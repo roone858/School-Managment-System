@@ -1,0 +1,71 @@
+const { Teacher } = require("../models/TeacherModel");
+
+async function createTeacher(req, res) {
+  try {
+    const teacher = await Teacher.create(req.body);
+    res.status(201).json(teacher);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
+
+async function getAllTeachers(req, res) {
+  try {
+    const teachers = await Teacher.getAll();
+    res.status(200).json(teachers);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
+
+async function getTeacherById(req, res) {
+  try {
+    const teacher = await Teacher.getById(req.params.id);
+    if (!teacher) {
+      return res.status(404).json({ message: "Teacher not found" });
+    }
+    res.status(200).json(teacher);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
+
+async function updateTeacher(req, res) {
+  try {
+    const result = await Teacher.update(
+      req.params.id,
+      req.body
+    );
+    if (!result) {
+      return res.status(404).json({ message: "Teacher not found" });
+    }
+    res.status(200).json(updatedTeacher);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
+
+async function deleteTeacher(req, res) {
+  try {
+    const result = await Teacher.delete( req.params.id);
+    if (!result) {
+      return res.status(404).json({ message: "Teacher not found" });
+    }
+    res.status(204).end();
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
+
+module.exports = {
+  createTeacher,
+  getAllTeachers,
+  getTeacherById,
+  updateTeacher,
+  deleteTeacher,
+};
