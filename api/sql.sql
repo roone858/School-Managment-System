@@ -1,3 +1,14 @@
+
+-- Create the Parent table
+
+CREATE TABLE Parent (
+  ID SERIAL PRIMARY KEY,
+  FirstName VARCHAR(255) NOT NULL,
+  LastName VARCHAR(255) NOT NULL,
+  Email VARCHAR(255) NOT NULL,
+  PhoneNumber VARCHAR(20) NOT NULL
+);
+
 -- Create the STUDENT table
 
 CREATE TABLE Student (
@@ -8,7 +19,8 @@ CREATE TABLE Student (
   gender VARCHAR(50) NOT NULL,
   phone  VARCHAR(50) NOT NULL,
   dateOfBirth Date ,
-  address VARCHAR(250)
+  address VARCHAR(250),
+  parentId INTEGER REFERENCES parent(id)
 );
 
 -- Create the teacher table
@@ -59,3 +71,6 @@ CREATE TABLE grades (
   grade DECIMAL(4,2),
   gradeDate DATE
 );
+
+
+
