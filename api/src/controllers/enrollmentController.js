@@ -15,7 +15,7 @@ const createEnrollment = async (req, res) => {
 const getAllEnrollments = async (req, res) => {
   try {
     const allEnrollments = await Enrollment.getAll()
-    res.json(allEnrollments.rows);
+    res.json(allEnrollments);
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ error: 'Server error' });

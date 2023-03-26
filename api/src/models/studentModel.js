@@ -38,10 +38,11 @@ const Student = {
         phone,
         dateOfBirth,
         address,
+        parentId
       } = data;
       const result = await conn.query(
-        "INSERT INTO student (firstName, lastName, email, gender, phone, dateOfBirth, address) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
-        [firstName, lastName, email, gender, phone, dateOfBirth, address]
+        "INSERT INTO student (firstName, lastName, email, gender, phone, dateOfBirth, address, parentId) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+        [firstName, lastName, email, gender, phone, dateOfBirth, address, parentId]
       );
       return result.rows[0];
     } finally {

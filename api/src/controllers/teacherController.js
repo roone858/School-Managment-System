@@ -42,7 +42,7 @@ async function updateTeacher(req, res) {
     if (!result) {
       return res.status(404).json({ message: "Teacher not found" });
     }
-    res.status(200).json(updatedTeacher);
+    res.status(200).json(result);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });

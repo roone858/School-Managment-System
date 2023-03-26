@@ -24,7 +24,7 @@ class Course {
 
   async create(data) {
     const query =
-      "INSERT INTO course (title, description, teacherId) VALUES ($1, $2, $3) RETURNING id";
+      "INSERT INTO course (title, description, teacherId) VALUES ($1, $2, $3) RETURNING *";
     const conn = await client.connect();
     try {
       const { title, description, teacherId } = data;
@@ -34,8 +34,20 @@ class Course {
       conn.release();
     }
   }
+  async update(id,data) {
+    const query =
+      "UPDATE course SET title = $1, description = $2, teacherId = $3 WHERE id = $4 RETURNING *";
+    const conn = await client.connect();
+    try {
+      const { title, description, teacherId } = data;
+      const result = await conn.query(query, [title, description, teacherId, id]);
+      return result.rows[0];
+    } finally {
+      conn.release();
+    }
+  }
 
-  async delete(id) {
+   static async delete(id) {
     const conn = await client.connect();
     try {
       const result = await conn.query("DELETE FROM course WHERE id = $1", [id]);

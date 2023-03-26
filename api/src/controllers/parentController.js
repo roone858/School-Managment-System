@@ -52,7 +52,7 @@ async function deleteParent(req, res) {
     if (!result) {
       return res.status(404).json({ message: "Parent not found" });
     }
-    res.status(204).end();
+    res.status(204).json({ message: "Parent Deleted successfully" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
