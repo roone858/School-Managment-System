@@ -68,6 +68,7 @@ Overall, token-based authentication is a widely used and effective method for se
 `POST /logout`: Invalidate an access token and log the user out
 
 
+--- 
 
 ## Libraries and SDKs
 
@@ -86,7 +87,7 @@ To install the necessary libraries and SDKs, run the following command in the pr
 npm install express pg pg-pool nodemon bcrypt jsonwebtoken body-parser cors 
 ```
 This will install all the required dependencies and add them to the package.json file.
-
+---
 ## Usage
 #### Prepare env
 - add a `.ENV` file in the root directory and set the missing `###` environment parameters
@@ -95,37 +96,35 @@ POSTGRES_HOST=127.0.0.1
 POSTGRES_DB=school
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=1234
-POSTGRES_TEST_DB=store_test
 POSTGRES_PORT=5432
 TOKEN_SECRET=my secret
 SALT_ROUNDS=12
 ```
 
-### Create Databases
+#### Create Databases
 - connect to the default postgres database as the server's root user `psql -U postgres`
 - In psql run the following to create a user 
-    - `CREATE USER shopping_user WITH PASSWORD 'password123';`
+    - `CREATE USER school_user WITH PASSWORD 'password123';`
 - In psql run the following to create the  database
-    - `CREATE DATABASE store;`
-    - `CREATE DATABASE store_test;`
+    - `CREATE DATABASE school;`
 - Connect to the databases and grant all privileges
-    - `\c store`
+    - `\c school`
     
-### Migrate Database
+#### Migrate Database
 Navigate to the root directory and run the command below to migrate the database 
 `npx db-migrate up`
 
 
-## Set up
+#### Set up
 - `npm install` to install all dependencies
   
 
-## Start the app
+#### Start the app
 - `npm run dev` to start the app and get access via http://localhost:3000
   
 #### Running Ports 
 After start up, the server will start on port `3000` and the database on port `5432`
-
+---
 ## Response Formats
 The API returns all data in JSON format. Responses will have a Content-Type header of application/json.
 #### Examples
