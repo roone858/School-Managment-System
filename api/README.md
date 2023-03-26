@@ -56,8 +56,8 @@ Overall, token-based authentication is a widely used and effective method for se
      - `PUT`: update a specific attendance record by ID
      - `DELETE`: delete a specific attendance record by ID
 11.	`/api/grades`:
-     - `GET`: get a list of all grades
-•	`POST`: create a new grade
+     - `GET`: get a list of all grades  
+     - `POST`: create a new grade
 12.	`/api/grades/:id`:
      - `GET`: get a specific grade by ID
      - `PUT`: update a specific grade by ID
@@ -80,14 +80,51 @@ The API is built with Node.js and Express, and uses a PostgreSQL database to sto
 - `jsonwebtoken`: A library for creating and verifying JSON Web Tokens (JWTs).
 - `body-parser`: A middleware for handling HTTP request bodies.
 - `cors`: A middleware for enabling Cross-Origin Resource Sharing (CORS) in Express applications.
-#### Installation 
+
 To install the necessary libraries and SDKs, run the following command in the project directory:
 ```
 npm install express pg pg-pool nodemon bcrypt jsonwebtoken body-parser cors 
 ```
 This will install all the required dependencies and add them to the package.json file.
-#### Usage
-To use the libraries and SDKs in the API code, simply require them at the top of the file
+
+## Usage
+#### Prepare env
+- add a `.ENV` file in the root directory and set the missing `###` environment parameters
+```
+POSTGRES_HOST=127.0.0.1
+POSTGRES_DB=school
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=1234
+POSTGRES_TEST_DB=store_test
+POSTGRES_PORT=5432
+TOKEN_SECRET=my secret
+SALT_ROUNDS=12
+```
+
+### Create Databases
+- connect to the default postgres database as the server's root user `psql -U postgres`
+- In psql run the following to create a user 
+    - `CREATE USER shopping_user WITH PASSWORD 'password123';`
+- In psql run the following to create the  database
+    - `CREATE DATABASE store;`
+    - `CREATE DATABASE store_test;`
+- Connect to the databases and grant all privileges
+    - `\c store`
+    
+### Migrate Database
+Navigate to the root directory and run the command below to migrate the database 
+`npx db-migrate up`
+
+
+## Set up
+- `npm install` to install all dependencies
+  
+
+## Start the app
+- `npm run dev` to start the app and get access via http://localhost:3000
+  
+#### Running Ports 
+After start up, the server will start on port `3000` and the database on port `5432`
 
 ## Response Formats
 The API returns all data in JSON format. Responses will have a Content-Type header of application/json.
