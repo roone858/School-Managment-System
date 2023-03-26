@@ -63,9 +63,11 @@ Overall, token-based authentication is a widely used and effective method for se
      - `PUT`: update a specific grade by ID
      - `DELETE`: delete a specific grade by ID
   
-**may also want to include authentication endpoints, such as:**
-`POST /login`: Authenticate a user and generate an access token.
-`POST /logout`: Invalidate an access token and log the user out
+
+
+may also want to include authentication endpoints, such as:
+- `POST /login`: Authenticate a user and generate an access token.
+- `POST /logout`: Invalidate an access token and log the user out
 
 
 --- 
@@ -86,7 +88,7 @@ To install the necessary libraries and SDKs, run the following command in the pr
 ```
 npm install express pg pg-pool nodemon bcrypt jsonwebtoken body-parser cors 
 ```
-This will install all the required dependencies and add them to the package.json file.
+
 ---
 ## Usage
 #### Prepare env
@@ -123,10 +125,10 @@ Navigate to the root directory and run the command below to migrate the database
 - `npm run dev` to start the app and get access via http://localhost:3000
   
 #### Running Ports 
-After start up, the server will start on port `3000` and the database on port `5432`
+- After start up, the server will start on port `3000` and the database on port `5432`
 ---
 ## Response Formats
-The API returns all data in JSON format. Responses will have a Content-Type header of application/json.
+- The API returns all data in JSON format. Responses will have a Content-Type header of application/json.
 #### Examples
 - GET /students
 ```
@@ -180,6 +182,8 @@ Content-Type: application/json
 ```
 
 In the above examples, the responses are shown in JSON format with the appropriate HTTP status code and content type headers. The data returned in the response depends on the endpoint being called and the parameters passed in the request.
+
+---
 
 ## Error Handling
 If an error occurs while processing a request, the API will return an error response with an appropriate status code and error message. The following status codes may be returned:
