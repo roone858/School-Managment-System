@@ -62,6 +62,7 @@ Overall, token-based authentication is a widely used and effective method for se
      - `GET`: get a specific grade by ID
      - `PUT`: update a specific grade by ID
      - `DELETE`: delete a specific grade by ID
+  
 **may also want to include authentication endpoints, such as:**
 `POST /login`: Authenticate a user and generate an access token.
 `POST /logout`: Invalidate an access token and log the user out
