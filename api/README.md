@@ -1,9 +1,7 @@
-## overview
+## Overview :speaker:
 A School Management System API is a type of application programming interface (API) that is specifically designed for use with school management systems. Its purpose is to provide programmatic access to the features and data of the school management system, enabling developers to create custom applications that can interact with the system.
 
 
-## authentication
-To secure a School Management System API, an authentication mechanism is used to verify the identity of users and ensure that only authorized users can access the system's resources. There are several authentication mechanisms that can be used to secure an API, but one commonly used method is token-based authentication.
 ## API Features :fire:
 A school management API have many features to help manage various aspects of a school. Here are some common features that a school management API include:
 
@@ -14,6 +12,7 @@ A school management API have many features to help manage various aspects of a s
 - Course Management - ability to create, update and delete course records, including course descriptions, course schedules, and course materials.
 - Attendance Tracking - ability to record and view attendance for each student in a class.
 These are just some of the features that a school management API can have. The specific features will depend on the requirements of the school or educational institution that is using the API.
+
 ## Endpoints :computer:
 
 1. `/api/students`:
@@ -32,7 +31,7 @@ These are just some of the features that a school management API can have. The s
      - `DELETE`: delete a specific teacher by ID
 5. `/api/courses`:
      - `GET`: get a list of all courses
-   - `POST`: create a new course
+     - `POST`: create a new course
 6.	`/api/courses/:id`:
      - `GET`: get a specific course by ID
      - `PUT`: update a specific course by ID
@@ -66,9 +65,9 @@ may also want to include authentication endpoints, such as:
 - `POST /logout`: Invalidate an access token and log the user out
 
 
---- 
 
-## Libraries and SDKs :bulb:
+
+## Libraries  :bulb:
 
 The API is built with Node.js and Express, and uses a PostgreSQL database to store data. The following libraries and SDKs are used:
 - [Express](https://www.npmjs.com/package/express) - A fast, unopinionated, minimalist web framework for Node.js.
@@ -84,7 +83,7 @@ To install the necessary libraries and SDKs, run the following command in the pr
 npm install express pg pg-pool nodemon bcrypt jsonwebtoken body-parser cors 
 ```
 
----
+
 
 ## Project Structure [api] :open_file_folder:
 
@@ -116,10 +115,10 @@ npm install express pg pg-pool nodemon bcrypt jsonwebtoken body-parser cors
     └── package-lock.json
     
 
----
-## Usage :pencil:
-1. #### Prepare env
-- add a `.ENV` file in the root directory and set the missing `###` environment parameters
+
+## Usage on your Local :pencil:
+1.  Prepare env
+       - add a `.ENV` file in the root directory and set the missing `###` environment parameters
 ```
 POSTGRES_HOST=127.0.0.1
 POSTGRES_DB=school
@@ -130,34 +129,34 @@ TOKEN_SECRET=my secret
 SALT_ROUNDS=12
 ```
 
-2. #### Create Databases
-- connect to the default postgres database as the server's root user `psql -U postgres`
-- In psql run the following to create a user 
-    - `CREATE USER school_user WITH PASSWORD 'password123';`
-- In psql run the following to create the  database
-    - `CREATE DATABASE school;`
-- Connect to the databases and grant all privileges
-    - `\c school`
+2. Create Databases
+   - connect to the default postgres database as the server's root user `psql -U postgres`
+   - In psql run the following to create a user 
+   - `CREATE USER school_user WITH PASSWORD 'password123';`
+   - In psql run the following to create the  database
+   - `CREATE DATABASE school;`
+   - Connect to the databases and grant all privileges
+   - `\c school`
     
-3. #### Migrate Database
-Navigate to the root directory and run the command below to migrate the database 
+3. Migrate Database
+    - Navigate to the root directory and run the command below to migrate the database 
 `npx db-migrate up`
 
 
-4. #### Set up
-- `npm install` to install all dependencies
+4. Set up
+   - `npm install` to install all dependencies
   
 
-5. #### Start the app
-- `npm run dev` to start the app and get access via http://localhost:3000
+5. Start the app
+   - `npm run dev` to start the app and get access via http://localhost:3000
   
-#### Running Ports 
-- After start up, the server will start on port `3000` and the database on port `5432`
+6. Running Ports 
+   - After start up, the server will start on port `3000` and the database on port `5432`
 ---
 ## Response Formats
 - The API returns all data in JSON format. Responses will have a Content-Type header of application/json.
-#### Examples
-- GET /students
+-  Examples
+   - GET /students
 ```
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -219,7 +218,4 @@ If an error occurs while processing a request, the API will return an error resp
 - `403 Forbidden`: The client does not have permission to access the requested resource.
 - `404 Not Found`: The requested resource could not be found.
 - `500 Internal Server Error`: An unexpected error occurred on the server.
-#### Error Response Format
-Error responses will be returned in the same format as regular responses, with an additional error field in the response body. The error field will contain an error message that describes the nature of the error.
-Here's an example of an error response for a POST /students request that fails due to a missing name parameter:
 
