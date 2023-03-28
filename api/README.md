@@ -4,7 +4,7 @@ A School Management System API is a type of application programming interface (A
 
 ## authentication
 To secure a School Management System API, an authentication mechanism is used to verify the identity of users and ensure that only authorized users can access the system's resources. There are several authentication mechanisms that can be used to secure an API, but one commonly used method is token-based authentication.
-## API Features
+## API Features :fire:
 A school management API have many features to help manage various aspects of a school. Here are some common features that a school management API include:
 
 - Student Management - ability to create, update and delete student records, including
@@ -14,7 +14,7 @@ A school management API have many features to help manage various aspects of a s
 - Course Management - ability to create, update and delete course records, including course descriptions, course schedules, and course materials.
 - Attendance Tracking - ability to record and view attendance for each student in a class.
 These are just some of the features that a school management API can have. The specific features will depend on the requirements of the school or educational institution that is using the API.
-## Endpoints
+## Endpoints :computer:
 
 1. `/api/students`:
      - `GET`: get a list of all students
@@ -68,16 +68,16 @@ may also want to include authentication endpoints, such as:
 
 --- 
 
-## Libraries and SDKs
+## Libraries and SDKs :bulb:
 
 The API is built with Node.js and Express, and uses a PostgreSQL database to store data. The following libraries and SDKs are used:
-- `express`: A fast, unopinionated, minimalist web framework for Node.js.
-- `pg`: A PostgreSQL client for Node.js. pg-pool: A connection pool for PostgreSQL clients.
-- `nodemon`: A tool that helps develop Node.js-based applications by automatically restarting the node application when file changes in the directory are detected.
-- `bcrypt`: A library for hashing passwords.
-- `jsonwebtoken`: A library for creating and verifying JSON Web Tokens (JWTs).
-- `body-parser`: A middleware for handling HTTP request bodies.
-- `cors`: A middleware for enabling Cross-Origin Resource Sharing (CORS) in Express applications.
+- [Express](https://www.npmjs.com/package/express) - A fast, unopinionated, minimalist web framework for Node.js.
+- [Pg](https://www.npmjs.com/package/pg) -  A PostgreSQL client for Node.js. pg-pool: A connection pool for PostgreSQL clients.
+- [Nodemon](https://www.npmjs.com/package/nodemon) - A tool that helps develop Node.js-based applications by automatically restarting the node application when file changes in the directory are detected.
+- [Bcrypt](https://www.npmjs.com/package/bcrypt) - A library for hashing passwords.
+- [Jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) - A library for creating and verifying JSON Web Tokens (JWTs).
+- [body-parser](https://www.npmjs.com/package/body-parser) -  A middleware for handling HTTP request bodies.
+- [Cors](https://www.npmjs.com/package/cors) - A middleware for enabling Cross-Origin Resource Sharing (CORS) in Express applications.
 
 To install the necessary libraries and SDKs, run the following command in the project directory:
 ```
@@ -117,7 +117,7 @@ npm install express pg pg-pool nodemon bcrypt jsonwebtoken body-parser cors
     
 
 ---
-## Usage
+## Usage :pencil:
 1. #### Prepare env
 - add a `.ENV` file in the root directory and set the missing `###` environment parameters
 ```
@@ -212,7 +212,7 @@ In the above examples, the responses are shown in JSON format with the appropria
 
 ---
 
-## Error Handling
+## Error Handling :writing_hand:
 If an error occurs while processing a request, the API will return an error response with an appropriate status code and error message. The following status codes may be returned:
 - `400 Bad Request`: The request was invalid or could not be understood by the server.
 - `401 Unauthorized`: The client is not authorized to access the requested resource.
