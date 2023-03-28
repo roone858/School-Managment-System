@@ -1,4 +1,4 @@
-const {Grade} = require('../models/GradeModel');
+const {Grade} = require('../models/grade.model');
 
 // Create a new Grade
 const createGrade = async (req, res) => {

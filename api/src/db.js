@@ -1,13 +1,13 @@
 const { Pool } = require("pg");
-const dotenv = require("dotenv");
-dotenv.config();
+require('dotenv').config()
+console.log(process.env.DATABASE_USERNAME)
 
 // Create a pool of PostgreSQL connections
 const client = new Pool({
-  user: "postgres",
+  user: process.env.DATABASE_USERNAME,
   host: process.env.HOST,
-  database: "school",
-  password: "1234",
+  database:  process.env.DATABASE,
+  password:  process.env.PASSWORD,
   port: process.env.PORT,
 });
 

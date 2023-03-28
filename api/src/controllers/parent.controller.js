@@ -1,4 +1,4 @@
-const { Parent } = require("../models/parentModel");
+const { Parent } = require("../models/parent.model");
 
 async function createParent(req, res) {
   try {

@@ -1,4 +1,4 @@
-const {Attendance} = require('../models/attendanceModel');
+const {Attendance} = require('../models/attendance.model');
 
 // Create a new Attendance
 const createAttendance = async (req, res) => {

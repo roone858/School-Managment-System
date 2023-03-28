@@ -5,7 +5,7 @@ const {
   getGradeById,
   updateGrade,
   deleteGrade,
-} = require("../controllers/gradeController");
+} = require("../controllers/grade.controller");
 const router = express.Router();
 
 

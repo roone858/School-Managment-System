@@ -42,7 +42,7 @@ const Attendance = {
     }
   },
 
-  // Update an existing Attendance in the database
+  // Update an existing attendance in the database
   update: async (id, data) => {
     const conn = await client.connect();
     try {

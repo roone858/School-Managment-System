@@ -1,23 +1,19 @@
 ## overview
 A School Management System API is a type of application programming interface (API) that is specifically designed for use with school management systems. Its purpose is to provide programmatic access to the features and data of the school management system, enabling developers to create custom applications that can interact with the system.
 
-The target audience for a School Management System API includes developers who want to build applications that can integrate with the school management system. This could include software vendors who want to build a custom student information system, educational technology companies that want to integrate their software with the school management system, or individual developers who want to create custom applications for teachers, students, and parents.
-
-The School Management System API typically provides a wide range of functionality, such as the ability to manage student records, attendance data, class schedules, and exam results. It may also include features for managing staff records, school finances, and other administrative tasks. By providing programmatic access to this functionality, the API enables developers to build custom applications that can automate and streamline various aspects of the school management system, improving efficiency and reducing workload for teachers and administrators.
-
-Overall, a School Management System API provides a powerful tool for developers who want to create custom applications that can integrate with the school management system. It can help to improve communication, automate administrative tasks, and provide more efficient and effective ways to manage school data and operations
 
 ## authentication
 To secure a School Management System API, an authentication mechanism is used to verify the identity of users and ensure that only authorized users can access the system's resources. There are several authentication mechanisms that can be used to secure an API, but one commonly used method is token-based authentication.
+## API Features
+A school management API have many features to help manage various aspects of a school. Here are some common features that a school management API include:
 
-In token-based authentication, when a user logs into the system, the API generates a unique access token that is then sent to the user's device. This token is usually a long string of characters that serves as a digital key, allowing the user to access the API's resources without having to repeatedly enter their login credentials.
-
-When the user makes a request to the API, the access token is sent along with the request as proof of the user's identity. The API then verifies the token to ensure that it is valid and that the user is authorized to access the requested resource. If the token is valid, the API returns the requested data, and the user can continue to use the token to access other resources within the system.
-
-To further enhance security, token-based authentication often uses a combination of access tokens and refresh tokens. Access tokens have a short lifespan and expire after a set period of time, typically a few hours. When an access token expires, the user must obtain a new token by using a refresh token. Refresh tokens are long-lived tokens that are used to obtain new access tokens when the original access token expires.
-
-Overall, token-based authentication is a widely used and effective method for securing APIs. It provides a scalable and flexible approach to authentication and helps to ensure that only authorized users can access the system's resources
-
+- Student Management - ability to create, update and delete student records, including
+- personal information, contact details, enrollment status, and academic progress.
+- Teacher Management - ability to create, update and delete teacher records, including
+- personal information, contact details, qualifications, and courses taught.
+- Course Management - ability to create, update and delete course records, including course descriptions, course schedules, and course materials.
+- Attendance Tracking - ability to record and view attendance for each student in a class.
+These are just some of the features that a school management API can have. The specific features will depend on the requirements of the school or educational institution that is using the API.
 ## Endpoints
 
 1. `/api/students`:
@@ -76,8 +72,7 @@ may also want to include authentication endpoints, such as:
 
 The API is built with Node.js and Express, and uses a PostgreSQL database to store data. The following libraries and SDKs are used:
 - `express`: A fast, unopinionated, minimalist web framework for Node.js.
-- `pg`: A PostgreSQL client for Node.js.
-- pg-pool: A connection pool for PostgreSQL clients.
+- `pg`: A PostgreSQL client for Node.js. pg-pool: A connection pool for PostgreSQL clients.
 - `nodemon`: A tool that helps develop Node.js-based applications by automatically restarting the node application when file changes in the directory are detected.
 - `bcrypt`: A library for hashing passwords.
 - `jsonwebtoken`: A library for creating and verifying JSON Web Tokens (JWTs).
@@ -90,8 +85,40 @@ npm install express pg pg-pool nodemon bcrypt jsonwebtoken body-parser cors
 ```
 
 ---
+
+## Project Structure [api] :open_file_folder:
+
+    # api Package
+    .
+    ├── src             # Our core frontend code consisting of all views and react components
+    |   ├── models      # This directory contains modules that define the schema for the data and interact with the database.
+    |   |    ├── student.model.js     
+    |   |    ├── teacher.model.js     
+    |   |    ├── course.model.js     
+    |   |    ├── attendance.model.js     
+    |   |    ├── parent.model.js     
+    |   |    ├── grade.model.js     
+    |   |    └── enrollment.model.js     
+    |   ├── controllers           # This directory contains modules that handle the logic of the API endpoints .
+    |   |    ├── parent.controller.js     
+    |   |    ├── student.controller.js     
+    |   |    ├── teacher.controller.js     
+    |   |    ├── course.controller.js     
+    |   |    ├── attendance.controller.js     
+    |   |    ├── enrollment.controller.js     
+    |   |    └── grade.controller.js     
+    |   ├── middleware     # Contains UI component files for dialog boxes, snackbars, single user in inbox etc
+    │   ├── routes         # This directory contains modules that define the API routes and connect them to the controller methods.
+    │   ├── server.js      # This is the main entry point of the application, where we initialize the Express app,  and set up middleware.
+    │   └── db.js          # connect to the database
+    ├── .env               # This file contains sensitive information (such as database credentials) and is not committed to version control.
+    ├── package.json       # This file lists the project dependencies and metadata.
+    └── package-lock.json
+    
+
+---
 ## Usage
-#### Prepare env
+1. #### Prepare env
 - add a `.ENV` file in the root directory and set the missing `###` environment parameters
 ```
 POSTGRES_HOST=127.0.0.1
@@ -103,7 +130,7 @@ TOKEN_SECRET=my secret
 SALT_ROUNDS=12
 ```
 
-#### Create Databases
+2. #### Create Databases
 - connect to the default postgres database as the server's root user `psql -U postgres`
 - In psql run the following to create a user 
     - `CREATE USER school_user WITH PASSWORD 'password123';`
@@ -112,16 +139,16 @@ SALT_ROUNDS=12
 - Connect to the databases and grant all privileges
     - `\c school`
     
-#### Migrate Database
+3. #### Migrate Database
 Navigate to the root directory and run the command below to migrate the database 
 `npx db-migrate up`
 
 
-#### Set up
+4. #### Set up
 - `npm install` to install all dependencies
   
 
-#### Start the app
+5. #### Start the app
 - `npm run dev` to start the app and get access via http://localhost:3000
   
 #### Running Ports 

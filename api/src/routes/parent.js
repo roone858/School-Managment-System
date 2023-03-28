@@ -7,7 +7,7 @@ const {
   getParentById,
   updateParent,
   deleteParent,
-} = require("../controllers/parentController");
+} = require("../controllers/parent.controller");
 
 router.get("/", getAllParents);
 router.post("/", createParent);

@@ -5,7 +5,7 @@ const {
   getEnrollmentById,
   updateEnrollment,
   deleteEnrollment,
-} = require("../controllers/enrollmentController");
+} = require("../controllers/enrollment.controller");
 const router = express.Router();
 
 
