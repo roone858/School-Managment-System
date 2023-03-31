@@ -1,0 +1,27 @@
+.analyses{
+     display: flex;
+     justify-content: space-evenly;
+     margin: 1rem 0;
+
+}
+.analyst-card{
+     border-radius: 15px;
+     width: 30%;
+     align-items: center;
+     display: flex;
+     justify-content:space-evenly;
+     height: 100px;
+     background-color:#1d1b31 ;
+     color: #ffff;
+     font-size: 30px;
+}
+.analyst-card .num {
+     display: flex;
+     padding-left: 20px;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+     font-size: 20px;
+
+border-left: 2px solid #fff;
+}

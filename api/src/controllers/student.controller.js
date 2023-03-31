@@ -12,6 +12,7 @@ async function createStudent(req, res) {
 
 async function getAllStudents(req, res) {
   try {
+   
     const students = await Student.getAll();
     res.status(200).json(students);
   } catch (error) {

@@ -27,6 +27,6 @@ app.use("/api/parent", parentRout);
 app.use("/api/attendance", attendanceRout);
 app.use("/api/grade", gradeRout);
 
-app.listen(3000, () => {
-  console.log("server listening on port : 3000");
+app.listen(4000, () => {
+  console.log("server listening on port : 4000");
 });
