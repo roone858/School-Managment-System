@@ -1,6 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import "./App.css";
-import Button from "./Components/Button";
+import  AddStudent  from "./Components/student/Add";
+import Navbar from "./Components/Navbar";
+
 import Sidebar from "./Components/Sidebar";
 import { Courses } from "./pages/Courses";
 import { Dashboard } from "./pages/Dashboard";
@@ -14,14 +17,18 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Sidebar />
-        <Routes>
-          <Route path="/" element={<Dashboard />}></Route>
-          <Route path="/dashboard" element={<Dashboard />}></Route>
-          <Route path="/students" element={<Student />}></Route>
-          <Route path="/teachers" element={<Teachers />}></Route>
-          <Route path="/courses" element={<Courses />}></Route>
-          <Route path="/setting" element={<Setting />}></Route>
-        </Routes>
+        <div className="home-section">
+          <Routes>
+            <Route path="/" element={<Dashboard />}/>
+            <Route path="/dashboard" element={<Dashboard />}/>
+            <Route path="/students" element={<Student />}>
+            <Route path="add" element={<AddStudent />}/>
+            </Route>
+            <Route path="/teachers" element={<Teachers />}></Route>
+            <Route path="/courses" element={<Courses />}></Route>
+            <Route path="/setting" element={<Setting />}></Route>
+          </Routes>
+        </div>
       </BrowserRouter>
     </div>
   );

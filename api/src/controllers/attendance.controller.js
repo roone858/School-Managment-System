@@ -28,6 +28,7 @@ const getAttendanceById = async (req, res) => {
     const { id } = req.params;
     const attendance = await Attendance.getById(id)
     if (!attendance) {
+      
       return res.status(404).json({ error: 'Attendance not found' });
     }
     res.json(attendance);

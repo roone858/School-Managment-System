@@ -90,3 +90,21 @@ CREATE TABLE Grade (
   student_id INTEGER REFERENCES Student(id),
   course_id INTEGER REFERENCES Course(id)
 );
+
+INSERT INTO
+  student (
+    firstName,
+    lastName,
+    email,
+    gender,
+    phone,
+    dateOfBirth,
+    address
+  )
+VALUES
+  ('Mahmoud', 'Gamal', 'roone858@gmail.com', 'Male', '01140192414', '1-1-1999', 'Assiut-Egypt'),
+  ('Emad', 'Rady', 'Emad22@gmail.com', 'Male', '01000192414', '1-1-2000', 'Cairo-Egypt'),
+  ('Ahmed', 'Adel', 'ahmed@gmail.com', 'Male', '01140192414', '1-1-1989', 'Aswan-Egypt'),
+  ('Mariam', 'Gamal', 'Mariam@gmail.com', 'Female', '0155192414', '1-1-1990', 'Assiut-Egypt'),
+  ('Karyma', 'Ali', 'Kali@gmail.com', 'Female', '012222224', '1-1-1995', 'Assiut-Egypt');
+  

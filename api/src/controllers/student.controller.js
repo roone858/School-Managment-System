@@ -53,10 +53,10 @@ async function deleteStudent(req, res) {
     if (!result) {
       return res.status(404).json({ message: "Student not found" });
     }
-    res.status(204).end();
+    res.status(204).json({ message: "Student is Deleted" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Internal Server Error" });
+    res.status(500).json({ Error: "Internal Server Error" });
   }
 }
 
