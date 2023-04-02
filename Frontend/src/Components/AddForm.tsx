@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Input } from "./Input";
-
+import StudentService from "../store/services/student.service";
+import { useDispatch,useSelector } from "react-redux";
+import { addStudent } from "../store/actions/studentActions";
 const AddData = (props: any) => {
   const [data, setData] = useState({});
+  const dispatch = useDispatch()
+
   const updateData = (e: any) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -21,8 +25,9 @@ const AddData = (props: any) => {
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => dispatch(addStudent(data)))
       .catch((err) => console.log(err));
+    
     event.target.reset();
   };
 

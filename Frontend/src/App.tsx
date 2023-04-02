@@ -3,14 +3,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import AddStudent from "./Components/AddForm";
 import AddTeacher from "./Components/AddForm";
-
 import Sidebar from "./Components/Sidebar";
 import { Courses } from "./pages/Courses";
 import { Dashboard } from "./pages/Dashboard";
 import { Setting } from "./pages/Setting";
 import { Student } from "./pages/Student";
 import { Teachers } from "./pages/Teacher";
-
+import { useDispatch, useSelector } from "react-redux";
 function App() {
   const myName = "mahmoud";
   return (

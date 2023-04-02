@@ -6,6 +6,7 @@ import "../css/dashboard.css";
 export const Dashboard = () => {
   const [students, setStudents] = useState([]);
   const [teachers, setTeachers] = useState([]);
+  
   // useEffect(() => {
   //   fetch("http://localhost:4000/api/student")
   //     .then((res) => res.json())

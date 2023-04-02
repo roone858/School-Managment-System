@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AddButton } from "../Components/AddButton";
 import { Table } from "../Components/Table";
 import { Outlet } from "react-router-dom";
-import TeacherService from "../services/teacher.service";
+import TeacherService from "../store/services/teacher.service";
 import { TableRaw } from "../Components/TableRaw";
 interface Teacher {
   id: string;
