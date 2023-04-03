@@ -1,6 +1,5 @@
-class teacherService {
+class TeacherService {
   async deleteTeacher(id: string) {
-
     fetch(`http://localhost:4000/api/teacher/${id}`, {
       method: "DELETE",
     });
@@ -15,5 +14,14 @@ class teacherService {
       console.log("error", error);
     }
   }
+  async getTeacher() {
+    try {
+      const response = await fetch("http://localhost:4000/api/teacher");
+      const json = await response.json();
+      return json;
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
 }
-export default teacherService ;
+export default TeacherService;

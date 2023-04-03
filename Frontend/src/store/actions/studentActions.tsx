@@ -11,10 +11,17 @@ export const addStudent = (student: any) => ({
   type: "addStudent",
   payload: student,
 });
-export const deleteStudent = (id: number) => ({
+
+export const deleteStudent = (id:Number) => ({
   type: "removeStudent",
   payload: id,
 });
+
+
+
+
+
+
 
 
 

@@ -7,7 +7,7 @@ import Sidebar from "./Components/Sidebar";
 import { Courses } from "./pages/Courses";
 import { Dashboard } from "./pages/Dashboard";
 import { Setting } from "./pages/Setting";
-import { Student } from "./pages/Student";
+import { Students } from "./pages/Student";
 import { Teachers } from "./pages/Teacher";
 import { useDispatch, useSelector } from "react-redux";
 function App() {
@@ -20,7 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/students" element={<Student />}>
+            <Route path="/students" element={<Students />}>
               <Route path="add" element={<AddStudent entity="student" />} />
             </Route>
             <Route path="/teachers" element={<Teachers />}>

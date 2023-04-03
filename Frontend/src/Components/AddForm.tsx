@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Input } from "./Input";
-import StudentService from "../store/services/student.service";
+import StudentService from "../services/student.service";
 import { useDispatch,useSelector } from "react-redux";
-import { addStudent } from "../store/actions/studentActions";
+import { addStudent } from "../features/slice/student-slice";
 const AddData = (props: any) => {
   const [data, setData] = useState({});
   const dispatch = useDispatch()
