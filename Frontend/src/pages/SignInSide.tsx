@@ -13,9 +13,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
-import { addToken } from "../features/slice/token-slice";
+import { addToken } from "../redux/slice/token-slice";
 import { useDispatch } from "react-redux";
-
+import login from "../utils/login";
 function Copyright(props: any) {
   return (
     <Typography
@@ -38,35 +38,20 @@ const theme = createTheme();
 
 export default function SignInSide() {
   const dispatch = useDispatch();
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    fetch(`http://localhost:4000/auth/login/`, {
-      method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      redirect: "follow",
-      referrerPolicy: "no-referrer",
-      body: JSON.stringify({
-        username: data.get("username"),
-        password: data.get("password"),
-      }),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-       
-        if (result.token) {
-          dispatch(addToken(result.token));
-          localStorage.setItem("token", result.token);
-          window.location.href = "/";
-        }
-        if(result.message) alert(result.message)
-        return;
-      });
+
+    const result = await login({
+      username: data.get("username"),
+      password: data.get("password"),
+    });
+    if (result.token) {
+      dispatch(addToken(result.token));
+      localStorage.setItem("token", result.token);
+      window.location.href = "/";
+    }
+    if (result.message) alert(result.message);
   };
 
   return (

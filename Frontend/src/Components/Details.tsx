@@ -1,4 +1,4 @@
-import "../css/details.css";
+import "../style/details.css";
 import avatar from "../assets/avatar.png";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";

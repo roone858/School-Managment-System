@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 import TeacherService from "../services/teacher.service";
 import { TableRaw } from "../Components/TableRaw";
 import { useDispatch, useSelector } from "react-redux";
-import { addTeacher, deleteTeacher } from "../features/slice/teacher-slice";
+import { addTeacher, deleteTeacher } from "../redux/slice/teacher-slice";
 interface Teacher {
   id: string;
   firstname: string;
@@ -18,12 +18,12 @@ export const Teachers = () => {
 
   const teachers = useSelector((state: any) => state.teachers);
   const handleDelete = (id: string) => {
-    const teacherService = new TeacherService();
-    teacherService.deleteTeacher(id);
+    const Db = new TeacherService();
+    Db.deleteTeacher(id);
     dispatch(deleteTeacher(Number(id)));
   };
 
-  const teacherElements = teachers.map((teacher: Teacher) => (
+  const teachersRaws = teachers.map((teacher: Teacher) => (
     <TableRaw
       url="teachers"
       key={teacher.id}
@@ -35,7 +35,7 @@ export const Teachers = () => {
     <div className="teachers">
       <AddButton entity="teacher" text="Add New teacher" />
       <Outlet />
-      <Table rows={teacherElements} />
+      <Table rows={teachersRaws} />
     </div>
   );
 };

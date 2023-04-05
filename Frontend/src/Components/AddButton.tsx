@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { Link } from 'react-router-dom';
 
 export const AddButton = (props:any) => {
-     const [isCreateOpen, setIsCreateOpen] = useState(false);
+     const [isOpen, setIsOpen] = useState(false);
   return (
      <Link
         onClick={() => {
-          isCreateOpen ? setIsCreateOpen(false) : setIsCreateOpen(true);
+          isOpen ? setIsOpen(false) : setIsOpen(true);
         }}
-        to={isCreateOpen ? `/${props.entity}s` : `/${props.entity}s/add`}
+        to={isOpen ? `/${props.entity}s` : `/${props.entity}s/add`}
         type="button"
         className="btn btn-success mr-3"
       >

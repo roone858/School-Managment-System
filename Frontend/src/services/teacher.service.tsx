@@ -43,6 +43,8 @@ class TeacherService {
   async deleteTeacher(id: string) {
     fetch(`http://localhost:4000/api/teacher/${id}`, {
       method: "DELETE",
+      headers: { Authorization: `${localStorage.getItem("token")}` },
+      
     });
   }
 }

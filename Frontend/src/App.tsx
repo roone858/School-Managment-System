@@ -13,9 +13,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Details from "./Components/Details";
 import { useEffect, useState } from "react";
 import StudentService from "./services/student.service";
-import { addStudent } from "./features/slice/student-slice";
+import { addStudent } from "./redux/slice/student-slice";
 import TeacherService from "./services/teacher.service";
-import { addTeacher } from "./features/slice/teacher-slice";
+import { addTeacher } from "./redux/slice/teacher-slice";
 import SignInSide from "./pages/SignInSide";
 function App() {
   
@@ -28,9 +28,6 @@ function App() {
   const studentService = new StudentService();
   const teachersService = new TeacherService();
   useEffect(() => {
-    
-  
- 
     studentService.getStudents().then((result: any) => {
       result.map((student: any) => dispatch(addStudent(student)));
       setStudents(result);

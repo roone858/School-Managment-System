@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../css/sidebar.css";
+import "../style/sidebar.css";
 import ListElements from "./sidebarComponents/ListElements";
 import ProfileDetails from "./sidebarComponents/ProfileDetails";
 import Search from "./sidebarComponents/Search";
