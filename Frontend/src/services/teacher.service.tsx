@@ -1,8 +1,9 @@
+import { getTokenFromCookie } from "../utils/cookies";
 class TeacherService {
   async getTeachers() {
     try {
       const response = await fetch("http://localhost:4000/api/teacher", {
-        headers: { Authorization: `${localStorage.getItem("token")}` },
+        headers: { Authorization: `${getTokenFromCookie()}` },
       });
       const json = await response.json();
       return json;
@@ -28,7 +29,7 @@ class TeacherService {
         credentials: "same-origin",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `${localStorage.getItem("token")}`,
+          Authorization: `${getTokenFromCookie()}`,
         },
         redirect: "follow",
         referrerPolicy: "no-referrer",
@@ -43,7 +44,7 @@ class TeacherService {
   async deleteTeacher(id: string) {
     fetch(`http://localhost:4000/api/teacher/${id}`, {
       method: "DELETE",
-      headers: { Authorization: `${localStorage.getItem("token")}` },
+      headers: { Authorization: `${getTokenFromCookie()}` },
       
     });
   }

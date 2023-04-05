@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import { addToken } from "../redux/slice/token-slice";
 import { useDispatch } from "react-redux";
 import login from "../utils/login";
+import { setTokenCookie ,setAdminCookie} from "../utils/cookies";
 function Copyright(props: any) {
   return (
     <Typography
@@ -38,17 +39,17 @@ const theme = createTheme();
 
 export default function SignInSide() {
   const dispatch = useDispatch();
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-
     const result = await login({
       username: data.get("username"),
       password: data.get("password"),
     });
     if (result.token) {
-      dispatch(addToken(result.token));
-      localStorage.setItem("token", result.token);
+      setAdminCookie(result.admin)
+      setTokenCookie(result.token);
       window.location.href = "/";
     }
     if (result.message) alert(result.message);

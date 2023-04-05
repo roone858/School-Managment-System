@@ -24,20 +24,3 @@
   flex-direction: row;
   width: 100%;
 }
-h2::before{
-     content: "";
-     position: absolute;
-     width: 120px;
-     height: 4px;
-     background-color: white;
-     bottom: 0;
- }
- h2::after{
-     content: "";
-     position: absolute;
-     width: 60px;
-     height: 4px;
-     background-color: black;
-     left: 0;
-     bottom: 0;
- }

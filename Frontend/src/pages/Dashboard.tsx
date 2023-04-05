@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 
 import "../style/dashboard.css";
 import { useSelector } from "react-redux";
+import { getAdminFromCookie } from "../utils/cookies";
 
 export const Dashboard = () => {
   const students=useSelector((state:any)=> state.students)
   const teachers=useSelector((state:any)=> state.teachers)
-  
+
   
   return (
     <>

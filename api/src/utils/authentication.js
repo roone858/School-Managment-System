@@ -29,7 +29,7 @@ const store = new AdminMethods();
       //    secure: true,
       //    maxAge: 24 * 60 * 60 * 1000,
       //  });
-      return res.json({ token });
+      return res.json({ token ,admin});
     }
 
     res.status(401).json({ message: "incorrect username or password" });

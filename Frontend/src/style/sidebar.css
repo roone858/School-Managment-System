@@ -226,6 +226,10 @@
   width: 50px;
   background: none;
 }
+#log_out:hover{
+  cursor: pointer;
+  color: red;
+}
 .home-section{
   position: relative;
   background: #E4E9F7;

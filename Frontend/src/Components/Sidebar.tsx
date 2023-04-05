@@ -3,6 +3,7 @@ import "../style/sidebar.css";
 import ListElements from "./sidebarComponents/ListElements";
 import ProfileDetails from "./sidebarComponents/ProfileDetails";
 import Search from "./sidebarComponents/Search";
+
 // import logo from"../../public/school-svgrepo-com.svg"
 export default function Sidebar(params: any) {
   const listItems = [
@@ -13,6 +14,7 @@ export default function Sidebar(params: any) {
     { name: "Setting", icon: "bx-cog",link:"/setting" },
   ];
 
+  
   const [isActive, setActive] = useState(false);
   const toggleHandler = () => {
     isActive ? setActive(false) : setActive(true);

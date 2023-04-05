@@ -17,9 +17,10 @@ import { addStudent } from "./redux/slice/student-slice";
 import TeacherService from "./services/teacher.service";
 import { addTeacher } from "./redux/slice/teacher-slice";
 import SignInSide from "./pages/SignInSide";
+import { getTokenFromCookie } from "./utils/cookies";
 function App() {
-  
-  if (!localStorage.getItem("token")) {
+  const token = getTokenFromCookie()
+  if (!token) {
     return <SignInSide />;
   }
   const [students, setStudents] = useState([]);
