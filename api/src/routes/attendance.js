@@ -1,4 +1,5 @@
 const express = require("express");
+const router = express.Router();
 const {
   createAttendance,
   getAllAttendances,
@@ -6,7 +7,6 @@ const {
   updateAttendance,
   deleteAttendance,
 } = require("../controllers/attendance.controller");
-const router = express.Router();
 
 
 router.get("/", getAllAttendances);

@@ -108,3 +108,21 @@ VALUES
   ('Mariam', 'Gamal', 'Mariam@gmail.com', 'Female', '0155192414', '1-1-1990', 'Assiut-Egypt'),
   ('Karyma', 'Ali', 'Kali@gmail.com', 'Female', '012222224', '1-1-1995', 'Assiut-Egypt');
   
+
+
+  CREATE TABLE IF NOT EXISTS admin (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(250) UNIQUE NOT NULL,
+    email VARCHAR(250) UNIQUE NOT NULL,
+    password VARCHAR(250) NOT NULL
+);
+INSERT INTO
+    admin (
+       username,
+       email,
+       password
+    )
+Values
+    ('username', 'email@example.com',`password`);
+
+  require('crypto').randomBytes(64).toString('hex')

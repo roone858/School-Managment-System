@@ -4,7 +4,7 @@ interface State {
 }
 interface StudentAction {
   type: string;
-  payload: Student;
+  payload: Student | number;
 }
 
 const studentReducer = (
@@ -25,8 +25,6 @@ const studentReducer = (
           (student: any) => student.id != action.payload
         ),
       };
-
-   
 
     default:
       return state;

@@ -4,7 +4,8 @@ import { Table } from "../Components/Table";
 import { Outlet } from "react-router-dom";
 import TeacherService from "../services/teacher.service";
 import { TableRaw } from "../Components/TableRaw";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addTeacher, deleteTeacher } from "../features/slice/teacher-slice";
 interface Teacher {
   id: string;
   firstname: string;
@@ -13,19 +14,22 @@ interface Teacher {
   address: string;
 }
 export const Teachers = () => {
-
+  const dispatch = useDispatch();
 
   const teachers = useSelector((state: any) => state.teachers);
-  const teacherService = new TeacherService();
   const handleDelete = (id: string) => {
+    const teacherService = new TeacherService();
     teacherService.deleteTeacher(id);
-
+    dispatch(deleteTeacher(Number(id)));
   };
-  useEffect(() => {
-   
-  }, []);
+
   const teacherElements = teachers.map((teacher: Teacher) => (
-    <TableRaw key={teacher.id} entity={teacher} onDeleteClick={handleDelete} />
+    <TableRaw
+      url="teachers"
+      key={teacher.id}
+      entity={teacher}
+      onDeleteClick={handleDelete}
+    />
   ));
   return (
     <div className="teachers">

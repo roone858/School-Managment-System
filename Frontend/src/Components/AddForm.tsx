@@ -1,33 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { Input } from "./Input";
 import StudentService from "../services/student.service";
-import { useDispatch,useSelector } from "react-redux";
+import TeacherService from "../services/teacher.service";
+import { useDispatch, useSelector } from "react-redux";
 import { addStudent } from "../features/slice/student-slice";
+import { addTeacher } from "../features/slice/teacher-slice";
 const AddData = (props: any) => {
   const [data, setData] = useState({});
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const updateData = (e: any) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    fetch(`http://localhost:4000/api/${props.entity}/`, {
-      method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      redirect: "follow",
-      referrerPolicy: "no-referrer",
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((data) => dispatch(addStudent(data)))
-      .catch((err) => console.log(err));
-    
+    if (props.entity == "student")
+      new StudentService()
+        .insertStudent(data)
+        .then((data) => {
+          dispatch(addStudent(data));
+        })
+        .catch((err) => console.log(err));
+    if (props.entity == "teacher")
+      new TeacherService().insertTeacher(data).then((data) => {
+        dispatch(addTeacher(data));
+      });
+
     event.target.reset();
   };
 

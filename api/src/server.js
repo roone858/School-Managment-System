@@ -1,16 +1,12 @@
 const express = require("express");
-const bodyParser = require('body-parser');
-const cors = require('cors');
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
-
+const { login } = require("./utils/authentication");
+const { checkToken } = require("./middleware/auth");
 const app = express();
-const studentRout = require("./routes/student");
-const teacherRout = require("./routes/teacher");
-const enrollmentRout = require("./routes/enrollment");
-const courseRout = require("./routes/course");
-const parentRout = require("./routes/parent");
-const attendanceRout = require("./routes/attendance");
-const gradeRout = require("./routes/grade");
+
+const apiRoute = require("./routes/api");
 
 app.use(express.json());
 // Use middleware to handle HTTP request bodies
@@ -19,13 +15,9 @@ app.use(bodyParser.json());
 // Use middleware to enable CORS
 app.use(cors());
 
-app.use("/api/student", studentRout);
-app.use("/api/teacher", teacherRout);
-app.use("/api/enrollment", enrollmentRout);
-app.use("/api/course", courseRout);
-app.use("/api/parent", parentRout);
-app.use("/api/attendance", attendanceRout);
-app.use("/api/grade", gradeRout);
+app.post("/auth/login", login);
+
+app.use("/api", checkToken, apiRoute);
 
 app.listen(4000, () => {
   console.log("server listening on port : 4000");
