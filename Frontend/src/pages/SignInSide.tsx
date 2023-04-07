@@ -12,11 +12,8 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
-import { addToken } from "../redux/slice/token-slice";
-import { useDispatch } from "react-redux";
 import login from "../utils/login";
-import { setTokenCookie ,setAdminCookie} from "../utils/cookies";
+import { setTokenCookie, setAdminCookie } from "../utils/cookies";
 function Copyright(props: any) {
   return (
     <Typography
@@ -38,7 +35,6 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function SignInSide() {
-  const dispatch = useDispatch();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -48,8 +44,9 @@ export default function SignInSide() {
       password: data.get("password"),
     });
     if (result.token) {
-      setAdminCookie(result.admin)
       setTokenCookie(result.token);
+      setAdminCookie(result.admin);
+     
       window.location.href = "/";
     }
     if (result.message) alert(result.message);

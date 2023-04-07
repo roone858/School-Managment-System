@@ -90,6 +90,12 @@ CREATE TABLE Grade (
   student_id INTEGER REFERENCES Student(id),
   course_id INTEGER REFERENCES Course(id)
 );
+CREATE TABLE IF NOT EXISTS admin (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(250) UNIQUE NOT NULL,
+    email VARCHAR(250) UNIQUE NOT NULL,
+    password VARCHAR(250) NOT NULL
+);
 
 INSERT INTO
   student (
@@ -109,13 +115,37 @@ VALUES
   ('Karyma', 'Ali', 'Kali@gmail.com', 'Female', '012222224', '1-1-1995', 'Assiut-Egypt');
   
 
+  INSERT INTO
+  teacher (
+    firstName,
+    lastName,
+    email,
+    gender,
+    phone,
+    dateOfBirth,
+    address
+  )
+VALUES
+  ('Maged', 'Askar', 'magedaskar@gmail.com', 'Male', '01040192414', '1-1-1989', 'Assiut-Egypt'),
+  ('Mohamed', 'Youssef', 'Myoussef@gmail.com', 'Male', '01500100014', '1-1-1985', 'Cairo-Egypt'),
+  ('Ahmed', 'Talat', 'ahmed@gmail.com', 'Male', '01140192414', '1-1-1989', 'Aswan-Egypt'),
+  ('Rehab', 'Gamal', 'rehab@gmail.com', 'Female', '0155192414', '1-1-1990', 'Assiut-Egypt'),
+  ('Mona', 'Ali', 'mona@gmail.com', 'Female', '01645222224', '1-1-1995', 'Assiut-Egypt');
 
-  CREATE TABLE IF NOT EXISTS admin (
-    id SERIAL PRIMARY KEY,
-    username VARCHAR(250) UNIQUE NOT NULL,
-    email VARCHAR(250) UNIQUE NOT NULL,
-    password VARCHAR(250) NOT NULL
-);
+
+
+INSERT INTO
+course( title ,description ,teacherId )
+VALUES
+( 'Front-End Developer ' ,'Launch your career as a front-end developer. Build job-ready skills for an in-demand career and earn a credential from Meta. No degree or prior experience required to get started.' ,1 ),
+( 'Data Analytics Professional' ,'This is your path to a career in data analytics. In this program, you will learn in-demand skills that will have you job-ready in less than 6 months. No degree or experience required.' ,2 ),
+( 'Machine Learning' ,'#BreakIntoAI with Machine Learning Specialization. Master fundamental AI concepts and develop practical machine learning skills in the beginner-friendly, 3-course program by AI visionary Andrew Ng' ,3 ),
+( 'DevOps, Cloud, and Agile' ,'DevOps essential characteristics including culture, behavior, practices, tools, methodologies, technologies and metrics.' ,4 ),
+( 'Back-End Developer' ,' Developer by learning skills from Watnya-TECH, then get a completion certificate to validate your skills.' ,5 );
+
+
+
+
 INSERT INTO
     admin (
        username,

@@ -1,7 +1,8 @@
 .analyses{
      display: flex;
      justify-content: space-evenly;
-     margin: 1rem 0;
+     margin: 1rem 0; 
+     width:calc(100% / 3 * 2)
 
 }
 .analyst-card{
@@ -25,3 +26,15 @@
 
 border-left: 2px solid #fff;
 }
+.dashboard{
+     display: flex;
+     justify-content: space-around;
+     align-items: flex-start;
+     align-content: center;
+     flex-wrap: nowrap;
+     flex-direction: row;
+}
+.courses-side{
+     width:calc(100% / 3 )
+}
+h3{align-items: center;}

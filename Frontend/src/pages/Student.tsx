@@ -7,21 +7,35 @@ import { AddButton } from "../Components/AddButton";
 import { TableRaw } from "../Components/TableRaw";
 import { addStudent, deleteStudent } from "../redux/slice/student-slice";
 import { Student } from "../types/type";
-
+import Swal from "sweetalert2";
 export const Students = () => {
   const students = useSelector((state: any) => state.students);
   const dispatch = useDispatch();
+
   const handleDelete = (id: any) => {
-    const db = new StudentService();
-    db.deleteStudent(id);
-    dispatch(deleteStudent(id));
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete !",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Deleted!", "Student has been deleted.", "success");
+        const db = new StudentService();
+        db.deleteStudent(id);
+        dispatch(deleteStudent(id));
+      }
+    });
   };
 
   const studentRaws = students.map((student: Student) => (
     <TableRaw
       url="students"
       key={student.id}
-      entity={student}
+      obj={student}
       onDeleteClick={handleDelete}
     />
   ));

@@ -5,6 +5,7 @@ import TeacherService from "../services/teacher.service";
 import { useDispatch } from "react-redux";
 import { addStudent } from "../redux/slice/student-slice";
 import { addTeacher } from "../redux/slice/teacher-slice";
+import { Outlet } from "react-router-dom";
 const AddData = (props: any) => {
   const [data, setData] = useState({});
   const dispatch = useDispatch();
@@ -12,17 +13,31 @@ const AddData = (props: any) => {
   const updateData = (e: any) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
-
-
+  function checkFormValues(values: any) {
+    for (const value of Object.values(values)) {
+      if (value === null) {
+        return false;
+      }
+    }
+    return true;
+  }
+  // checkFormValues(data)? console.log("there is no null value"):console.log(" null value")
   const handleSubmit = (event: any) => {
     event.preventDefault();
+
     if (props.entity == "student") {
       const db = new StudentService();
-      db.insertStudent(data).then((data) => dispatch(addStudent(data)));
+      db.insertStudent(data).then((res) => {
+        res.message && alert(res.message);
+        res.id && dispatch(addStudent(res));
+      });
     }
     if (props.entity == "teacher") {
       const db = new TeacherService();
-      db.insertTeacher(data).then((data) => dispatch(addTeacher(data)));
+      db.insertTeacher(data).then((res) => {
+        res.message && alert(res.message);
+        res.id && dispatch(addTeacher(res));
+      });
     }
     event.target.reset();
   };
@@ -84,6 +99,7 @@ const AddData = (props: any) => {
               name="gender"
               className="form-control"
             >
+              <option></option>
               <option>Male</option>
               <option>Female</option>
             </select>
@@ -102,7 +118,9 @@ const AddData = (props: any) => {
         <button type="submit" className="btn btn-primary">
           Create
         </button>
+      
       </form>
+      
     </>
   );
 };

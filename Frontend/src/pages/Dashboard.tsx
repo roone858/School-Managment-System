@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "../style/dashboard.css";
 import { useSelector } from "react-redux";
 import { getAdminFromCookie } from "../utils/cookies";
+import ListGroup from "../Components/ListGroup";
 
 export const Dashboard = () => {
   const students=useSelector((state:any)=> state.students)
@@ -13,7 +14,9 @@ export const Dashboard = () => {
   return (
     <>
       <div className="dashboard">
+     
         <div className="analyses">
+          
           <div className="analyst-card">
             <i className="bx bx-user"></i>
             <div className="num">
@@ -36,6 +39,7 @@ export const Dashboard = () => {
             </div>
           </div>
         </div>
+      
       </div>
     </>
   );
