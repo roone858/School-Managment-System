@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 
 import "./App.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import AddStudent from "./Components/AddForm";
 import AddTeacher from "./Components/AddForm";
 import Sidebar from "./Components/Sidebar";

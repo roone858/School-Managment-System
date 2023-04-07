@@ -26,15 +26,5 @@
 
 border-left: 2px solid #fff;
 }
-.dashboard{
-     display: flex;
-     justify-content: space-around;
-     align-items: flex-start;
-     align-content: center;
-     flex-wrap: nowrap;
-     flex-direction: row;
-}
-.courses-side{
-     width:calc(100% / 3 )
-}
-h3{align-items: center;}
+
+

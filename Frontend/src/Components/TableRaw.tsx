@@ -22,18 +22,23 @@ export const TableRaw = ({
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete !",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        Swal.fire("Deleted!", "Student has been deleted.", "success");
         if (url == "students") {
           const db = new StudentService();
-          db.deleteStudent(id);
-          dispatch(deleteStudent(id));
+
+          const response = await db.deleteStudent(id);
+          if (response.message)
+            Swal.fire("Can't Deleted!", response.message, "error");
+          else dispatch(deleteStudent(id));
         }
         if (url == "teachers") {
           const db = new TeacherService();
-          db.deleteTeacher(id);
-          dispatch(deleteTeacher(id));
+          const response = await db.deleteTeacher(id);
+
+          if (response.message)
+            Swal.fire("Can't Deleted!", response.message, "error");
+          else dispatch(deleteTeacher(id));
         }
       }
     });
@@ -57,13 +62,13 @@ export const TableRaw = ({
         >
           Details
         </Link>
-        <button type="button" className="btn btn-success btn-sm ml-3 mr-3">
+        <button type="button" className="btn btn-success btn-sm mx-3">
           Update
         </button>
         <button
           onClick={() => handleDelete(obj.id)}
           type="button"
-          className="btn btn-danger btn-sm "
+          className="btn  btn-danger btn-sm "
         >
           Delete
         </button>

@@ -1,6 +1,6 @@
 export const Input = (props: any) => {
   return (
-    <div className={props.name=="address"?"form-group":"form-group col-md-6"}>
+    <div className={"form-group col-md-6"}>
       <label htmlFor={props.id}>{props.text}</label>
       <input
         onChange={props.onChange}

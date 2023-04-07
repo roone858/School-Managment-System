@@ -42,11 +42,12 @@ class TeacherService {
     }
   }
   async deleteTeacher(id: string) {
-    fetch(`http://localhost:4000/api/teacher/${id}`, {
+    const response = await fetch(`http://localhost:4000/api/teacher/${id}`, {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },
-      
     });
+    const json = await response.json();
+    return json;
   }
 }
 export default TeacherService;

@@ -21,11 +21,12 @@ export const Students = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete !",
-    }).then((result) => {
+    }).then( async(result) => {
       if (result.isConfirmed) {
         Swal.fire("Deleted!", "Student has been deleted.", "success");
         const db = new StudentService();
-        db.deleteStudent(id);
+       const response =await db.deleteStudent(id);
+       console.log(response)
         dispatch(deleteStudent(id));
       }
     });

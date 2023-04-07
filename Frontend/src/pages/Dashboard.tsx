@@ -7,39 +7,34 @@ import { getAdminFromCookie } from "../utils/cookies";
 import ListGroup from "../Components/ListGroup";
 
 export const Dashboard = () => {
-  const students=useSelector((state:any)=> state.students)
-  const teachers=useSelector((state:any)=> state.teachers)
+  const students = useSelector((state: any) => state.students);
+  const teachers = useSelector((state: any) => state.teachers);
+  const courses = useSelector((state: any) => state.courses);
 
-  
   return (
     <>
-      <div className="dashboard">
-     
-        <div className="analyses">
-          
-          <div className="analyst-card">
-            <i className="bx bx-user"></i>
-            <div className="num">
-              <span>Student</span>
-              <span> {students.length}</span>
-            </div>
-          </div>
-          <div className=" analyst-card">
-            <i className="bx bx-user"></i>
-            <div className="num">
-              <span>Teachers</span>
-              <span>{teachers.length}</span>
-            </div>
-          </div>
-          <div className="analyst-card">
-            <i className="bx bx-user"></i>
-            <div className="num">
-              <span>Course</span>
-              <span> 50</span>
-            </div>
+      <div className=" row w-100 gap-3 analyses">
+        <div className="col-md-4 col-6 analyst-card">
+          <i className="bx bx-user"></i>
+          <div className="num">
+            <span>Student</span>
+            <span> {students.length}</span>
           </div>
         </div>
-      
+        <div className="col-md-4 col-6 analyst-card">
+          <i className="bx bx-user"></i>
+          <div className="num">
+            <span>Teachers</span>
+            <span>{teachers.length}</span>
+          </div>
+        </div>
+        <div className="col-md-4 col-6 analyst-card">
+          <i className="bx bx-user"></i>
+          <div className="num">
+            <span>Course</span>
+            <span> {courses.length}</span>
+          </div>
+        </div>
       </div>
     </>
   );

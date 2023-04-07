@@ -2,10 +2,12 @@ import { getTokenFromCookie } from "../utils/cookies";
 
 class studentService {
   async deleteStudent(id: string) {
-    fetch(`http://localhost:4000/api/student/${id}`, {
+   const response= await fetch(`http://localhost:4000/api/student/${id}`, {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },
-    });
+    })
+    const json = await response.json();
+    return json;
   }
 
   async getStudents() {
