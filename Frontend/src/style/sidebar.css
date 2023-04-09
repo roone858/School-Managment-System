@@ -232,8 +232,8 @@ s .sidebar.open .logo-details .icon,
 .home-section {
   position: relative;
 
-  min-height: 100vh;
-  top: 1rem;
+
+  top: 0.5rem;
   left: 78px;
   width: calc(100% - 78px);
   transition: all 0.5s ease;

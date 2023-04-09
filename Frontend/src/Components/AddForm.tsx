@@ -5,7 +5,7 @@ import TeacherService from "../services/teacher.service";
 import { useDispatch } from "react-redux";
 import { addStudent } from "../redux/slice/student-slice";
 import { addTeacher } from "../redux/slice/teacher-slice";
-
+import "../style/addForm.css"
 const AddData = (props: any) => {
   const [data, setData] = useState({});
   const dispatch = useDispatch();
@@ -44,7 +44,8 @@ const AddData = (props: any) => {
   };
 
   return (
-    <>
+    <div className="add-form">
+      <h1>Add new Student</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-row d-flex gap-2 ">
           <Input
@@ -91,7 +92,7 @@ const AddData = (props: any) => {
             placeholder="Phone"
           />
 
-          <div className="form-row ">
+          <div className="form-row col-6 ">
             <label htmlFor="inputGender4">Gender</label>
             <br />
             <select
@@ -122,7 +123,7 @@ const AddData = (props: any) => {
       
       </form>
       
-    </>
+    </div>
   );
 };
 
