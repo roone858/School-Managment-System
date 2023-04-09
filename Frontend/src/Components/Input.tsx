@@ -9,7 +9,7 @@ export const Input = (props: any) => {
         className="form-control"
         id={props.id}
         placeholder={props.placeholder}
-      />
+        required />
     </div>
   );
 };

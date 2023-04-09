@@ -6,8 +6,9 @@ class studentService {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },
     })
-    const json = await response.json();
-    return json;
+    // .then(result=>result.json()).then(data => data)
+    // console.log(response)
+    // return response;
   }
 
   async getStudents() {

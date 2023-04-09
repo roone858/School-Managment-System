@@ -12,7 +12,6 @@ async function createStudent(req, res) {
 
 async function getAllStudents(req, res) {
   try {
-   
     const students = await Student.getAll();
     res.status(200).json(students);
   } catch (error) {
@@ -50,13 +49,11 @@ async function updateStudent(req, res) {
 async function deleteStudent(req, res) {
   try {
     const result = await Student.delete(req.params.id);
-    if (!result) {
-      return res.status(404).json({ message: "Student not found" });
-    }
-    res.status(204).json({ message: "Student is Deleted" });
+    if (!result) return res.status(404).json({ message: "Student not found" });
+    if(result==true) res.status(204).json({ message: "Student is Deleted" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ Error: "Internal Server Error" });
+    res.status(500).json({ error: "Internal Server Error" });
   }
 }
 

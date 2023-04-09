@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 
 import "./App.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import AddStudent from "./Components/AddForm";
 import AddTeacher from "./Components/AddForm";
-import Sidebar from "./Components/Sidebar";
+import Sidebar from "./layouts/Sidebar";
 import { Courses } from "./pages/Courses";
 import { Dashboard } from "./pages/Dashboard";
 import { Setting } from "./pages/Setting";
@@ -20,8 +20,9 @@ import TeacherService from "./services/teacher.service";
 import { addTeacher } from "./redux/slice/teacher-slice";
 import SignInSide from "./pages/SignInSide";
 import { getTokenFromCookie } from "./utils/cookies";
-import AddFrom from "./Components/AddForm"
+import AddFrom from "./Components/AddForm";
 import { addCourse } from "./redux/slice/course-slice ";
+import NavBar from "./layouts/NavBar";
 function App() {
   const token = getTokenFromCookie();
   if (!token) {
@@ -31,10 +32,9 @@ function App() {
   const dispatch = useDispatch();
   const studentService = new StudentService();
   const teachersService = new TeacherService();
-  const coursesService=new CourseService()
-  
+  const coursesService = new CourseService();
+
   useEffect(() => {
-   
     studentService.getStudents().then((result: any) => {
       result.map((student: any) => dispatch(addStudent(student)));
     });
@@ -50,6 +50,8 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Sidebar />
+
+        <NavBar />
         <div className="home-section">
           <Routes>
             <Route path="/" element={<Dashboard />} />

@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import "../style/student.css";
 import StudentService from "../services/student.service";
 import { Table } from "../Components/Table";
-import { AddButton } from "../Components/AddButton";
+import { AddButton } from "../layouts/AddButton";
 import { TableRaw } from "../Components/TableRaw";
 import { addStudent, deleteStudent } from "../redux/slice/student-slice";
 import { Student } from "../types/type";
@@ -42,7 +42,7 @@ export const Students = () => {
   ));
   return (
     <div className="students">
-      <AddButton entity="student" text="Add New Student" />
+      <AddButton  />
       <Outlet />
       <Table rows={studentRaws} />
     </div>

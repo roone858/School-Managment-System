@@ -2,8 +2,8 @@
 
 export const Table = (props:any) => {
   return (
-     <table className="table table-dark">
-        <thead>
+     <table className="table">
+        <thead className=" table-light">
           <tr>
             <th scope="col">#</th>
             <th scope="col">First</th>

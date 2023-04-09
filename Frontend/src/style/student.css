@@ -22,3 +22,9 @@ h2::before{
      left: 0;
      bottom: 0;
  }
+ .add-button {
+     position: fixed;
+    bottom: 5%;
+    right: 5%;
+    z-index: 1000;
+ }

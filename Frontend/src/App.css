@@ -3,6 +3,9 @@
     
    }
 
-   form{
-    padding-top: 1rem;
-   }
+   .add-button {
+    position: fixed;
+   bottom: 5%;
+   right: 5%;
+   z-index: 1000;
+}

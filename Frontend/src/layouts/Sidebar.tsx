@@ -1,8 +1,8 @@
 import { useState } from "react";
 import "../style/sidebar.css";
-import ListElements from "./sidebarComponents/ListElements";
-import ProfileDetails from "./sidebarComponents/ProfileDetails";
-import Search from "./sidebarComponents/Search";
+import ListElements from "../Components/sidebarComponents/ListElements";
+import ProfileDetails from "../Components/sidebarComponents/ProfileDetails";
+import Search from "../Components/sidebarComponents/Search";
 
 // import logo from"../../public/school-svgrepo-com.svg"
 export default function Sidebar(params: any) {

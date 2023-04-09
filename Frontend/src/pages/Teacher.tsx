@@ -1,4 +1,4 @@
-import { AddButton } from "../Components/AddButton";
+import { AddButton } from "../layouts/AddButton";
 import { Table } from "../Components/Table";
 import { Outlet } from "react-router-dom";
 import { TableRaw } from "../Components/TableRaw";
@@ -25,7 +25,7 @@ export const Teachers = () => {
   ));
   return (
     <div className="teachers">
-      <AddButton entity="teacher" text="Add New teacher" />
+      <AddButton  />
       <Outlet />
       <Table rows={teachersRaws} />
     </div>

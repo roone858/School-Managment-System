@@ -35,10 +35,7 @@ async function getTeacherById(req, res) {
 
 async function updateTeacher(req, res) {
   try {
-    const result = await Teacher.update(
-      req.params.id,
-      req.body
-    );
+    const result = await Teacher.update(req.params.id, req.body);
     if (!result) {
       return res.status(404).json({ message: "Teacher not found" });
     }
@@ -51,11 +48,11 @@ async function updateTeacher(req, res) {
 
 async function deleteTeacher(req, res) {
   try {
-    const result = await Teacher.delete( req.params.id);
+    const result = await Teacher.delete(req.params.id);
     if (!result) {
       return res.status(404).json({ message: "Teacher not found" });
     }
-    res.status(204).end();
+    res.status(204).json({ message: "Student is Deleted" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error.message });

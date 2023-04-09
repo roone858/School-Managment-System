@@ -28,15 +28,16 @@ const AddData = (props: any) => {
     if (props.entity == "student") {
       const db = new StudentService();
       db.insertStudent(data).then((res) => {
+       
         res.message && alert(res.message);
-        res.id && dispatch(addStudent(res));
+        dispatch(addStudent(res));
       });
     }
     if (props.entity == "teacher") {
       const db = new TeacherService();
       db.insertTeacher(data).then((res) => {
         res.message && alert(res.message);
-        res.id && dispatch(addTeacher(res));
+        dispatch(addTeacher(res));
       });
     }
     event.target.reset();
@@ -97,9 +98,9 @@ const AddData = (props: any) => {
               id="inputGender4"
               onChange={updateData}
               name="gender"
-              className="form-control"
+              className="form-control" required
             >
-              <option></option>
+              <option>Select Gender </option>
               <option>Male</option>
               <option>Female</option>
             </select>

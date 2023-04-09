@@ -46,8 +46,8 @@ class TeacherService {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },
     });
-    const json = await response.json();
-    return json;
+    // const json = await response.json();
+    // return json;
   }
 }
 export default TeacherService;
