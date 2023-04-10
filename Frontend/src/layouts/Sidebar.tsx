@@ -11,6 +11,7 @@ export default function Sidebar(params: any) {
     { name: "Student", icon: "bx-user" ,link:"/students"},
     { name: "Teachers", icon: "bx-user-voice",link:"/teachers" },
     { name: "Courses", icon: "bx-grid-alt",link:"/courses" },
+    { name: "Attendance", icon: "bx-down-arrow-alt",link:"/attendance" },
     { name: "Setting", icon: "bx-cog",link:"/setting" },
   ];
 

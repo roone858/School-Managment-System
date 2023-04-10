@@ -23,6 +23,9 @@ import { getTokenFromCookie } from "./utils/cookies";
 import AddFrom from "./Components/AddForm"
 import { addCourse } from "./redux/slice/course-slice ";
 import NavBar from "./layouts/NavBar";
+import Attendance from "./pages/Attendance";
+import AttendanceService from "./services/attendance.service";
+import { addAttendance } from "./redux/slice/attendance-slice";
 function App() {
   const token = getTokenFromCookie();
   if (!token) {
@@ -33,6 +36,7 @@ function App() {
   const studentService = new StudentService();
   const teachersService = new TeacherService();
   const coursesService=new CourseService()
+  const attendanceService=new AttendanceService()
   
   useEffect(() => {
    
@@ -44,6 +48,9 @@ function App() {
     });
     coursesService.getCourses().then((result: any) => {
       result.map((student: any) => dispatch(addCourse(student)));
+    });
+    attendanceService.getAttendance().then((result: any) => {
+      result.map((attend: any) => dispatch(addAttendance(attend)));
     });
   }, []);
 
@@ -80,6 +87,7 @@ function App() {
               />
             </Route>
             <Route path="/courses" element={<Courses />}></Route>
+            <Route path="/attendance" element={<Attendance />}></Route>
             <Route path="/setting" element={<Setting />}></Route>
           </Routes>
         </div>
