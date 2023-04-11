@@ -158,7 +158,7 @@ SALT_ROUNDS=12
   
 
 5. Start the app
-   - `npm run dev` to start the app and get access via http://localhost:3000
+   - `npm run dev` to start the app and get access via http://localhost:4000
   
 6. Running Ports 
    - After start up, the server will start on port `3000` and the database on port `5432`
