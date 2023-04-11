@@ -1,15 +1,15 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-// import { Attendance } from "../../types/type";
+import { Attendance } from "../../types/type";
 
 const attendanceSlice = createSlice({
   name: "Attendances",
-  initialState: [] as any[],
+  initialState: [] as Attendance[],
   reducers: {
-    addAttendance: (state, action:PayloadAction<any>) => {
+    addAttendance: (state, action:PayloadAction<Attendance>) => {
       state.push(action.payload);
     },
     deleteAttendance: (state = [], action:PayloadAction<number>) => {
-      return state.filter((attendance:any) => attendance.id !== action.payload);
+      return state.filter((attendance:Attendance) => attendance.id !== action.payload);
     },
   },
 });

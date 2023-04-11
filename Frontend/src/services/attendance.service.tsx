@@ -11,9 +11,9 @@ class AttendanceService {
       console.log("error", error);
     }
   }
-  async getTeacher() {
+  async getOneAttendance() {
     try {
-      const response = await fetch("http://localhost:4000/api/teacher");
+      const response = await fetch("http://localhost:4000/api/attendance");
       const json = await response.json();
       return json;
     } catch (error) {
@@ -41,13 +41,13 @@ class AttendanceService {
       console.log("error", error);
     }
   }
-  async deleteTeacher(id: string) {
-    const response = await fetch(`http://localhost:4000/api/teacher/${id}`, {
+  async deleteAttendance(id: string) {
+    const response = await fetch(`http://localhost:4000/api/attendance/${id}`, {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },
     });
-    // const json = await response.json();
-    // return json;
+     const json = await response.json();
+     return json;
   }
 }
 export default AttendanceService;

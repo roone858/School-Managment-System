@@ -27,19 +27,22 @@ export const TableRaw = ({
         if (url == "students") {
           const db = new StudentService();
           const response = await db.deleteStudent(id);
-          // if (response.message)
-          //   Swal.fire("Can't Deleted!", response.message, "error");
-          dispatch(deleteStudent(id));
-          Swal.fire(" Deleted!", "student deleted", "success");
+          if (response.message)
+            Swal.fire("Can't Deleted!", "Internal Server Error", "error");
+          else {
+            dispatch(deleteStudent(id));
+            Swal.fire(" Deleted!", "student deleted", "success");
+          }
         }
         if (url == "teachers") {
           const db = new TeacherService();
           const response = await db.deleteTeacher(id);
-          // if (response.message)
-          //   Swal.fire("Can't Deleted!", response.message, "error");
-           dispatch(deleteTeacher(id));
-          Swal.fire(" Deleted!", "student deleted", "success");
-
+          if (response.message)
+            Swal.fire("Can't Deleted!", "Internal Server Error", "error");
+          else {
+            dispatch(deleteTeacher(id));
+            Swal.fire(" Deleted!", "student deleted", "success");
+          }
         }
       }
     });

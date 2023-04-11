@@ -16,3 +16,4 @@ const teachersSlice = createSlice({
 
 export const { addTeacher, deleteTeacher } = teachersSlice.actions;
 export default teachersSlice.reducer;
+

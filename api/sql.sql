@@ -137,7 +137,7 @@ VALUES
 INSERT INTO
 course( title ,description ,teacherId )
 VALUES
-( 'Front-End Developer ' ,'Launch your career as a front-end developer. Build job-ready skills for an in-demand career and earn a credential from Meta. No degree or prior experience required to get started.' ,1 ),
+( 'Front-End Developer' ,'Launch your career as a front-end developer. Build job-ready skills for an in-demand career and earn a credential from Meta. No degree or prior experience required to get started.' ,1 ),
 ( 'Data Analytics Professional' ,'This is your path to a career in data analytics. In this program, you will learn in-demand skills that will have you job-ready in less than 6 months. No degree or experience required.' ,2 ),
 ( 'Machine Learning' ,'#BreakIntoAI with Machine Learning Specialization. Master fundamental AI concepts and develop practical machine learning skills in the beginner-friendly, 3-course program by AI visionary Andrew Ng' ,3 ),
 ( 'DevOps, Cloud, and Agile' ,'DevOps essential characteristics including culture, behavior, practices, tools, methodologies, technologies and metrics.' ,4 ),

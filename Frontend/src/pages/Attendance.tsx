@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AttendanceService from "../services/attendance.service";
 import Swal from "sweetalert2";
-import { addAttendance } from "../redux/slice/attendance-slice";
-
-const Attendance = () => {
+import {
+  addAttendance,
+  deleteAttendance,
+} from "../redux/slice/attendance-slice";
+import { Attendance, Course, Student } from "../types/type";
+const AttendanceCm = () => {
   const courses = useSelector((state: any) => state.courses);
   const students = useSelector((state: any) => state.students);
 
@@ -12,34 +15,46 @@ const Attendance = () => {
   const [studentId, setStudentId] = useState({});
   const [courseTitle, setCourseTitle] = useState({});
   const attendance = useSelector((state: any) => state.attendance);
-  const db = new AttendanceService();
-  var currentDate = new Date();
-  var datetime =
-    currentDate.getDate() +
-    "/" +
-    (currentDate.getMonth() + 1) +
-    "/" +
-    currentDate.getFullYear() +
-    " - " +
-    currentDate.getHours() +
-    ":" +
-    currentDate.getMinutes() +
-    ":" +
-    currentDate.getSeconds();
-
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
-    event.target.reset();
-    const { id } = courses.find((course: any) => course.title == courseTitle);
-    db.insertAttendance({ studentId: studentId, courseId: id });
-    dispatch(
-      addAttendance({
-        studentid: studentId,
-        courseid: id,
-        attenddate: datetime,
-      })
+  const attendanceRows = attendance.map((att: Attendance) => {
+    const course = courses?.find(
+      (course: Course) => String(course.id) == String(att.courseid)
     );
+    return (
+      <tr key={att.id}>
+        <th scope="row">{att.id}</th>
+        <td>{course?.title}</td>
+        <td>{att.studentid}</td>
+        <td>{att.attenddate}</td>
+        <td>
+          <button
+            onClick={() => handleCancel(att.id)}
+            type="button"
+            className="btn-close"
+            aria-label="Close"
+          ></button>
+        </td>
+      </tr>
+    );
+  });
+  const db = new AttendanceService();
+
+  const handleCancel = async (id: any) => {
+    const result = await db.deleteAttendance(id);
+    dispatch(deleteAttendance(id));
+  };
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
+    const course = await courses.find(
+      (course: Course) => course.title == courseTitle
+    );
+    const attend = await db.insertAttendance({
+      studentId: studentId,
+      courseId: course.id,
+    });
+
+    dispatch(addAttendance(attend));
     Swal.fire(" Accepted!", "student inserted successfully", "success");
+    event.target.reset();
   };
   return (
     <div className="attendance">
@@ -54,7 +69,7 @@ const Attendance = () => {
             }}
           >
             <option>Default select</option>
-            {courses.map((course: any) => (
+            {courses.map((course: Course) => (
               <option key={course.id}>{course.title}</option>
             ))}
           </select>
@@ -69,8 +84,8 @@ const Attendance = () => {
             }}
           >
             <option>Default select</option>
-            {students.map((student: any) => (
-              <option key={student.id}>{student.id}</option>
+            {students?.map((student: Student) => (
+              <option key={String(student.id)}>{String(student.id)}</option>
             ))}
           </select>
         </div>
@@ -86,22 +101,14 @@ const Attendance = () => {
               <th scope="col">Course Title</th>
               <th scope="col">Student Id</th>
               <th scope="col">Date</th>
+              <th scope="col">Cancel</th>
             </tr>
           </thead>
-          <tbody>
-            {attendance.map((att: any) => (
-              <tr key={att.id}>
-                <th scope="row">{att.id}</th>
-                <td>{att.courseid}</td>
-                <td>{att.studentid}</td>
-                <td>{att.attenddate}</td>
-              </tr>
-            ))}
-          </tbody>
+          <tbody>{attendanceRows}</tbody>
         </table>
       </div>
     </div>
   );
 };
 
-export default Attendance;
+export default AttendanceCm;

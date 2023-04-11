@@ -45,7 +45,7 @@ const AddData = (props: any) => {
 
   return (
     <div className="add-form">
-      <h1>Add new Student</h1>
+      <h1>Add new {props.entity}</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-row d-flex gap-2 ">
           <Input
