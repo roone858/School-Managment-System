@@ -229,3 +229,10 @@ If an error occurs while processing a request, the API will return an error resp
 - `404 Not Found`: The requested resource could not be found.
 - `500 Internal Server Error`: An unexpected error occurred on the server.
 
+## Screenshots
+<img src="../docs/screenshots/api/terminal.PNG"  />
+<img src="../docs/screenshots/api/Structure.PNG"  />
+<img src="../docs/screenshots/api/auth postman.PNG"  />
+<img src="../docs/screenshots/api/get with token postman.PNG"  />
+<img src="../docs/screenshots/api/test endpoints postman.PNG"  />
+<img src="../docs/screenshots/api/dependencies.PNG"  />
