@@ -61,8 +61,8 @@ These are just some of the features that a school management API can have. The s
 
 
 may also want to include authentication endpoints, such as:
-- `POST /login`: Authenticate a user and generate an access token.
-- `POST /logout`: Invalidate an access token and log the user out
+- `POST /auth/login`: Authenticate a user and generate an access token.
+- `POST /auth/logout`: Invalidate an access token and log the user out
 
 
 
@@ -98,7 +98,7 @@ npm install express pg pg-pool nodemon bcrypt jsonwebtoken body-parser cors
     |   |    ├── parent.model.js     
     |   |    ├── grade.model.js     
     |   |    └── enrollment.model.js     
-    |   ├── controllers           # This directory contains modules that handle the logic of the API endpoints .
+    |   ├── controllers   # This directory contains modules that handle the logic of the API endpoints .
     |   |    ├── parent.controller.js     
     |   |    ├── student.controller.js     
     |   |    ├── teacher.controller.js     
@@ -106,8 +106,18 @@ npm install express pg pg-pool nodemon bcrypt jsonwebtoken body-parser cors
     |   |    ├── attendance.controller.js     
     |   |    ├── enrollment.controller.js     
     |   |    └── grade.controller.js     
-    |   ├── middleware     # Contains UI component files for dialog boxes, snackbars, single user in inbox etc
-    │   ├── routes         # This directory contains modules that define the API routes and connect them to the controller methods.
+    |   ├── middleware        
+    |   |    └── auth.js 
+    │   ├── routes        # This directory contains modules that define the API routes and connect them to the controller methods.
+    |   |    ├── student.js     
+    |   |    ├── teacher.js     
+    |   |    ├── course.js     
+    |   |    ├── attendance.js     
+    |   |    ├── parent.js     
+    |   |    ├── grade.js     
+    |   |    └── enrollment.js  
+    |   ├── utils        
+    |   |    └── authentication.js  
     │   ├── server.js      # This is the main entry point of the application, where we initialize the Express app,  and set up middleware.
     │   └── db.js          # connect to the database
     ├── .env               # This file contains sensitive information (such as database credentials) and is not committed to version control.

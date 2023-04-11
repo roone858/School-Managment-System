@@ -1,0 +1,26 @@
+.details {
+  display: flex;
+}
+.student-image {
+  background-color: #fff;
+
+  margin-right: 5px;
+}
+.student-image img {
+  width: 100%;
+  position: relative;
+  top: 50%;
+
+  transform: translate(0, -50%);
+}
+
+.about-content li span:first-child {
+  font-weight: 600;
+}
+.about-content li {
+  line-height: 2rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+}
