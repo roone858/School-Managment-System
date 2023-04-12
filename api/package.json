@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "echo \"start nodemon \" && nodemon ./src/server.js"
+    "migration": "echo \"Error: no test specified\" && exit 1",
+    "dev": "echo \"start nodemon \"&& npx db-migrate up && nodemon ./src/server.js"
   },
   "keywords": [],
   "author": "",

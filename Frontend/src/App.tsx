@@ -65,9 +65,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="students/update/:id" element={<UpdateForm />} />
             <Route path="/students" element={<Students />}>
               <Route path="add" element={<AddStudent entity="student" />} />
-              <Route path="update/:id" element={<UpdateForm />} />
 
               <Route
                 path=":id"

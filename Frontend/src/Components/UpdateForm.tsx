@@ -1,30 +1,58 @@
 import React, { useEffect, useState } from "react";
 import { Student } from "../types/type";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import studentService from "../services/student.service";
+import { updateStudent } from "../redux/slice/student-slice";
+import Swal from "sweetalert2";
 const UpdateForm = () => {
+  const dispatch = useDispatch();
   const { id } = useParams();
   const [data, setData] = useState({
+    id: "",
+    parentid: "",
     firstname: "",
     lastname: "",
     phone: "",
     email: "",
     address: "",
     gender: "",
+    dateofbirth: "",
   });
-  const student = useSelector((state: any) =>
-    state.students.find((student: any) => student.id == id)
-  );
-
+  const students = useSelector((state: any) => state.students);
+  const student = students?.find((student: any) => student.id == id);
   const updateData = (e: any) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
-  const  handleSubmit = (e: any) => {
-     e.preventDefault();
-     console.log(data)
-   }
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+
+    Swal.fire({
+      title: "Are you sure to update?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Update !",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await new studentService().updateStudent(id, {
+          ...data,
+          firstName: data.firstname,
+          lastName: data.lastname,
+        });
+        if (res.message)
+          Swal.fire("Can't Update!", "Internal Server Error", "error");
+        else {
+          dispatch(updateStudent({ id: id, data: data }));
+          Swal.fire("Updated!", "student Updated", "success");
+        }
+      }
+    });
+  };
   useEffect(() => {
-    if (student) setData(student);
+    student && setData(student);
   }, []);
   return (
     <div className="update-form">
@@ -35,9 +63,7 @@ const UpdateForm = () => {
               <div className="card shadow-2-strong card-registration">
                 <div className="card-body p-4 p-md-5">
                   <h3 className="mb-4 pb-2 pb-md-0 mb-md-5">Update Form</h3>
-                  <form
-                    onSubmit={handleSubmit}
-                  >
+                  <form onSubmit={handleSubmit}>
                     <div className="row">
                       <div className="col-md-6 mb-4">
                         <div className="form-outline">
@@ -97,6 +123,7 @@ const UpdateForm = () => {
                               name="gender"
                               id="femaleGender"
                               value="Female"
+                              onChange={updateData}
                               checked
                             />
                           ) : (
@@ -106,7 +133,7 @@ const UpdateForm = () => {
                               name="gender"
                               id="femaleGender"
                               value="Female"
-                              onClick={updateData}
+                              onChange={updateData}
                             />
                           )}
                           <label
@@ -126,6 +153,7 @@ const UpdateForm = () => {
                               id="maleGender"
                               value="Male"
                               checked
+                              onChange={updateData}
                             />
                           ) : (
                             <input
@@ -134,7 +162,7 @@ const UpdateForm = () => {
                               name="gender"
                               id="maleGender"
                               value="Male"
-                              onClick={updateData}
+                              onChange={updateData}
                             />
                           )}
                           <label
