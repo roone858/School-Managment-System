@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 
 import "./App.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import AddStudent from "./Components/AddForm";
 import AddTeacher from "./Components/AddForm";
 import Sidebar from "./layouts/Sidebar";
@@ -20,7 +20,7 @@ import TeacherService from "./services/teacher.service";
 import { addTeacher } from "./redux/slice/teacher-slice";
 import SignInSide from "./pages/SignInSide";
 import { getTokenFromCookie } from "./utils/cookies";
-import AddFrom from "./Components/AddForm"
+import AddFrom from "./Components/AddForm";
 import { addCourse } from "./redux/slice/course-slice ";
 import NavBar from "./layouts/NavBar";
 import AttendanceCm from "./pages/Attendance";
@@ -37,11 +37,10 @@ function App() {
   const dispatch = useDispatch();
   const studentService = new StudentService();
   const teachersService = new TeacherService();
-  const coursesService=new CourseService()
-  const attendanceService=new AttendanceService()
-  
+  const coursesService = new CourseService();
+  const attendanceService = new AttendanceService();
+
   useEffect(() => {
-   
     studentService.getStudents().then((result: any) => {
       result.map((student: Student) => dispatch(addStudent(student)));
     });
@@ -61,7 +60,7 @@ function App() {
       <BrowserRouter>
         <Sidebar />
 
-      <NavBar/>
+        <NavBar />
         <div className="home-section">
           <Routes>
             <Route path="/" element={<Dashboard />} />
