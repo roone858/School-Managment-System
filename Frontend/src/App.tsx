@@ -27,6 +27,7 @@ import AttendanceCm from "./pages/Attendance";
 import AttendanceService from "./services/attendance.service";
 import { addAttendance } from "./redux/slice/attendance-slice";
 import { Attendance, Course, Student, Teacher } from "./types/type";
+import UpdateForm from "./Components/UpdateForm";
 function App() {
   const token = getTokenFromCookie();
   if (!token) {
@@ -67,6 +68,8 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/students" element={<Students />}>
               <Route path="add" element={<AddStudent entity="student" />} />
+              <Route path="update/:id" element={<UpdateForm />} />
+
               <Route
                 path=":id"
                 element={
@@ -78,6 +81,7 @@ function App() {
             </Route>
             <Route path="/teachers" element={<Teachers />}>
               <Route path="add" element={<AddTeacher entity="teacher" />} />
+              <Route path="update/:id" element={<UpdateForm />} />
               <Route
                 path=":id"
                 element={

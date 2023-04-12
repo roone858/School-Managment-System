@@ -64,9 +64,16 @@ export const TableRaw = ({
         >
           Details
         </Link>
-        <button type="button" className="btn btn-success btn-sm mx-3">
-          Update
-        </button>
+        <Link
+          onClick={() => {
+            window.scrollTo(0, 0);
+          }}
+          to={`/${url}/`+"update/" + obj.id}
+          type="button"
+          className="btn btn-success btn-sm mx-2 "
+        >
+         Update
+        </Link>
         <button
           onClick={() => handleDelete(obj.id)}
           type="button"
