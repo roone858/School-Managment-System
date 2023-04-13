@@ -39,6 +39,7 @@ function App() {
   const teachersService = new TeacherService();
   const coursesService = new CourseService();
   const attendanceService = new AttendanceService();
+  const state= useSelector((state:any)=> state)
 
   useEffect(() => {
     studentService.getStudents().then((result: any) => {
@@ -54,6 +55,7 @@ function App() {
       result.map((attend: Attendance) => dispatch(addAttendance(attend)));
     });
   }, []);
+  if (!state) return <h1>loading</h1>;
 
   return (
     <div className="App">
