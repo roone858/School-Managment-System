@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import "../style/dashboard.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAdminFromCookie } from "../utils/cookies";
 import ListGroup from "../Components/ListGroup";
+import { addNotification } from "../redux/slice/notifications-slice";
 
 export const Dashboard = () => {
+  const dispatch = useDispatch();
   const students = useSelector((state: any) => state.students);
   const teachers = useSelector((state: any) => state.teachers);
   const courses = useSelector((state: any) => state.courses);
@@ -35,6 +37,18 @@ export const Dashboard = () => {
             <span> {courses.length}</span>
           </div>
         </div>
+        <button
+          onClick={() => {
+            dispatch(
+              addNotification({
+                message: " there is new student",
+                isVisible: false,
+              })
+            );
+          }}
+        >
+          add notification
+        </button>
       </div>
     </>
   );

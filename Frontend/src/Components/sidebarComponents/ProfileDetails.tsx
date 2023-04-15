@@ -13,7 +13,9 @@ export default function ProfileDetails() {
         <div className="profile-details">
           <img src={profileImage} alt="profileImg" />
           <div className="name_job">
-            <div className="name">User : {admin.username}</div>
+            <div className="name">
+              {admin.firstname + " " + admin.lastname}{" "}
+            </div>
             <div className="job">Administrator</div>
           </div>
         </div>

@@ -4,6 +4,7 @@ import teachersSlice from "./slice/teacher-slice";
 import loginSlice from "./slice/login-slice";
 import courseSlice from "./slice/course-slice ";
 import attendanceSlice from "./slice/attendance-slice";
+import notificationsSlice from "./slice/notifications-slice";
 export const store = configureStore({
   reducer: {
     students: studentsSlice,
@@ -11,5 +12,6 @@ export const store = configureStore({
     courses: courseSlice,
     login: loginSlice,
     attendance: attendanceSlice,
+    notification:notificationsSlice
   },
 });

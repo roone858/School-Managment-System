@@ -1,20 +1,20 @@
-.navbar-section{
+.navbar-section {
   position: sticky;
- background-color: #fff;
- 
+  background-color: #11101d;
+  color: #fff;
   top: 0;
   left: 78px;
   width: calc(100% - 78px);
   transition: all 0.5s ease;
   z-index: 3;
   padding: 0.5rem 1rem;
-  border-bottom: solid 2px red;
+  border-bottom: solid 2px #1d1b31;
 }
-.sidebar.open ~ .navbar-section{
+.sidebar.open ~ .navbar-section {
   left: 250px;
   width: calc(100% - 250px);
 }
-.nav{
+.nav {
   display: flex;
   justify-content: space-between;
   align-content: center;
@@ -23,31 +23,71 @@
   flex-direction: row;
   align-items: center;
 }
-.navbar-section ul  {
+.navbar-section .nav ul {
   display: flex;
   justify-content: space-between;
   list-style: none;
- align-items: center;
-  margin-bottom:0rem;
-  margin-right:2rem;
-
+  align-items: center;
+  margin-bottom: 0rem;
+  margin-right: 2rem;
 }
 
-.navbar-section ul li{
+.navbar-section .nav ul li {
   align-items: center;
   margin: 0 1rem;
 }
-.navbar-profile{
+.navbar-profile {
   display: flex;
   align-items: center;
 }
-.navbar-profile img{
-  height:2rem;
-  border-radius: 50%;
+.navbar-profile img {
+  height: 2rem;
   margin: 0 0.5rem;
 }
-.page-name{
+.page-name {
   text-transform: capitalize;
   font-weight: 500;
   font-size: 1rem;
+}
+
+.notification-icon:hover {
+  cursor: pointer;
+}
+svg {
+  font-size: small;
+  width: 1.3rem;
+}
+.notification{
+  position:fixed;
+  margin-top: 0.5rem;
+  top:3rem;
+  right: 5rem;
+  width:20rem;
+  height:20rem;
+  border: #11101d solid 1px;
+  border-radius: 5px;
+  background-color: #ffffff;
+}
+.notification ul{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0.5rem;
+  width: 100%;
+  list-style: none;
+  align-items: center
+}
+.notification ul li{
+  width: 100%;
+
+  padding: 5px 5px 5px 5px ;
+  margin:2px 4px  2px 4px ;
+font-size: 0.7rem;
+border: #11101d solid 1px;
+background-color: #11101d;
+border-radius: 5%;
+}
+.notification-icon.open .css-888hsi-MuiBadge-root .MuiBadge-badge {
+
+  display: none;
 }

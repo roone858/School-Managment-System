@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { addStudent } from "../redux/slice/student-slice";
 import { addTeacher } from "../redux/slice/teacher-slice";
 import "../style/addForm.css"
+import { addNotification } from "../redux/slice/notifications-slice";
 const AddData = (props: any) => {
   const [data, setData] = useState({});
   const dispatch = useDispatch();
@@ -31,6 +32,12 @@ const AddData = (props: any) => {
        
         res.message && alert(res.message);
         dispatch(addStudent(res));
+        dispatch(
+          addNotification({
+            id:res.id,
+            message: ` there is new ${props.entity} his name ${res.firstname} ${res.lastname}`,
+            isVisible: false,
+          }))
       });
     }
     if (props.entity == "teacher") {
@@ -38,6 +45,12 @@ const AddData = (props: any) => {
       db.insertTeacher(data).then((res) => {
         res.message && alert(res.message);
         dispatch(addTeacher(res));
+        dispatch(
+          addNotification({
+            id:res.id,
+            message: ` there is new ${props.entity} his name ${res.firstname} ${res.lastname}`,
+            isVisible: false,
+          }))
       });
     }
     event.target.reset();

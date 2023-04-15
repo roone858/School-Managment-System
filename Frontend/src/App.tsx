@@ -46,13 +46,13 @@ function App() {
       result.map((student: Student) => dispatch(addStudent(student)));
     });
     teachersService.getTeachers().then((result: any) => {
-      result.map((teacher: Teacher) => dispatch(addTeacher(teacher)));
+      result?.map((teacher: Teacher) => dispatch(addTeacher(teacher)));
     });
     coursesService.getCourses().then((result: any) => {
-      result.map((course: Course) => dispatch(addCourse(course)));
+      result?.map((course: Course) => dispatch(addCourse(course)));
     });
     attendanceService.getAttendance().then((result: any) => {
-      result.map((attend: Attendance) => dispatch(addAttendance(attend)));
+      result?.map((attend: Attendance) => dispatch(addAttendance(attend)));
     });
   }, []);
   if (!state) return <h1>loading</h1>;
