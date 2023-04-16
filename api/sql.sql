@@ -100,6 +100,15 @@ CREATE TABLE IF NOT EXISTS admin (
   password VARCHAR(250) NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS notifications (
+  id SERIAL PRIMARY KEY,
+  message TEXT,
+  generated_at TIMESTAMP DEFAULT NOW()
+);
+
+INSERT INTO  notifications (message )
+VALUES ('your massage here');
+
 INSERT INTO
   student (
     firstName,

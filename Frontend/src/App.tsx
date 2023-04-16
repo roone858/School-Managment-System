@@ -17,6 +17,8 @@ import StudentService from "./services/student.service";
 import CourseService from "./services/course.service";
 import { addStudent } from "./redux/slice/student-slice";
 import TeacherService from "./services/teacher.service";
+import NotificationService from "./services/notification.service ";
+import { addNotification } from "./redux/slice/notifications-slice";
 import { addTeacher } from "./redux/slice/teacher-slice";
 import SignInSide from "./pages/SignInSide";
 import { getTokenFromCookie } from "./utils/cookies";
@@ -39,6 +41,7 @@ function App() {
   const teachersService = new TeacherService();
   const coursesService = new CourseService();
   const attendanceService = new AttendanceService();
+  const notificationService = new NotificationService();
   const state = useSelector((state: any) => state);
 
   useEffect(() => {
@@ -53,6 +56,9 @@ function App() {
     });
     attendanceService.getAttendance().then((result: any) => {
       result?.map((attend: Attendance) => dispatch(addAttendance(attend)));
+    });
+    notificationService.getNotification().then((result: any) => {
+      result?.map((message: any) => dispatch(addNotification(message)));
     });
   }, []);
   if (!state) return <h1>loading</h1>;
@@ -94,9 +100,7 @@ function App() {
             </Route>
             <Route path="/courses" element={<Courses />}></Route>
             <Route path="/attendance" element={<AttendanceCm />}></Route>
-            <Route path="/setting//*" element={<Setting />}>
-            </Route>
-        
+            <Route path="/setting//*" element={<Setting />}></Route>
           </Routes>
         </div>
       </BrowserRouter>

@@ -23,7 +23,7 @@ const NavBar = () => {
     <div className="navbar-section">
       {NotificationFlag && (
         <div className="notification">
-        <InsetDividers/>
+        <InsetDividers messages={notifications}/>
         </div>
       )}
       <div className="nav">
