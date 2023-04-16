@@ -3,42 +3,15 @@ import profileImage from "../assets/avatar.png";
 
 import { useParams, useLocation } from "react-router-dom";
 import { getAdminFromCookie } from "../utils/cookies";
-import { styled } from "@mui/material/styles";
-import Badge from "@mui/material/Badge";
-import Avatar from "@mui/material/Avatar";
-import Stack from "@mui/material/Stack";
+
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import StyledBadge from "../Components/mui/StyledBadge"
 import { useSelector } from "react-redux";
 import "../style/navbar.css";
+import ListDividers from "../Components/mui/ListDividers";
+import InsetDividers from "../Components/mui/InsetDividers";
 
-const StyledBadge = styled(Badge)(({ theme }) => ({
-  "& .MuiBadge-badge": {
-    backgroundColor: "red",
-    color: "red",
-    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-    "&::after": {
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      borderRadius: "50%",
-      animation: "ripple 1.2s infinite ease-in-out",
-      border: "1px solid currentColor",
-      content: '""',
-    },
-  },
-  "@keyframes ripple": {
-    "0%": {
-      transform: "scale(.7)",
-      opacity: 1,
-    },
-    "100%": {
-      transform: "scale(2.4)",
-      opacity: 0,
-    },
-  },
-}));
+
 const NavBar = () => {
   const notifications = useSelector((state: any) => state.notification);
 
@@ -50,11 +23,7 @@ const NavBar = () => {
     <div className="navbar-section">
       {NotificationFlag && (
         <div className="notification">
-          <ul>
-            {notifications.map((n: any) => (
-              <li key={n.id}>{n.message}</li>
-            ))}
-          </ul>
+        <InsetDividers/>
         </div>
       )}
       <div className="nav">

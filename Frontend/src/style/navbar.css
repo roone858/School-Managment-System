@@ -63,30 +63,14 @@ svg {
   top:3rem;
   right: 5rem;
   width:20rem;
-  height:20rem;
+ 
   border: #11101d solid 1px;
   border-radius: 5px;
   background-color: #1d1b31;
+  color: #111;
 }
-.notification ul{
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0.5rem;
-  width: 100%;
-  list-style: none;
-  align-items: center
-}
-.notification ul li{
-  width: 100%;
 
-  padding: 5px 5px 5px 5px ;
-  margin:2px 4px  2px 4px ;
-font-size: 0.7rem;
-border: #11101d solid 1px;
-background-color: #11101d;
-border-radius: 5%;
-}
+
 .notification-icon.open .css-888hsi-MuiBadge-root .MuiBadge-badge {
 
   display: none;

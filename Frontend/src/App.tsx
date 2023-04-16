@@ -39,7 +39,7 @@ function App() {
   const teachersService = new TeacherService();
   const coursesService = new CourseService();
   const attendanceService = new AttendanceService();
-  const state= useSelector((state:any)=> state)
+  const state = useSelector((state: any) => state);
 
   useEffect(() => {
     studentService.getStudents().then((result: any) => {
@@ -67,7 +67,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="students/update/:id" element={<UpdateForm />} />
+            <Route path="students/update/:id" element={<UpdateForm />} />
             <Route path="/students" element={<Students />}>
               <Route path="add" element={<AddStudent entity="student" />} />
 
@@ -94,7 +94,9 @@ function App() {
             </Route>
             <Route path="/courses" element={<Courses />}></Route>
             <Route path="/attendance" element={<AttendanceCm />}></Route>
-            <Route path="/setting" element={<Setting />}></Route>
+            <Route path="/setting//*" element={<Setting />}>
+            </Route>
+        
           </Routes>
         </div>
       </BrowserRouter>
