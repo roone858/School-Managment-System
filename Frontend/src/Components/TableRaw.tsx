@@ -5,13 +5,7 @@ import TeacherService from "../services/teacher.service";
 import { deleteStudent } from "../redux/slice/student-slice";
 import { useDispatch } from "react-redux";
 import { deleteTeacher } from "../redux/slice/teacher-slice";
-export const TableRaw = ({
-  obj,
-  onDeleteClick,
-  onUpdateClick,
-  onDetailsClick,
-  url,
-}: any) => {
+export const TableRaw = ({ obj, url }: any) => {
   const dispatch = useDispatch();
   const handleDelete = (id: any) => {
     Swal.fire({
@@ -27,10 +21,9 @@ export const TableRaw = ({
         if (url == "students") {
           const db = new StudentService();
           const response = await db.deleteStudent(id);
-      
-            dispatch(deleteStudent(id));
-            Swal.fire(" Deleted!", "student deleted", "success");
-          
+
+          dispatch(deleteStudent(id));
+          Swal.fire(" Deleted!", "student deleted", "success");
         }
         if (url == "teachers") {
           const db = new TeacherService();
@@ -39,7 +32,7 @@ export const TableRaw = ({
             Swal.fire("Can't Deleted!", "Internal Server Error", "error");
           else {
             dispatch(deleteTeacher(id));
-            Swal.fire(" Deleted!", "student deleted", "success");
+            Swal.fire(" Deleted!", "Teacher deleted", "success");
           }
         }
       }
@@ -68,11 +61,11 @@ export const TableRaw = ({
           onClick={() => {
             window.scrollTo(0, 0);
           }}
-          to={`/${url}/`+"update/" + obj.id}
+          to={`/${url}/` + "update/" + obj.id}
           type="button"
           className="btn btn-success btn-sm mx-2 "
         >
-         Update
+          Update
         </Link>
         <button
           onClick={() => handleDelete(obj.id)}

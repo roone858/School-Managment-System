@@ -5,7 +5,7 @@ import "../style/dashboard.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getAdminFromCookie } from "../utils/cookies";
 import ListGroup from "../Components/ListGroup";
-import { addNotification } from "../redux/slice/notifications-slice";
+import { addNotification ,  setRedFlag} from "../redux/slice/notifications-slice";
 
 export const Dashboard = () => {
   const dispatch = useDispatch();
@@ -40,14 +40,11 @@ export const Dashboard = () => {
         <button
           onClick={() => {
             dispatch(
-              addNotification({
-                message: " there is new student",
-                isVisible: false,
-              })
+              setRedFlag(true)
             );
           }}
         >
-          add notification
+           set Notification Flag
         </button>
       </div>
     </>

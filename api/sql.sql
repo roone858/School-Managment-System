@@ -106,8 +106,10 @@ CREATE TABLE IF NOT EXISTS notifications (
   generated_at TIMESTAMP DEFAULT NOW()
 );
 
-INSERT INTO  notifications (message )
-VALUES ('your massage here');
+INSERT INTO
+  notifications (message)
+VALUES
+  ('your massage here Tow');
 
 INSERT INTO
   student (
@@ -261,6 +263,12 @@ INSERT INTO
     password
   )
 Values
-  ('Mahmoud','Gamal','admin', 'mahmoudg.dev@gmail.com', 'admin');
+  (
+    'Mahmoud',
+    'Gamal',
+    'admin',
+    'mahmoudg.dev@gmail.com',
+    'admin'
+  );
 
 require('crypto').randomBytes(64).toString('hex')

@@ -2,11 +2,15 @@ import { useState } from "react";
 import { Input } from "./Input";
 import StudentService from "../services/student.service";
 import TeacherService from "../services/teacher.service";
+import NotificationService from "../services/notification.service";
 import { useDispatch } from "react-redux";
 import { addStudent } from "../redux/slice/student-slice";
 import { addTeacher } from "../redux/slice/teacher-slice";
-import "../style/addForm.css"
-import { addNotification } from "../redux/slice/notifications-slice";
+import "../style/addForm.css";
+import {
+  addNotification,
+  setRedFlag,
+} from "../redux/slice/notifications-slice";
 const AddData = (props: any) => {
   const [data, setData] = useState({});
   const dispatch = useDispatch();
@@ -14,45 +18,48 @@ const AddData = (props: any) => {
   const updateData = (e: any) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
-  function checkFormValues(values: any) {
-    for (const value of Object.values(values)) {
-      if (value === null) {
-        return false;
-      }
-    }
-    return true;
-  }
-  // checkFormValues(data)? console.log("there is no null value"):console.log(" null value")
+
+  const insertStudent = () => {
+    const db = new StudentService();
+    db.insertStudent(data).then((res) => {
+      res.message && alert(res.message);
+      dispatch(addStudent(res));
+
+      new NotificationService()
+        .insertNotification({
+          message: `new Student added ${res.firstname} ${res.lastname}`,
+        })
+        .then((result) => {
+          dispatch(addNotification(result));
+          dispatch(setRedFlag(true));
+        });
+    });
+  };
+
+  const insertTeacher = () => {
+    const db = new TeacherService();
+    db.insertTeacher(data).then((res) => {
+      res.message && alert(res.message);
+      dispatch(addTeacher(res));
+
+      new NotificationService()
+        .insertNotification({
+          message: `new Teacher added ${res.firstname} ${res.lastname}`,
+        })
+        .then((result) => {
+          dispatch(addNotification(result));
+          dispatch(setRedFlag(true));
+        });
+    });
+  };
+
   const handleSubmit = (event: any) => {
     event.preventDefault();
 
-    if (props.entity == "student") {
-      const db = new StudentService();
-      db.insertStudent(data).then((res) => {
-       
-        res.message && alert(res.message);
-        dispatch(addStudent(res));
-        dispatch(
-          addNotification({
-            id:res.id,
-            message: ` there is new ${props.entity} his name ${res.firstname} ${res.lastname}`,
-            isVisible: false,
-          }))
-      });
-    }
-    if (props.entity == "teacher") {
-      const db = new TeacherService();
-      db.insertTeacher(data).then((res) => {
-        res.message && alert(res.message);
-        dispatch(addTeacher(res));
-        dispatch(
-          addNotification({
-            id:res.id,
-            message: ` there is new ${props.entity} his name ${res.firstname} ${res.lastname}`,
-            isVisible: false,
-          }))
-      });
-    }
+    if (props.entity == "student") insertStudent();
+
+    if (props.entity == "teacher") insertTeacher();
+
     event.target.reset();
   };
 
@@ -112,7 +119,8 @@ const AddData = (props: any) => {
               id="inputGender4"
               onChange={updateData}
               name="gender"
-              className="form-control" required
+              className="form-control"
+              required
             >
               <option>Select Gender </option>
               <option>Male</option>
@@ -133,9 +141,7 @@ const AddData = (props: any) => {
         <button type="submit" className="btn btn-primary">
           Create
         </button>
-      
       </form>
-      
     </div>
   );
 };

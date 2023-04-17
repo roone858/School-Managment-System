@@ -17,7 +17,7 @@ import StudentService from "./services/student.service";
 import CourseService from "./services/course.service";
 import { addStudent } from "./redux/slice/student-slice";
 import TeacherService from "./services/teacher.service";
-import NotificationService from "./services/notification.service ";
+import NotificationService from "./services/notification.service";
 import { addNotification } from "./redux/slice/notifications-slice";
 import { addTeacher } from "./redux/slice/teacher-slice";
 import SignInSide from "./pages/SignInSide";
