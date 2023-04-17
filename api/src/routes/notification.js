@@ -14,4 +14,8 @@ router.post("/", async (req, res) => {
   res.json(notification);
 });
 
+router.delete("/", async (req, res) => {
+     const notification = await Notification.deleteAll();
+     res.json(notification);
+   });
 module.exports = router;

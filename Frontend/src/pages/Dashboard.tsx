@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+
 
 import "../style/dashboard.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getAdminFromCookie } from "../utils/cookies";
-import ListGroup from "../Components/ListGroup";
+import AdminService from "../services/admin.service"
+
 import { addNotification ,  setRedFlag} from "../redux/slice/notifications-slice";
 
 export const Dashboard = () => {
@@ -39,12 +38,20 @@ export const Dashboard = () => {
         </div>
         <button
           onClick={() => {
+            new AdminService().insertAdmin({
+ 
+              "firstName": "Hassan",
+              "lastName": "Ammer",
+              "userName": "hassan",
+              "email": "hassan.dev@gmail.com",
+              "password": "hassan"
+          })
             dispatch(
               setRedFlag(true)
             );
           }}
         >
-           set Notification Flag
+           Insert Hassan admin
         </button>
       </div>
     </>

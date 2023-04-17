@@ -28,12 +28,9 @@ export const TableRaw = ({ obj, url }: any) => {
         if (url == "teachers") {
           const db = new TeacherService();
           const response = await db.deleteTeacher(id);
-          if (response.message)
-            Swal.fire("Can't Deleted!", "Internal Server Error", "error");
-          else {
-            dispatch(deleteTeacher(id));
-            Swal.fire(" Deleted!", "Teacher deleted", "success");
-          }
+
+          dispatch(deleteTeacher(id));
+          Swal.fire(" Deleted!", "Teacher deleted", "success");
         }
       }
     });

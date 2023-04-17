@@ -9,6 +9,7 @@ const parentRout = require("./parent");
 const attendanceRout = require("./attendance");
 const gradeRout = require("./grade");
 const notificationRout = require("./notification");
+const adminRout = require("./admin");
 
 router.use("/student", studentRout);
 router.use("/teacher", teacherRout);
@@ -18,5 +19,6 @@ router.use("/parent", parentRout);
 router.use("/attendance", attendanceRout);
 router.use("/grade", gradeRout);
 router.use("/notification", notificationRout);
+router.use("/admin", adminRout);
 
 module.exports =router

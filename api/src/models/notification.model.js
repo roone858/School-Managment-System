@@ -34,12 +34,10 @@ const Notification = {
   
 
   // Delete an Attendance from the database
-  delete: async (id) => {
+  deleteAll: async () => {
     const conn = await client.connect();
     try {
-      const result = await conn.query("DELETE FROM notifications WHERE id = $1", [
-        id,
-      ]);
+      const result = await conn.query("DELETE FROM notifications ");
       return result.rowCount > 0;
     } finally {
       conn.release();

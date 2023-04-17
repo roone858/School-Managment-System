@@ -63,10 +63,9 @@ svg {
   top:3rem;
   right: 5rem;
   width:20rem;
- 
+ background-color: #fff;
   border: #11101d solid 1px;
   border-radius: 5px;
-  background-color: #1d1b31;
   color: #111;
 }
 

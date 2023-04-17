@@ -1,20 +1,20 @@
 const client = require("../db");
 
-// Define the model for the "students" table
-class AdminMethods  {
-  // Fetch all students from the database
-  async getAll  () {
+// Define the model for the "admin" table
+class AdminMethods {
+  // Fetch all admin from the database
+  async getAll() {
     const conn = await client.connect();
     try {
-      const result = await conn.query("SELECT * FROM student");
+      const result = await conn.query("SELECT * FROM admin");
       return result.rows;
     } finally {
       conn.release();
     }
   }
 
-  // Fetch a specific student by ID from the database
-  async  getById  (id)  {
+  // Fetch a specific admin by ID from the database
+  async getById(id) {
     const conn = await client.connect();
     try {
       const result = await conn.query("SELECT * FROM admin WHERE id = $1", [
@@ -26,31 +26,22 @@ class AdminMethods  {
     }
   }
   async getByUsername(username) {
-     const sql = `SELECT * FROM admin WHERE username ='${username}' ;`;
+    const sql = `SELECT * FROM admin WHERE username ='${username}' ;`;
     const conn = await client.connect();
     const result = await conn.query(sql);
     conn.release();
 
     return result.rows[0];
-   }
+  }
 
-  // Create a new student in the database
-  async create (data)  {
-  const conn = await client.connect();
+  // Create a new admin in the database
+  async create(data) {
+    const conn = await client.connect();
     try {
-      const {
-        firstName,
-        lastName,
-        email,
-        gender,
-        phone,
-        dateOfBirth,
-        address,
-        parentId
-      } = data;
+      const { firstName, lastName, email, userName, password } = data;
       const result = await conn.query(
-        "INSERT INTO admin (firstName, lastName, email, gender, phone, dateOfBirth, address, parentId) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
-        [firstName, lastName, email, gender, phone, dateOfBirth, address, parentId]
+        "INSERT INTO admin ( firstName , lastName , userName , email , password) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+        [firstName, lastName, userName, email, password]
       );
       return result.rows[0];
     } finally {
@@ -58,33 +49,14 @@ class AdminMethods  {
     }
   }
 
-  // Update an existing student in the database
-  async update (id, data)  {
+  // Update an existing admin in the database
+  async update(id, data) {
     const conn = await client.connect();
     try {
-      const {
-        firstName,
-        lastName,
-        email,
-        gender,
-        phone,
-        dateOfBirth,
-        address,
-        parentId,
-      } = data;
+      const { firstName, lastName, userName, email, password } = data;
       const result = await conn.query(
-        "UPDATE student SET firstName = $1, lastName = $2, email = $3, gender = $4, phone = $5, dateOfBirth = $6, address = $7, parentId = $8 WHERE id = $9 RETURNING *",
-        [
-          firstName,
-          lastName,
-          email,
-          gender,
-          phone,
-          dateOfBirth,
-          address,
-          parentId,
-          id,
-        ]
+        "UPDATE admin SET firstName = $1, lastName = $2, userName = $3, email = $4, password = $5  WHERE id = $6 RETURNING *",
+        [firstName, lastName, userName, email, password, id]
       );
       return result.rows[0];
     } finally {
@@ -92,19 +64,17 @@ class AdminMethods  {
     }
   }
 
-  // Delete a student from the database
-  async  delete (id)  {
+  // Delete a admin from the database
+  async delete(id) {
     const conn = await client.connect();
     try {
-      const result = await conn.query("DELETE FROM student WHERE id = $1", [
-        id,
-      ]);
+      const result = await conn.query("DELETE FROM admin WHERE id = $1", [id]);
       return result.rowCount > 0;
     } finally {
       conn.release();
     }
   }
-};
+}
 
 module.exports = {
   AdminMethods,

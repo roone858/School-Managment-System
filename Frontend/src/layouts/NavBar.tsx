@@ -10,7 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import "../style/navbar.css";
 import ListDividers from "../Components/mui/ListDividers";
 import InsetDividers from "../Components/mui/InsetDividers";
-import { setRedFlag } from "../redux/slice/notifications-slice";
+import { clearAllNotification, setRedFlag } from "../redux/slice/notifications-slice";
+import NotificationService from "../services/notification.service"
 
 
 const NavBar = () => {
@@ -27,6 +28,12 @@ const dispatch=useDispatch()
       {NotificationFlag && (
         <div className="notification">
         <InsetDividers messages={notifications.slice(0,4)}/>
+        <button onClick={()=>{
+          new NotificationService().deleteAllNotification().then((result)=>{
+            dispatch(clearAllNotification())
+          })
+        }} className="btn  w-100">Delete all notifications</button>
+
         </div>
       )}
       <div className="nav">

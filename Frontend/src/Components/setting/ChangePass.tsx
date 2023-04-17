@@ -67,7 +67,7 @@ const ChangePass = () => {
                 Show
               </span>
             </div>
-            <button className="my-2 btn btn-primary" type="submit">
+            <button className="my-3 btn btn-primary" type="submit">
               Change
             </button>
           </div>

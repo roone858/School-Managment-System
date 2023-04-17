@@ -33,13 +33,12 @@ class NotificationService {
       console.log("error", error);
     }
   }
-  async deleteAttendance(id: string) {
-    const response = await fetch(`http://localhost:4000/api/attendance/${id}`, {
+  async deleteAllNotification() {
+    const response = await fetch(`http://localhost:4000/api/notification`, {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },
     });
-     const json = await response.json();
-     return json;
+     return response;
   }
 }
 export default NotificationService;

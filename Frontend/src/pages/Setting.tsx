@@ -12,16 +12,11 @@ export const Setting = () => {
 
   return (
     <div className="setting">
-      
-
       <Routes>
         <Route path="/" element={<NestedList />} />
-        <Route path="/info" element={<AccountInfo/>} />
-        <Route
-          path="/password"
-          element={<ChangePass/>}
-        />
-        <Route path="/deactivate" element={<DeactivateAcc/>} />
+        <Route path="/info" element={<AccountInfo />} />
+        <Route path="/password" element={<ChangePass />} />
+        <Route path="/deactivate" element={<DeactivateAcc />} />
       </Routes>
     </div>
   );

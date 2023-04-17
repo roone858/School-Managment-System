@@ -8,6 +8,9 @@ const notificationSlice = createSlice({
     addNotification: (state, action:PayloadAction<any>) => {
       state.messages.unshift(action.payload);
     },
+    clearAllNotification: (state) => {
+      state.messages=[];
+    },
     setRedFlag: (state, action:PayloadAction<any>) => {
       state.isVisible = action.payload;
     },
@@ -15,6 +18,6 @@ const notificationSlice = createSlice({
   },
 });
 
-export const { addNotification, setRedFlag } = notificationSlice.actions;
+export const { addNotification, setRedFlag,clearAllNotification } = notificationSlice.actions;
 export default notificationSlice.reducer;
 

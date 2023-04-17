@@ -4,7 +4,15 @@ export function setTokenCookie(token: any) {
   Cookies.set("token", token, { expires: 7 }); // expires in 7 days
 }
 export function setAdminCookie(admin: any) {
-  Cookies.set("admin", JSON.stringify(admin), { expires: 7 }); // expires in 7 days
+  Cookies.set(
+    "admin",
+    JSON.stringify({
+      username: admin.username,
+      firstname: admin.firstname,
+      lastname: admin.lastname,
+    }),
+    { expires: 7 }
+  ); // expires in 7 days
 }
 export function getTokenFromCookie() {
   const token = Cookies.get("token");
