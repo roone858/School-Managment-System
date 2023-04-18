@@ -28,7 +28,15 @@ import NavBar from "./layouts/NavBar";
 import AttendanceCm from "./pages/Attendance";
 import AttendanceService from "./services/attendance.service";
 import { addAttendance } from "./redux/slice/attendance-slice";
-import { Attendance, Course, Student, Teacher } from "./types/type";
+import {
+  Notification,
+  Attendance,
+  Course,
+  State,
+  Student,
+  Teacher,
+  Message,
+} from "./types/type";
 import UpdateForm from "./Components/UpdateForm";
 function App() {
   const token = getTokenFromCookie();
@@ -42,23 +50,23 @@ function App() {
   const coursesService = new CourseService();
   const attendanceService = new AttendanceService();
   const notificationService = new NotificationService();
-  const state = useSelector((state: any) => state);
+  const state = useSelector((state: State) => state);
 
   useEffect(() => {
-    studentService.getStudents().then((result: any) => {
+    studentService.getStudents().then((result: Student[]) => {
       result.map((student: Student) => dispatch(addStudent(student)));
     });
-    teachersService.getTeachers().then((result: any) => {
+    teachersService.getTeachers().then((result: Teacher[]) => {
       result?.map((teacher: Teacher) => dispatch(addTeacher(teacher)));
     });
-    coursesService.getCourses().then((result: any) => {
+    coursesService.getCourses().then((result: Course[]) => {
       result?.map((course: Course) => dispatch(addCourse(course)));
     });
-    attendanceService.getAttendance().then((result: any) => {
+    attendanceService.getAttendance().then((result: Attendance[]) => {
       result?.map((attend: Attendance) => dispatch(addAttendance(attend)));
     });
-    notificationService.getNotification().then((result: any) => {
-      result?.map((message: any) => dispatch(addNotification(message)));
+    notificationService.getNotification().then((result: Message[]) => {
+      result?.map((message: Message) => dispatch(addNotification(message)));
     });
   }, []);
   if (!state) return <h1>loading</h1>;
@@ -81,7 +89,7 @@ function App() {
                 path=":id"
                 element={
                   <Details
-                    array={useSelector((state: any) => state.students)}
+                    array={useSelector((state: State) => state.students)}
                   />
                 }
               />
@@ -93,7 +101,7 @@ function App() {
                 path=":id"
                 element={
                   <Details
-                    array={useSelector((state: any) => state.teachers)}
+                    array={useSelector((state: State) => state.teachers)}
                   />
                 }
               />

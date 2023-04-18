@@ -1,11 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-interface LoginState {
-  username: string | null;
-  isLoggedIn: boolean;
-  isLoading: boolean;
-  error: string | null;
-}
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { LoginState } from "../../types/type";
 
 const initialState: LoginState = {
   username: null,
@@ -15,7 +9,7 @@ const initialState: LoginState = {
 };
 
 const loginSlice = createSlice({
-  name: 'login',
+  name: "login",
   initialState,
   reducers: {
     loginRequest: (state) => {
@@ -41,6 +35,7 @@ const loginSlice = createSlice({
   },
 });
 
-export const { loginRequest, loginSuccess, loginFailure, logout } = loginSlice.actions;
+export const { loginRequest, loginSuccess, loginFailure, logout } =
+  loginSlice.actions;
 
 export default loginSlice.reducer;

@@ -1,10 +1,12 @@
 import { useState,useEffect } from "react";
 import AdminService from "../../services/admin.service";
-
+import { getAdminFromCookie } from "../../utils/cookies";
+import { Admin } from "../../types/type";
 const AccountInfo = () => {
-  const [admin, setAdmin] = useState({});
+  const [admin, setAdmin] = useState({}as Admin);
+  const{username}=getAdminFromCookie()
 useEffect(()=>{
-  new AdminService().getAdminByUsername("hassan").then((result) => {
+  new AdminService().getAdminByUsername(username).then((result) => {
     setAdmin(result);
   });
 },[])
