@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../../style/changepass.css";
 import { getAdminFromCookie } from "../../utils/cookies";
 import AdminService from "../../services/admin.service";
+import Swal from "sweetalert2";
 const ChangePass = () => {
   const [data, setData] = useState({} as any);
   const [hideCurrent, setHideCurrent] = useState(true);
@@ -24,9 +25,29 @@ const ChangePass = () => {
     if (data.newPassword !== data.confirmPassword)
       return console.log("not confirm");
     const { username } = getAdminFromCookie();
-    console.log();
-    new AdminService().changeAdminPassword({ ...data, username: username }).then((result: any) => {
-      console.log(result);
+
+    Swal.fire({
+      title: "Are you sure Change Your Password ?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Update !",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        new AdminService()
+          .changeAdminPassword({ ...data, username })
+          .then((result: any) => {
+            if (result.message)
+              return Swal.fire(
+                "Sorry!",
+                "Current Password is not valid ",
+                "error"
+              );
+            Swal.fire("Changed!", "Password is changed ", "success");
+          });
+      }
     });
   };
 
@@ -42,6 +63,7 @@ const ChangePass = () => {
                 className="form-control"
                 placeholder="Current Password"
                 name="oldPassword"
+                required
                 onChange={handleChange}
               />
               <span onClick={handleHideCurrent} className="show-btn">
@@ -55,6 +77,7 @@ const ChangePass = () => {
                 className="form-control"
                 placeholder="New Password"
                 name="newPassword"
+                required
                 onChange={handleChange}
               />
               <span onClick={handleHideNew} className="show-btn">
@@ -68,6 +91,7 @@ const ChangePass = () => {
                 className="form-control"
                 placeholder="Confirm Password"
                 name="confirmPassword"
+                required
                 onChange={handleChange}
               />
               <span onClick={handleHideConfirm} className="show-btn">

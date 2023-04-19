@@ -42,3 +42,7 @@ background-color: #ddd;
   font-weight: 500;
   margin: 18px;
 }
+
+.MuiButtonBase-root{
+  background-color: #11101d;
+}

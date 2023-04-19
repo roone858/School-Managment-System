@@ -68,7 +68,6 @@ class AdminMethods {
     const conn = await client.connect();
     try {
       const { oldPassword, newPassword } = data;
-
       const { password } = await this.getByUsername(username);
       if (oldPassword == password) {
         const result = await conn.query(
