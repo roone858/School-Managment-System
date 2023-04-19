@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 
-import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AddStudent from "./Components/AddForm";
 import AddTeacher from "./Components/AddForm";
@@ -38,6 +37,8 @@ import {
   Message,
 } from "./types/type";
 import UpdateForm from "./Components/UpdateForm";
+import  Table  from "./Components/bootstrap/Table";
+import "./App.css";
 function App() {
   const token = getTokenFromCookie();
   if (!token) {
@@ -77,9 +78,10 @@ function App() {
         <Sidebar />
 
         <NavBar />
-        <div className="home-section">
+        <div className="home-section bg-eee">
           <Routes>
             <Route path="/" element={<Dashboard />} />
+            <Route path="/test" element={<Table />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="students/update/:id" element={<UpdateForm />} />
             <Route path="/students" element={<Students />}>

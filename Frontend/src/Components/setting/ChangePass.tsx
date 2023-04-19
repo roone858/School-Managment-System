@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "../../style/changepass.css";
+import { getAdminFromCookie } from "../../utils/cookies";
+import AdminService from "../../services/admin.service";
 const ChangePass = () => {
   const [data, setData] = useState({} as any);
   const [hideCurrent, setHideCurrent] = useState(true);
@@ -17,10 +19,15 @@ const ChangePass = () => {
   const handleChange = (e: any) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    if (data.newPassword !==data.confirmPassword ) return console.log("not confirm")
-    console.log(data);
+    if (data.newPassword !== data.confirmPassword)
+      return console.log("not confirm");
+    const { username } = getAdminFromCookie();
+    console.log();
+    new AdminService().changeAdminPassword({ ...data, username: username }).then((result: any) => {
+      console.log(result);
+    });
   };
 
   return (
@@ -34,7 +41,7 @@ const ChangePass = () => {
                 type={hideCurrent ? "password" : "text"}
                 className="form-control"
                 placeholder="Current Password"
-                name="currentPassword"
+                name="oldPassword"
                 onChange={handleChange}
               />
               <span onClick={handleHideCurrent} className="show-btn">

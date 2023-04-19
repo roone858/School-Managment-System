@@ -8,7 +8,7 @@
   transition: all 0.5s ease;
   z-index: 3;
   padding: 0.5rem 1rem;
-  border-bottom: solid 2px #1d1b31;
+  border-bottom: solid 2px #24223c;
 }
 .sidebar.open ~ .navbar-section {
   left: 250px;

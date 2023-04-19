@@ -1,11 +1,44 @@
-.navbar{
-     transition: all 2s ease;
-    
-   }
+.navbar {
+  transition: all 2s ease;
+}
 
-   .add-button {
-    position: fixed;
-   bottom: 5%;
-   right: 5%;
-   z-index: 1000;
+.add-button {
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+  z-index: 1000;
+}
+table {
+  text-align: center;
+}
+table tr {
+  border-color: #ddd;
+}
+body{
+  background: #ddd;
+}
+.btn-primary {
+  background: #11101d;
+}
+.btn-primary:hover {
+  background:#000000;
+}
+.home-section {
+  position: relative;
+
+background-color: #ddd;
+  top: 0.2rem;
+  left: 78px;
+  width: calc(100% - 78px);
+  transition: all 0.5s ease;
+  z-index: 2;
+  padding: 1rem;
+}
+
+.home-section .text {
+  display: inline-block;
+  color: #11101d;
+  font-size: 25px;
+  font-weight: 500;
+  margin: 18px;
 }

@@ -12,6 +12,8 @@ import PersonIcon from "@mui/icons-material/Person";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import StarBorder from "@mui/icons-material/StarBorder";
+import AddModeratorIcon from "@mui/icons-material/AddModerator";
+import RemoveModeratorIcon from "@mui/icons-material/RemoveModerator";
 import LockIcon from "@mui/icons-material/Lock";
 import MoodBadIcon from "@mui/icons-material/MoodBad";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
@@ -55,19 +57,28 @@ export default function NestedList() {
       </ListItemButton>
       <Collapse in={openItemOne} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItemButton onClick={()=> navigate("/setting/info")} sx={{ pl: 4 }}>
+          <ListItemButton
+            onClick={() => navigate("/setting/info")}
+            sx={{ pl: 4 }}
+          >
             <ListItemIcon>
               <PersonIcon />
             </ListItemIcon>
             <ListItemText primary="Account Information" />
           </ListItemButton>
-          <ListItemButton onClick={()=> navigate("/setting/password")} sx={{ pl: 4 }}>
+          <ListItemButton
+            onClick={() => navigate("/setting/password")}
+            sx={{ pl: 4 }}
+          >
             <ListItemIcon>
               <LockIcon />
             </ListItemIcon>
             <ListItemText primary="Change your password" />
           </ListItemButton>
-          <ListItemButton onClick={()=> navigate("/setting/deactivate")} sx={{ pl: 4 }}>
+          <ListItemButton
+            onClick={() => navigate("/setting/deactivate")}
+            sx={{ pl: 4 }}
+          >
             <ListItemIcon>
               <MoodBadIcon />
             </ListItemIcon>
@@ -83,20 +94,29 @@ export default function NestedList() {
         {openItemTow ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={openItemTow} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
+        <List component="div"   disablePadding>
           <ListItemButton sx={{ pl: 4 }}>
-            <ListItemText  primary="Add new Admin  " />
+            <ListItemIcon  >
+              <AddModeratorIcon fontSize={"small"}/>
+            </ListItemIcon>
+            <ListItemText primary="Add new Admin  " />
           </ListItemButton>
           <ListItemButton sx={{ pl: 4 }}>
+            <ListItemIcon>
+              <RemoveModeratorIcon fontSize={"small"} />
+            </ListItemIcon>
             <ListItemText primary="Delete Admin" />
           </ListItemButton>
           <ListItemButton sx={{ pl: 4 }}>
+            <ListItemIcon>
+              <RemoveModeratorIcon fontSize={"small"} />
+            </ListItemIcon>
             <ListItemText primary="Update Admin" />
           </ListItemButton>
         </List>
       </Collapse>
       <ListItemButton onClick={handleItemThreeClick}>
-        <ListItemIcon >
+        <ListItemIcon>
           <SupervisorAccountIcon />
         </ListItemIcon>
         <ListItemText primary="Users" />

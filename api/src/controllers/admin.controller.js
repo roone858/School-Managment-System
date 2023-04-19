@@ -57,6 +57,18 @@ async function updateAdmin(req, res) {
     res.status(500).json({ message: "Internal Server Error" });
   }
 }
+async function updateAdminPassword(req, res) {
+  try {
+    const result = await db.updatePassword(req.body.username, req.body);
+    if (!result) {
+      return res.status(404).json({ message: "Admin not found" });
+    }
+    res.status(200).json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
 
 async function deleteAdmin(req, res) {
   try {
@@ -76,4 +88,5 @@ module.exports = {
   createAdmin,
   updateAdmin,
   deleteAdmin,
+  updateAdminPassword,
 };

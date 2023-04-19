@@ -64,6 +64,25 @@ class AdminMethods {
     }
   }
 
+  async updatePassword(username, data) {
+    const conn = await client.connect();
+    try {
+      const { oldPassword, newPassword } = data;
+
+      const { password } = await this.getByUsername(username);
+      if (oldPassword == password) {
+        const result = await conn.query(
+          "UPDATE admin SET password = $1  WHERE username = $2 RETURNING *",
+          [newPassword, username]
+        );
+        return result.rows[0];
+      }
+      throw new Error();
+    } finally {
+      conn.release();
+    }
+  }
+
   // Delete a admin from the database
   async delete(id) {
     const conn = await client.connect();

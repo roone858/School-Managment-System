@@ -9,8 +9,8 @@ export interface Student {
 }
 export interface Teacher {
   id?: Number;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   email?: string;
   phone?: string;
   address?: string;

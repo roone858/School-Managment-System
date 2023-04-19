@@ -11,6 +11,11 @@ import {
   addNotification,
   setRedFlag,
 } from "../redux/slice/notifications-slice";
+import { Student, Teacher } from "../types/type";
+
+interface Error {
+  message: string;
+}
 const AddData = (props: any) => {
   const [data, setData] = useState({});
   const dispatch = useDispatch();
@@ -21,8 +26,7 @@ const AddData = (props: any) => {
 
   const insertStudent = () => {
     const db = new StudentService();
-    db.insertStudent(data).then((res) => {
-      res.message && alert(res.message);
+    db.insertStudent(data).then((res: Student) => {
       dispatch(addStudent(res));
 
       new NotificationService()
@@ -38,10 +42,8 @@ const AddData = (props: any) => {
 
   const insertTeacher = () => {
     const db = new TeacherService();
-    db.insertTeacher(data).then((res) => {
-      res.message && alert(res.message);
+    db.insertTeacher(data).then((res: Teacher) => {
       dispatch(addTeacher(res));
-
       new NotificationService()
         .insertNotification({
           message: `new Teacher added ${res.firstname} ${res.lastname}`,

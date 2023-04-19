@@ -37,7 +37,7 @@ export const TableRaw = ({ obj, url }: any) => {
   };
 
   return (
-    <tr key={obj.id}>
+    <tr className="bg-fff" key={obj.id}>
       <th scope="row">{obj.id}</th>
       <td>{obj.firstname}</td>
       <td>{obj.lastname}</td>
