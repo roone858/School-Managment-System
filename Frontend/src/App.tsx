@@ -11,21 +11,21 @@ import { Students } from "./pages/Student";
 import { Teachers } from "./pages/Teacher";
 import { useDispatch, useSelector } from "react-redux";
 import Details from "./Components/Details";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { addStudent } from "./redux/slice/student-slice";
 import StudentService from "./services/student.service";
 import CourseService from "./services/course.service";
-import { addStudent } from "./redux/slice/student-slice";
+import TeachingService from "./services/teaching.service";
 import TeacherService from "./services/teacher.service";
+import AttendanceService from "./services/attendance.service";
 import NotificationService from "./services/notification.service";
 import { addNotification } from "./redux/slice/notifications-slice";
 import { addTeacher } from "./redux/slice/teacher-slice";
 import SignInSide from "./pages/SignInSide";
 import { getTokenFromCookie } from "./utils/cookies";
-import AddFrom from "./Components/AddForm";
 import { addCourse } from "./redux/slice/course-slice ";
 import NavBar from "./layouts/NavBar";
 import AttendanceCm from "./pages/Attendance";
-import AttendanceService from "./services/attendance.service";
 import { addAttendance } from "./redux/slice/attendance-slice";
 import {
   Notification,
@@ -40,6 +40,7 @@ import UpdateForm from "./Components/UpdateForm";
 import Table from "./Components/bootstrap/Table";
 import "./App.css";
 import { AddCourse } from "./Components/AddCourse";
+import { addTeaching } from "./redux/slice/teaching-slice";
 function App() {
   const dispatch = useDispatch();
   const state = useSelector((state: State) => state);
@@ -58,6 +59,9 @@ function App() {
     });
     CourseService.getAllCourses().then((result: Course[]) => {
       result?.map((course: Course) => dispatch(addCourse(course)));
+    });
+    TeachingService.getAllTeachings().then((result: any) => {
+      result?.map((row: any) => dispatch(addTeaching(row)));
     });
     AttendanceService.getAttendance().then((result: Attendance[]) => {
       result?.map((attend: Attendance) => dispatch(addAttendance(attend)));

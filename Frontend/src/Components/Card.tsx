@@ -6,7 +6,6 @@ const Card = ({ title, description, image ,teacher }: any) => {
         <div className="card-body">
           <h5 className="card-title">{title}</h5>
           <p className="card-text">{description}</p>
-          <p><span>Instructor : </span> <span >{teacher}</span> </p>
           
           <a  href="#" className="btn btn-primary disabled">Enroll Me</a>
         </div>

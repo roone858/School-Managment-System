@@ -23,8 +23,7 @@ export const Courses = () => {
         <Card
           image={images[index]}
           title={course.title}
-          description={course.description.slice(0, 50) + "..."}
-          teacher={"test"}
+          description={course.description.slice(0, 100) + "..."}
         />
       </div>
     );
