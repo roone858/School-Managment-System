@@ -1,14 +1,7 @@
 import { getTokenFromCookie } from "../utils/cookies";
 
 class CourseService {
-  async deleteCourse(id: string) {
-    fetch(`http://localhost:4000/api/course/${id}`, {
-      method: "DELETE",
-      headers: { Authorization: `${getTokenFromCookie()}` },
-    });
-  }
-
-  async getCourses() {
+  static async getAllCourses() {
     try {
       const response = await fetch("http://localhost:4000/api/course", {
         headers: { Authorization: `${getTokenFromCookie()}` },
@@ -19,16 +12,16 @@ class CourseService {
       console.log("error", error);
     }
   }
-  async getCourse() {
+  static async getCourse(id: string | number) {
     try {
-      const response = await fetch("http://localhost:4000/api/course");
+      const response = await fetch(`http://localhost:4000/api/course/${id}`);
       const json = await response.json();
       return json;
     } catch (error) {
       console.log("error", error);
     }
   }
-  async insertCourse(data: any) {
+  static async insertCourse(data: any) {
     try {
       const response = await fetch(`http://localhost:4000/api/course/`, {
         method: "POST",
@@ -48,6 +41,12 @@ class CourseService {
     } catch (error) {
       console.log("error", error);
     }
+  }
+  static async deleteCourse(id: string) {
+    fetch(`http://localhost:4000/api/course/${id}`, {
+      method: "DELETE",
+      headers: { Authorization: `${getTokenFromCookie()}` },
+    });
   }
 }
 export default CourseService;

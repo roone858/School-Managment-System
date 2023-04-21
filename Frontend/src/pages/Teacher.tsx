@@ -5,8 +5,8 @@ import { TableRaw } from "../Components/TableRaw";
 import { useDispatch, useSelector } from "react-redux";
 interface Teacher {
   id: string;
-  firstname: string;
-  lastname: string;
+  first_name: string;
+  last_name: string;
   email: string;
   address: string;
 }

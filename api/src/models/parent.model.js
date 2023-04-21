@@ -31,17 +31,17 @@ const Parent = {
     const conn = await client.connect();
     try {
       const {
-        firstName,
-        lastName,
+        first_name,
+        last_name,
         email,
         gender,
         phone,
-        dateOfBirth,
+        dob,
         address,
       } = data;
       const result = await conn.query(
-        "INSERT INTO parent (firstName, lastName, email, phoneNumber) VALUES ($1, $2, $3, $4) RETURNING *",
-        [firstName, lastName, email, phone]
+        "INSERT INTO parent (first_name, last_name, email, phoneNumber) VALUES ($1, $2, $3, $4) RETURNING *",
+        [first_name, last_name, email, phone]
       );
       return result.rows[0];
     } finally {
@@ -53,10 +53,10 @@ const Parent = {
   update: async (id, data) => {
     const conn = await client.connect();
     try {
-      const { firstName, lastName, email, phone } = data;
+      const { first_name, last_name, email, phone } = data;
       const result = await conn.query(
-        "UPDATE parent SET firstName = $1, lastName = $2, email = $3, phoneNumber = $4 WHERE id = $5 RETURNING *",
-        [firstName, lastName, email, phone, id]
+        "UPDATE parent SET first_name = $1, last_name = $2, email = $3, phoneNumber = $4 WHERE id = $5 RETURNING *",
+        [first_name, last_name, email, phone, id]
       );
       return result.rows[0];
     } finally {

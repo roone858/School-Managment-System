@@ -21,7 +21,7 @@ const Details = (props: any) => {
           <div className="card">
             <div className="card-body">
               <h5 className="font-weight-bold mb-3">
-                {obj.firstname + " " + obj.lastname}
+                {obj.first_name + " " + obj.last_name}
               </h5>
               <p className="mb-0">
                 Some quick example text to build on the panel title and make up

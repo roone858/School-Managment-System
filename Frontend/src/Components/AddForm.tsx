@@ -25,33 +25,27 @@ const AddData = (props: any) => {
   };
 
   const insertStudent = () => {
-    const db = new StudentService();
-    db.insertStudent(data).then((res: Student) => {
+    StudentService.insertStudent(data).then((res: Student) => {
       dispatch(addStudent(res));
 
-      new NotificationService()
-        .insertNotification({
-          message: `new Student added ${res.firstname} ${res.lastname}`,
-        })
-        .then((result) => {
-          dispatch(addNotification(result));
-          dispatch(setRedFlag(true));
-        });
+      NotificationService.insertNotification({
+        message: `new Student added ${res.first_name} ${res.last_name}`,
+      }).then((result) => {
+        dispatch(addNotification(result));
+        dispatch(setRedFlag(true));
+      });
     });
   };
 
   const insertTeacher = () => {
-    const db = new TeacherService();
-    db.insertTeacher(data).then((res: Teacher) => {
+    TeacherService.insertTeacher(data).then((res: Teacher) => {
       dispatch(addTeacher(res));
-      new NotificationService()
-        .insertNotification({
-          message: `new Teacher added ${res.firstname} ${res.lastname}`,
-        })
-        .then((result) => {
-          dispatch(addNotification(result));
-          dispatch(setRedFlag(true));
-        });
+      NotificationService.insertNotification({
+        message: `new Teacher added ${res.first_name} ${res.last_name}`,
+      }).then((result) => {
+        dispatch(addNotification(result));
+        dispatch(setRedFlag(true));
+      });
     });
   };
 
@@ -71,20 +65,20 @@ const AddData = (props: any) => {
       <form onSubmit={handleSubmit}>
         <div className="form-row d-flex gap-2 ">
           <Input
-            name="firstName"
+            name="first_name"
             onChange={updateData}
             text="First Name"
             placeholder="First Name"
             type="text"
-            id="inputFirstname4"
+            id="inputfirst_name4"
           />
           <Input
-            name="lastName"
+            name="last_name"
             onChange={updateData}
             text="Last Name"
             placeholder="Last Name"
             type="text"
-            id="inputLastname4"
+            id="inputlast_name4"
           />
         </div>
         <div className="form-row d-flex gap-2">
@@ -97,7 +91,7 @@ const AddData = (props: any) => {
             id="inputEmail4"
           />
           <Input
-            name="dateOfBirth"
+            name="dob"
             onChange={updateData}
             text="Date of Birth"
             type="date"

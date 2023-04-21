@@ -1,7 +1,7 @@
 import { getTokenFromCookie } from "../utils/cookies";
 
 class studentService {
-  async deleteStudent(id: string) {
+  static  async deleteStudent(id: string) {
    const response= await fetch(`http://localhost:4000/api/student/${id}`, {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },
@@ -11,7 +11,7 @@ class studentService {
     // return response;
   }
 
-  async getStudents() {
+  static  async getStudents() {
     try {
       const response = await fetch("http://localhost:4000/api/student", {
         headers: { Authorization: `${getTokenFromCookie()}` },
@@ -22,7 +22,7 @@ class studentService {
       console.log("error", error);
     }
   }
-  async getStudent() {
+  static async getStudent() {
     try {
       const response = await fetch("http://localhost:4000/api/student");
       const json = await response.json();
@@ -31,7 +31,7 @@ class studentService {
       console.log("error", error);
     }
   }
-  async insertStudent(data: any) {
+  static async insertStudent(data: any) {
     try {
       const response = await fetch(`http://localhost:4000/api/student/`, {
         method: "POST",
@@ -52,7 +52,7 @@ class studentService {
       console.log("error", error);
     }
   }
-  async updateStudent(id: any,data:any) {
+  static async updateStudent(id: any,data:any) {
     try {
       const response = await fetch(`http://localhost:4000/api/student/${id}`, {
         method: "PUT",

@@ -8,8 +8,8 @@ export function setAdminCookie(admin: any) {
     "admin",
     JSON.stringify({
       username: admin.username,
-      firstname: admin.firstname,
-      lastname: admin.lastname,
+      first_name: admin.first_name,
+      last_name: admin.last_name,
     }),
     { expires: 7 }
   ); // expires in 7 days

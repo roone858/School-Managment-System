@@ -38,7 +38,7 @@ const dispatch=useDispatch()
       )}
       <div className="nav">
         <div className="page-name">
-          {header == "" ? `Welcome ${admin.firstname}` : header}
+          {header == "" ? `Welcome ${admin.first_name}` : header}
         </div>
         <ul>
           <li>
@@ -70,7 +70,7 @@ const dispatch=useDispatch()
           <li>
             <div className="navbar-profile">
               <img src={profileImage} alt="..." />
-              <span className="mx-2">{admin.firstname}</span>
+              <span className="mx-2">{admin.first_name}</span>
             </div>
           </li>
         </ul>

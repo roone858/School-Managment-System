@@ -31,8 +31,8 @@ const UpdateForm = () => {
       if (result.isConfirmed) {
         const res = await new studentService().updateStudent(id, {
           ...data,
-          firstName: data.firstname,
-          lastName: data.lastname,
+          first_name: data.first_name,
+          last_name: data.last_name,
         });
         if (res.message)
           Swal.fire("Can't Update!", "Internal Server Error", "error");
@@ -64,13 +64,13 @@ const UpdateForm = () => {
                             <div className="form-outline">
                               <input
                                 type="text"
-                                id="firstname"
+                                id="first_name"
                                 className="form-control form-control-lg"
-                                name="firstname"
-                                value={data.firstname}
+                                name="first_name"
+                                value={data.first_name}
                                 onChange={updateData}
                               />
-                              <label className="form-label" htmlFor="firstName">
+                              <label className="form-label" htmlFor="first_name">
                                 First Name
                               </label>
                             </div>
@@ -79,13 +79,13 @@ const UpdateForm = () => {
                             <div className="form-outline">
                               <input
                                 type="text"
-                                id="lastname"
-                                value={data.lastname}
+                                id="last_name"
+                                value={data.last_name}
                                 onChange={updateData}
-                                name="lastname"
+                                name="last_name"
                                 className="form-control form-control-lg"
                               />
-                              <label className="form-label" htmlFor="lastName">
+                              <label className="form-label" htmlFor="last_name">
                                 Last Name
                               </label>
                             </div>
@@ -99,7 +99,7 @@ const UpdateForm = () => {
                                 type="date"
                                 className="form-control form-control-lg"
                                 id="birthdayDate"
-                                name="dateofbirth"
+                                name="dob"
                                 onChange={updateData}
                               />
                               <label

@@ -1,8 +1,9 @@
 import { getTokenFromCookie } from "../utils/cookies";
-class NotificationService {
- static async getNotification() {
+
+class TeachingService {
+  static async getAllTeachings() {
     try {
-      const response = await fetch("http://localhost:4000/api/notification", {
+      const response = await fetch("http://localhost:4000/api/teaching", {
         headers: { Authorization: `${getTokenFromCookie()}` },
       });
       const json = await response.json();
@@ -11,10 +12,18 @@ class NotificationService {
       console.log("error", error);
     }
   }
- 
-  static async insertNotification(data: any) {
+  static async getTeaching(id: string | number) {
     try {
-      const response = await fetch(`http://localhost:4000/api/notification/`, {
+      const response = await fetch(`http://localhost:4000/api/teaching/${id}`);
+      const json = await response.json();
+      return json;
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+  static async insertTeaching(data: any) {
+    try {
+      const response = await fetch(`http://localhost:4000/api/teaching/`, {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -33,12 +42,11 @@ class NotificationService {
       console.log("error", error);
     }
   }
-  static async deleteAllNotification() {
-    const response = await fetch(`http://localhost:4000/api/notification`, {
+  static async deleteTeaching(id: string) {
+    fetch(`http://localhost:4000/api/teaching/${id}`, {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },
     });
-     return response;
   }
 }
-export default NotificationService;
+export default TeachingService;

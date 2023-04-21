@@ -31,18 +31,17 @@ const Student = {
     const conn = await client.connect();
     try {
       const {
-        firstName,
-        lastName,
+        first_name,
+        last_name,
         email,
         gender,
         phone,
-        dateOfBirth,
-        address,
-        parentId
+        dob,
+        address
       } = data;
       const result = await conn.query(
-        "INSERT INTO student (firstName, lastName, email, gender, phone, dateOfBirth, address, parentId) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
-        [firstName, lastName, email, gender, phone, dateOfBirth, address, parentId]
+        "INSERT INTO student (first_name, last_name, email, gender, phone, dob, address) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+        [first_name, last_name, email, gender, phone, dob, address]
       );
       return result.rows[0];
     } finally {
@@ -55,24 +54,24 @@ const Student = {
     const conn = await client.connect();
     try {
       const {
-        firstName,
-        lastName,
+        first_name,
+        last_name,
         email,
         gender,
         phone,
-        dateOfBirth,
+        dob,
         address,
         parentId,
       } = data;
       const result = await conn.query(
-        "UPDATE student SET firstName = $1, lastName = $2, email = $3, gender = $4, phone = $5, dateOfBirth = $6, address = $7, parentId = $8 WHERE id = $9 RETURNING *",
+        "UPDATE student SET first_name = $1, last_name = $2, email = $3, gender = $4, phone = $5, dob = $6, address = $7, parentId = $8 WHERE id = $9 RETURNING *",
         [
-          firstName,
-          lastName,
+          first_name,
+          last_name,
           email,
           gender,
           phone,
-          dateOfBirth,
+          dob,
           address,
           parentId,
           id,

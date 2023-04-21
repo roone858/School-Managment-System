@@ -21,11 +21,11 @@ useEffect(()=>{
           </li>
           <li className="list-group-item">
             <span>First Name :</span>
-            <span>{admin.firstname}</span>
+            <span>{admin.first_name}</span>
           </li>
           <li className="list-group-item">
             <span>Last Name :</span>
-            <span>{admin.lastname}</span>
+            <span>{admin.last_name}</span>
           </li>
           <li className="list-group-item">
             <span>Email :</span>

@@ -1,6 +1,6 @@
 import { getTokenFromCookie } from "../utils/cookies";
 class AttendanceService {
-  async getAttendance() {
+  static async getAttendance() {
     try {
       const response = await fetch("http://localhost:4000/api/attendance", {
         headers: { Authorization: `${getTokenFromCookie()}` },
@@ -11,7 +11,7 @@ class AttendanceService {
       console.log("error", error);
     }
   }
-  async getOneAttendance() {
+  static async getOneAttendance() {
     try {
       const response = await fetch("http://localhost:4000/api/attendance");
       const json = await response.json();
@@ -20,7 +20,7 @@ class AttendanceService {
       console.log("error", error);
     }
   }
-  async insertAttendance(data: any) {
+  static async insertAttendance(data: any) {
     try {
       const response = await fetch(`http://localhost:4000/api/attendance/`, {
         method: "POST",
@@ -41,13 +41,13 @@ class AttendanceService {
       console.log("error", error);
     }
   }
-  async deleteAttendance(id: string) {
+  static async deleteAttendance(id: string) {
     const response = await fetch(`http://localhost:4000/api/attendance/${id}`, {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },
     });
-     const json = await response.json();
-     return json;
+    const json = await response.json();
+    return json;
   }
 }
 export default AttendanceService;

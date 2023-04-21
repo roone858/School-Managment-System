@@ -1,16 +1,16 @@
 export interface Student {
   id?: Number;
-  firstname: string;
-  lastname: string;
+  first_name: string;
+  last_name: string;
   email?: string;
   phone?: string;
   address?: string;
   gender?: string;
 }
 export interface Teacher {
-  id?: Number;
-  firstname: string;
-  lastname: string;
+  id?: string;
+  first_name: string;
+  last_name: string;
   email?: string;
   phone?: string;
   address?: string;
@@ -22,16 +22,16 @@ interface StudentAction {
   payload: Student | number;
 }
 export interface Course {
-  id?: number;
+  id: number;
   title: string;
   description: string;
-  teacherid: number;
+  department: string;
 }
 export interface Admin {
   id: Number;
   username: string;
-  firstname: string;
-  lastname: string;
+  first_name: string;
+  last_name: string;
   email: string;
   password?: string;
 }

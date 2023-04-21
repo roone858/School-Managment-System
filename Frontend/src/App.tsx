@@ -37,39 +37,36 @@ import {
   Message,
 } from "./types/type";
 import UpdateForm from "./Components/UpdateForm";
-import  Table  from "./Components/bootstrap/Table";
+import Table from "./Components/bootstrap/Table";
 import "./App.css";
+import { AddCourse } from "./Components/AddCourse";
 function App() {
+  const dispatch = useDispatch();
+  const state = useSelector((state: State) => state);
+
   const token = getTokenFromCookie();
   if (!token) {
     return <SignInSide />;
   }
 
-  const dispatch = useDispatch();
-  const studentService = new StudentService();
-  const teachersService = new TeacherService();
-  const coursesService = new CourseService();
-  const attendanceService = new AttendanceService();
-  const notificationService = new NotificationService();
-  const state = useSelector((state: State) => state);
-
   useEffect(() => {
-    studentService.getStudents().then((result: Student[]) => {
+    StudentService.getStudents().then((result: Student[]) => {
       result.map((student: Student) => dispatch(addStudent(student)));
     });
-    teachersService.getTeachers().then((result: Teacher[]) => {
+    TeacherService.getTeachers().then((result: Teacher[]) => {
       result?.map((teacher: Teacher) => dispatch(addTeacher(teacher)));
     });
-    coursesService.getCourses().then((result: Course[]) => {
+    CourseService.getAllCourses().then((result: Course[]) => {
       result?.map((course: Course) => dispatch(addCourse(course)));
     });
-    attendanceService.getAttendance().then((result: Attendance[]) => {
+    AttendanceService.getAttendance().then((result: Attendance[]) => {
       result?.map((attend: Attendance) => dispatch(addAttendance(attend)));
     });
-    notificationService.getNotification().then((result: Message[]) => {
+    NotificationService.getNotification().then((result: Message[]) => {
       result?.map((message: Message) => dispatch(addNotification(message)));
     });
   }, []);
+
   if (!state) return <h1>loading</h1>;
 
   return (
@@ -108,7 +105,9 @@ function App() {
                 }
               />
             </Route>
-            <Route path="/courses" element={<Courses />}></Route>
+            <Route path="/courses" element={<Courses />}>
+              <Route path="add" element={<AddCourse />} />
+            </Route>
             <Route path="/attendance" element={<AttendanceCm />}></Route>
             <Route path="/setting//*" element={<Setting />}></Route>
           </Routes>

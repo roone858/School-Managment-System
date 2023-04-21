@@ -174,23 +174,23 @@ Content-Type: application/json
 [
     {
         "id": 1,
-        "firstname": "Mahmoud",
-        "lastname": "Gamal",
+        "first_name": "Mahmoud",
+        "last_name": "Gamal",
         "email": "roone@gmail.com",
         "gender": "Male",
         "phone": "0115043454",
-        "dateofbirth": "1998-12-31T22:00:00.000Z",
+        "dob": "1998-12-31T22:00:00.000Z",
         "address": "Assiut - Egypt",
         "parentid": null
     },
     {
         "id": 3,
-        "firstname": "Hesham",
-        "lastname": "Abbas",
+        "first_name": "Hesham",
+        "last_name": "Abbas",
         "email": "habbas@gmail.com",
         "gender": "male",
         "phone": "324234333",
-        "dateofbirth": "1999-12-31T22:00:00.000Z",
+        "dob": "1999-12-31T22:00:00.000Z",
         "address": "Assiut - Egypt",
         "parentid": 1
     }
@@ -205,12 +205,12 @@ Content-Type: application/json
 
   {
         "id": 3,
-        "firstname": "Hesham",
-        "lastname": "Abbas",
+        "first_name": "Hesham",
+        "last_name": "Abbas",
         "email": "habbas@gmail.com",
         "gender": "male",
         "phone": "324234333",
-        "dateofbirth": "1999-12-31T22:00:00.000Z",
+        "dob": "1999-12-31T22:00:00.000Z",
         "address": "Assiut - Egypt",
         "parentid": 1
     }

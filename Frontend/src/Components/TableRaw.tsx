@@ -19,15 +19,13 @@ export const TableRaw = ({ obj, url }: any) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         if (url == "students") {
-          const db = new StudentService();
-          const response = await db.deleteStudent(id);
+          const response = await StudentService.deleteStudent(id);
 
           dispatch(deleteStudent(id));
           Swal.fire(" Deleted!", "student deleted", "success");
         }
         if (url == "teachers") {
-          const db = new TeacherService();
-          const response = await db.deleteTeacher(id);
+          const response = await TeacherService.deleteTeacher(id);
 
           dispatch(deleteTeacher(id));
           Swal.fire(" Deleted!", "Teacher deleted", "success");
@@ -39,8 +37,8 @@ export const TableRaw = ({ obj, url }: any) => {
   return (
     <tr className="bg-fff" key={obj.id}>
       <th scope="row">{obj.id}</th>
-      <td>{obj.firstname}</td>
-      <td>{obj.lastname}</td>
+      <td>{obj.first_name}</td>
+      <td>{obj.last_name}</td>
       <td>{obj.address}</td>
       <td>
         {/* to={"/students/"+obj.id} */}

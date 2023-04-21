@@ -40,8 +40,8 @@ export const Dashboard = () => {
           onClick={() => {
             new AdminService().insertAdmin({
  
-              "firstName": "Hassan",
-              "lastName": "Ammer",
+              "first_name": "Hassan",
+              "last_name": "Ammer",
               "userName": "hassan",
               "email": "hassan.dev@gmail.com",
               "password": "hassan"

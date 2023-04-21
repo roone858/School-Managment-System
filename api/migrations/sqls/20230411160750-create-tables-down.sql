@@ -1,3 +1,11 @@
 /* Drop all tables */
-DROP TABLE parent, attendance, course, teacher, student ;
-
+DROP TABLE attendance,
+grading_scale,
+grade,
+class_session,
+timetable,
+teaching,
+enrollment,
+course,
+teacher,
+student;
