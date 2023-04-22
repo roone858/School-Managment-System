@@ -5,6 +5,7 @@ import TeacherService from "../services/teacher.service";
 import { deleteStudent } from "../redux/slice/student-slice";
 import { useDispatch } from "react-redux";
 import { deleteTeacher } from "../redux/slice/teacher-slice";
+
 export const TableRaw = ({ obj, url }: any) => {
   const dispatch = useDispatch();
   const handleDelete = (id: any) => {

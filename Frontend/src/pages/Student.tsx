@@ -26,7 +26,7 @@ export const Students = () => {
     <div className="students">
       <AddButton  />
       <Outlet />
-      <Table rows={studentRaws} />
+      <Table columns={['ID ','First Name','Last Name','Address','Actions']} rows={studentRaws} />
     </div>
   );
 };

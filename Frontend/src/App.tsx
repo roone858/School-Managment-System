@@ -43,7 +43,6 @@ import { AddCourse } from "./Components/AddCourse";
 import { addTeaching } from "./redux/slice/teaching-slice";
 function App() {
   const dispatch = useDispatch();
-  const state = useSelector((state: State) => state);
 
   const token = getTokenFromCookie();
   if (!token) {
@@ -70,8 +69,6 @@ function App() {
       result?.map((message: Message) => dispatch(addNotification(message)));
     });
   }, []);
-
-  if (!state) return <h1>loading</h1>;
 
   return (
     <div className="App">
