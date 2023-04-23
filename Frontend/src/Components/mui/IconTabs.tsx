@@ -6,7 +6,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import PersonPinIcon from "@mui/icons-material/PersonPin";
 import TableRowsIcon from "@mui/icons-material/TableRows";
 import ViewModuleIcon from "@mui/icons-material/ViewModule";
-import { CoursesCards } from "../CoursesCards";
+import { SubjectsCards } from "../SubjectsCards";
 import DataTable from "./DataTable";
 import { Table } from "../Table";
 export default function IconTabs({rows,columns}:any) {
@@ -28,7 +28,7 @@ export default function IconTabs({rows,columns}:any) {
         <Tab icon={<ViewModuleIcon fontSize={"large"} />} aria-label="favorite" />
       </Tabs>
       {value == 0 && <div><Table columns={columns} rows={rows}/></div>}
-      {value == 1 && <CoursesCards />}
+      {value == 1 && <SubjectsCards />}
     </div>
   );
 }

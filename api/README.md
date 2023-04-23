@@ -8,8 +8,8 @@ A school management API have many features to help manage various aspects of a s
 - Student Management - ability to create, update and delete student records, including
 - personal information, contact details, enrollment status, and academic progress.
 - Teacher Management - ability to create, update and delete teacher records, including
-- personal information, contact details, qualifications, and courses taught.
-- Course Management - ability to create, update and delete course records, including course descriptions, course schedules, and course materials.
+- personal information, contact details, qualifications, and subjects taught.
+- Subject Management - ability to create, update and delete subject records, including subject descriptions, subject schedules, and subject materials.
 - Attendance Tracking - ability to record and view attendance for each student in a class.
 These are just some of the features that a school management API can have. The specific features will depend on the requirements of the school or educational institution that is using the API.
 
@@ -29,13 +29,13 @@ These are just some of the features that a school management API can have. The s
      - `GET`: get a specific teacher by ID
      - `PUT`: update a specific teacher by ID
      - `DELETE`: delete a specific teacher by ID
-5. `/api/courses`:
-     - `GET`: get a list of all courses
-     - `POST`: create a new course
-6.	`/api/courses/:id`:
-     - `GET`: get a specific course by ID
-     - `PUT`: update a specific course by ID
-     - `DELETE`: delete a specific course by ID
+5. `/api/subjects`:
+     - `GET`: get a list of all subjects
+     - `POST`: create a new subject
+6.	`/api/subjects/:id`:
+     - `GET`: get a specific subject by ID
+     - `PUT`: update a specific subject by ID
+     - `DELETE`: delete a specific subject by ID
 7.	`/api/enrollments`:
      - `GET`: get a list of all enrollments
      - `POST`: create a new enrollment
@@ -93,7 +93,7 @@ npm install express pg pg-pool nodemon bcrypt jsonwebtoken body-parser cors
     |   ├── models      # This directory contains modules that define the schema for the data and interact with the database.
     |   |    ├── student.model.js     
     |   |    ├── teacher.model.js     
-    |   |    ├── course.model.js     
+    |   |    ├── subject.model.js     
     |   |    ├── attendance.model.js     
     |   |    ├── parent.model.js     
     |   |    ├── grade.model.js     
@@ -102,7 +102,7 @@ npm install express pg pg-pool nodemon bcrypt jsonwebtoken body-parser cors
     |   |    ├── parent.controller.js     
     |   |    ├── student.controller.js     
     |   |    ├── teacher.controller.js     
-    |   |    ├── course.controller.js     
+    |   |    ├── subject.controller.js     
     |   |    ├── attendance.controller.js     
     |   |    ├── enrollment.controller.js     
     |   |    └── grade.controller.js     
@@ -111,7 +111,7 @@ npm install express pg pg-pool nodemon bcrypt jsonwebtoken body-parser cors
     │   ├── routes        # This directory contains modules that define the API routes and connect them to the controller methods.
     |   |    ├── student.js     
     |   |    ├── teacher.js     
-    |   |    ├── course.js     
+    |   |    ├── subject.js     
     |   |    ├── attendance.js     
     |   |    ├── parent.js     
     |   |    ├── grade.js     

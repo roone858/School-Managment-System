@@ -1,20 +1,20 @@
 const client = require("../db");
 
-class Course {
+class Subject {
   static async getAll() {
     const conn = await client.connect();
     try {
-      const courseResult = await conn.query("SELECT * FROM course");
-      const courses = courseResult.rows;
+      const subjectResult = await conn.query("SELECT * FROM subject");
+      const subjects = subjectResult.rows;
 
-      return courses;
+      return subjects;
     } finally {
       conn.release();
     }
   }
 
   static async getById(id) {
-    const query = "SELECT * FROM course WHERE id = $1";
+    const query = "SELECT * FROM subject WHERE id = $1";
     const conn = await client.connect();
     try {
       const result = await conn.query(query, [id]);
@@ -25,34 +25,33 @@ class Course {
   }
 
   async create(data) {
-    const courseQuery =
-      "INSERT INTO course (title, description, department) VALUES ($1, $2, $3) RETURNING *";
+    const subjectQuery =
+      "INSERT INTO subject (title, description) VALUES ($1, $2) RETURNING *";
 
     const conn = await client.connect();
     try {
-      const { title, description, department } = data;
-      const courseResult = await conn.query(courseQuery, [
+      const { title, description } = data;
+      const subjectResult = await conn.query(subjectQuery, [
         title,
-        description,
-        department,
+        description
       ]);
-      const course = courseResult.rows[0];
+      const subject = subjectResult.rows[0];
 
-      return course;
+      return subject;
     } finally {
       conn.release();
     }
   }
   async update(id, data) {
     const query =
-      "UPDATE course SET title = $1, description = $2, department = $3 WHERE id = $4 RETURNING *";
+      "UPDATE subject SET title = $1, description = $2 WHERE id = $3 RETURNING *";
     const conn = await client.connect();
     try {
-      const { title, description, department } = data;
+      const { title, description } = data;
       const result = await conn.query(query, [
         title,
         description,
-        department,
+
         id,
       ]);
       return result.rows[0];
@@ -65,10 +64,10 @@ class Course {
     const conn = await client.connect();
     try {
       const teachResult = await conn.query(
-        "DELETE FROM Teaching WHERE course_id = $1",
+        "DELETE FROM Teaching WHERE subject_id = $1",
         [id]
       );
-      const result = await conn.query("DELETE FROM course WHERE id = $1", [id]);
+      const result = await conn.query("DELETE FROM subject WHERE id = $1", [id]);
       return result.rowCount > 0;
     } finally {
       conn.release();
@@ -76,4 +75,4 @@ class Course {
   }
 }
 
-module.exports = Course;
+module.exports = Subject;

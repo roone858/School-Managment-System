@@ -26,19 +26,17 @@ class Teaching {
 
   async create(data) {
     const teachQuery =
-      "INSERT INTO teaching (semester , section , start_date , end_date , teacher_id , course_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *";
+      "INSERT INTO teaching (semester  , start_date , end_date , teacher_id , subject_id,grade_level) VALUES ($1, $2, $3, $4, $5,$6) RETURNING *";
     const conn = await client.connect();
     try {
-      const { semester, section, start_date, end_date, teacher_id, course_id } =
-        data;
+      const { semester, start_date, end_date, teacher_id, subject_id,grade_level } = data;
 
       const teachResult = await conn.query(teachQuery, [
         semester,
-        section,
         start_date,
         end_date,
         teacher_id,
-        course_id,
+        subject_id,
       ]);
       const teachRow = teachResult.rows[0];
       return teachRow;
@@ -48,17 +46,17 @@ class Teaching {
   }
   async update(id, data) {
     const query =
-      "UPDATE teaching SET semester = $1, section = $2, start_date = $3, end_date = $4, teacher_id=$5, course_id=$6 WHERE id=$7  RETURNING *";
+      "UPDATE teaching SET semester = $1, start_date = $2, end_date = $3, teacher_id=$4, subject_id=$5 , grade_level=$6 WHERE id=$7  RETURNING *";
     const conn = await client.connect();
     try {
-      const { semester, section, start_date, end_date, teacher_id } = data;
+      const { semester, start_date, end_date, teacher_id, subject_id,grade_level } = data;
       const result = await conn.query(query, [
         semester,
-        section,
         start_date,
         end_date,
         teacher_id,
-        course.id,
+        subject_id,
+        grade_level.
         id,
       ]);
       return result.rows[0];

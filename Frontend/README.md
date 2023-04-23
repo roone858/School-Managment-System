@@ -13,8 +13,8 @@ To run this application, follow these steps:
 This school management system includes the following features:
 
 - User authentication and authorization
-- CRUD functionality for students, courses, and grades
-- Reports and analytics for student and course performance
+- CRUD functionality for students, subjects, and grades
+- Reports and analytics for student and subject performance
 - Dashboard with key performance indicators and metrics
 - Integration with external APIs for weather and news information
 - Mobile-responsive design for use on tablets and smartphones
@@ -23,7 +23,7 @@ This school management system includes the following features:
 ## Usage
 Once the application is running, you can access it in your web browser by navigating to `http://127.0.0.1:5173/`.
 
-This application is a school management system that allows users to manage students, courses, and grades. Users can add, edit, and delete students, courses, and grades, as well as view reports and analytics.
+This application is a school management system that allows users to manage students, subjects, and grades. Users can add, edit, and delete students, subjects, and grades, as well as view reports and analytics.
 
 ## Vite
 This application is built with the Vite tool, which is a build tool that provides fast and efficient development and production builds. Vite is included as a dependency in this project.

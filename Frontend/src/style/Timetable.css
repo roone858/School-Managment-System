@@ -1,0 +1,19 @@
+tr { line-height: 4rem; }
+td.Science {
+  background-color: rgb(153, 0, 255);
+  color: rgb(255, 255, 255);
+}
+td.History {
+  background-color: rgb(0, 255, 42);
+  color: rgb(255, 255, 255);
+}
+
+td.Maths {
+  background-color: rgb(255, 2, 103);
+  color: rgb(255, 255, 255);
+}
+
+td.English {
+  background-color: blue;
+  color: rgb(255, 255, 255);
+}

@@ -31,10 +31,10 @@ const Grade = {
   create: async (data) => {
     const conn = await client.connect();
     try {
-      const { studentId, courseId ,overall_grade} = data;
+      const { studentId, subjectId ,overall_grade} = data;
       const result = await conn.query(
-        "INSERT INTO Grade (student_Id, course_Id,overall_grade) VALUES ($1, $2, $3) RETURNING *",
-        [studentId, courseId, overall_grade]
+        "INSERT INTO Grade (student_Id, subject_Id,overall_grade) VALUES ($1, $2, $3) RETURNING *",
+        [studentId, subjectId, overall_grade]
       );
       return result.rows[0];
     } finally {
@@ -46,10 +46,10 @@ const Grade = {
   update: async (id, data) => {
     const conn = await client.connect();
     try {
-      const { studentId, courseId ,overall_grade} = data;
+      const { studentId, subjectId ,overall_grade} = data;
       const result = await conn.query(
-        "UPDATE Grade SET studentId = $1, courseId = $2, overall_grade = $3, WHERE id = $4 RETURNING *",
-        [studentId, courseId, overall_grade, id]
+        "UPDATE Grade SET studentId = $1, subjectId = $2, overall_grade = $3, WHERE id = $4 RETURNING *",
+        [studentId, subjectId, overall_grade, id]
       );
       return result.rows[0];
     } finally {

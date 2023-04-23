@@ -26,8 +26,8 @@ CREATE TABLE IF NOT EXISTS teacher (
   address VARCHAR(255)
 );
 
--- Create the course table
-CREATE TABLE IF NOT EXISTS course (
+-- Create the subject table
+CREATE TABLE IF NOT EXISTS subject (
   id SERIAL PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
   description VARCHAR(255) NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS enrollment (
   status statues_type NOT NULL,
   grade VARCHAR(5),
   student_Id INTEGER NOT NULL REFERENCES student(id),
-  course_Id INTEGER NOT NULL REFERENCES course(id)
+  subject_Id INTEGER NOT NULL REFERENCES subject(id)
 );
 
 -- Create the teaching table
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS teaching (
   start_date DATE NOT NULL,
   end_date DATE NOT NULL,
   teacher_id INTEGER REFERENCES teacher(id),
-  course_id INTEGER REFERENCES course(id)
+  subject_id INTEGER REFERENCES subject(id)
 );
 
 -- Create the timetable table
@@ -66,12 +66,12 @@ CREATE TABLE IF NOT EXISTS timetable (
 );
 
 -- Create the class_session table
-CREATE TABLE IF NOT EXISTS class_session (
+CREATE TABLE class_session (
   id SERIAL PRIMARY KEY,
-  start_time TIME NOT NULL,
-  end_time TIME NOT NULL,
+  start_time timestamp  NOT NULL,
+  end_time timestamp  NOT NULL,
   classroom VARCHAR(255) NOT NULL,
-  course_id INTEGER REFERENCES course(id),
+  subject_id INTEGER REFERENCES subject(id),
   timetable_id INTEGER REFERENCES timetable(id)
 );
 

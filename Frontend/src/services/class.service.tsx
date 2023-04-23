@@ -1,9 +1,9 @@
 import { getTokenFromCookie } from "../utils/cookies";
 
-class CourseService {
-  static async getAllCourses() {
+class ClassService {
+  static async getAllClass() {
     try {
-      const response = await fetch("http://localhost:4000/api/course", {
+      const response = await fetch("http://localhost:4000/api/class", {
         headers: { Authorization: `${getTokenFromCookie()}` },
       });
       const json = await response.json();
@@ -12,18 +12,18 @@ class CourseService {
       console.log("error", error);
     }
   }
-  static async getCourse(id: string | number) {
+  static async getClass(id: string | number) {
     try {
-      const response = await fetch(`http://localhost:4000/api/course/${id}`);
+      const response = await fetch(`http://localhost:4000/api/class/${id}`);
       const json = await response.json();
       return json;
     } catch (error) {
       console.log("error", error);
     }
   }
-  static async insertCourse(data: any) {
+  static async insertClass(data: any) {
     try {
-      const response = await fetch(`http://localhost:4000/api/course/`, {
+      const response = await fetch(`http://localhost:4000/api/class/`, {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -42,11 +42,11 @@ class CourseService {
       console.log("error", error);
     }
   }
-  static async deleteCourse(id: string) {
-    fetch(`http://localhost:4000/api/course/${id}`, {
+  static async deleteClass(id: string) {
+    fetch(`http://localhost:4000/api/class/${id}`, {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },
     });
   }
 }
-export default CourseService;
+export default ClassService;

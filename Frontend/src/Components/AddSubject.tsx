@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Input } from "./Input";
-import { Course, State, Teacher } from "../types/type";
+import { Subject, State, Teacher } from "../types/type";
 import { useSelector } from "react-redux";
 import TeachingService from "../services/teaching.service";
-import CourseService from "../services/course.service";
+import SubjectService from "../services/subject.service";
 
-export const AddCourse = () => {
+export const AddSubject = () => {
   const teachers = useSelector((state: State) => state.teachers);
-  const [data, setData] = useState({} as Course);
+  const [data, setData] = useState({} as Subject);
   const updateData = (e: any) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -15,12 +15,12 @@ export const AddCourse = () => {
     
     event.preventDefault();
     console.log(data);
-   const course:Course = await CourseService.insertCourse(data)
-  await TeachingService.insertTeaching({...data,course_id:course.id})
+   const subject:Subject = await SubjectService.insertSubject(data)
+  await TeachingService.insertTeaching({...data,subject_id:subject.id})
   };
   return (
     <div className="add-form">
-      <h1>Add new Course</h1>
+      <h1>Add new Subject</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-row d-flex gap-2 ">
           <Input

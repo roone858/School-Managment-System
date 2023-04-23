@@ -31,10 +31,10 @@ const Enrollment = {
   create: async (data) => {
     const conn = await client.connect();
     try {
-      const { studentId, courseId, enrollmentDate } = data;
+      const { studentId, subjectId, enrollmentDate } = data;
       const result = await conn.query(
-        "INSERT INTO enrollment (studentId, courseId, enrollmentDate) VALUES ($1, $2, $3) RETURNING *",
-        [studentId, courseId, enrollmentDate]
+        "INSERT INTO enrollment (studentId, subjectId, enrollmentDate) VALUES ($1, $2, $3) RETURNING *",
+        [studentId, subjectId, enrollmentDate]
       );
       return result.rows[0];
     } finally {
@@ -46,10 +46,10 @@ const Enrollment = {
   update: async (id, data) => {
     const conn = await client.connect();
     try {
-      const { studentId, courseId, enrollmentDate } = data;
+      const { studentId, subjectId, enrollmentDate } = data;
       const result = await conn.query(
-        "UPDATE enrollment SET studentId = $1, courseId = $2, enrollmentDate = $3 WHERE id = $4 RETURNING *",
-        [studentId, courseId, enrollmentDate, id]
+        "UPDATE enrollment SET studentId = $1, subjectId = $2, enrollmentDate = $3 WHERE id = $4 RETURNING *",
+        [studentId, subjectId, enrollmentDate, id]
       );
       return result.rows[0];
     } finally {

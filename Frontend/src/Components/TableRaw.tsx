@@ -38,9 +38,10 @@ export const TableRaw = ({ obj, url }: any) => {
   return (
     <tr className="bg-fff" key={obj.id}>
       <th scope="row">{obj.id}</th>
-      <td>{obj.first_name}</td>
-      <td>{obj.last_name}</td>
+      <td>{obj.name}</td>
+      <td>{obj.dob.slice(0,10)}</td>
       <td>{obj.address}</td>
+      <td>{obj.class_id?obj.class_id:"10 A"}</td>
       <td>
         {/* to={"/students/"+obj.id} */}
         <Link

@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import AddStudent from "./Components/AddForm";
 import AddTeacher from "./Components/AddForm";
 import Sidebar from "./layouts/Sidebar";
-import { Courses } from "./pages/Courses";
+import { Subjects } from "./pages/Subjects";
 import { Dashboard } from "./pages/Dashboard";
 import { Setting } from "./pages/Setting";
 import { Students } from "./pages/Student";
@@ -14,7 +14,7 @@ import Details from "./Components/Details";
 import { useEffect } from "react";
 import { addStudent } from "./redux/slice/student-slice";
 import StudentService from "./services/student.service";
-import CourseService from "./services/course.service";
+import SubjectService from "./services/subject.service";
 import TeachingService from "./services/teaching.service";
 import TeacherService from "./services/teacher.service";
 import AttendanceService from "./services/attendance.service";
@@ -23,14 +23,14 @@ import { addNotification } from "./redux/slice/notifications-slice";
 import { addTeacher } from "./redux/slice/teacher-slice";
 import SignInSide from "./pages/SignInSide";
 import { getTokenFromCookie } from "./utils/cookies";
-import { addCourse } from "./redux/slice/course-slice ";
+import { addSubject } from "./redux/slice/subject-slice ";
 import NavBar from "./layouts/NavBar";
 import AttendanceCm from "./pages/Attendance";
 import { addAttendance } from "./redux/slice/attendance-slice";
 import {
   Notification,
   Attendance,
-  Course,
+  Subject,
   State,
   Student,
   Teacher,
@@ -39,8 +39,11 @@ import {
 import UpdateForm from "./Components/UpdateForm";
 import Table from "./Components/bootstrap/Table";
 import "./App.css";
-import { AddCourse } from "./Components/AddCourse";
+import { AddSubject } from "./Components/AddSubject";
 import { addTeaching } from "./redux/slice/teaching-slice";
+import Timetable from "./Components/TimeTable";
+import { addClass } from "./redux/slice/class-slice ";
+import ClassService from "./services/class.service";
 function App() {
   const dispatch = useDispatch();
 
@@ -50,24 +53,38 @@ function App() {
   }
 
   useEffect(() => {
+    let isDone = false;
+
     StudentService.getStudents().then((result: Student[]) => {
-      result.map((student: Student) => dispatch(addStudent(student)));
+      if (!isDone)
+        result.map((student: Student) => dispatch(addStudent(student)));
     });
     TeacherService.getTeachers().then((result: Teacher[]) => {
-      result?.map((teacher: Teacher) => dispatch(addTeacher(teacher)));
+      if (!isDone)
+        result?.map((teacher: Teacher) => dispatch(addTeacher(teacher)));
     });
-    CourseService.getAllCourses().then((result: Course[]) => {
-      result?.map((course: Course) => dispatch(addCourse(course)));
+    SubjectService.getAllSubjects().then((result: Subject[]) => {
+      if (!isDone)
+        result?.map((subject: Subject) => dispatch(addSubject(subject)));
     });
     TeachingService.getAllTeachings().then((result: any) => {
-      result?.map((row: any) => dispatch(addTeaching(row)));
+      if (!isDone) result?.map((row: any) => dispatch(addTeaching(row)));
     });
     AttendanceService.getAttendance().then((result: Attendance[]) => {
-      result?.map((attend: Attendance) => dispatch(addAttendance(attend)));
+      if (!isDone)
+        result?.map((attend: Attendance) => dispatch(addAttendance(attend)));
     });
     NotificationService.getNotification().then((result: Message[]) => {
-      result?.map((message: Message) => dispatch(addNotification(message)));
+      if (!isDone)
+        result?.map((message: Message) => dispatch(addNotification(message)));
+      ClassService.getAllClass().then((result) => {
+        if (!isDone) result?.map((c: any) => dispatch(addClass(c)));
+      });
     });
+
+    return () => {
+      isDone = true;
+    };
   }, []);
 
   return (
@@ -106,9 +123,10 @@ function App() {
                 }
               />
             </Route>
-            <Route path="/courses" element={<Courses />}>
-              <Route path="add" element={<AddCourse />} />
+            <Route path="/subjects" element={<Subjects />}>
+              <Route path="add" element={<AddSubject />} />
             </Route>
+            <Route path="/timetable" element={<Timetable />}></Route>
             <Route path="/attendance" element={<AttendanceCm />}></Route>
             <Route path="/setting//*" element={<Setting />}></Route>
           </Routes>

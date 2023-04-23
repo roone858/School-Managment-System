@@ -31,10 +31,10 @@ const Attendance = {
   create: async (data) => {
     const conn = await client.connect();
     try {
-      const { studentId, courseId } = data;
+      const { studentId, subjectId } = data;
       const result = await conn.query(
-        "INSERT INTO Attendance (studentId, courseId) VALUES ($1, $2) RETURNING *",
-        [studentId, courseId]
+        "INSERT INTO Attendance (studentId, subjectId) VALUES ($1, $2) RETURNING *",
+        [studentId, subjectId]
       );
       return result.rows[0];
     } finally {
@@ -46,10 +46,10 @@ const Attendance = {
   update: async (id, data) => {
     const conn = await client.connect();
     try {
-      const { studentId, courseId } = data;
+      const { studentId, subjectId } = data;
       const result = await conn.query(
-        "UPDATE Attendance SET studentId = $1, courseId = $2 WHERE id = $3 RETURNING *",
-        [studentId, courseId, id]
+        "UPDATE Attendance SET studentId = $1, subjectId = $2 WHERE id = $3 RETURNING *",
+        [studentId, subjectId, id]
       );
       return result.rows[0];
     } finally {

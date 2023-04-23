@@ -30,18 +30,10 @@ const Student = {
   create: async (data) => {
     const conn = await client.connect();
     try {
-      const {
-        first_name,
-        last_name,
-        email,
-        gender,
-        phone,
-        dob,
-        address
-      } = data;
+      const { name, email, gender, phone, dob, address, class_id } = data;
       const result = await conn.query(
-        "INSERT INTO student (first_name, last_name, email, gender, phone, dob, address) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
-        [first_name, last_name, email, gender, phone, dob, address]
+        "INSERT INTO student (name, email, gender, phone, dob, address,class_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+        [name, email, gender, phone, dob, address, class_id]
       );
       return result.rows[0];
     } finally {
@@ -53,29 +45,10 @@ const Student = {
   update: async (id, data) => {
     const conn = await client.connect();
     try {
-      const {
-        first_name,
-        last_name,
-        email,
-        gender,
-        phone,
-        dob,
-        address,
-        parentId,
-      } = data;
+      const { name, email, gender, phone, dob, address, parentId } = data;
       const result = await conn.query(
-        "UPDATE student SET first_name = $1, last_name = $2, email = $3, gender = $4, phone = $5, dob = $6, address = $7, parentId = $8 WHERE id = $9 RETURNING *",
-        [
-          first_name,
-          last_name,
-          email,
-          gender,
-          phone,
-          dob,
-          address,
-          parentId,
-          id,
-        ]
+        "UPDATE student SET name = $1,  email = $2, gender = $3, phone = $4, dob = $5, address = $6, class_id =$7,parentId = $8 WHERE id = $9 RETURNING *",
+        [name, email, gender, phone, dob, address, class_id, parentId, id]
       );
       return result.rows[0];
     } finally {

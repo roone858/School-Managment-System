@@ -21,7 +21,7 @@ interface StudentAction {
   type: string;
   payload: Student | number;
 }
-export interface Course {
+export interface Subject {
   id: number;
   title: string;
   description: string;
@@ -39,7 +39,7 @@ export interface Admin {
 export interface Attendance {
   id?: number;
   studentid: string;
-  courseid: string;
+  subjectid: string;
   attenddate?: number;
 }
 export interface Message {
@@ -60,7 +60,8 @@ export interface LoginState {
 }
 export interface State {
   students: Student[];
-  teachers: Teacher[];
+  teachers: Teacher[]; 
+  classes: any[];
   login: LoginState;
   notification: Notification;
 }

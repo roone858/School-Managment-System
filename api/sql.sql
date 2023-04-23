@@ -32,8 +32,8 @@ CREATE TABLE teacher (
   address VARCHAR(250)
 );
 
--- Create the courses table
-CREATE TABLE course (
+-- Create the subjects table
+CREATE TABLE subject (
   id SERIAL PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
   description TEXT,
@@ -44,7 +44,7 @@ CREATE TABLE course (
 CREATE TABLE enrollment (
   id SERIAL PRIMARY KEY,
   studentId INTEGER REFERENCES student(id),
-  courseId INTEGER REFERENCES course(id),
+  subjectId INTEGER REFERENCES subject(id),
   enrollmentDate DATE
 );
 
@@ -52,7 +52,7 @@ CREATE TABLE enrollment (
 CREATE TABLE attendance (
   id SERIAL PRIMARY KEY,
   studentId INTEGER REFERENCES students(id),
-  courseId INTEGER REFERENCES courses(id),
+  subjectId INTEGER REFERENCES subjects(id),
   attendanceDate DATE,
   isPresent BOOLEAN NOT NULL
 );
@@ -61,7 +61,7 @@ CREATE TABLE attendance (
 CREATE TABLE grades (
   id SERIAL PRIMARY KEY,
   studentId INTEGER REFERENCES students(id),
-  courseId INTEGER REFERENCES courses(id),
+  subjectId INTEGER REFERENCES subjects(id),
   grade DECIMAL(4, 2),
   gradeDate DATE
 );
@@ -70,25 +70,25 @@ CREATE TABLE grades (
 CREATE TABLE attendance (
   id SERIAL PRIMARY KEY,
   studentId INTEGER REFERENCES student(id),
-  courseId INTEGER REFERENCES course(id),
+  subjectId INTEGER REFERENCES subject(id),
   attendDate TIMESTAMPTZ DEFAULT Now()
 );
 
-CREATE TABLE CourseAssignment (
-  course_id INT NOT NULL,
+CREATE TABLE SubjectAssignment (
+  subject_id INT NOT NULL,
   teacher_id INT NOT NULL,
-  PRIMARY KEY (course_id, teacher_id),
-  FOREIGN KEY (course_id) REFERENCES Course(course_id),
+  PRIMARY KEY (subject_id, teacher_id),
+  FOREIGN KEY (subject_id) REFERENCES Subject(subject_id),
   FOREIGN KEY (teacher_id) REFERENCES Teacher(teacher_id)
 );
 
 CREATE TABLE Grade (
   id SERIAL PRIMARY KEY,
-  course_work DECIMAL(4, 2),
+  subject_work DECIMAL(4, 2),
   final_exam DECIMAL(4, 2),
   overall_grade DECIMAL(4, 2),
   student_id INTEGER REFERENCES Student(id),
-  course_id INTEGER REFERENCES Course(id)
+  subject_id INTEGER REFERENCES Subject(id)
 );
 
 CREATE TABLE IF NOT EXISTS admin (
@@ -106,175 +106,12 @@ CREATE TABLE IF NOT EXISTS notifications (
   generated_at TIMESTAMP DEFAULT NOW()
 );
 
-INSERT INTO
-  notifications (message)
-VALUES
-  ('your massage here Tow');
 
-INSERT INTO
-  student (
-    first_name,
-    last_name,
-    email,
-    gender,
-    phone,
-    dob,
-    address
-  )
-VALUES
-  (
-    'Mahmoud',
-    'Gamal',
-    'roone858@gmail.com',
-    'Male',
-    '01140192414',
-    '1-1-1999',
-    'Assiut-Egypt'
-  ),
-  (
-    'Emad',
-    'Rady',
-    'Emad22@gmail.com',
-    'Male',
-    '01000192414',
-    '1-1-2000',
-    'Cairo-Egypt'
-  ),
-  (
-    'Ahmed',
-    'Adel',
-    'ahmed@gmail.com',
-    'Male',
-    '01140192414',
-    '1-1-1989',
-    'Aswan-Egypt'
-  ),
-  (
-    'Mariam',
-    'Gamal',
-    'Mariam@gmail.com',
-    'Female',
-    '0155192414',
-    '1-1-1990',
-    'Assiut-Egypt'
-  ),
-  (
-    'Karyma',
-    'Ali',
-    'Kali@gmail.com',
-    'Female',
-    '012222224',
-    '1-1-1995',
-    'Assiut-Egypt'
-  );
-
-INSERT INTO
-  teacher (
-    first_name,
-    last_name,
-    email,
-    gender,
-    phone,
-    dob,
-    address
-  )
-VALUES
-  (
-    'Maged',
-    'Askar',
-    'magedaskar@gmail.com',
-    'Male',
-    '01040192414',
-    '1-1-1989',
-    'Assiut-Egypt'
-  ),
-  (
-    'Mohamed',
-    'Youssef',
-    'Myoussef@gmail.com',
-    'Male',
-    '01500100014',
-    '1-1-1985',
-    'Cairo-Egypt'
-  ),
-  (
-    'Ahmed',
-    'Talat',
-    'ahmed@gmail.com',
-    'Male',
-    '01140192414',
-    '1-1-1989',
-    'Aswan-Egypt'
-  ),
-  (
-    'Rehab',
-    'Gamal',
-    'rehab@gmail.com',
-    'Female',
-    '0155192414',
-    '1-1-1990',
-    'Assiut-Egypt'
-  ),
-  (
-    'Mona',
-    'Ali',
-    'mona@gmail.com',
-    'Female',
-    '01645222224',
-    '1-1-1995',
-    'Assiut-Egypt'
-  );
-
-INSERT INTO
-  course(title, description, department)
-VALUES
-  (
-    'Front-End Developer',
-    'Launch your career as a front-end developer. Build job-ready skills for an in-demand career and earn a credential from Meta. No degree or prior experience required to get started.',
-    'test'
-  ),
-  (
-    'Data Analytics Professional',
-    'This is your path to a career in data analytics. In this program, you will learn in-demand skills that will have you job-ready in less than 6 months. No degree or experience required.',
-    'test'
-  ),
-  (
-    'Machine Learning',
-    '#BreakIntoAI with Machine Learning Specialization. Master fundamental AI concepts and develop practical machine learning skills in the beginner-friendly, 3-course program by AI visionary Andrew Ng',
-    'test'
-  ),
-  (
-    'DevOps, Cloud, and Agile',
-    'DevOps essential characteristics including culture, behavior, practices, tools, methodologies, technologies and metrics.',
-    'test'
-  ),
-  (
-    'Back-End Developer',
-    ' Developer by learning skills from Watnya-TECH, then get a completion certificate to validate your skills.',
-    'test'
-  );
-
-INSERT INTO
-  admin (
-    first_name,
-    last_name,
-    username,
-    email,
-    password
-  )
-Values
-  (
-    'Mahmoud',
-    'Gamal',
-    'admin',
-    'mahmoudg.dev@gmail.com',
-    'admin'
-  );
-
+///////////////////////
 CREATE TYPE gender_type as ENUM('Male', 'Female');
 
 CREATE TABLE student (
- id SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   first_name VARCHAR(50) NOT NULL,
   last_name VARCHAR(50) NOT NULL,
   dob DATE NOT NULL,
@@ -285,7 +122,7 @@ CREATE TABLE student (
 );
 
 CREATE TABLE teacher (
- id SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   first_name VARCHAR(50) NOT NULL,
   last_name VARCHAR(50) NOT NULL,
   dob DATE NOT NULL,
@@ -295,12 +132,10 @@ CREATE TABLE teacher (
   address VARCHAR(255)
 );
 
-CREATE TABLE course (
- id SERIAL PRIMARY KEY,
+CREATE TABLE subject (
+  id SERIAL PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
   description VARCHAR(255) NOT NULL,
-  credits INT NOT NULL,
-  department VARCHAR(255) NOT NULL
 );
 
 CREATE TYPE statues_type as ENUM('Enrolled', 'Dropped');
@@ -310,17 +145,17 @@ CREATE TABLE enrollment (
   status statues_type NOT NULL,
   grade VARCHAR(5),
   student_Id INTEGER NOT NULL REFERENCES student(id),
-  course_Id INTEGER NOT NULL REFERENCES course(id)
+  subject_Id INTEGER NOT NULL REFERENCES subject(id)
 );
 
 CREATE TABLE teaching (
- id SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   semester VARCHAR(255) NOT NULL,
   section VARCHAR(255) NOT NULL,
   start_date DATE NOT NULL,
   end_date DATE NOT NULL,
   teacher_id INTEGER REFERENCES teacher(id),
-  course_id INTEGER REFERENCES course(id)
+  subject_id INTEGER REFERENCES subject(id)
 );
 
 CREATE TABLE timetable (
@@ -332,23 +167,23 @@ CREATE TABLE timetable (
 );
 
 CREATE TABLE class_session (
- id SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   start_time DATETIME NOT NULL,
   end_time DATETIME NOT NULL,
   classroom VARCHAR(255) NOT NULL,
-  course_id INTEGER REFERENCES course(id),
+  subject_id INTEGER REFERENCES subject(id),
   timetable_id INTEGER REFERENCES timetable(id)
 );
 
 CREATE TABLE grade (
- id SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   min_score FLOAT NOT NULL,
   max_score FLOAT NOT NULL
 );
 
 CREATE TABLE grading_scale (
- id SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   grade_id INT NOT NULL,
   letter_grade VARCHAR(5) NOT NULL,
   lower_bound FLOAT NOT NULL,
@@ -357,7 +192,7 @@ CREATE TABLE grading_scale (
 );
 
 CREATE TABLE attendance (
- id SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   class_session_id INT NOT NULL,
   student_id INT NOT NULL,
   status ENUM('Present', 'Absent') NOT NULL,
@@ -366,3 +201,128 @@ CREATE TABLE attendance (
 );
 
 require('crypto').randomBytes(64).toString('hex')
+INSERT INTO
+  timetable (period, start_date, end_date, academic_year)
+VALUES
+  ('2', '2023-4-1', '2023-9-29', '5 grade');
+
+INSERT INTO
+  class_session (
+    start_time,
+    end_time,
+    classroom,
+    subject_id,
+    timetable_id
+  )
+VALUES
+  (
+    '2023-4-23 09:00:00',
+    '2023-4-23 10:00:00',
+    'A-1',
+    1,
+    1
+  );
+
+CREATE TABLE class (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  grade_level INT NOT NULL
+);
+
+CREATE TABLE student (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  dob DATE NOT NULL,
+  gender CHAR(1) NOT NULL,
+  email VARCHAR(255),
+  phone VARCHAR(20),
+  address VARCHAR(255),
+  class_id INT,
+  FOREIGN KEY (class_id) REFERENCES class (id)
+);
+
+CREATE TABLE teacher (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  dob DATE NOT NULL,
+  gender CHAR(1) NOT NULL,
+  email VARCHAR(255),
+  phone VARCHAR(20),
+  address VARCHAR(255)
+);
+
+CREATE TABLE subject (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  description VARCHAR(255) NOT NULL
+
+);
+
+CREATE TABLE enrollment (
+  id SERIAL PRIMARY KEY,
+  student_id INT NOT NULL,
+  subject_id INT NOT NULL,
+  status VARCHAR(8) NOT NULL,
+  grade VARCHAR(5),
+  FOREIGN KEY (student_id) REFERENCES student(id),
+  FOREIGN KEY (subject_id) REFERENCES subject(id)
+);
+
+CREATE TABLE teaching (
+  id SERIAL PRIMARY KEY,
+  teacher_id INT NOT NULL,
+  subject_id INT NOT NULL,
+  semester VARCHAR(255) NOT NULL,
+  start_date DATE NOT NULL,
+  end_date DATE NOT NULL,
+  grade_level INT NOT NULL,
+  FOREIGN KEY (teacher_id) REFERENCES teacher(id),
+  FOREIGN KEY (subject_id) REFERENCES subject(id)
+);
+
+CREATE TABLE timetable (
+  id SERIAL PRIMARY KEY,
+  period VARCHAR(255) NOT NULL,
+  start_date DATE NOT NULL,
+  end_date DATE NOT NULL,
+  class_id INT,
+  FOREIGN KEY (class_id) REFERENCES class(id)
+);
+
+CREATE TABLE class_session (
+  id SERIAL PRIMARY KEY,
+  start_time TIMESTAMP NOT NULL,
+  end_time TIMESTAMP NOT NULL,
+  subject_id INT NOT NULL,
+  classroom VARCHAR(255) NOT NULL,
+  timetable_id INT NOT NULL,
+  FOREIGN KEY (subject_id) REFERENCES subject(id),
+  FOREIGN KEY (timetable_id) REFERENCES timetable(id)
+);
+
+CREATE TABLE grade (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  min_score FLOAT NOT NULL,
+  max_score FLOAT NOT NULL
+);
+
+CREATE TABLE grading_scale (
+  id SERIAL PRIMARY KEY,
+  grade_id INT NOT NULL,
+  letter_grade VARCHAR(5) NOT NULL,
+  lower_bound FLOAT NOT NULL,
+  upper_bound FLOAT NOT NULL,
+  FOREIGN KEY (grade_id) REFERENCES grade(id)
+);
+
+CREATE TABLE attendance (
+  id SERIAL PRIMARY KEY,
+  class_session_id INT NOT NULL,
+  student_id INT NOT NULL,
+  status VARCHAR(7) NOT NULL,
+  FOREIGN KEY (class_session_id) REFERENCES class_session(id),
+  FOREIGN KEY (student_id) REFERENCES student(id)
+);
+
+drop table attendance, class_session ,enrollment, subject ;

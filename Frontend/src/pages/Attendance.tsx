@@ -6,23 +6,23 @@ import {
   addAttendance,
   deleteAttendance,
 } from "../redux/slice/attendance-slice";
-import { Attendance, Course, Student } from "../types/type";
+import { Attendance, Subject, Student } from "../types/type";
 const AttendanceCm = () => {
-  const courses = useSelector((state: any) => state.courses);
+  const subjects = useSelector((state: any) => state.subjects);
   const students = useSelector((state: any) => state.students);
 
   const dispatch = useDispatch();
   const [studentId, setStudentId] = useState({});
-  const [courseTitle, setCourseTitle] = useState({});
+  const [subjectTitle, setSubjectTitle] = useState({});
   const attendance = useSelector((state: any) => state.attendance);
   const attendanceRows = attendance.map((att: Attendance) => {
-    const course = courses?.find(
-      (course: Course) => String(course.id) == String(att.courseid)
+    const subject = subjects?.find(
+      (subject: Subject) => String(subject.id) == String(att.subjectid)
     );
     return (
       <tr key={att.id}>
         <th scope="row">{att.id}</th>
-        <td>{course?.title}</td>
+        <td>{subject?.title}</td>
         <td>{att.studentid}</td>
         <td>{att.attenddate}</td>
         <td>
@@ -44,12 +44,12 @@ const AttendanceCm = () => {
   };
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    const course = await courses.find(
-      (course: Course) => course.title == courseTitle
+    const subject = await subjects.find(
+      (subject: Subject) => subject.title == subjectTitle
     );
     const attend = await db.insertAttendance({
       studentId: studentId,
-      courseId: course.id,
+      subjectId: subject.id,
     });
 
     dispatch(addAttendance(attend));
@@ -60,17 +60,17 @@ const AttendanceCm = () => {
     <div className="attendance">
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="formGroupExampleInput">Course title :</label>
+          <label htmlFor="formGroupExampleInput">Subject title :</label>
           <select
             className="form-control"
-            name="course"
+            name="subject"
             onChange={(e: any) => {
-              setCourseTitle(e.target.value);
+              setSubjectTitle(e.target.value);
             }}
           >
             <option>Default select</option>
-            {courses.map((course: Course) => (
-              <option key={course.id}>{course.title}</option>
+            {subjects.map((subject: Subject) => (
+              <option key={subject.id}>{subject.title}</option>
             ))}
           </select>
         </div>
@@ -98,7 +98,7 @@ const AttendanceCm = () => {
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Course Title</th>
+              <th scope="col">Subject Title</th>
               <th scope="col">Student Id</th>
               <th scope="col">Date</th>
               <th scope="col">Cancel</th>

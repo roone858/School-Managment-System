@@ -10,7 +10,7 @@ export const Dashboard = () => {
   const dispatch = useDispatch();
   const students = useSelector((state: any) => state.students);
   const teachers = useSelector((state: any) => state.teachers);
-  const courses = useSelector((state: any) => state.courses);
+  const subjects = useSelector((state: any) => state.subjects);
 
   return (
     <>
@@ -32,8 +32,8 @@ export const Dashboard = () => {
         <div className="col-md-4 col-6 analyst-card">
           <i className="bx bx-user"></i>
           <div className="num">
-            <span>Course</span>
-            <span> {courses.length}</span>
+            <span>Subject</span>
+            <span> {subjects.length}</span>
           </div>
         </div>
         <button
