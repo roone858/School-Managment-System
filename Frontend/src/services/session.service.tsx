@@ -1,8 +1,9 @@
 import { getTokenFromCookie } from "../utils/cookies";
-class TeacherService {
-  static async getTeachers() {
+
+class SessionService {
+  static async getAllSession() {
     try {
-      const response = await fetch("http://localhost:4000/api/teacher", {
+      const response = await fetch("http://localhost:4000/api/session", {
         headers: { Authorization: `${getTokenFromCookie()}` },
       });
       const json = await response.json();
@@ -11,18 +12,18 @@ class TeacherService {
       console.log("error", error);
     }
   }
-  static async getTeacher() {
+  static async getSession(id: string | number) {
     try {
-      const response = await fetch("http://localhost:4000/api/teacher");
+      const response = await fetch(`http://localhost:4000/api/session/${id}`);
       const json = await response.json();
       return json;
     } catch (error) {
       console.log("error", error);
     }
   }
-  static async insertTeacher(data: any) {
+  static async insertSession(data: any) {
     try {
-      const response = await fetch(`http://localhost:4000/api/teacher/`, {
+      const response = await fetch(`http://localhost:4000/api/session/`, {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -41,15 +42,11 @@ class TeacherService {
       console.log("error", error);
     }
   }
-  static async deleteTeacher(id: string) {
-   
-      const response = await fetch(`http://localhost:4000/api/teacher/${id}`, {
-        method: "DELETE",
-        headers: { Authorization: `${getTokenFromCookie()}` },
-      });
-      
-      return response;
-    
+  static async deleteSession(id: string) {
+    fetch(`http://localhost:4000/api/session/${id}`, {
+      method: "DELETE",
+      headers: { Authorization: `${getTokenFromCookie()}` },
+    });
   }
 }
-export default TeacherService;
+export default SessionService;

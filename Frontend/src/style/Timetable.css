@@ -1,4 +1,3 @@
-tr { line-height: 4rem; }
 td.Science {
   background-color: rgb(153, 0, 255);
   color: rgb(255, 255, 255);
@@ -15,5 +14,9 @@ td.Maths {
 
 td.English {
   background-color: blue;
+  color: rgb(255, 255, 255);
+}
+td.Art {
+  background-color: rgb(255, 0, 183);
   color: rgb(255, 255, 255);
 }

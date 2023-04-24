@@ -36,10 +36,10 @@ const AttendanceCm = () => {
       </tr>
     );
   });
-  const db = new AttendanceService();
+
 
   const handleCancel = async (id: any) => {
-    const result = await db.deleteAttendance(id);
+    const result = await AttendanceService.deleteAttendance(id);
     dispatch(deleteAttendance(id));
   };
   const handleSubmit = async (event: any) => {
@@ -47,7 +47,7 @@ const AttendanceCm = () => {
     const subject = await subjects.find(
       (subject: Subject) => subject.title == subjectTitle
     );
-    const attend = await db.insertAttendance({
+    const attend = await AttendanceService.insertAttendance({
       studentId: studentId,
       subjectId: subject.id,
     });

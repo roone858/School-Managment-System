@@ -62,6 +62,7 @@ export interface State {
   students: Student[];
   teachers: Teacher[]; 
   classes: any[];
+  sessions: any[];
   login: LoginState;
   notification: Notification;
 }

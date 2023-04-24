@@ -5,6 +5,7 @@ import TeacherService from "../services/teacher.service";
 import { deleteStudent } from "../redux/slice/student-slice";
 import { useDispatch } from "react-redux";
 import { deleteTeacher } from "../redux/slice/teacher-slice";
+import TeachingService from "../services/teaching.service";
 
 export const TableRaw = ({ obj, url }: any) => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ export const TableRaw = ({ obj, url }: any) => {
           Swal.fire(" Deleted!", "student deleted", "success");
         }
         if (url == "teachers") {
+          await TeachingService.deleteTeaching(id)
           const response = await TeacherService.deleteTeacher(id);
 
           dispatch(deleteTeacher(id));
@@ -39,7 +41,7 @@ export const TableRaw = ({ obj, url }: any) => {
     <tr className="bg-fff" key={obj.id}>
       <th scope="row">{obj.id}</th>
       <td>{obj.name}</td>
-      <td>{obj.dob.slice(0,10)}</td>
+      <td>{obj.dob}</td>
       <td>{obj.address}</td>
       <td>{obj.class_id?obj.class_id:"10 A"}</td>
       <td>

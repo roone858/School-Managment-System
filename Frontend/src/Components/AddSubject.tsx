@@ -16,7 +16,7 @@ export const AddSubject = () => {
     event.preventDefault();
     console.log(data);
    const subject:Subject = await SubjectService.insertSubject(data)
-  await TeachingService.insertTeaching({...data,subject_id:subject.id})
+   await TeachingService.insertTeaching({...data,subject_id:subject.id})
   };
   return (
     <div className="add-form">
@@ -60,9 +60,9 @@ export const AddSubject = () => {
               required
             >
               <option>Select Teacher </option>
-              {teachers.map((teacher: Teacher) => (
+              {teachers.map((teacher: any) => (
                 <option key={teacher.id} value={teacher.id}>
-                  {teacher.first_name + " " + teacher.last_name}{" "}
+                  {teacher.name}
                 </option>
               ))}
             </select>
@@ -78,12 +78,12 @@ export const AddSubject = () => {
             placeholder="Semester"
           />
           <Input
-            name="section"
+            name="grade_level"
             onChange={updateData}
-            text="Section"
+            text="Grade Level"
             type="text"
-            id="inputSection"
-            placeholder="Section"
+            id="GradeLevel"
+            placeholder="Grade Level"
           />
         </div>
         <div className="form-row d-flex gap-2">

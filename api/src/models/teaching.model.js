@@ -29,7 +29,14 @@ class Teaching {
       "INSERT INTO teaching (semester  , start_date , end_date , teacher_id , subject_id,grade_level) VALUES ($1, $2, $3, $4, $5,$6) RETURNING *";
     const conn = await client.connect();
     try {
-      const { semester, start_date, end_date, teacher_id, subject_id,grade_level } = data;
+      const {
+        semester,
+        start_date,
+        end_date,
+        teacher_id,
+        subject_id,
+        grade_level,
+      } = data;
 
       const teachResult = await conn.query(teachQuery, [
         semester,
@@ -37,6 +44,7 @@ class Teaching {
         end_date,
         teacher_id,
         subject_id,
+        grade_level,
       ]);
       const teachRow = teachResult.rows[0];
       return teachRow;
@@ -49,15 +57,21 @@ class Teaching {
       "UPDATE teaching SET semester = $1, start_date = $2, end_date = $3, teacher_id=$4, subject_id=$5 , grade_level=$6 WHERE id=$7  RETURNING *";
     const conn = await client.connect();
     try {
-      const { semester, start_date, end_date, teacher_id, subject_id,grade_level } = data;
+      const {
+        semester,
+        start_date,
+        end_date,
+        teacher_id,
+        subject_id,
+        grade_level,
+      } = data;
       const result = await conn.query(query, [
         semester,
         start_date,
         end_date,
         teacher_id,
         subject_id,
-        grade_level.
-        id,
+        grade_level.id,
       ]);
       return result.rows[0];
     } finally {
@@ -69,7 +83,7 @@ class Teaching {
     const conn = await client.connect();
     try {
       const teachResult = await conn.query(
-        "DELETE FROM teaching WHERE id = $1",
+        "DELETE FROM teaching WHERE teacher_id = $1",
         [id]
       );
       return teachResult.rowCount > 0;

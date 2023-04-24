@@ -12,13 +12,7 @@ import { Subject, State, Teacher } from "../types/type";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import IconTabs from "../Components/mui/IconTabs";
 import Swal from "sweetalert2";
-const rows = [
-  { id: 1, title: "Snow", firstName: "Jon", age: 35 },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-];
+
 export const Subjects = () => {
   const navigate = useNavigate();
   const images = [image, image1, image2, image3, image4];

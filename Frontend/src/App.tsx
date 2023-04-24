@@ -12,7 +12,7 @@ import { Teachers } from "./pages/Teacher";
 import { useDispatch, useSelector } from "react-redux";
 import Details from "./Components/Details";
 import { useEffect } from "react";
-import { addStudent } from "./redux/slice/student-slice";
+import { addStudent, fetchStudents } from "./redux/slice/student-slice";
 import StudentService from "./services/student.service";
 import SubjectService from "./services/subject.service";
 import TeachingService from "./services/teaching.service";
@@ -20,13 +20,13 @@ import TeacherService from "./services/teacher.service";
 import AttendanceService from "./services/attendance.service";
 import NotificationService from "./services/notification.service";
 import { addNotification } from "./redux/slice/notifications-slice";
-import { addTeacher } from "./redux/slice/teacher-slice";
+import { addTeacher, fetchTeachers } from "./redux/slice/teacher-slice";
 import SignInSide from "./pages/SignInSide";
 import { getTokenFromCookie } from "./utils/cookies";
-import { addSubject } from "./redux/slice/subject-slice ";
+import { addSubject, fetchSubjects } from "./redux/slice/subject-slice ";
 import NavBar from "./layouts/NavBar";
 import AttendanceCm from "./pages/Attendance";
-import { addAttendance } from "./redux/slice/attendance-slice";
+import { addAttendance, fetchAttendance } from "./redux/slice/attendance-slice";
 import {
   Notification,
   Attendance,
@@ -40,10 +40,16 @@ import UpdateForm from "./Components/UpdateForm";
 import Table from "./Components/bootstrap/Table";
 import "./App.css";
 import { AddSubject } from "./Components/AddSubject";
-import { addTeaching } from "./redux/slice/teaching-slice";
+import { addTeaching, fetchTeaching } from "./redux/slice/teaching-slice";
 import Timetable from "./Components/TimeTable";
-import { addClass } from "./redux/slice/class-slice ";
+import { addClass, fetchClasses } from "./redux/slice/class-slice ";
 import ClassService from "./services/class.service";
+import SessionService from "./services/session.service";
+import { addSession, fetchSessions } from "./redux/slice/session-slice ";
+import TimetableService from "./services/timetable.service";
+import { addTimetable, fetchTimetables } from "./redux/slice/timetable-slice";
+import { ClassPage } from "./pages/ClassPage";
+import AddClass from "./Components/AddClass";
 function App() {
   const dispatch = useDispatch();
 
@@ -54,33 +60,45 @@ function App() {
 
   useEffect(() => {
     let isDone = false;
-
-    StudentService.getStudents().then((result: Student[]) => {
-      if (!isDone)
-        result.map((student: Student) => dispatch(addStudent(student)));
-    });
-    TeacherService.getTeachers().then((result: Teacher[]) => {
-      if (!isDone)
-        result?.map((teacher: Teacher) => dispatch(addTeacher(teacher)));
-    });
-    SubjectService.getAllSubjects().then((result: Subject[]) => {
-      if (!isDone)
-        result?.map((subject: Subject) => dispatch(addSubject(subject)));
-    });
-    TeachingService.getAllTeachings().then((result: any) => {
-      if (!isDone) result?.map((row: any) => dispatch(addTeaching(row)));
-    });
-    AttendanceService.getAttendance().then((result: Attendance[]) => {
-      if (!isDone)
-        result?.map((attend: Attendance) => dispatch(addAttendance(attend)));
-    });
+    
+    dispatch(fetchStudents())
+    dispatch(fetchTeachers())
+    dispatch(fetchSubjects())
+    dispatch(fetchTeaching())
+    dispatch(fetchClasses())
+    dispatch(fetchAttendance())
+    dispatch(fetchSessions())
+    dispatch(fetchTimetables())
+    // StudentService.getStudents().then((result: Student[]) => {
+    //   if (!isDone)
+    //     result.map((student: Student) => dispatch(addStudent(student)));
+    // });
+    // TeacherService.getTeachers().then((result: Teacher[]) => {
+    //   if (!isDone)
+    //     result?.map((teacher: Teacher) => dispatch(addTeacher(teacher)));
+    // });
+    // SubjectService.getAllSubjects().then((result: Subject[]) => {
+    //   if (!isDone)
+    //     result?.map((subject: Subject) => dispatch(addSubject(subject)));
+    // });
+    // TeachingService.getAllTeachings().then((result: any) => {
+    //   if (!isDone) result?.map((row: any) => dispatch(addTeaching(row)));
+    // });
+    // AttendanceService.getAttendance().then((result: Attendance[]) => {
+    //   if (!isDone)
+    //     result?.map((attend: Attendance) => dispatch(addAttendance(attend)));
+    // });
     NotificationService.getNotification().then((result: Message[]) => {
       if (!isDone)
         result?.map((message: Message) => dispatch(addNotification(message)));
-      ClassService.getAllClass().then((result) => {
-        if (!isDone) result?.map((c: any) => dispatch(addClass(c)));
-      });
     });
+    // ClassService.getAllClass().then((result) => {
+    //   if (!isDone) result?.map((c: any) => dispatch(addClass(c)));
+    // });
+    // SessionService.getAllSession().then((result) => {
+    //   if (!isDone) result?.map((s: any) => dispatch(addSession(s)));
+    // });
+    
 
     return () => {
       isDone = true;
@@ -127,6 +145,8 @@ function App() {
               <Route path="add" element={<AddSubject />} />
             </Route>
             <Route path="/timetable" element={<Timetable />}></Route>
+            <Route path="/classes" element={<ClassPage />}></Route>
+            <Route path="/classes/add" element={<AddClass />}></Route>
             <Route path="/attendance" element={<AttendanceCm />}></Route>
             <Route path="/setting//*" element={<Setting />}></Route>
           </Routes>
