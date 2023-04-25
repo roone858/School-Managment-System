@@ -9,18 +9,13 @@ import { fetchSubjects } from "../redux/slice/subject-slice ";
 
 const Timetable = () => {
   const [classId, setClassID] = useState(1);
-  const [className, setClassName] = useState();
-  const dispatch = useDispatch();
   const subjects = useSelector((state: any) => state.subjects);
   const classes = useSelector((state: State) => state.classes);
   const sessions = useSelector((state: State) => state.sessions);
-  const timetables = useSelector((state: any) => state.timetables);
   const teachings = useSelector((state: any) => state.teaching);
   const teachers = useSelector((state: any) => state.teachers);
-  const timetable = timetables.find((table: any) => table.class_id == classId);
 
   const sessionsRow = sessions.map((session: any) => {
-    const date = session.start_time.slice(0, session.start_time.indexOf("T"));
     const startTime = session.start_time.slice(
       session.start_time.indexOf("T"),
       session.start_time.indexOf(".")
@@ -34,14 +29,15 @@ const Timetable = () => {
       (teach: any) => teach.subject_id == session.subject_id
     );
     const teacher = teachers.find((t: any) => t.id == teaching?.teacher_id);
+ 
     return {
       ...session,
       id: session.id,
-      title: subject.title,
-      day: getDayFromDate(date),
+      title: subject?.title,
+      day:session.day,
       startTime: startTime.slice(1, -3),
       endTime: endTime.slice(1, -3),
-      teacher_name: teacher ? teacher.name :null,
+      teacher_name: teacher.first_name +" "+teacher.last_name ,
     };
   });
 
@@ -58,17 +54,12 @@ const Timetable = () => {
     { startDate: "15:00", endDate: "16:00" },
     { startDate: "16:00", endDate: "17:00" },
   ];
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
-    const c = classes.find((c: any) => c.id == classId);
-    setClassName(c.name);
-  };
-  useEffect(() => {
-  }, []);
+
+ 
   return (
     <>
       <div>
-        <form onSubmit={handleSubmit}>
+        <form >
           <div className="form-row  col-4 gap-2">
             <label htmlFor="class-selector">CLASS NAME :</label>
             <select
@@ -87,14 +78,9 @@ const Timetable = () => {
               ))}
             </select>
           </div>
-          <div className="form-row ">
-            <button className="btn btn-primary mt-2" type="submit">
-              {" "}
-              OK
-            </button>
-          </div>
+        
         </form>
-        <h1>{className}</h1>
+        <h1>{classes.find((c: any) => c.id == classId)?.name}</h1>
       </div>
       <div className="timetable">
         <table className="table table-striped ">
@@ -115,12 +101,12 @@ const Timetable = () => {
                     (session: any) =>
                       session.day === day &&
                       session.startTime == timeSlot.startDate &&
-                      session.timetable_id == timetable?.id
+                      session.class_id == classId
                   );
                   return (
                     <td className={filterSessions?.title} key={day}>
                       {filterSessions ? filterSessions.title : null}
-                      <p>{filterSessions?.teacher_name}</p>
+                      <p>{filterSessions? filterSessions.teacher_name:null}</p>
                     </td>
                   );
                 })}

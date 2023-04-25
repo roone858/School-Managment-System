@@ -54,7 +54,7 @@ class Teaching {
   }
   async update(id, data) {
     const query =
-      "UPDATE teaching SET semester = $1, start_date = $2, end_date = $3, teacher_id=$4, subject_id=$5 , grade_level=$6 WHERE id=$7  RETURNING *";
+      "UPDATE teaching SET semester = $1, start_date = $2, end_date = $3, teacher_id=$4, subject_id=$5 , grade_level=$6 WHERE subject_id=$7  RETURNING *";
     const conn = await client.connect();
     try {
       const {
@@ -71,7 +71,8 @@ class Teaching {
         end_date,
         teacher_id,
         subject_id,
-        grade_level.id,
+        grade_level,
+        id,
       ]);
       return result.rows[0];
     } finally {

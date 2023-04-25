@@ -19,7 +19,7 @@ const studentsSlice = createSlice({
     addStudent: (state, action: PayloadAction<Student>) => {
       state.push(action.payload);
     },
-    deleteStudent: (state = [], action: PayloadAction<number>) => {
+    deleteStudent: (state = [], action: PayloadAction<any>) => {
       return state.filter((student: Student) => student.id !== action.payload);
     },
     updateStudent: (state = [], action: PayloadAction<any>) => {

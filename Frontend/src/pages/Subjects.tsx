@@ -1,27 +1,21 @@
-import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addStudent } from "../store/actions/studentActions";
-import Card from "../Components/Card";
-import image from "../assets/Back-end-dev-ProCert.png";
-import image1 from "../assets/Data-analyses.png";
-import image2 from "../assets/DevOps-Cloud-Agile-Specialization-Final.png";
-import image3 from "../assets/MLS.subject-banners-01_Subject-Logo-.png";
-import image4 from "../assets/subject1.png";
-import { AddButton } from "../layouts/AddButton";
-import { Subject, State, Teacher } from "../types/type";
+
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import IconTabs from "../Components/mui/IconTabs";
 import Swal from "sweetalert2";
+import SubjectService from "../services/subject.service";
+import { deleteSubject } from "../redux/slice/subject-slice ";
 
 export const Subjects = () => {
-  const navigate = useNavigate();
-  const images = [image, image1, image2, image3, image4];
-  const teaching = useSelector((state: any) => state.teaching);
+  const dispatch = useDispatch();
+
   const subjects = useSelector((state: any) => state.subjects);
+  const teaching = useSelector((state: any) => state.teaching);
+  // const [subjects,setSubjects] =useState()
   const teachers = useSelector((state: any) => state.teachers);
   const handleDelete = (id: any) => {
     Swal.fire({
-      title: "Are you sure?",
+      title: "Are you sure  to delete this Subject?",
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
@@ -30,19 +24,24 @@ export const Subjects = () => {
       confirmButtonText: "Yes, delete !",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        
+        SubjectService.deleteSubject(id);
+        dispatch(deleteSubject(id));
       }
     });
   };
-  const subjectsRows = teaching.map((teach: any) => {
-    const subject = subjects.find((subject: any) => teach.subject_id == subject.id);
-    const teacher = teachers.find( (teacher: any) => teach.teacher_id == teacher.id);
-    return  (
+  const subjectsRows = subjects.map((subject: any) => {
+    const teach = teaching.find((teach: any) => teach.subject_id == subject.id);
+
+    const teacher = teachers.find(
+      (teacher: any) => teacher.id == teach?.teacher_id
+    );
+
+    return (
       <tr className="bg-fff" key={subject.id}>
         <th scope="row">{subject.id}</th>
-        <td>{subject.title}</td>
-        <td>{teach.grade_level}</td>
-        <td>{teacher.name }</td>
+        <td>{subject?.title}</td>
+        <td>{teach?.grade_level}</td>
+        <td>{teacher && teacher.first_name + " " + teacher.last_name}</td>
         <td>
           {/* to={"/students/"+obj.id} */}
           <Link
@@ -83,7 +82,10 @@ export const Subjects = () => {
         ADD NEW COURSE
       </Link>
       <Outlet />
-      <IconTabs columns={["ID","Title","Level","Teacher","Action"]} rows={subjectsRows} />
+      <IconTabs
+        columns={["ID", "Title", "Level", "Teacher", "Action"]}
+        rows={subjectsRows}
+      />
     </>
   );
 };

@@ -48,5 +48,11 @@ class SessionService {
       headers: { Authorization: `${getTokenFromCookie()}` },
     });
   }
+  static async deleteSessionByClassID(id: string) {
+    fetch(`http://localhost:4000/api/session/delete/${id}`, {
+      method: "DELETE",
+      headers: { Authorization: `${getTokenFromCookie()}` },
+    });
+  }
 }
 export default SessionService;

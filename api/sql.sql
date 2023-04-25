@@ -106,9 +106,7 @@ CREATE TABLE IF NOT EXISTS notifications (
   generated_at TIMESTAMP DEFAULT NOW()
 );
 
-
-///////////////////////
-CREATE TYPE gender_type as ENUM('Male', 'Female');
+/ / / / / / / / / / / / / / / / / / / / / / / CREATE TYPE gender_type as ENUM('Male', 'Female');
 
 CREATE TABLE student (
   id SERIAL PRIMARY KEY,
@@ -231,19 +229,21 @@ CREATE TABLE class (
 
 CREATE TABLE student (
   id SERIAL PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
+  first_name VARCHAR(255) NOT NULL,
+  last_name VARCHAR(255) NOT NULL,
   dob DATE NOT NULL,
   gender CHAR(1) NOT NULL,
   email VARCHAR(255),
   phone VARCHAR(20),
   address VARCHAR(255),
   class_id INT,
-  FOREIGN KEY (class_id) REFERENCES class (id)
+  FOREIGN KEY (class_id) REFERENCES class (id)  ON DELETE SET NULL
 );
 
 CREATE TABLE teacher (
   id SERIAL PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
+  first_name VARCHAR(255) NOT NULL,
+  last_name VARCHAR(255) NOT NULL,
   dob DATE NOT NULL,
   gender CHAR(1) NOT NULL,
   email VARCHAR(255),
@@ -255,7 +255,6 @@ CREATE TABLE subject (
   id SERIAL PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
   description VARCHAR(255) NOT NULL
-
 );
 
 CREATE TABLE enrollment (
@@ -293,11 +292,11 @@ CREATE TABLE class_session (
   id SERIAL PRIMARY KEY,
   start_time TIMESTAMP NOT NULL,
   end_time TIMESTAMP NOT NULL,
-  subject_id INT NOT NULL,
-  classroom VARCHAR(255) NOT NULL,
-  timetable_id INT NOT NULL,
+  subject_id INT NOT NULL ,
+  class_id INT  NOT NULL,
+  day VARCHAR(255) NOT NULL,
   FOREIGN KEY (subject_id) REFERENCES subject(id),
-  FOREIGN KEY (timetable_id) REFERENCES timetable(id)
+  FOREIGN KEY (class_id) REFERENCES class(id)
 );
 
 CREATE TABLE grade (
@@ -321,8 +320,26 @@ CREATE TABLE attendance (
   class_session_id INT NOT NULL,
   student_id INT NOT NULL,
   status VARCHAR(7) NOT NULL,
-  FOREIGN KEY (class_session_id) REFERENCES class_session(id),
+  FOREIGN KEY (class_session_id) REFERENCES class_session(id) ,
   FOREIGN KEY (student_id) REFERENCES student(id)
 );
 
-drop table attendance, class_session ,enrollment, subject ;
+drop table attendance,
+class_session,
+enrollment,
+subject;
+
+
+ALTER TABLE class_session
+DROP CONSTRAINT class_session_class_id_fkey ;
+
+
+
+ALTER TABLE class_session
+ADD CONSTRAINT class_session_class_id_fkey
+FOREIGN KEY (class_id)
+REFERENCES class(id)
+ON DELETE SET NULL;
+
+ALTER TABLE class_session
+ALTER COLUMN class_id DROP NOT NULL;

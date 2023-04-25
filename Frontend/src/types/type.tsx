@@ -1,11 +1,13 @@
 export interface Student {
-  id?: Number;
+  id?: string;
   first_name: string;
   last_name: string;
+  dob: string;
   email?: string;
   phone?: string;
   address?: string;
   gender?: string;
+  class_id:string;
 }
 export interface Teacher {
   id?: string;
@@ -15,6 +17,7 @@ export interface Teacher {
   phone?: string;
   address?: string;
   gender?: string;
+  dob:string
 }
 
 interface StudentAction {
@@ -60,7 +63,7 @@ export interface LoginState {
 }
 export interface State {
   students: Student[];
-  teachers: Teacher[]; 
+  teachers: Teacher[];
   classes: any[];
   sessions: any[];
   login: LoginState;

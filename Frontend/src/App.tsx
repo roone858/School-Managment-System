@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import AddStudent from "./Components/AddForm";
-import AddTeacher from "./Components/AddForm";
+import AddStudent from "./Components/AddComponents/AddStudent";
+import AddTeacher from "./Components/AddComponents/AddTeacher";
 import Sidebar from "./layouts/Sidebar";
 import { Subjects } from "./pages/Subjects";
 import { Dashboard } from "./pages/Dashboard";
@@ -39,9 +39,9 @@ import {
 import UpdateForm from "./Components/UpdateForm";
 import Table from "./Components/bootstrap/Table";
 import "./App.css";
-import { AddSubject } from "./Components/AddSubject";
+import { AddSubject } from "./Components/AddComponents/AddSubject";
 import { addTeaching, fetchTeaching } from "./redux/slice/teaching-slice";
-import Timetable from "./Components/TimeTable";
+import Timetable from "./pages/TimeTable";
 import { addClass, fetchClasses } from "./redux/slice/class-slice ";
 import ClassService from "./services/class.service";
 import SessionService from "./services/session.service";
@@ -49,7 +49,11 @@ import { addSession, fetchSessions } from "./redux/slice/session-slice ";
 import TimetableService from "./services/timetable.service";
 import { addTimetable, fetchTimetables } from "./redux/slice/timetable-slice";
 import { ClassPage } from "./pages/ClassPage";
-import AddClass from "./Components/AddClass";
+import AddClass from "./Components/AddComponents/AddClass";
+import UpdateStudent from "./Components/UpdateComponents/UpdateStudent";
+import UpdateClass from "./Components/UpdateComponents/UpdateClass";
+import UpdateTeacher from "./Components/UpdateComponents/UpdateTeacher";
+import UpdateSubject from "./Components/UpdateComponents/UpdateSubject";
 function App() {
   const dispatch = useDispatch();
 
@@ -66,9 +70,9 @@ function App() {
     dispatch(fetchSubjects())
     dispatch(fetchTeaching())
     dispatch(fetchClasses())
-    dispatch(fetchAttendance())
+    // dispatch(fetchAttendance())
     dispatch(fetchSessions())
-    dispatch(fetchTimetables())
+    // dispatch(fetchTimetables())
     // StudentService.getStudents().then((result: Student[]) => {
     //   if (!isDone)
     //     result.map((student: Student) => dispatch(addStudent(student)));
@@ -116,7 +120,7 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/test" element={<Table />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="students/update/:id" element={<UpdateForm />} />
+            <Route path="students/update/:id" element={<UpdateStudent />} />
             <Route path="/students" element={<Students />}>
               <Route path="add" element={<AddStudent entity="student" />} />
 
@@ -130,8 +134,8 @@ function App() {
               />
             </Route>
             <Route path="/teachers" element={<Teachers />}>
-              <Route path="add" element={<AddTeacher entity="teacher" />} />
-              <Route path="update/:id" element={<UpdateForm />} />
+              <Route path="add" element={<AddTeacher  />} />
+              <Route path="update/:id" element={<UpdateTeacher />} />
               <Route
                 path=":id"
                 element={
@@ -144,9 +148,11 @@ function App() {
             <Route path="/subjects" element={<Subjects />}>
               <Route path="add" element={<AddSubject />} />
             </Route>
+            <Route path="subjects/update/:id" element={<UpdateSubject />} />
             <Route path="/timetable" element={<Timetable />}></Route>
             <Route path="/classes" element={<ClassPage />}></Route>
             <Route path="/classes/add" element={<AddClass />}></Route>
+            <Route path="/classes/update/:id" element={<UpdateClass />} />
             <Route path="/attendance" element={<AttendanceCm />}></Route>
             <Route path="/setting//*" element={<Setting />}></Route>
           </Routes>

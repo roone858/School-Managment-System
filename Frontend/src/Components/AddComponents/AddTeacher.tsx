@@ -1,47 +1,30 @@
 import { useState } from "react";
-import { Input } from "./Input";
-import StudentService from "../services/student.service";
-import TeacherService from "../services/teacher.service";
-import NotificationService from "../services/notification.service";
+import { Input } from "../Input";
+import TeacherService from "../../services/teacher.service";
+import NotificationService from "../../services/notification.service";
 import { useDispatch } from "react-redux";
-import { addStudent } from "../redux/slice/student-slice";
-import { addTeacher } from "../redux/slice/teacher-slice";
-import "../style/addForm.css";
+
+import { addTeacher } from "../../redux/slice/teacher-slice";
+import "../../style/addForm.css";
 import {
   addNotification,
   setRedFlag,
-} from "../redux/slice/notifications-slice";
-import { Student, Teacher } from "../types/type";
+} from "../../redux/slice/notifications-slice";
+import {  Teacher } from "../../types/type";
 
-interface Error {
-  message: string;
-}
-const AddData = (props: any) => {
-  const [data, setData] = useState({});
+const AddTeacher = () => {
+  const [data, setData] = useState({} as any);
   const dispatch = useDispatch();
 
   const updateData = (e: any) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  const insertStudent = () => {
-    StudentService.insertStudent(data).then((res: Student) => {
-      dispatch(addStudent(res));
-
-      NotificationService.insertNotification({
-        message: `new Student added ${res.first_name} ${res.last_name}`,
-      }).then((result) => {
-        dispatch(addNotification(result));
-        dispatch(setRedFlag(true));
-      });
-    });
-  };
-
   const insertTeacher = () => {
     TeacherService.insertTeacher(data).then((res: Teacher) => {
       dispatch(addTeacher(res));
       NotificationService.insertNotification({
-        message: `new Teacher added ${res.first_name} ${res.last_name}`,
+        message: `new Teacher added ${res.first_name} }`,
       }).then((result) => {
         dispatch(addNotification(result));
         dispatch(setRedFlag(true));
@@ -52,16 +35,14 @@ const AddData = (props: any) => {
   const handleSubmit = (event: any) => {
     event.preventDefault();
 
-    if (props.entity == "student") insertStudent();
-
-    if (props.entity == "teacher") insertTeacher();
+    insertTeacher();
 
     event.target.reset();
   };
 
   return (
     <div className="add-form">
-      <h1>Add new {props.entity}</h1>
+      <h1>Add new Teacher</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-row d-flex gap-2 ">
           <Input
@@ -119,8 +100,8 @@ const AddData = (props: any) => {
               required
             >
               <option>Select Gender </option>
-              <option>Male</option>
-              <option>Female</option>
+              <option value="M">Male</option>
+              <option value="F">Female</option>
             </select>
           </div>
         </div>
@@ -142,4 +123,4 @@ const AddData = (props: any) => {
   );
 };
 
-export default AddData;
+export default AddTeacher;

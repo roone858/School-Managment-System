@@ -1,11 +1,11 @@
 INSERT INTO
      class (name, grade_level)
 VALUES
-     ('1 A', 1),
-     ('1 B', 1),
-     ('1 C', 1),
-     ('1 D', 1),
-     ('1 F', 1);
+     ('1-A', 1),
+     ('1-B', 1),
+     ('1-C', 1),
+     ('1-D', 1),
+     ('1-F', 1);
 
 INSERT INTO
      notifications (message)
@@ -71,7 +71,8 @@ VALUES
 
 INSERT INTO
      teacher (
-          name,
+          first_name,
+          last_name,
           email,
           gender,
           phone,
@@ -80,7 +81,8 @@ INSERT INTO
      )
 VALUES
      (
-          'Maged Askar',
+          'Maged',
+          'Askar',
           'magedaskar@gmail.com',
           'M',
           '01040192414',
@@ -88,7 +90,8 @@ VALUES
           'Assiut-Egypt'
      ),
      (
-          'Mohamed Youssef',
+          'Mohamed',
+          'Youssef',
           'Myoussef@gmail.com',
           'M',
           '01500100014',
@@ -96,7 +99,8 @@ VALUES
           'Cairo-Egypt'
      ),
      (
-          'Ahmed Talat',
+          'Ahmed',
+          'Talat',
           'ahmed@gmail.com',
           'M',
           '01140192414',
@@ -104,7 +108,8 @@ VALUES
           'Aswan-Egypt'
      ),
      (
-          'Rehab Gamal',
+          'Rehab',
+          'Gamal',
           'rehab@gmail.com',
           'F',
           '0155192414',
@@ -112,7 +117,8 @@ VALUES
           'Assiut-Egypt'
      ),
      (
-          'Mona Ali',
+          'Mona',
+          'Ali',
           'mona@gmail.com',
           'F',
           '01645222224',
@@ -225,43 +231,70 @@ INSERT INTO
      class_session (
           start_time,
           end_time,
+          class_id,
+          subject_id,
+    
+          day
+     )
+Values
+     (
+          '2023-04-23 10:00:00',
+          '2023-04-23 11:00:00',
+          1,
+          1,
+       
+          'Sunday'
+     ),
+     (
+          '2023-04-24 11:00:00',
+          '2023-04-24 12:00:00',
+          2,
+          2,
+      
+          'Monday'
+
+     ),
+     (
+          '2023-04-25 12:00:00',
+          '2023-04-25 13:00:00',
+          3,
+          3,
+        
+          'Tuesday'
+
+     ),
+     (
+          '2023-04-26 13:00:00',
+          '2023-04-26 14:00:00',
+          4,
+          4,
+        
+          'Wednesday'
+
+     ),
+     (
+          '2023-04-27 14:00:00',
+          '2023-04-27 15:00:00',
+          5,
+          5,
+  
+          'Thursday'
+
+     );
+
+INSERT INTO
+     class_session (
+          start_time,
+          end_time,
           classroom,
           subject_id,
           timetable_id
      )
 Values
      (
-          '2023-04-23 10:00:00',
-          '2023-04-23 11:00:00',
-          'room 1',
-          1,
-          5
-     ),
-     (
-          '2023-04-24 11:00:00',
-          '2023-04-24 12:00:00',
-          'room 1',
-          2,
-          4
-     ),
-     (
-          '2023-04-25 12:00:00',
-          '2023-04-25 13:00:00',
+          '2023-04-23 14:00:00',
+          '2023-04-23 15:00:00',
           'room 1',
           3,
-          3
-     ),
-     (
-          '2023-04-26 13:00:00',
-          '2023-04-26 14:00:00',
-          'room 1',
-          4,
-          2
-     ),
-     (
-          '2023-04-27 14:00:00',
-          '2023-04-27 15:00:00',
-          'room 1',
-          5,
-          1
-     );
+          5
+     )

@@ -29,7 +29,7 @@ const dispatch=useDispatch()
         <div className="notification">
         <InsetDividers messages={notifications.slice(0,4)}/>
         <button onClick={()=>{
-          new NotificationService().deleteAllNotification().then((result)=>{
+           NotificationService.deleteAllNotification().then((result)=>{
             dispatch(clearAllNotification())
           })
         }} className="btn  w-100">Delete all notifications</button>

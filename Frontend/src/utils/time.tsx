@@ -15,3 +15,8 @@ export function getDayFromDate(date: any) {
   const d = new Date(date);
   return weekdays[d.getDay()];
 }
+export function getOnlyDate(date: string) {
+  const index = date.indexOf("T")
+
+  return date.slice(0,index)
+}

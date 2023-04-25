@@ -41,6 +41,27 @@ class TeacherService {
       console.log("error", error);
     }
   }
+  static async updateTeacher(id: any,data:any) {
+    try {
+      const response = await fetch(`http://localhost:4000/api/teacher/${id}`, {
+        method: "PUT",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${getTokenFromCookie()}`,
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(data),
+      });
+      const json = await response.json();
+      return json;
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
   static async deleteTeacher(id: string) {
    
       const response = await fetch(`http://localhost:4000/api/teacher/${id}`, {

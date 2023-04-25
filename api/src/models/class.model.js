@@ -38,7 +38,7 @@ class ClassModel {
   }
   async update(id, data) {
     const query =
-      "UPDATE class SET nae = $1, grade_level = $2 WHERE id = $3 RETURNING *";
+      "UPDATE class SET name = $1, grade_level = $2 WHERE id = $3 RETURNING *";
     const conn = await client.connect();
     try {
       const { name, grade_level } = data;

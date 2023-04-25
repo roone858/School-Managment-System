@@ -51,7 +51,7 @@ async function deleteClassModel(req, res) {
   try {
     const result = await ClassModel.delete(req.params.id);
     if (!result) {
-      return res.status(404).json({ message: "Student not found" });
+      return res.status(404).json({ message: "Class not found" });
     }
     res.status(204).end();
   } catch (error) {

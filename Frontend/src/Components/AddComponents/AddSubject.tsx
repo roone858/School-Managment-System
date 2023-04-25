@@ -1,22 +1,29 @@
 import React, { useState } from "react";
-import { Input } from "./Input";
-import { Subject, State, Teacher } from "../types/type";
-import { useSelector } from "react-redux";
-import TeachingService from "../services/teaching.service";
-import SubjectService from "../services/subject.service";
+import { Input } from "../Input";
+import { Subject, State, Teacher } from "../../types/type";
+import { useDispatch, useSelector } from "react-redux";
+import TeachingService from "../../services/teaching.service";
+import SubjectService from "../../services/subject.service";
+import { addSubject } from "../../redux/slice/subject-slice ";
+import { addTeaching } from "../../redux/slice/teaching-slice";
 
 export const AddSubject = () => {
   const teachers = useSelector((state: State) => state.teachers);
   const [data, setData] = useState({} as Subject);
+  const dispatch= useDispatch()
   const updateData = (e: any) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
   const handleSubmit = async(event: any) => {
-    
     event.preventDefault();
     console.log(data);
    const subject:Subject = await SubjectService.insertSubject(data)
-   await TeachingService.insertTeaching({...data,subject_id:subject.id})
+    await TeachingService.insertTeaching({...data,subject_id:subject.id}).then(result=>{
+      dispatch(addSubject(subject))
+      dispatch(addTeaching(result))
+    })
+
+
   };
   return (
     <div className="add-form">
@@ -41,14 +48,7 @@ export const AddSubject = () => {
           />
         </div>
         <div className="form-row d-flex gap-2">
-          <Input
-            name="department"
-            onChange={updateData}
-            text="Department"
-            placeholder="Department"
-            type="text"
-            id="inputDepartment"
-          />
+          
           <div className="form-row col-6 ">
             <label htmlFor="inputTeacher">Teacher Name :</label>
             <br />
@@ -62,7 +62,7 @@ export const AddSubject = () => {
               <option>Select Teacher </option>
               {teachers.map((teacher: any) => (
                 <option key={teacher.id} value={teacher.id}>
-                  {teacher.name}
+                  {teacher.first_name+" "+teacher.last_name}
                 </option>
               ))}
             </select>

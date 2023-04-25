@@ -2,7 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Teacher } from "../../types/type";
 import TeacherService from "../../services/teacher.service";
 
-export const fetchTeachers  :any= createAsyncThunk(
+export const fetchTeachers: any = createAsyncThunk(
   "teachers/fetchTeachers",
   async () => {
     const data = await TeacherService.getTeachers();
@@ -20,6 +20,14 @@ const teachersSlice = createSlice({
     deleteTeacher: (state = [], action: PayloadAction<any>) => {
       return state.filter((teacher: Teacher) => teacher.id !== action.payload);
     },
+    updateTeacher: (state = [], action: PayloadAction<any>) => {
+      const index = state.findIndex(
+        (teacher: any) => teacher.id == action.payload.id
+      );
+      if (index !== -1) {
+        state[index] = action.payload.data;
+      }
+    },
   },
   extraReducers: (builder) => {
     // Add reducers for handling the fetchTeachers action
@@ -34,5 +42,5 @@ const teachersSlice = createSlice({
   },
 });
 
-export const { addTeacher, deleteTeacher } = teachersSlice.actions;
+export const { addTeacher, deleteTeacher,updateTeacher } = teachersSlice.actions;
 export default teachersSlice.reducer;

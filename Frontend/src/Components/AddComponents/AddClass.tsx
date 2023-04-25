@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Input } from "./Input";
-import ClassService from "../services/class.service";
+import { Input } from "./../Input";
+import ClassService from "../../services/class.service";
 import { useDispatch } from "react-redux";
-import { addClass } from "../redux/slice/class-slice ";
+import { addClass } from "../../redux/slice/class-slice ";
 import { useNavigate } from "react-router-dom";
 
 const AddClass = () => {

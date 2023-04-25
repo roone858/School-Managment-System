@@ -1,33 +1,79 @@
 import { AddButton } from "../layouts/AddButton";
 import { Table } from "../Components/Table";
-import { Outlet } from "react-router-dom";
-import { TableRaw } from "../Components/TableRaw";
+import { Link, Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-interface Teacher {
-  id: string;
-  first_name: string;
-  last_name: string;
-  email: string;
-  address: string;
-}
-export const Teachers = () => {
+import { Teacher } from "../types/type";
+import Swal from "sweetalert2";
+import TeacherService from "../services/teacher.service";
+import { deleteTeacher } from "../redux/slice/teacher-slice";
 
+export const Teachers = () => {
+  const dispatch = useDispatch();
   const teachers = useSelector((state: any) => state.teachers);
 
-
+  const handleDelete = (id: any) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete !",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const response = await TeacherService.deleteTeacher(id);
+        dispatch(deleteTeacher(id));
+        Swal.fire(" Deleted!", "student deleted", "success");
+      }
+    });
+  };
   const teachersRaws = teachers.map((teacher: Teacher) => (
-    <TableRaw
-      url="teachers"
-      key={teacher.id}
-      obj={teacher}
-     
-    />
+    <tr className="bg-fff" key={teacher.id}>
+      <th scope="row">{teacher.id}</th>
+      <td>{teacher.first_name+" "+teacher.last_name}</td>
+      <td>{teacher.dob}</td>
+      <td>{teacher.address}</td>
+
+      <td>
+        <Link
+          onClick={() => {
+            window.scrollTo(0, 0);
+          }}
+          to={`/teachers/` + teacher.id}
+          type="button"
+          className="btn btn-primary btn-sm "
+        >
+          Details
+        </Link>
+        <Link
+          onClick={() => {
+            window.scrollTo(0, 0);
+          }}
+          to={`/teachers/` + "update/" + teacher.id}
+          type="button"
+          className="btn btn-success btn-sm mx-2 "
+        >
+          Update
+        </Link>
+        <button
+          onClick={() => handleDelete(teacher.id)}
+          type="button"
+          className="btn  btn-danger btn-sm "
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
   ));
   return (
     <div className="teachers">
-      <AddButton  />
+      <AddButton />
       <Outlet />
-      <Table columns={['ID ','First Name','Last Name','Address','Actions']} rows={teachersRaws} />
+      <Table
+        columns={["ID ", "Name",'DOB', "Address", "Actions"]}
+        rows={teachersRaws}
+      />
     </div>
   );
 };
