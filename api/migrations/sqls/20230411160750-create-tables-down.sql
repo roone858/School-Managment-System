@@ -1,1 +1,1 @@
-DROP TABLE attendance, grading_scale, grade, class_session, timetable, teaching, enrollment, subject, teacher, student;
+DROP TABLE attendance, class_session, teaching, subject, teacher, student, class ;

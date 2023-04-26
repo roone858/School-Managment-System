@@ -8,13 +8,9 @@ VALUES
      ('1-F', 1);
 
 INSERT INTO
-     notifications (message)
-VALUES
-     ('your massage here Tow');
-
-INSERT INTO
      student (
-          name,
+          first_name,
+          last_name,
           email,
           gender,
           phone,
@@ -24,7 +20,8 @@ INSERT INTO
      )
 VALUES
      (
-          'Mahmoud Gamal',
+          'Mahmoud',
+          'Gamal',
           'roone858@gmail.com',
           'M',
           '01140192414',
@@ -33,7 +30,8 @@ VALUES
           1
      ),
      (
-          'Emad Rady',
+          'Emad',
+          'Rady',
           'Emad22@gmail.com',
           'M',
           '01000192414',
@@ -42,7 +40,8 @@ VALUES
           2
      ),
      (
-          'Ahmed Adel',
+          'Ahmed',
+          'Adel',
           'ahmed@gmail.com',
           'M',
           '01140192414',
@@ -51,7 +50,8 @@ VALUES
           3
      ),
      (
-          'Mariam Gamal',
+          'Mariam',
+          'Gamal',
           'Mariam@gmail.com',
           'F',
           '0155192414',
@@ -60,7 +60,8 @@ VALUES
           4
      ),
      (
-          'Karyma ALi',
+          'Karyma',
+          'ALi',
           'Kali@gmail.com',
           'F',
           '012222224',
@@ -202,32 +203,6 @@ VALUES
      );
 
 INSERT INTO
-     admin (
-          first_name,
-          last_name,
-          username,
-          email,
-          password
-     )
-Values
-     (
-          'Mahmoud',
-          'Gamal',
-          'admin',
-          'mahmoudg.dev@gmail.com',
-          'admin'
-     );
-
-INSERT INTO
-     timetable (period, start_date, end_date, class_id)
-Values
-     ('4 month', '2023-9-1', '2024-1-1', 1),
-     ('4 month', '2023-9-1', '2024-1-1', 2),
-     ('4 month', '2023-9-1', '2024-1-1', 3),
-     ('4 month', '2023-9-1', '2024-1-1', 4),
-     ('4 month', '2023-9-1', '2024-1-1', 5);
-
-INSERT INTO
      class_session (
           start_time,
           end_time,
@@ -237,8 +212,8 @@ INSERT INTO
      )
 Values
      (
+          '09:00:00',
           '10:00:00',
-          '11:00:00',
           2,
           1,
           'Sunday'
@@ -288,3 +263,19 @@ Values
           3,
           5
      )
+INSERT INTO
+     admin (
+          first_name,
+          last_name,
+          username,
+          email,
+          password
+     )
+Values
+     (
+          'Mahmoud',
+          'Gamal',
+          'admin',
+          'mahmoudg.dev@gmail.com',
+          'admin'
+     );

@@ -7,105 +7,134 @@ import {
   deleteAttendance,
 } from "../redux/slice/attendance-slice";
 import { Attendance, Subject, Student } from "../types/type";
+import { Table } from "../Components/Table";
+import AbsentButton from "../Components/AbsentButton";
 const AttendanceCm = () => {
   const subjects = useSelector((state: any) => state.subjects);
   const students = useSelector((state: any) => state.students);
-
+  const sessions = useSelector((state: any) => state.sessions);
+  const classes = useSelector((state: any) => state.classes);
+  const selectedStudent: any[] = [];
   const dispatch = useDispatch();
-  const [studentId, setStudentId] = useState({});
-  const [subjectTitle, setSubjectTitle] = useState({});
+  const [classId, seClassId] = useState();
+  const [subjectId, setSubjectId] = useState();
+  const [chosenSessionID, setChosenSessionID] = useState();
   const attendance = useSelector((state: any) => state.attendance);
-  const attendanceRows = attendance.map((att: Attendance) => {
-    const subject = subjects?.find(
-      (subject: Subject) => String(subject.id) == String(att.subjectid)
-    );
-    return (
-      <tr key={att.id}>
-        <th scope="row">{att.id}</th>
-        <td>{subject?.title}</td>
-        <td>{att.studentid}</td>
-        <td>{att.attenddate}</td>
-        <td>
-          <button
-            onClick={() => handleCancel(att.id)}
-            type="button"
-            className="btn-close"
-            aria-label="Close"
-          ></button>
-        </td>
-      </tr>
-    );
-  });
 
-
-  const handleCancel = async (id: any) => {
-    const result = await AttendanceService.deleteAttendance(id);
-    dispatch(deleteAttendance(id));
+  const handleApply = () => {
+    [...new Set(selectedStudent)].forEach((id) =>
+      AttendanceService.insertAttendance({
+        student_id: id,
+        class_session_id: chosenSessionID,
+        subject_id: subjectId,
+        date: new Date(),
+        status: "Absent",
+      })
+    );
+    setChosenSessionID(0);
   };
-  const handleSubmit = async (event: any) => {
-    event.preventDefault();
-    const subject = await subjects.find(
-      (subject: Subject) => subject.title == subjectTitle
-    );
-    const attend = await AttendanceService.insertAttendance({
-      studentId: studentId,
-      subjectId: subject.id,
-    });
-
-    dispatch(addAttendance(attend));
-    Swal.fire(" Accepted!", "student inserted successfully", "success");
-    event.target.reset();
+  const handleChose = async (id: any) => {
+    setChosenSessionID(id);
   };
+
   return (
     <div className="attendance">
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="formGroupExampleInput">Subject title :</label>
-          <select
-            className="form-control"
-            name="subject"
-            onChange={(e: any) => {
-              setSubjectTitle(e.target.value);
-            }}
-          >
-            <option>Default select</option>
-            {subjects.map((subject: Subject) => (
-              <option key={subject.id}>{subject.title}</option>
-            ))}
-          </select>
+      <form>
+        <div className="form-row d-flex gap-2 ">
+          <div className="form-group col-3">
+            <label htmlFor="formGroupExampleInput">Subject title :</label>
+            <select
+              className="form-control"
+              name="subject"
+              onChange={(e: any) => {
+                setSubjectId(e.target.value);
+              }}
+            >
+              <option>Default select</option>
+              {subjects.map((subject: Subject) => (
+                <option key={subject.id} value={subject.id}>
+                  {subject.title}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="form-group col-3">
+            <label htmlFor="formGroupExampleInput2">Select Class :</label>
+            <select
+              className="form-control"
+              name="student"
+              onChange={(e: any) => {
+                seClassId(e.target.value);
+              }}
+            >
+              <option>Default select</option>
+              {classes?.map((cla: any) => (
+                <option key={String(cla.id)} value={cla.id}>
+                  {cla.name}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-        <div className="form-group">
-          <label htmlFor="formGroupExampleInput2">Student ID :</label>
-          <select
-            className="form-control"
-            name="student"
-            onChange={(e: any) => {
-              setStudentId(e.target.value);
-            }}
-          >
-            <option>Default select</option>
-            {students?.map((student: Student) => (
-              <option key={String(student.id)}>{String(student.id)}</option>
-            ))}
-          </select>
-        </div>
-        <button type="submit" className="btn btn-primary mt-4">
-          submit
-        </button>
       </form>
       <div className="attendance-table">
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Subject Title</th>
-              <th scope="col">Student Id</th>
-              <th scope="col">Date</th>
-              <th scope="col">Cancel</th>
-            </tr>
-          </thead>
-          <tbody>{attendanceRows}</tbody>
-        </table>
+        {!chosenSessionID ? (
+          <Table
+            columns={["Session ID", "Start Time ", "End Time", "Day"]}
+            rows={sessions
+              .filter(
+                (session: any) =>
+                  session.class_id == classId && session.subject_id == subjectId
+              )
+              .map((session: any) => (
+                <tr key={session.id}>
+                  <th scope="row">{session.id}</th>
+                  <td>{session.start_time}</td>
+                  <td>{session.end_time}</td>
+                  <td>{session.day}</td>
+                  <td>
+                    <button
+                      onClick={() => handleChose(session.id)}
+                      type="button"
+                      className="btn  btn-primary"
+                      aria-label="Close"
+                    >
+                      {" "}
+                      Chose
+                    </button>
+                  </td>
+                </tr>
+              ))}
+          />
+        ) : (
+          <>
+            <Table
+              columns={["Student ID", "Student Name ", "Absent"]}
+              rows={students.map(
+                (student: Student) =>
+                  student.class_id == classId && (
+                    <tr key={student.id}>
+                      <th scope="row">{student.id}</th>
+                      <td>{student.first_name + " " + student.last_name}</td>
+                      <td>
+                        <div
+                          onClick={() => {
+                            selectedStudent.push(student.id);
+                            console.log(selectedStudent);
+                          }}
+                        >
+                          <AbsentButton />
+                        </div>
+                      </td>
+                    </tr>
+                  )
+              )}
+            />
+            <button onClick={handleApply} className="btn btn-success">
+              Apply
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

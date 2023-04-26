@@ -7,6 +7,7 @@ import { AddButton } from "../layouts/AddButton";
 import {  deleteStudent } from "../redux/slice/student-slice";
 import { Student } from "../types/type";
 import Swal from "sweetalert2";
+import image from "../assets/dash-icon-01.svg"
 export const Students = () => {
   const students = useSelector((state: any) => state.students);
   const classes = useSelector((state: any) => state.classes);
@@ -35,7 +36,7 @@ export const Students = () => {
     
       <tr className="bg-fff" key={student.id}>
         <th scope="row">{student.id}</th>
-        <td>{student.first_name+" "+student.last_name}</td>
+        <td> <img src={image} style={{"width": "10%"}} />{student.first_name+" "+student.last_name}</td>
         <td>{student.dob}</td>
         <td>{student.address}</td>
         <td>{classes.find((cl:any)=> student.class_id==cl.id)?.name }</td>

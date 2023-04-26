@@ -6,7 +6,7 @@ const Attendance = {
   getAll: async () => {
     const conn = await client.connect();
     try {
-      const result = await conn.query("SELECT * FROM Attendance");
+      const result = await conn.query("SELECT * FROM attendance");
       return result.rows;
     } finally {
       conn.release();
@@ -18,7 +18,7 @@ const Attendance = {
     const conn = await client.connect();
     try {
       const result = await conn.query(
-        "SELECT * FROM Attendance WHERE id = $1",
+        "SELECT * FROM attendance WHERE id = $1",
         [id]
       );
       return result.rows[0];
@@ -31,10 +31,10 @@ const Attendance = {
   create: async (data) => {
     const conn = await client.connect();
     try {
-      const { studentId, subjectId } = data;
+      const { student_id, subject_id, class_session_id, date, status } = data;
       const result = await conn.query(
-        "INSERT INTO Attendance (studentId, subjectId) VALUES ($1, $2) RETURNING *",
-        [studentId, subjectId]
+        "INSERT INTO Attendance ( student_id, subject_id,class_session_id,date ,status) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+        [student_id, subject_id, class_session_id, date, status]
       );
       return result.rows[0];
     } finally {
@@ -46,10 +46,10 @@ const Attendance = {
   update: async (id, data) => {
     const conn = await client.connect();
     try {
-      const { studentId, subjectId } = data;
+      const { student_id, subject_id, class_session_id, date, status } = data;
       const result = await conn.query(
-        "UPDATE Attendance SET studentId = $1, subjectId = $2 WHERE id = $3 RETURNING *",
-        [studentId, subjectId, id]
+        "UPDATE Attendance SET student_id = $1, subject_id = $2, class_session_id=$3, date=$4, status=$5 WHERE id = $6 RETURNING *",
+        [student_id, subject_id, class_session_id, date, status, id]
       );
       return result.rows[0];
     } finally {
