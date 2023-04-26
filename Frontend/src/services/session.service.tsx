@@ -49,10 +49,16 @@ class SessionService {
     });
   }
   static async deleteSessionByClassID(id: string) {
-    fetch(`http://localhost:4000/api/session/delete/${id}`, {
+     return fetch(`http://localhost:4000/api/session/delete/${id}`, {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },
-    });
+    }).then( result => result);
   }
+  static async deleteSessionBySubjectId(id: string) {
+    return fetch(`http://localhost:4000/api/session/deleteBySession/${id}`, {
+     method: "DELETE",
+     headers: { Authorization: `${getTokenFromCookie()}` },
+   }).then( result => result);
+ }
 }
 export default SessionService;

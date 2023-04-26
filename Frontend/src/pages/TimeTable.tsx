@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "../style/Timetable.css";
-import { currentDay, getDayFromDate } from "../utils/time";
+import { currentDay, days, getDayFromDate } from "../utils/time";
 import ClassService from "../services/class.service";
 import { useDispatch, useSelector } from "react-redux";
 import { State } from "../types/type";
 import SessionService from "../services/session.service";
 import { fetchSubjects } from "../redux/slice/subject-slice ";
+import { Link, Outlet } from "react-router-dom";
 
 const Timetable = () => {
   const [classId, setClassID] = useState(1);
@@ -16,14 +17,7 @@ const Timetable = () => {
   const teachers = useSelector((state: any) => state.teachers);
 
   const sessionsRow = sessions.map((session: any) => {
-    const startTime = session.start_time.slice(
-      session.start_time.indexOf("T"),
-      session.start_time.indexOf(".")
-    );
-    const endTime = session.end_time.slice(
-      session.end_time.indexOf("T"),
-      session.end_time.indexOf(".")
-    );
+    
     const subject = subjects.find((sub: any) => sub.id == session.subject_id);
     const teaching = teachings.find(
       (teach: any) => teach.subject_id == session.subject_id
@@ -35,14 +29,13 @@ const Timetable = () => {
       id: session.id,
       title: subject?.title,
       day:session.day,
-      startTime: startTime.slice(1, -3),
-      endTime: endTime.slice(1, -3),
-      teacher_name: teacher.first_name +" "+teacher.last_name ,
+      startTime: session.start_time.slice(0, -3),
+      endTime: session.end_time.slice(0, -3),
+      teacher_name: teacher ? teacher?.first_name +" "+teacher?.last_name :"",
     };
   });
-
   currentDay();
-  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"];
+
   const timeSlots = [
     { startDate: "08:00", endDate: "09:00" },
     { startDate: "09:00", endDate: "10:00" },
@@ -58,6 +51,10 @@ const Timetable = () => {
  
   return (
     <>
+     <Link className="btn btn-primary mb-4" to={"add"}>
+        Add New Session
+      </Link>
+      <Outlet/>
       <div>
         <form >
           <div className="form-row  col-4 gap-2">
@@ -80,7 +77,7 @@ const Timetable = () => {
           </div>
         
         </form>
-        <h1>{classes.find((c: any) => c.id == classId)?.name}</h1>
+
       </div>
       <div className="timetable">
         <table className="table table-striped ">
@@ -106,7 +103,7 @@ const Timetable = () => {
                   return (
                     <td className={filterSessions?.title} key={day}>
                       {filterSessions ? filterSessions.title : null}
-                      <p>{filterSessions? filterSessions.teacher_name:null}</p>
+                      <p>{filterSessions?.teacher_name}</p>
                     </td>
                   );
                 })}
@@ -115,6 +112,7 @@ const Timetable = () => {
           </tbody>
         </table>
       </div>
+     
     </>
   );
 };

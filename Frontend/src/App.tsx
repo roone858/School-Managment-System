@@ -54,6 +54,7 @@ import UpdateStudent from "./Components/UpdateComponents/UpdateStudent";
 import UpdateClass from "./Components/UpdateComponents/UpdateClass";
 import UpdateTeacher from "./Components/UpdateComponents/UpdateTeacher";
 import UpdateSubject from "./Components/UpdateComponents/UpdateSubject";
+import AddSession from "./Components/AddComponents/AddSession";
 function App() {
   const dispatch = useDispatch();
 
@@ -149,7 +150,9 @@ function App() {
               <Route path="add" element={<AddSubject />} />
             </Route>
             <Route path="subjects/update/:id" element={<UpdateSubject />} />
-            <Route path="/timetable" element={<Timetable />}></Route>
+            <Route path="/timetable" element={<Timetable />}>
+            <Route path="add" element={<AddSession />} />
+            </Route>
             <Route path="/classes" element={<ClassPage />}></Route>
             <Route path="/classes/add" element={<AddClass />}></Route>
             <Route path="/classes/update/:id" element={<UpdateClass />} />

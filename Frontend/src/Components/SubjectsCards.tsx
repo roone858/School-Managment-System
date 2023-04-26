@@ -20,7 +20,7 @@ export const SubjectsCards = () => {
     return (
       <div key={subject.id} className="col-md-4 mb-4 col-sm-6">
         <Card
-          image={images[index]}
+          image={images[index]?images[index] :images[Math.floor(Math.random() * images.length)]}
           title={subject.title}
           description={subject.description.slice(0, 100) + "..."}
         />

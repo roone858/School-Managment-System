@@ -5,12 +5,15 @@ import IconTabs from "../Components/mui/IconTabs";
 import Swal from "sweetalert2";
 import SubjectService from "../services/subject.service";
 import { deleteSubject } from "../redux/slice/subject-slice ";
+import SessionService from "../services/session.service";
+import { deleteSession } from "../redux/slice/session-slice ";
 
 export const Subjects = () => {
   const dispatch = useDispatch();
 
   const subjects = useSelector((state: any) => state.subjects);
   const teaching = useSelector((state: any) => state.teaching);
+  const sessions = useSelector((state: any) => state.sessions);
   // const [subjects,setSubjects] =useState()
   const teachers = useSelector((state: any) => state.teachers);
   const handleDelete = (id: any) => {
@@ -24,18 +27,21 @@ export const Subjects = () => {
       confirmButtonText: "Yes, delete !",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        SubjectService.deleteSubject(id);
+        const session = await sessions.find((s: any) => s.subject_id == id);
+        if (session) {
+          await SessionService.deleteSessionBySubjectId(id);
+          dispatch(deleteSession(session.id));
+        }
+        await SubjectService.deleteSubject(id);
         dispatch(deleteSubject(id));
       }
     });
   };
   const subjectsRows = subjects.map((subject: any) => {
     const teach = teaching.find((teach: any) => teach.subject_id == subject.id);
-
     const teacher = teachers.find(
       (teacher: any) => teacher.id == teach?.teacher_id
     );
-
     return (
       <tr className="bg-fff" key={subject.id}>
         <th scope="row">{subject.id}</th>
@@ -79,7 +85,7 @@ export const Subjects = () => {
   return (
     <>
       <Link className="btn btn-primary mb-4" to={"add"}>
-        ADD NEW COURSE
+        Add New Subject
       </Link>
       <Outlet />
       <IconTabs

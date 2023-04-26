@@ -69,5 +69,11 @@ class TeachingService {
       headers: { Authorization: `${getTokenFromCookie()}` },
     });
   }
+  static async deleteTeachingByTeacherID(id: string) {
+    fetch(`http://localhost:4000/api/teaching/teacher/${id}`, {
+      method: "DELETE",
+      headers: { Authorization: `${getTokenFromCookie()}` },
+    });
+  }
 }
 export default TeachingService;

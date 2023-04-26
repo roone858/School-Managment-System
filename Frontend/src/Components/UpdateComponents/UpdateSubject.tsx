@@ -11,7 +11,7 @@ import { updateSubject } from "../../redux/slice/subject-slice ";
 import { Input } from "../Input";
 import { getOnlyDate } from "../../utils/time";
 import TeachingService from "../../services/teaching.service";
-import { updateTeaching } from "../../redux/slice/teaching-slice";
+import { addTeaching, updateTeaching } from "../../redux/slice/teaching-slice";
 const UpdateStudent = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -37,17 +37,24 @@ const UpdateStudent = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, Update !",
-    }).then(async (result:any) => {
+    }).then(async (result: any) => {
       if (result.isConfirmed) {
         const subject = await SubjectService.updateSubject(id, data);
-        const t:any= await TeachingService.updateTeaching(subject.id,data)
-        if (result.message)
-          Swal.fire("Can't Update!", "Internal Server Error", "error");
-        else {
-          dispatch(updateSubject({ id: id, data: subject }));
-          dispatch(updateTeaching({ id: t.id, data: t }));
-          Swal.fire("Updated!", "student Updated", "success");
+        if (!teach) {
+          TeachingService.insertTeaching({
+            ...data,
+            subject_id: subject.id,
+          }).then((result) => {
+            dispatch(addTeaching(result));
+          });
+        } else {
+          TeachingService.updateTeaching(subject.id, data).then((result) => {
+            dispatch(updateTeaching(result));
+          });
         }
+
+        dispatch(updateSubject({ id: id, data: subject }));
+        Swal.fire("Updated!", "Subject Updated", "success");
       }
     });
   };
@@ -59,9 +66,9 @@ const UpdateStudent = () => {
         <h1>loading</h1>
       ) : (
         <>
-          <section className="vh-100 gradient-custom">
-            <div className="container py-5 h-100">
-              <div className="row justify-content-center align-items-center h-100">
+          <section className="gradient-custom">
+            <div className="container py-1 ">
+              <div className="row justify-content-center align-items-center ">
                 <div className="col-12 col-lg-9 col-xl-7">
                   <div className="card shadow-2-strong card-registration">
                     <div className="card-body p-4 p-md-5">
@@ -108,19 +115,25 @@ const UpdateStudent = () => {
                         <div className="row">
                           <div className="col-md-6 mb-2">
                             <div className="form-outline">
-                                <select
+                              <select
                                 id="inputGender4"
                                 onChange={updateData}
                                 name="teacher_id"
-                                value={data.teacher_id}
+                                value={data?.teacher_id}
                                 className="form-control"
                                 required
                               >
                                 <option>select teacher</option>
-                               {teachers.map((teacher:any)=> <option key={teacher.id} value={teacher.id}>{teacher.first_name +" "+teacher.last_name}</option> )}
+                                {teachers.map((teacher: any) => (
+                                  <option key={teacher.id} value={teacher.id}>
+                                    {teacher.first_name +
+                                      " " +
+                                      teacher.last_name}
+                                  </option>
+                                ))}
                               </select>
                               <label className="form-label" htmlFor="title">
-                              Teacher Name 
+                                Teacher Name
                               </label>
                             </div>
                           </div>
@@ -129,15 +142,12 @@ const UpdateStudent = () => {
                               <input
                                 type="text"
                                 id="semester"
-                                value={data.semester}
+                                value={teach ? data.semester: ""}
                                 onChange={updateData}
                                 name="semester"
                                 className="form-control form-control-lg"
                               />
-                              <label
-                                className="form-label"
-                                htmlFor="semester"
-                              >
+                              <label className="form-label" htmlFor="semester">
                                 Semester
                               </label>
                             </div>
@@ -154,20 +164,22 @@ const UpdateStudent = () => {
                                 value={data.grade_level}
                                 onChange={updateData}
                               />
-                              <label className="form-label" htmlFor="grade_level">
+                              <label
+                                className="form-label"
+                                htmlFor="grade_level"
+                              >
                                 Grade level
                               </label>
                             </div>
                           </div>
-                        
                         </div>{" "}
                         <div className="row">
-                        <div className="col-md-6 mb-2">
+                          <div className="col-md-6 mb-2">
                             <div className="form-outline">
                               <input
                                 type="date"
                                 id="start_date"
-                                value={data &&getOnlyDate(data.start_date)}
+                               value={teach ? getOnlyDate(data.start_date):''}
                                 onChange={updateData}
                                 name="start_date"
                                 className="form-control form-control-lg"
@@ -185,21 +197,19 @@ const UpdateStudent = () => {
                               <input
                                 type="date"
                                 id="end_date"
-                                value={data && getOnlyDate(data.end_date)}
+                                 value={teach ? getOnlyDate(data.end_date): ""}
                                 onChange={updateData}
                                 name="end_date"
                                 className="form-control form-control-lg"
                               />
-                              <label
-                                className="form-label"
-                                htmlFor="end_date"
-                              >
+                              <label className="form-label" htmlFor="end_date">
                                 End Date
                               </label>
                             </div>
                           </div>
-                        </div>                        <button type="submit" className="btn btn-primary">
-                         Update
+                        </div>{" "}
+                        <button type="submit" className="btn btn-primary">
+                          Update
                         </button>
                       </form>
                     </div>
@@ -215,5 +225,3 @@ const UpdateStudent = () => {
 };
 
 export default UpdateStudent;
-
-

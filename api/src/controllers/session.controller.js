@@ -70,6 +70,18 @@ async function deleteSessionByClassId(req, res) {
     res.status(500).json({ message: "Internal Server Error" });
   }
 }
+async function deleteSessionBySubjectId(req, res) {
+  try {
+    const result = await Session.deleteBySubjectId(req.params.id);
+    if (!result) {
+      return res.status(404).json({ message: "Student not found" });
+    }
+    res.status(204).end();
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
 
 module.exports = {
   createSession,
@@ -78,4 +90,5 @@ module.exports = {
   updateSession,
   deleteSession,
   deleteSessionByClassId,
+  deleteSessionBySubjectId,
 };

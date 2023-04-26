@@ -50,6 +50,7 @@ async function updateClassModel(req, res) {
 async function deleteClassModel(req, res) {
   try {
     const result = await ClassModel.delete(req.params.id);
+    console.log(result)
     if (!result) {
       return res.status(404).json({ message: "Class not found" });
     }

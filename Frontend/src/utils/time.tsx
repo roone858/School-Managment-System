@@ -20,3 +20,5 @@ export function getOnlyDate(date: string) {
 
   return date.slice(0,index)
 }
+
+export   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"];

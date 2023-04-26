@@ -92,6 +92,18 @@ class Teaching {
       conn.release();
     }
   }
+  static async deleteByTeacherId(id) {
+    const conn = await client.connect();
+    try {
+      const teachResult = await conn.query(
+        "DELETE FROM teaching WHERE teacher_id = $1",
+        [id]
+      );
+      return teachResult.rowCount > 0;
+    } finally {
+      conn.release();
+    }
+  }
 }
 
 module.exports = Teaching;

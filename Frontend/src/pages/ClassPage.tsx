@@ -22,10 +22,16 @@ export const ClassPage = () => {
       confirmButtonText: "Yes, delete !",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const session = SessionService.deleteSessionByClassID(id);
-        const response = await ClassService.deleteClass(id);
-        dispatch(deleteClass(id));
-        Swal.fire(" Deleted!", "Class deleted", "success");
+        const sessionResponse = await SessionService.deleteSessionByClassID(id);
+        const classResponse = await ClassService.deleteClass(id);
+      
+        if (classResponse.ok ) {
+          dispatch(deleteClass(id));
+          Swal.fire(" Deleted!", "Class deleted", "success");
+        }
+       else{
+        Swal.fire("Can't Deleted!", "There is err check api ", "error");
+       }
       }
     });
   };

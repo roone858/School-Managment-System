@@ -290,8 +290,8 @@ CREATE TABLE timetable (
 
 CREATE TABLE class_session (
   id SERIAL PRIMARY KEY,
-  start_time TIMESTAMP NOT NULL,
-  end_time TIMESTAMP NOT NULL,
+  start_time TIME NOT NULL,
+  end_time TIME NOT NULL,
   subject_id INT NOT NULL ,
   class_id INT  NOT NULL,
   day VARCHAR(255) NOT NULL,

@@ -60,6 +60,19 @@ async function deleteTeaching(req, res) {
     res.status(500).json({ message: "Internal Server Error" });
   }
 }
+async function deleteTeachingByTeacherID(req, res) {
+  try {
+    const result = await Teaching.deleteByTeacherId(req.params.id);
+    if (!result) {
+      return res.status(404).json({ message: "Teaching not found" });
+    }
+    res.status(204).end();
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
+
 
 module.exports = {
   createTeaching,

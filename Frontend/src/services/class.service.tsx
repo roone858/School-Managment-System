@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import { getTokenFromCookie } from "../utils/cookies";
 
 class ClassService {
@@ -42,7 +43,7 @@ class ClassService {
       console.log("error", error);
     }
   }
-  static async updateClass(id:any,data: any) {
+  static async updateClass(id: any, data: any) {
     try {
       const response = await fetch(`http://localhost:4000/api/class/${id}`, {
         method: "PUT",
@@ -64,10 +65,10 @@ class ClassService {
     }
   }
   static async deleteClass(id: string) {
-    fetch(`http://localhost:4000/api/class/${id}`, {
+    return fetch(`http://localhost:4000/api/class/${id}`, {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },
-    });
+    }).then((result) => result);
   }
 }
 export default ClassService;

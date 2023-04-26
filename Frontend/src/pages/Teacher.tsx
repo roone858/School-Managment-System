@@ -6,6 +6,7 @@ import { Teacher } from "../types/type";
 import Swal from "sweetalert2";
 import TeacherService from "../services/teacher.service";
 import { deleteTeacher } from "../redux/slice/teacher-slice";
+import TeachingService from "../services/teaching.service";
 
 export const Teachers = () => {
   const dispatch = useDispatch();
@@ -22,9 +23,10 @@ export const Teachers = () => {
       confirmButtonText: "Yes, delete !",
     }).then(async (result) => {
       if (result.isConfirmed) {
+        await TeachingService.deleteTeaching(id)
         const response = await TeacherService.deleteTeacher(id);
         dispatch(deleteTeacher(id));
-        Swal.fire(" Deleted!", "student deleted", "success");
+        Swal.fire(" Deleted!", "Teacher deleted", "success");
       }
     });
   };
