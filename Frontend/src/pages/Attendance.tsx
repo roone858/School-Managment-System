@@ -18,7 +18,7 @@ const AttendanceCm = () => {
   const dispatch = useDispatch();
   const [classId, seClassId] = useState();
   const [subjectId, setSubjectId] = useState();
-  const [chosenSessionID, setChosenSessionID] = useState();
+  const [chosenSessionID, setChosenSessionID] = useState(0 as number);
   const attendance = useSelector((state: any) => state.attendance);
 
   const handleApply = () => {

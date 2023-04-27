@@ -4,8 +4,8 @@ VALUES
      ('1-A', 1),
      ('1-B', 1),
      ('1-C', 1),
-     ('1-D', 1),
-     ('1-F', 1);
+     ('2-A', 1),
+     ('2-B', 1);
 
 INSERT INTO
      student (
@@ -66,6 +66,156 @@ VALUES
           'F',
           '012222224',
           '1-1-1995',
+          'Assiut-Egypt',
+          5
+     ),
+     (
+          'Mahmoud',
+          'Ali',
+          'AboAli@gmail.com',
+          'M',
+          '01540192415',
+          '1-1-2000',
+          'Assiut-Egypt',
+          1
+     ),
+     (
+          'Sayed',
+          'Mansour',
+          'Sayed@gmail.com',
+          'M',
+          '01000192333',
+          '1-5-2001',
+          'Cairo-Egypt',
+          2
+     ),
+     (
+          'Osama',
+          'Mohamed',
+          'ahmed@gmail.com',
+          'M',
+          '01240222414',
+          '1-6-1992',
+          'Aswan-Egypt',
+          3
+     ),
+     (
+          'Ziad',
+          'Abd Elrahman',
+          'Mariam@gmail.com',
+          'M',
+          '0155192414',
+          '1-1-1990',
+          'Assiut-Egypt',
+          4
+     ),
+     (
+          'Youssef',
+          'Mohamed',
+          'youssef@gmail.com',
+          'M',
+          '011111111',
+          '1-1-2002',
+          'Assiut-Egypt',
+          5
+     ),
+     (
+          'Aya',
+          'Ali',
+          'aya@gmail.com',
+          'F',
+          '01140192414',
+          '1-1-2001',
+          'Assiut-Egypt',
+          1
+     ),
+     (
+          'Hamdy',
+          'Rashad',
+          'Hamdy@gmail.com',
+          'M',
+          '01000192414',
+          '1-1-2000',
+          'Cairo-Egypt',
+          2
+     ),
+     (
+          'Walid',
+          'Mostafa',
+          'Walid@gmail.com',
+          'M',
+          '01140192414',
+          '1-1-1989',
+          'Aswan-Egypt',
+          3
+     ),
+     (
+          'Hany',
+          'Ezz',
+          'Hany@gmail.com',
+          'M',
+          '0155192414',
+          '1-1-1998',
+          'Assiut-Egypt',
+          4
+     ),
+     (
+          'Ibrahim',
+          'Ammer',
+          'Ibrahim@gmail.com',
+          'M',
+          '012222224',
+          '1-4-2000',
+          'Assiut-Egypt',
+          5
+     ),
+     (
+          'Momen',
+          'Adel',
+          'Momen@gmail.com',
+          'M',
+          '01140192412',
+          '1-9-2000',
+          'Assiut-Egypt',
+          1
+     ),
+     (
+          'Nasser',
+          'Makady',
+          'Nasser@gmail.com',
+          'M',
+          '012440192344',
+          '1-5-2001',
+          'Cairo-Egypt',
+          2
+     ),
+     (
+          'Sabreen',
+          'Talat',
+          'Sabreen@gmail.com',
+          'F',
+          '01240222414',
+          '1-7-2000',
+          'Aswan-Egypt',
+          3
+     ),
+     (
+          'Ziad',
+          'Salah',
+          'Salah@gmail.com',
+          'M',
+          '0155192414',
+          '1-1-1990',
+          'Assiut-Egypt',
+          4
+     ),
+     (
+          'Merfat',
+          'Mahmoud',
+          'Merfat@gmail.com',
+          'F',
+          '01222222',
+          '1-1-2002',
           'Assiut-Egypt',
           5
      );
@@ -167,39 +317,39 @@ VALUES
           '2024-01-27',
           1,
           1,
+          1
+     ),
+     (
+          'Semester 1',
+          '2023-09-27',
+          '2024-01-27',
+          2,
+          2,
+          1
+     ),
+     (
+          'Semester 1',
+          '2023-09-27',
+          '2024-01-27',
+          3,
+          3,
+          1
+     ),
+     (
+          'Semester 1',
+          '2023-09-27',
+          '2024-01-27',
+          4,
+          4,
           2
      ),
      (
           'Semester 1',
           '2023-09-27',
           '2024-01-27',
-          2,
-          2,
-          3
-     ),
-     (
-          'Semester 1',
-          '2023-09-27',
-          '2024-01-27',
-          3,
-          3,
-          4
-     ),
-     (
-          'Semester 1',
-          '2023-09-27',
-          '2024-01-27',
-          4,
-          4,
-          5
-     ),
-     (
-          'Semester 1',
-          '2023-09-27',
-          '2024-01-27',
           5,
           5,
-          6
+          2
      );
 
 INSERT INTO
@@ -214,7 +364,7 @@ Values
      (
           '09:00:00',
           '10:00:00',
-          2,
+          1,
           1,
           'Sunday'
      ),
@@ -242,6 +392,41 @@ Values
      (
           '14:00:00',
           '15:00:00',
+          5,
+          5,
+          'Thursday'
+     ),
+     (
+          '10:00:00',
+          '11:00:00',
+          1,
+          1,
+          'Sunday'
+     ),
+     (
+          '12:00:00',
+          '13:00:00',
+          2,
+          2,
+          'Monday'
+     ),
+     (
+          '13:00:00',
+          '14:00:00',
+          3,
+          3,
+          'Tuesday'
+     ),
+     (
+          '14:00:00',
+          '15:00:00',
+          4,
+          4,
+          'Wednesday'
+     ),
+     (
+          '15:00:00',
+          '16:00:00',
           5,
           5,
           'Thursday'

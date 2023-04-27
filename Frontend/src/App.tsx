@@ -11,7 +11,7 @@ import { Students } from "./pages/Student";
 import { Teachers } from "./pages/Teacher";
 import { useDispatch, useSelector } from "react-redux";
 import Details from "./Components/Details";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { addStudent, fetchStudents } from "./redux/slice/student-slice";
 import StudentService from "./services/student.service";
 import SubjectService from "./services/subject.service";
@@ -63,6 +63,11 @@ function App() {
     return <SignInSide />;
   }
 
+  const[searchValue,setSearchValue]=useState("")
+
+  const changeHandler = (e:any) => {
+    setSearchValue(e.target.value)
+    };
   useEffect(() => {
     let isDone = false;
     
@@ -71,7 +76,7 @@ function App() {
     dispatch(fetchSubjects())
     dispatch(fetchTeaching())
     dispatch(fetchClasses())
-    // dispatch(fetchAttendance())
+    //dispatch(fetchAttendance())
     dispatch(fetchSessions())
     // dispatch(fetchTimetables())
     // StudentService.getStudents().then((result: Student[]) => {
@@ -113,7 +118,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Sidebar />
+        <Sidebar onChange={changeHandler} />
 
         <NavBar />
         <div className="home-section bg-eee">

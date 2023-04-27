@@ -35,14 +35,11 @@ background-color: #ddd;
   padding: 1rem;
 }
 
-.home-section .text {
-  display: inline-block;
-  color: #11101d;
-  font-size: 25px;
-  font-weight: 500;
-  margin: 18px;
-}
+
 
 .MuiButtonBase-root{
   background-color: #11101d;
+}
+body{
+  font-size: 0.9rem;
 }

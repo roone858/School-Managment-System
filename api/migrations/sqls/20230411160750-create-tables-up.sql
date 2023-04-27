@@ -62,12 +62,12 @@ CREATE TABLE class_session (
 
 CREATE TABLE attendance (
   id SERIAL PRIMARY KEY,
-  class_session_id INT NOT NULL,
+  class_session_id INT ,
   student_id INT NOT NULL,
-  subject_id INT NOT NULL,
+  subject_id INT ,
   date DATE NOT NULL,
   status VARCHAR(7) NOT NULL,
-  FOREIGN KEY (subject_id) REFERENCES subject(id) ,
+  FOREIGN KEY (subject_id) REFERENCES subject(id) ON DELETE SET NULL ,
   FOREIGN KEY (class_session_id) REFERENCES class_session(id) ON DELETE SET NULL,
-  FOREIGN KEY (student_id) REFERENCES student(id)
+  FOREIGN KEY (student_id) REFERENCES student(id) ON DELETE SET NULL
 );

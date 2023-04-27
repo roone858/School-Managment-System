@@ -5,7 +5,7 @@ import ProfileDetails from "../Components/sidebarComponents/ProfileDetails";
 import Search from "../Components/sidebarComponents/Search";
 
 // import logo from"../../public/school-svgrepo-com.svg"
-export default function Sidebar(params: any) {
+export default function Sidebar(props: any) {
   const listItems = [
     { name: "Dashboard", icon: "bx-grid-alt",link:"/dashboard" },
     { name: "Student", icon: "bx-user" ,link:"/students"},
@@ -22,6 +22,8 @@ export default function Sidebar(params: any) {
   const toggleHandler = () => {
     isActive ? setActive(false) : setActive(true);
   };
+
+
   return (
     <>
       <div className={isActive ? "sidebar open" : "sidebar"}>
@@ -32,7 +34,7 @@ export default function Sidebar(params: any) {
           <i className="bx bx-menu" onClick={toggleHandler} id="btn"></i>
         </div>
         <ul className="sidebar-list">
-          <Search onClick={toggleHandler} />
+          <Search onChange={props.onChange}  onClick={toggleHandler} />
           <ListElements items={listItems} />
           <ProfileDetails />
         </ul>
