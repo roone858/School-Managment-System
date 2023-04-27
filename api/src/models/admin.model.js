@@ -1,5 +1,7 @@
 const client = require("../db");
 const bcrypt = require("bcrypt");
+require("dotenv").config()
+
 
 // Define the model for the "admin" table
 class AdminMethods {
@@ -43,7 +45,7 @@ class AdminMethods {
 
       const salt = bcrypt.genSaltSync(Number(process.env.saltRounds));
       const hash = bcrypt.hashSync(
-        process.env.PASSWORD_HASH_KEY + password,
+        password + process.env.PASSWORD_HASH_KEY,
         salt
       );
 
@@ -76,11 +78,16 @@ class AdminMethods {
     const conn = await client.connect();
     try {
       const { oldPassword, newPassword } = data;
-      const { password } = await this.getByUsername(username);
-      if (oldPassword == password) {
+      const admin = await this.getByUsername(username);
+      const isPasswordValid = bcrypt.compareSync(
+       oldPassword +   process.env.PASSWORD_HASH_KEY ,
+        admin.password
+      );
+      if (isPasswordValid) {
+        const hash = bcrypt.hashSync(   newPassword + process.env.PASSWORD_HASH_KEY,Number(process.env.saltRounds))
         const result = await conn.query(
           "UPDATE admin SET password = $1  WHERE username = $2 RETURNING *",
-          [newPassword, username]
+          [hash, username]
         );
         return result.rows[0];
       }

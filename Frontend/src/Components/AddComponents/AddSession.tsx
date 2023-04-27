@@ -7,6 +7,11 @@ import { useNavigate } from "react-router-dom";
 import { days } from "../../utils/time";
 import SessionService from "../../services/session.service";
 import { addSession } from "../../redux/slice/session-slice ";
+import {
+  checkSessionDay,
+  checkSessionTime,
+} from "../../utils/checkSessionTime";
+import Swal from "sweetalert2";
 
 const AddSession = () => {
   const dispatch = useDispatch();
@@ -15,14 +20,27 @@ const AddSession = () => {
   const teachers = useSelector((state: any) => state.teachers);
   const classes = useSelector((state: any) => state.classes);
   const subjects = useSelector((state: any) => state.subjects);
+  const sessions = useSelector((state: any) => state.sessions);
   const updateData = (e: any) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    SessionService.insertSession(data).then((result) => {
-      dispatch(addSession(result));
-    });
+
+    const isFound = checkSessionTime(
+      sessions,
+      data.start_time,
+      data.day,
+      data.class_id
+    );
+    if (!isFound) {
+      Swal.fire(" Cant  Add!", "The time period already exists", "error");
+    } else {
+      SessionService.insertSession(data).then((result) => {
+        dispatch(addSession(result));
+      });
+      Swal.fire(" Added!", "The Session has been added", "success");
+    }
   };
   return (
     <div className="add-form">

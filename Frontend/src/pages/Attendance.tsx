@@ -48,6 +48,7 @@ const AttendanceCm = () => {
               name="subject"
               onChange={(e: any) => {
                 setSubjectId(e.target.value);
+                setChosenSessionID(0)
               }}
             >
               <option>Default select</option>
@@ -65,6 +66,8 @@ const AttendanceCm = () => {
               name="student"
               onChange={(e: any) => {
                 seClassId(e.target.value);
+                setChosenSessionID(0)
+
               }}
             >
               <option>Default select</option>
