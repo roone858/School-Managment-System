@@ -11,6 +11,11 @@ export function currentDay() {
   var a = new Date();
   return weekdays[a.getDay()];
 }
+
+export function currentHours() {
+  var a = new Date();
+  return a.getHours();
+}
 export function getDayFromDate(date: any) {
   const d = new Date(date);
   return weekdays[d.getDay()];

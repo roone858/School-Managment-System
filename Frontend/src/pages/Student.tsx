@@ -85,7 +85,7 @@ export const Students = () => {
   };
   const GetStudentByName = () => {
     const studentFilter = students.filter((student: any) =>
-      (student.first_name + " " + student.last_name).includes(
+      (student.first_name + " " + student.last_name).toLowerCase().includes(
         String(studentName)
       )
     );
