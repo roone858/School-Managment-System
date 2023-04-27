@@ -8,6 +8,7 @@ import { deleteStudent } from "../redux/slice/student-slice";
 import { Student } from "../types/type";
 import Swal from "sweetalert2";
 import image from "../assets/dash-icon-01.svg";
+import StudentAvatar from "../assets/Student avatar.png";
 import { useState } from "react";
 import { Input } from "../Components/Input";
 export const Students = () => {
@@ -84,7 +85,9 @@ export const Students = () => {
   };
   const GetStudentByName = () => {
     const studentFilter = students.filter((student: any) =>
-      (student.first_name + " " + student.last_name).includes(studentName)
+      (student.first_name + " " + student.last_name).includes(
+        String(studentName)
+      )
     );
     return studentFilter.map(
       (student: Student) =>
@@ -200,8 +203,11 @@ export const Students = () => {
         <tr className="bg-fff" key={student.id}>
           <th scope="row">{student.id}</th>
           <td>
+           
+            <img src={StudentAvatar} style={{  height: "30px" }} />
+          </td>
+          <td>
             {" "}
-            <img src={image} style={{ width: "10%" }} />
             {student.first_name + " " + student.last_name}
           </td>
           <td>{student.dob.slice(0, 10)}</td>
@@ -268,7 +274,7 @@ export const Students = () => {
                 setClassId(e.target.value);
               }}
             >
-              <option>Search By Class</option>
+              <option value={undefined}>Search By Class</option>
               {classes.map((cla: any) => (
                 <option key={cla.id} value={cla.id}>
                   {cla.name}
@@ -278,12 +284,19 @@ export const Students = () => {
           </div>
         </div>
       </form>
-     
+
       <div className="students">
         <AddButton />
-        <Outlet />
         <Table
-          columns={["ID ", "Name", "DOP", "Address", "Class", "Actions"]}
+          columns={[
+            "ID ",
+            "Photo",
+            "Name",
+            "DOP",
+            "Address",
+            "Class",
+            "Actions",
+          ]}
           rows={studentRaws}
         />
       </div>

@@ -1,22 +1,26 @@
 const jwt = require("jsonwebtoken");
 const { AdminMethods } = require("../models/admin.model.js");
+const { checkPassword } = require("./checkPassword.js");
+const bcrypt = require("bcrypt");
 
 require("dotenv").config();
 
-
 const store = new AdminMethods();
 
- const login = async (req, res) => {
+const login = async (req, res) => {
   try {
     const { username, password } = req.body;
 
     if (username == undefined || password == undefined)
       return res.json({ message: "missing username or password" });
-
     const admin = await store.getByUsername(username);
-    if (admin.password == password && admin.username == username) {
-      const token = jwt.sign(admin, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: "1d",
+    const isPasswordValid = bcrypt.compareSync(
+      process.env.PASSWORD_HASH_KEY + password,
+      admin.password
+    );
+    if (isPasswordValid) {
+      const token = jwt.sign({admin :admin.username}, process.env.ACCESS_TOKEN_SECRET, {
+        expiresIn: "7d",
       });
       //  const refreshToken = jwt.sign(
       //    { username: admin.username },
@@ -29,7 +33,14 @@ const store = new AdminMethods();
       //    secure: true,
       //    maxAge: 24 * 60 * 60 * 1000,
       //  });
-      return res.json({ token ,admin});
+      return res.json({
+        token: token,
+        admin: {
+          username: admin.username,
+          first_name: admin.first_name,
+          last_name: admin.last_name,
+        },
+      });
     }
 
     res.status(401).json({ message: "incorrect username or password" });
@@ -61,4 +72,4 @@ const refresh = async (req, res) => {
   }
 };
 
-module.exports={login}
+module.exports = { login };

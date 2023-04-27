@@ -1,4 +1,5 @@
 const client = require("../db");
+const bcrypt = require("bcrypt");
 
 // Define the model for the "admin" table
 class AdminMethods {
@@ -38,10 +39,17 @@ class AdminMethods {
   async create(data) {
     const conn = await client.connect();
     try {
-      const { first_name, last_name, email, userName, password } = data;
+      const { first_name, last_name, email, username, password } = data;
+
+      const salt = bcrypt.genSaltSync(Number(process.env.saltRounds));
+      const hash = bcrypt.hashSync(
+        process.env.PASSWORD_HASH_KEY + password,
+        salt
+      );
+
       const result = await conn.query(
-        "INSERT INTO admin ( first_name , last_name , userName , email , password) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-        [first_name, last_name, userName, email, password]
+        "INSERT INTO admin ( first_name , last_name , username , email , password) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+        [first_name, last_name, username, email, hash]
       );
       return result.rows[0];
     } finally {

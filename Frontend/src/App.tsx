@@ -55,29 +55,30 @@ import UpdateClass from "./Components/UpdateComponents/UpdateClass";
 import UpdateTeacher from "./Components/UpdateComponents/UpdateTeacher";
 import UpdateSubject from "./Components/UpdateComponents/UpdateSubject";
 import AddSession from "./Components/AddComponents/AddSession";
+import SignIn from "./pages/SignIn";
 function App() {
   const dispatch = useDispatch();
 
   const token = getTokenFromCookie();
   if (!token) {
-    return <SignInSide />;
+    return <SignIn/>;
   }
 
-  const[searchValue,setSearchValue]=useState("")
+  const [searchValue, setSearchValue] = useState("");
 
-  const changeHandler = (e:any) => {
-    setSearchValue(e.target.value)
-    };
+  const changeHandler = (e: any) => {
+    setSearchValue(e.target.value);
+  };
   useEffect(() => {
     let isDone = false;
-    
-    dispatch(fetchStudents())
-    dispatch(fetchTeachers())
-    dispatch(fetchSubjects())
-    dispatch(fetchTeaching())
-    dispatch(fetchClasses())
+
+    dispatch(fetchStudents());
+    dispatch(fetchTeachers());
+    dispatch(fetchSubjects());
+    dispatch(fetchTeaching());
+    dispatch(fetchClasses());
     //dispatch(fetchAttendance())
-    dispatch(fetchSessions())
+    dispatch(fetchSessions());
     // dispatch(fetchTimetables())
     // StudentService.getStudents().then((result: Student[]) => {
     //   if (!isDone)
@@ -108,7 +109,6 @@ function App() {
     // SessionService.getAllSession().then((result) => {
     //   if (!isDone) result?.map((s: any) => dispatch(addSession(s)));
     // });
-    
 
     return () => {
       isDone = true;
@@ -129,18 +129,17 @@ function App() {
             <Route path="students/update/:id" element={<UpdateStudent />} />
             <Route path="/students" element={<Students />}>
               <Route path="add" element={<AddStudent entity="student" />} />
-
-              <Route
-                path=":id"
-                element={
-                  <Details
-                    array={useSelector((state: State) => state.students)}
-                  />
-                }
-              />
             </Route>
+            <Route
+              path="/students/:id"
+              element={
+                <Details
+                  array={useSelector((state: State) => state.students)}
+                />
+              }
+            />
             <Route path="/teachers" element={<Teachers />}>
-              <Route path="add" element={<AddTeacher  />} />
+              <Route path="add" element={<AddTeacher />} />
               <Route path="update/:id" element={<UpdateTeacher />} />
               <Route
                 path=":id"
@@ -156,7 +155,7 @@ function App() {
             </Route>
             <Route path="subjects/update/:id" element={<UpdateSubject />} />
             <Route path="/timetable" element={<Timetable />}>
-            <Route path="add" element={<AddSession />} />
+              <Route path="add" element={<AddSession />} />
             </Route>
             <Route path="/classes" element={<ClassPage />}></Route>
             <Route path="/classes/add" element={<AddClass />}></Route>

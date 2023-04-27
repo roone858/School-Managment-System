@@ -38,6 +38,7 @@ async function getAdminByUsername(req, res) {
 }
 async function createAdmin(req, res) {
   try {
+    
     const admin = await db.create(req.body);
     res.status(201).json(admin);
   } catch (error) {

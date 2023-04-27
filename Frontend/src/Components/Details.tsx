@@ -1,11 +1,11 @@
 import "../style/details.css";
 import avatar from "../assets/avatar.png";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Details = (props: any) => {
   const params = useParams();
-  const arr =props.array
+  const arr = props.array;
 
   const obj = arr.filter((s: any) => s.id == params.id)[0];
 
@@ -47,12 +47,24 @@ const Details = (props: any) => {
               </li>
             </ul>
             <div className="card-body">
-              <a href="#!" className="card-link">
-                Card link
-              </a>
-              <a href="#!" className="card-link">
-                Another link
-              </a>
+          
+            <Link
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
+              to={`/students/` + "update/" +  params.id}
+              type="button"
+              className="btn btn-success  "
+            >
+              Update
+            </Link>
+            <button
+              // onClick={() => handleDelete(student.id)}
+              type="button"
+              className="btn  btn-danger mx-2 "
+            >
+              Delete
+            </button>
             </div>
           </div>
         </>

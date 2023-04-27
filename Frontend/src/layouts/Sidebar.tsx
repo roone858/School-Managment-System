@@ -34,7 +34,6 @@ export default function Sidebar(props: any) {
           <i className="bx bx-menu" onClick={toggleHandler} id="btn"></i>
         </div>
         <ul className="sidebar-list">
-          <Search onChange={props.onChange}  onClick={toggleHandler} />
           <ListElements items={listItems} />
           <ProfileDetails />
         </ul>
