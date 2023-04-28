@@ -26,7 +26,7 @@ export const AddSubject = () => {
 
   };
   return (
-    <div className="add-form">
+    <div className="add-form bg-white">
       <h1>Add new Subject</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-row d-flex gap-2 ">

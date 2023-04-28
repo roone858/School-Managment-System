@@ -263,32 +263,46 @@ export const Students = () => {
           Add new Student
         </Link>
         <Outlet/>
-        <form className=" d-flex ">
+        <form className=" d-flex mt-4 ">
           <div className="form-row d-flex  col-8 gap-2">
-            <Input
-              onChange={(e: any) => {
-                setStudentId(e.target.value);
-              }}
+         
+           <div className={"form-group col-sm-12  col-lg-5  col-xl-3  "}>
+            <input
+                onChange={(e: any) => {
+               
+                  setStudentId(e.target.value);
+                }}
+              name="first_name"
               type="text"
-              placeholder="Search By ID ..."
+              className="form-control p-3"
+              id="first-name"
+              placeholder="Search By ID..."
+              required
             />
-            <Input
-              onChange={(e: any) => {
-                setStudentName(e.target.value);
+          </div>
+          <div className={"form-group col-sm-12  col-lg-5  col-xl-3  "}>
+            <input
+               onChange={(e: any) => {
+                setStudentName(e.target.value)
               }}
+              name="last_name"
               type="text"
-              placeholder="Search By Name ..."
+              className="form-control p-3"
+              id="last-name"
+              placeholder="Search By Name..."
+              required
             />
+          </div>
             <div className="form-group  col-5">
-              <label></label>
               <select
-                className="form-control"
+               style={{color:"#7c7c7c"}}
+                className="form-control p-3"
                 name="class_id"
                 onChange={(e: any) => {
                   setClassId(e.target.value);
                 }}
               >
-                <option value={undefined}>Search By Class</option>
+                <option  value={undefined}>Search By Class</option>
                 {classes.map((cla: any) => (
                   <option key={cla.id} value={cla.id}>
                     {cla.name}

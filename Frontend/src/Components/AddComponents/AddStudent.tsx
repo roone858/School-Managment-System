@@ -44,55 +44,69 @@ const AddStudent = (props: any) => {
   };
 
   return (
-    <div className="add-form">
-      <h1>Add new Student</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="form-row d-flex gap-2 ">
-          <Input
-            name="first_name"
-            onChange={updateData}
-            text="First Name"
-            placeholder="First Name"
-            type="text"
-            id="inputfirst_name4"
-          />
-          <Input
-            name="last_name"
-            onChange={updateData}
-            text="Last Name"
-            placeholder="Last Name"
-            type="text"
-            id="inputlast_name4"
-          />
-        </div>
-        <div className="form-row d-flex gap-2">
-          <Input
-            name="email"
-            onChange={updateData}
-            text="Email"
-            placeholder="Email"
-            type="email"
-            id="inputEmail4"
-          />
-          <Input
-            name="dob"
-            onChange={updateData}
-            text="Date of Birth"
-            type="date"
-            id="inputBirth4"
-          />
-        </div>
-        <div className="form-row d-flex gap-2">
-          <Input
-            name="phone"
-            onChange={updateData}
-            text="Phone"
-            type="text"
-            id="inputPhone"
-            placeholder="Phone"
-          />
-
-          <div className="form-row col-6 ">
+    <div className="add-form container rounded-2 bg-white mt-4 px-4 py-5">
+      <form  onSubmit={handleSubmit}>
+        <div className="d-flex justify-content-around flex-wrap gap-2 ">
+          <div className={"form-group col-sm-12  col-lg-5  col-xl-3  "}>
+            <label htmlFor="first-name">First Name</label>
+            <input
+              onChange={updateData}
+              name="first_name"
+              type="text"
+              className="form-control"
+              id="first-name"
+              placeholder="First Name"
+              required
+            />
+          </div>
+          <div className={"form-group col-sm-12  col-lg-5  col-xl-3  "}>
+            <label htmlFor="last-name">Last Name</label>
+            <input
+              onChange={updateData}
+              name="last_name"
+              type="text"
+              className="form-control"
+              id="last-name"
+              placeholder="Last Name"
+              required
+            />
+          </div>
+          <div className={"form-group col-sm-12  col-lg-5  col-xl-3  "}>
+            <label htmlFor="email">Email</label>
+            <input
+              onChange={updateData}
+              name="email"
+              type="email"
+              className="form-control"
+              id="email"
+              placeholder="Email"
+              required
+            />
+          </div>
+          <div className={"form-group col-sm-12  col-lg-5  col-xl-3  "}>
+            <label htmlFor="phone">Phone</label>
+            <input
+              onChange={updateData}
+              name="phone"
+              type="phone"
+              className="form-control"
+              id="phone"
+              placeholder="phone"
+              required
+            />
+          </div>
+          <div className={"form-group col-sm-12  col-lg-5  col-xl-3  "}>
+            <label htmlFor="dob">DOB</label>
+            <input
+              onChange={updateData}
+              name="dob"
+              type="date"
+              className="form-control"
+              id="dob"
+              required
+            />
+          </div>
+          <div className="form-group col-sm-12  col-lg-5  col-xl-3   ">
             <label htmlFor="inputGender4">Gender</label>
             <br />
             <select
@@ -107,17 +121,7 @@ const AddStudent = (props: any) => {
               <option value="F">Female</option>
             </select>
           </div>
-        </div>
-        <div className="form-row d-flex gap-2">
-          <Input
-            name="address"
-            onChange={updateData}
-            text="Address"
-            type="text"
-            id="inputAddress"
-            placeholder="1234 Main St"
-          />
-          <div className="form-row col-6 ">
+          <div className="form-group col-sm-12  col-lg-5  col-xl-3   ">
             <label htmlFor="inputGender4">Class</label>
             <br />
             <select
@@ -135,11 +139,26 @@ const AddStudent = (props: any) => {
               ))}
             </select>
           </div>
+          <div className={"form-group col-sm-12  col-lg-5  col-xl-3  "}>
+            <label htmlFor="address">Address</label>
+            <input
+              onChange={updateData}
+              name="address"
+              type="address"
+              className="form-control"
+              id="address"
+              placeholder=" 25 STR- Manflout - Assiut"
+              required
+            />
+          </div>
+          <div className="form-group col-sm-12 mt-4 col-lg-5  col-xl-3 ">
+        
+
+          <button type="submit" className="btn btn-primary form-control">
+            Create
+          </button>
+          </div>
         </div>
-        <div className="form-group"></div>
-        <button type="submit" className="btn btn-primary">
-          Create
-        </button>
       </form>
     </div>
   );
