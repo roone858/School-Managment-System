@@ -9,10 +9,13 @@ import { deleteTeacher } from "../redux/slice/teacher-slice";
 import TeachingService from "../services/teaching.service";
 import { Input } from "../Components/Input";
 import teacherAvatar from "../assets/teacherAvatar.jpg";
+import { useState } from "react";
+import AddTeacher from "../Components/AddComponents/AddTeacher";
 
 export const Teachers = () => {
   const dispatch = useDispatch();
   const teachers = useSelector((state: any) => state.teachers);
+  const [isAddOpen, setIsAddOpen] = useState(false);
 
   const handleDelete = (id: any) => {
     Swal.fire({
@@ -74,10 +77,12 @@ export const Teachers = () => {
   return (
     <><div className="teachers-sections container">
       
-       <Link className="btn btn-primary " to={"add"}>
+       <button    onClick={() => {
+            setIsAddOpen(!isAddOpen);
+          }} className="btn btn-primary " >
           Add new Teacher
-        </Link>
-        <Outlet/>
+        </button>
+       {isAddOpen && <AddTeacher/>}
         <form className=" d-flex ">
           <div className="form-row d-flex  col-8 gap-2">
             <Input

@@ -12,6 +12,7 @@ import maleAvatar from "../assets/maleAvatar.png";
 import femaleAvatar from "../assets/femaleAvatar.png";
 import { useState } from "react";
 import { Input } from "../Components/Input";
+import AddStudent from "../Components/AddComponents/AddStudent";
 export const Students = () => {
   const students = useSelector((state: any) => state.students);
   const classes = useSelector((state: any) => state.classes);
@@ -19,6 +20,7 @@ export const Students = () => {
   const [studentId, setStudentId] = useState();
   const [studentName, setStudentName] = useState();
   const dispatch = useDispatch();
+  const [isAddOpen, setIsAddOpen] = useState(false);
   const handleDelete = (id: any) => {
     Swal.fire({
       title: "Are you sure?",
@@ -41,72 +43,14 @@ export const Students = () => {
     return (
       student && (
         <tr className="bg-fff" key={student.id}>
-        <th scope="row">{student.id}</th>
-        <td>
-         
-          <img src={student.gender=="M"?maleAvatar:femaleAvatar} style={{  height: "30px" }} />
-        </td>
-        <td>
-          {" "}
-          {student.first_name + " " + student.last_name}
-        </td>
-        <td>{student.dob.slice(0, 10)}</td>
-        <td>{student.address}</td>
-
-        <td>{classes.find((cl: any) => student.class_id == cl.id)?.name}</td>
-        <td>
-          <Link
-            onClick={() => {
-              window.scrollTo(0, 0);
-            }}
-            to={`/students/` + student.id}
-            type="button"
-            className="btn btn-primary btn-sm "
-          >
-            Details
-          </Link>
-          <Link
-            onClick={() => {
-              window.scrollTo(0, 0);
-            }}
-            to={`/students/` + "update/" + student.id}
-            type="button"
-            className="btn btn-success btn-sm mx-2 "
-          >
-            Update
-          </Link>
-          <button
-            onClick={() => handleDelete(student.id)}
-            type="button"
-            className="btn  btn-danger btn-sm "
-          >
-            Delete
-          </button>
-        </td>
-      </tr>
-    
-      )
-    );
-  };
-  const GetStudentByName = () => {
-    const studentFilter = students.filter((student: any) =>
-      (student.first_name + " " + student.last_name).toLowerCase().includes(
-        String(studentName)
-      )
-    );
-    return studentFilter.map(
-      (student: Student) =>
-        student && (
-          <tr className="bg-fff" key={student.id}>
           <th scope="row">{student.id}</th>
           <td>
-           
-            <img src={student.gender=="M"?maleAvatar:femaleAvatar} style={{  height: "30px" }} />
+            <img
+              src={student.gender == "M" ? maleAvatar : femaleAvatar}
+              style={{ height: "30px" }}
+            />
           </td>
-          <td>
-            {" "}
-            {student.first_name + " " + student.last_name}
-          </td>
+          <td> {student.first_name + " " + student.last_name}</td>
           <td>{student.dob.slice(0, 10)}</td>
           <td>{student.address}</td>
 
@@ -141,7 +85,63 @@ export const Students = () => {
             </button>
           </td>
         </tr>
-      
+      )
+    );
+  };
+  const GetStudentByName = () => {
+    const studentFilter = students.filter((student: any) =>
+      (student.first_name + " " + student.last_name)
+        .toLowerCase()
+        .includes(String(studentName))
+    );
+    return studentFilter.map(
+      (student: Student) =>
+        student && (
+          <tr className="bg-fff" key={student.id}>
+            <th scope="row">{student.id}</th>
+            <td>
+              <img
+                src={student.gender == "M" ? maleAvatar : femaleAvatar}
+                style={{ height: "30px" }}
+              />
+            </td>
+            <td> {student.first_name + " " + student.last_name}</td>
+            <td>{student.dob.slice(0, 10)}</td>
+            <td>{student.address}</td>
+
+            <td>
+              {classes.find((cl: any) => student.class_id == cl.id)?.name}
+            </td>
+            <td>
+              <Link
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                }}
+                to={`/students/` + student.id}
+                type="button"
+                className="btn btn-primary btn-sm "
+              >
+                Details
+              </Link>
+              <Link
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                }}
+                to={`/students/` + "update/" + student.id}
+                type="button"
+                className="btn btn-success btn-sm mx-2 "
+              >
+                Update
+              </Link>
+              <button
+                onClick={() => handleDelete(student.id)}
+                type="button"
+                className="btn  btn-danger btn-sm "
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
         )
     );
   };
@@ -153,50 +153,50 @@ export const Students = () => {
       (student: Student) =>
         student && (
           <tr className="bg-fff" key={student.id}>
-          <th scope="row">{student.id}</th>
-          <td>
-           
-            <img src={student.gender=="M"?maleAvatar:femaleAvatar} style={{  height: "30px" }} />
-          </td>
-          <td>
-            {" "}
-            {student.first_name + " " + student.last_name}
-          </td>
-          <td>{student.dob.slice(0, 10)}</td>
-          <td>{student.address}</td>
+            <th scope="row">{student.id}</th>
+            <td>
+              <img
+                src={student.gender == "M" ? maleAvatar : femaleAvatar}
+                style={{ height: "30px" }}
+              />
+            </td>
+            <td> {student.first_name + " " + student.last_name}</td>
+            <td>{student.dob.slice(0, 10)}</td>
+            <td>{student.address}</td>
 
-          <td>{classes.find((cl: any) => student.class_id == cl.id)?.name}</td>
-          <td>
-            <Link
-              onClick={() => {
-                window.scrollTo(0, 0);
-              }}
-              to={`/students/` + student.id}
-              type="button"
-              className="btn btn-primary btn-sm "
-            >
-              Details
-            </Link>
-            <Link
-              onClick={() => {
-                window.scrollTo(0, 0);
-              }}
-              to={`/students/` + "update/" + student.id}
-              type="button"
-              className="btn btn-success btn-sm mx-2 "
-            >
-              Update
-            </Link>
-            <button
-              onClick={() => handleDelete(student.id)}
-              type="button"
-              className="btn  btn-danger btn-sm "
-            >
-              Delete
-            </button>
-          </td>
-        </tr>
-      
+            <td>
+              {classes.find((cl: any) => student.class_id == cl.id)?.name}
+            </td>
+            <td>
+              <Link
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                }}
+                to={`/students/` + student.id}
+                type="button"
+                className="btn btn-primary btn-sm "
+              >
+                Details
+              </Link>
+              <Link
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                }}
+                to={`/students/` + "update/" + student.id}
+                type="button"
+                className="btn btn-success btn-sm mx-2 "
+              >
+                Update
+              </Link>
+              <button
+                onClick={() => handleDelete(student.id)}
+                type="button"
+                className="btn  btn-danger btn-sm "
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
         )
     );
   };
@@ -212,13 +212,12 @@ export const Students = () => {
         <tr className="bg-fff" key={student.id}>
           <th scope="row">{student.id}</th>
           <td>
-           
-            <img src={student.gender=="M"?maleAvatar:femaleAvatar} style={{  height: "30px" }} />
+            <img
+              src={student.gender == "M" ? maleAvatar : femaleAvatar}
+              style={{ height: "30px" }}
+            />
           </td>
-          <td>
-            {" "}
-            {student.first_name + " " + student.last_name}
-          </td>
+          <td> {student.first_name + " " + student.last_name}</td>
           <td>{student.dob.slice(0, 10)}</td>
           <td>{student.address}</td>
 
@@ -257,52 +256,55 @@ export const Students = () => {
     );
 
   return (
-    <><div className="students-section container">
-      
-       <Link className="btn btn-primary " to={"add"}>
+    <>
+      <div className="students-section container">
+        <button
+          onClick={() => {
+            setIsAddOpen(!isAddOpen);
+          }}
+          className="btn btn-primary "
+        >
           Add new Student
-        </Link>
-        <Outlet/>
+        </button>
+        {isAddOpen && <AddStudent />}
         <form className=" d-flex mt-4 ">
           <div className="form-row d-flex  col-8 gap-2">
-         
-           <div className={"form-group col-sm-12  col-lg-5  col-xl-3  "}>
-            <input
+            <div className={"form-group col-sm-12  col-lg-5  col-xl-3  "}>
+              <input
                 onChange={(e: any) => {
-               
                   setStudentId(e.target.value);
                 }}
-              name="first_name"
-              type="text"
-              className="form-control p-3"
-              id="first-name"
-              placeholder="Search By ID..."
-              required
-            />
-          </div>
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3  "}>
-            <input
-               onChange={(e: any) => {
-                setStudentName(e.target.value)
-              }}
-              name="last_name"
-              type="text"
-              className="form-control p-3"
-              id="last-name"
-              placeholder="Search By Name..."
-              required
-            />
-          </div>
+                name="first_name"
+                type="text"
+                className="form-control p-3"
+                id="first-name"
+                placeholder="Search By ID..."
+                required
+              />
+            </div>
+            <div className={"form-group col-sm-12  col-lg-5  col-xl-3  "}>
+              <input
+                onChange={(e: any) => {
+                  setStudentName(e.target.value);
+                }}
+                name="last_name"
+                type="text"
+                className="form-control p-3"
+                id="last-name"
+                placeholder="Search By Name..."
+                required
+              />
+            </div>
             <div className="form-group  col-5">
               <select
-               style={{color:"#7c7c7c"}}
+                style={{ color: "#7c7c7c" }}
                 className="form-control p-3"
                 name="class_id"
                 onChange={(e: any) => {
                   setClassId(e.target.value);
                 }}
               >
-                <option  value={undefined}>Search By Class</option>
+                <option value={undefined}>Search By Class</option>
                 {classes.map((cla: any) => (
                   <option key={cla.id} value={cla.id}>
                     {cla.name}
@@ -326,7 +328,7 @@ export const Students = () => {
             rows={studentRaws}
           />
         </div>
-    </div>
+      </div>
     </>
   );
 };
