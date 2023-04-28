@@ -70,7 +70,9 @@ export const Teachers = () => {
   ));
   return (
     <div className="teachers">
-      <AddButton />
+     <Link className="btn btn-primary " to={"add"}>
+        Add new Teacher
+      </Link>
       <Outlet />
       <Table
         columns={["ID ", "Name",'DOB', "Address", "Actions"]}

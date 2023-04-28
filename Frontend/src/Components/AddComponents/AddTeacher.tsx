@@ -24,7 +24,7 @@ const AddTeacher = () => {
     TeacherService.insertTeacher(data).then((res: Teacher) => {
       dispatch(addTeacher(res));
       NotificationService.insertNotification({
-        message: `new Teacher added ${res.first_name} }`,
+        message: `new teacher has been added ${res.first_name} ${res.last_name}`,
       }).then((result) => {
         dispatch(addNotification(result));
         dispatch(setRedFlag(true));

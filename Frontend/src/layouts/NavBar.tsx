@@ -50,7 +50,7 @@ const dispatch=useDispatch()
                   : "notification-icon"
               }
             >
-              <StyledBadge
+              <StyledBadge style={{borderRight:"1px solid #ddd"}}
                 onClick={() => {
                   dispatch (setRedFlag(false))
                   NotificationFlag
@@ -61,16 +61,19 @@ const dispatch=useDispatch()
                 anchorOrigin={{ vertical: "top", horizontal: "left" }}
                 variant="dot"
               >
-                 <NotificationsIcon />
+                 <NotificationsIcon style={{marginRight: "1rem"}} />
               </StyledBadge>
                
               
             </div>
           </li>
           <li>
-            <div className="navbar-profile">
+            <div className="navbar-profile ">
               <img src={profileImage} alt="..." />
-              <span className="mx-2">{admin.first_name}</span>
+              <div className="d-flex flex-column ">
+                <span style={{fontSize:"14px"}} className="mx-2  ">{admin.first_name + " " + admin.last_name }</span>
+                <span style={{fontSize:"12px"}} className="mx-2 ">Admin</span>
+              </div>
             </div>
           </li>
         </ul>

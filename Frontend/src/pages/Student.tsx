@@ -258,6 +258,10 @@ export const Students = () => {
 
   return (
     <>
+     <Link className="btn btn-primary " to={"add"}>
+        Add new Student
+      </Link>
+      <Outlet/>
       <form className=" d-flex ">
         <div className="form-row d-flex  col-8 gap-2">
           <Input
@@ -295,7 +299,6 @@ export const Students = () => {
       </form>
 
       <div className="students">
-        <AddButton />
         <Table
           columns={[
             "ID ",

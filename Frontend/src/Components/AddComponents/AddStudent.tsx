@@ -27,7 +27,7 @@ const AddStudent = (props: any) => {
       dispatch(addStudent(res));
 
       NotificationService.insertNotification({
-        message: `new Student added ${res.first_name} `,
+        message: `new student has been added ${res.first_name} ${res.last_name}`,
       }).then((result) => {
         dispatch(addNotification(result));
         dispatch(setRedFlag(true));

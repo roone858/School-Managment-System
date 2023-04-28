@@ -29,7 +29,6 @@
   list-style: none;
   align-items: center;
   margin-bottom: 0rem;
-  margin-right: 2rem;
 }
 
 .navbar-section .nav ul li {
@@ -41,8 +40,8 @@
   align-items: center;
 }
 .navbar-profile img {
-  height: 2rem;
-  margin: 0 0.5rem;
+  height: 2.2rem;
+  
 }
 .page-name {
   text-transform: capitalize;

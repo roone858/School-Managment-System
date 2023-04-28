@@ -19,6 +19,8 @@ td.English {
 td.Art {
   background-color: rgb(255, 0, 183);
   color: rgb(255, 255, 255);
+}td {
+  font-weight: 500;
 }
 .timetable{
   background-color: #fff;

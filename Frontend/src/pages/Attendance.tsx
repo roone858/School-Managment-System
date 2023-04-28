@@ -125,7 +125,6 @@ const AttendanceCm = () => {
                         <div
                           onClick={() => {
                             selectedStudent.push(student.id);
-                            console.log(selectedStudent);
                           }}
                         >
                           <AbsentButton />

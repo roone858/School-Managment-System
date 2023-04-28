@@ -38,7 +38,7 @@ export const Dashboard = () => {
           </div>
         </div>
         <div className="col-md-4 col-6 analyst-card">
-          <i className="bx bx-user"></i>
+          <i className="bx bxs-book"></i>
           <div className="num">
             <span>Subject</span>
             <span> {subjects.length}</span>
