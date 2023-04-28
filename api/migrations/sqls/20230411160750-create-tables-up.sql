@@ -65,7 +65,7 @@ CREATE TABLE attendance (
   class_session_id INT ,
   student_id INT NOT NULL,
   subject_id INT ,
-  date DATE NOT NULL,
+  date Timestamp NOT NULL,
   status VARCHAR(7) NOT NULL,
   FOREIGN KEY (subject_id) REFERENCES subject(id) ON DELETE SET NULL ,
   FOREIGN KEY (class_session_id) REFERENCES class_session(id) ON DELETE SET NULL,

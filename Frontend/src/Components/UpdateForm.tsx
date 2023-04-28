@@ -29,7 +29,7 @@ const UpdateForm = () => {
       confirmButtonText: "Yes, Update !",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await new studentService().updateStudent(id, {
+        const res = await studentService.updateStudent(id, {
           ...data,
           first_name: data.first_name,
           last_name: data.last_name,

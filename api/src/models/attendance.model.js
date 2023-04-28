@@ -46,6 +46,7 @@ const Attendance = {
   update: async (id, data) => {
     const conn = await client.connect();
     try {
+   
       const { student_id, subject_id, class_session_id, date, status } = data;
       const result = await conn.query(
         "UPDATE Attendance SET student_id = $1, subject_id = $2, class_session_id=$3, date=$4, status=$5 WHERE id = $6 RETURNING *",

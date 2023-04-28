@@ -16,6 +16,10 @@ export function currentHours() {
   var a = new Date();
   return a.getHours();
 }
+export function currentDate() {
+  var a = new Date();
+  return a.getUTCFullYear()+"-"+a.getMonth()+"-"+a.getDate();
+}
 export function getDayFromDate(date: any) {
   const d = new Date(date);
   return weekdays[d.getDay()];

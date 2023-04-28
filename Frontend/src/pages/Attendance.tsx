@@ -9,6 +9,7 @@ import {
 import { Attendance, Subject, Student } from "../types/type";
 import { Table } from "../Components/Table";
 import AbsentButton from "../Components/AbsentButton";
+import { currentDate } from "../utils/time";
 const AttendanceCm = () => {
   const subjects = useSelector((state: any) => state.subjects);
   const students = useSelector((state: any) => state.students);
@@ -21,16 +22,18 @@ const AttendanceCm = () => {
   const [chosenSessionID, setChosenSessionID] = useState(0 as number);
   const attendance = useSelector((state: any) => state.attendance);
 
-  const handleApply = () => {
-    [...new Set(selectedStudent)].forEach((id) =>
-      AttendanceService.insertAttendance({
+  const handleApply = async () => {
+ 
+    [...new Set(selectedStudent)].forEach(async (id) => {
+      const attend = await AttendanceService.insertAttendance({
         student_id: id,
         class_session_id: chosenSessionID,
         subject_id: subjectId,
         date: new Date(),
         status: "Absent",
-      })
-    );
+      });
+      dispatch(addAttendance(attend));
+    });
     setChosenSessionID(0);
   };
   const handleChose = async (id: any) => {
@@ -48,7 +51,7 @@ const AttendanceCm = () => {
               name="subject"
               onChange={(e: any) => {
                 setSubjectId(e.target.value);
-                setChosenSessionID(0)
+                setChosenSessionID(0);
               }}
             >
               <option>Default select</option>
@@ -66,8 +69,7 @@ const AttendanceCm = () => {
               name="student"
               onChange={(e: any) => {
                 seClassId(e.target.value);
-                setChosenSessionID(0)
-
+                setChosenSessionID(0);
               }}
             >
               <option>Default select</option>

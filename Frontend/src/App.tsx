@@ -56,12 +56,14 @@ import UpdateTeacher from "./Components/UpdateComponents/UpdateTeacher";
 import UpdateSubject from "./Components/UpdateComponents/UpdateSubject";
 import AddSession from "./Components/AddComponents/AddSession";
 import SignIn from "./pages/SignIn";
+import StudentDetails from "./Components/DetailsComponents/StudentDetails";
+import TeacherDetails from "./Components/DetailsComponents/teacherDetails";
 function App() {
   const dispatch = useDispatch();
 
   const token = getTokenFromCookie();
   if (!token) {
-    return <SignIn/>;
+    return <SignIn />;
   }
 
   const [searchValue, setSearchValue] = useState("");
@@ -77,7 +79,7 @@ function App() {
     dispatch(fetchSubjects());
     dispatch(fetchTeaching());
     dispatch(fetchClasses());
-    //dispatch(fetchAttendance())
+    dispatch(fetchAttendance());
     dispatch(fetchSessions());
     // dispatch(fetchTimetables())
     // StudentService.getStudents().then((result: Student[]) => {
@@ -130,25 +132,11 @@ function App() {
             <Route path="/students" element={<Students />}>
               <Route path="add" element={<AddStudent entity="student" />} />
             </Route>
-            <Route
-              path="/students/:id"
-              element={
-                <Details
-                  array={useSelector((state: State) => state.students)}
-                />
-              }
-            />
+            <Route path="/students/:id" element={<StudentDetails />} />
             <Route path="/teachers" element={<Teachers />}>
               <Route path="add" element={<AddTeacher />} />
               <Route path="update/:id" element={<UpdateTeacher />} />
-              <Route
-                path=":id"
-                element={
-                  <Details
-                    array={useSelector((state: State) => state.teachers)}
-                  />
-                }
-              />
+              <Route path=":id" element={<TeacherDetails />} />
             </Route>
             <Route path="/subjects" element={<Subjects />}>
               <Route path="add" element={<AddSubject />} />
