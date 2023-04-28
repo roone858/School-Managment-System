@@ -7,6 +7,8 @@ import Swal from "sweetalert2";
 import TeacherService from "../services/teacher.service";
 import { deleteTeacher } from "../redux/slice/teacher-slice";
 import TeachingService from "../services/teaching.service";
+import { Input } from "../Components/Input";
+import teacherAvatar from "../assets/teacherAvatar.jpg";
 
 export const Teachers = () => {
   const dispatch = useDispatch();
@@ -33,8 +35,9 @@ export const Teachers = () => {
   const teachersRaws = teachers.map((teacher: Teacher) => (
     <tr className="bg-fff" key={teacher.id}>
       <th scope="row">{teacher.id}</th>
+      <td><img src={teacherAvatar}  style={{  height: "40px" ,borderRadius:"100%"}} alt="" /></td>
       <td>{teacher.first_name+" "+teacher.last_name}</td>
-      <td>{teacher.dob}</td>
+      <td>{teacher.dob.slice(0,10)}</td>
       <td>{teacher.address}</td>
 
       <td>
@@ -69,15 +72,61 @@ export const Teachers = () => {
     </tr>
   ));
   return (
-    <div className="teachers">
-     <Link className="btn btn-primary " to={"add"}>
-        Add new Teacher
-      </Link>
-      <Outlet />
-      <Table
-        columns={["ID ", "Name",'DOB', "Address", "Actions"]}
-        rows={teachersRaws}
-      />
+    <><div className="teachers-sections container">
+      
+       <Link className="btn btn-primary " to={"add"}>
+          Add new Teacher
+        </Link>
+        <Outlet/>
+        <form className=" d-flex ">
+          <div className="form-row d-flex  col-8 gap-2">
+            <Input
+              onChange={(e: any) => {
+                // setStudentId(e.target.value);
+              }}
+              type="text"
+              placeholder="Search By ID ..."
+            />
+            <Input
+              onChange={(e: any) => {
+                // setStudentName(e.target.value);
+              }}
+              type="text"
+              placeholder="Search By Name ..."
+            />
+            <div className="form-group  col-5">
+              <label></label>
+              {/* <select
+                className="form-control"
+                name="class_id"
+                onChange={(e: any) => {
+                   setClassId(e.target.value);
+                }}
+              >
+                <option value={undefined}>Search By Class</option>
+                {classes.map((cla: any) => (
+                  <option key={cla.id} value={cla.id}>
+                    {cla.name}
+                  </option>
+                ))}
+              </select> */}
+            </div>
+          </div>
+        </form>
+        <div className="students">
+          <Table
+            columns={[
+              "ID ",
+              "Photo",
+              "Name",
+              "DOP",
+              "Address",
+              "Actions",
+            ]}
+            rows={teachersRaws}
+          />
+        </div>
     </div>
+    </>
   );
 };

@@ -2,8 +2,8 @@
 
 export const Table = ({rows,columns}:any) => {
   return (
-     <div className="bg-fff" style={{background:"#fff"}}>
-       <table className="table table-bordered table-sm bg-fff">
+    
+       <table className="table bg-white table-bordered table-sm bg-fff">
           <thead className=" table-light">
             <tr>
             
@@ -12,6 +12,6 @@ export const Table = ({rows,columns}:any) => {
           </thead>
           <tbody className="bg-fff">{rows}</tbody>
         </table>
-     </div>
+    
   )
 }

@@ -24,8 +24,8 @@ export default function IconTabs({rows,columns}:any) {
         onChange={handleChange}
         aria-label="icon tabs example"
       >
-        <Tab  icon={<TableRowsIcon fontSize={"large"}  />} aria-label="phone" />
-        <Tab icon={<ViewModuleIcon fontSize={"large"} />} aria-label="favorite" />
+        <Tab className=" my-2  bg-white"   icon={<TableRowsIcon  />} aria-label="phone" />
+        <Tab className=" m-2 bg-white"   icon={<ViewModuleIcon  />} aria-label="favorite" />
       </Tabs>
       {value == 0 && <div><Table columns={columns} rows={rows}/></div>}
       {value == 1 && <SubjectsCards />}

@@ -80,14 +80,16 @@ export const ClassPage = () => {
 
   return (
     <>
-      <Link className="btn btn-primary mb-4" to={"add"}>
-        Add New Class
-      </Link>
-      <div className="class-page">
-        <Table
-          columns={["ID", "Name", "Grade Level", "Students", "Actions"]}
-          rows={classesRows}
-        />
+      <div className="class-section container">
+        <Link className="btn btn-primary " to={"add"}>
+          Add New Class
+        </Link>
+        <div className="class-page">
+          <Table
+            columns={["ID", "Name", "Grade Level", "Students", "Actions"]}
+            rows={classesRows}
+          />
+        </div>
       </div>
     </>
   );

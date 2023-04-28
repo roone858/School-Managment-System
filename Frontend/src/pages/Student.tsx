@@ -257,61 +257,62 @@ export const Students = () => {
     );
 
   return (
-    <>
-     <Link className="btn btn-primary " to={"add"}>
-        Add new Student
-      </Link>
-      <Outlet/>
-      <form className=" d-flex ">
-        <div className="form-row d-flex  col-8 gap-2">
-          <Input
-            onChange={(e: any) => {
-              setStudentId(e.target.value);
-            }}
-            type="text"
-            placeholder="Search By ID ..."
-          />
-          <Input
-            onChange={(e: any) => {
-              setStudentName(e.target.value);
-            }}
-            type="text"
-            placeholder="Search By Name ..."
-          />
-          <div className="form-group  col-5">
-            <label></label>
-            <select
-              className="form-control"
-              name="class_id"
+    <><div className="students-section container">
+      
+       <Link className="btn btn-primary " to={"add"}>
+          Add new Student
+        </Link>
+        <Outlet/>
+        <form className=" d-flex ">
+          <div className="form-row d-flex  col-8 gap-2">
+            <Input
               onChange={(e: any) => {
-                setClassId(e.target.value);
+                setStudentId(e.target.value);
               }}
-            >
-              <option value={undefined}>Search By Class</option>
-              {classes.map((cla: any) => (
-                <option key={cla.id} value={cla.id}>
-                  {cla.name}
-                </option>
-              ))}
-            </select>
+              type="text"
+              placeholder="Search By ID ..."
+            />
+            <Input
+              onChange={(e: any) => {
+                setStudentName(e.target.value);
+              }}
+              type="text"
+              placeholder="Search By Name ..."
+            />
+            <div className="form-group  col-5">
+              <label></label>
+              <select
+                className="form-control"
+                name="class_id"
+                onChange={(e: any) => {
+                  setClassId(e.target.value);
+                }}
+              >
+                <option value={undefined}>Search By Class</option>
+                {classes.map((cla: any) => (
+                  <option key={cla.id} value={cla.id}>
+                    {cla.name}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
+        </form>
+        <div className="students">
+          <Table
+            columns={[
+              "ID ",
+              "Photo",
+              "Name",
+              "DOP",
+              "Address",
+              "Class",
+              "Actions",
+            ]}
+            rows={studentRaws}
+          />
         </div>
-      </form>
-
-      <div className="students">
-        <Table
-          columns={[
-            "ID ",
-            "Photo",
-            "Name",
-            "DOP",
-            "Address",
-            "Class",
-            "Actions",
-          ]}
-          rows={studentRaws}
-        />
-      </div>
+    </div>
     </>
   );
 };

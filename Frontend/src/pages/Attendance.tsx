@@ -41,7 +41,7 @@ const AttendanceCm = () => {
   };
 
   return (
-    <div className="attendance">
+    <div className="attendance-section container">
       <form>
         <div className="form-row d-flex gap-2 ">
           <div className="form-group col-3">

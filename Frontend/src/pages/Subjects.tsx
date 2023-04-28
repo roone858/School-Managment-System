@@ -83,15 +83,17 @@ export const Subjects = () => {
   });
 
   return (
-    <>
-      <Link className="btn btn-primary mb-4" to={"add"}>
-        Add New Subject
-      </Link>
-      <Outlet />
-      <IconTabs
-        columns={["ID", "Title", "Level", "Teacher", "Action"]}
-        rows={subjectsRows}
-      />
+    <><div className="container">
+      
+        <Link className="btn btn-primary mb-1" to={"add"}>
+          Add New Subject
+        </Link>
+        <Outlet />
+        <IconTabs
+          columns={["ID", "Title", "Level", "Teacher", "Action"]}
+          rows={subjectsRows}
+        />
+    </div>
     </>
   );
 };

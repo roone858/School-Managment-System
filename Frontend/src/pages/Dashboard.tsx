@@ -21,176 +21,178 @@ export const Dashboard = () => {
   const attendance= attendanceList.slice(1,).reverse()
 
   return (
-    <>
-      <div className=" row w-100 gap-3 analyses">
-        <div className="col-md-4 col-6 analyst-card">
-          <i className="bx bx-user"></i>
-          <div className="num">
-            <span>Student</span>
-            <span> {students.length}</span>
+    <><div className="dashboard-section  container">
+      
+        <div className=" row w-100 gap-3 analyses">
+          <div className="col-md-4 col-6 analyst-card">
+            <i className="bx bx-user"></i>
+            <div className="num">
+              <span>Student</span>
+              <span> {students.length}</span>
+            </div>
+          </div>
+          <div className="col-md-4 col-6 analyst-card">
+            <i className="bx bx-user"></i>
+            <div className="num">
+              <span>Teachers</span>
+              <span>{teachers.length}</span>
+            </div>
+          </div>
+          <div className="col-md-4 col-6 analyst-card">
+            <i className="bx bxs-book"></i>
+            <div className="num">
+              <span>Subject</span>
+              <span> {subjects.length}</span>
+            </div>
           </div>
         </div>
-        <div className="col-md-4 col-6 analyst-card">
-          <i className="bx bx-user"></i>
-          <div className="num">
-            <span>Teachers</span>
-            <span>{teachers.length}</span>
+        <div className="d-flex m-2 justify-content-around gap-3 ">
+          <div className="current-session col-6 p-4 bg-white rounded-4">
+            <h3 className="m-2 ">Current Sessions</h3>
+            <table className="table table-striped table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">Subject</th>
+                  <th scope="col">Class</th>
+                  <th scope="col">Start</th>
+                  <th scope="col">End</th>
+                </tr>
+              </thead>
+              <tbody>
+                {sessions.map((session: any) => {
+                  if (
+                    session.day == currentDay() &&
+                    Number(session.start_time.slice(0, 2)) == currentHours()
+                  ) {
+                    return (
+                      <tr key={"session"+session.id}>
+                        <th scope="row">
+                          {" "}
+                          {
+                            subjects.find(
+                              (subject: any) => session.subject_id == subject.id
+                            )?.title
+                          }
+                        </th>
+                        <td>
+                          {" "}
+                          {
+                            classes.find((cla: any) => cla.id == session.class_id)
+                              .name
+                          }
+                        </td>
+                        <td>{session.start_time}</td>
+                        <td>{session.end_time}</td>
+                      </tr>
+                    );
+                  }
+                })}
+              </tbody>
+            </table>
           </div>
-        </div>
-        <div className="col-md-4 col-6 analyst-card">
-          <i className="bx bxs-book"></i>
-          <div className="num">
-            <span>Subject</span>
-            <span> {subjects.length}</span>
-          </div>
-        </div>
-      </div>
-      <div className="d-flex m-2 justify-content-around gap-2  ">
-        <div className="current-session col-6 p-4 bg-white rounded-4">
-          <h3 className="m-2 ">Current Sessions</h3>
-          <table className="table table-striped table-dark">
-            <thead>
-              <tr>
-                <th scope="col">Subject</th>
-                <th scope="col">Class</th>
-                <th scope="col">Start</th>
-                <th scope="col">End</th>
-              </tr>
-            </thead>
-            <tbody>
-              {sessions.map((session: any) => {
-                if (
-                  session.day == currentDay() &&
-                  Number(session.start_time.slice(0, 2)) == currentHours()
-                ) {
+          <div className="last-absence col-6 p-4 bg-white rounded-4">
+            <h3 className="m-2 ">Last Absence</h3>
+            <table className="table table-striped table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">Student</th>
+                  <th scope="col">Class</th>
+                  <th scope="col">Subject</th>
+                  <th scope="col">Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                {attendance.slice(0,5).map((attend: any) => {
                   return (
-                    <tr key={"session"+session.id}>
+                    <tr key={"attend"+attend.id}>
+                      <td>
+                        {students.map((student: any) => {
+                          return (
+                            attend.student_id == student.id &&
+                            student.first_name + " " + student.last_name
+                          );
+                        })}
+                      </td>
+                      <td>
+                        {
+                          classes.find(
+                            (cla: any) =>
+                              cla.id ==
+                              sessions.find(
+                                (session: any) =>
+                                  session.id == attend.class_session_id
+                              )?.class_id
+                          )?.name
+                        }
+                      </td>
                       <th scope="row">
                         {" "}
                         {
                           subjects.find(
-                            (subject: any) => session.subject_id == subject.id
+                            (subject: any) => attend.subject_id == subject.id
                           )?.title
                         }
                       </th>
-                      <td>
-                        {" "}
-                        {
-                          classes.find((cla: any) => cla.id == session.class_id)
-                            .name
-                        }
-                      </td>
-                      <td>{session.start_time}</td>
-                      <td>{session.end_time}</td>
+                      <td>{attend.date.slice(0,10)}</td>
                     </tr>
                   );
-                }
-              })}
-            </tbody>
-          </table>
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div className="last-absence col-6 p-4 bg-white rounded-4">
-          <h3 className="m-2 ">Last Absence</h3>
+        <div className="Today-sessions col-12 p-4 my-3 bg-white rounded-4">
+          <h3 className="m-2 ">Today's Sessions</h3>
           <table className="table table-striped table-dark">
             <thead>
               <tr>
-                <th scope="col">Student</th>
-                <th scope="col">Class</th>
                 <th scope="col">Subject</th>
-                <th scope="col">Time</th>
+                <th scope="col">Class</th>
+                <th scope="col">Teacher</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">End Time</th>
               </tr>
             </thead>
             <tbody>
-              {attendance.slice(0,5).map((attend: any) => {
-                return (
-                  <tr key={"attend"+attend.id}>
+              {sessions.map((session: any) => {
+                return session.day=="Sunday"&& (
+                  <tr key={session.id}>
                     <td>
-                      {students.map((student: any) => {
-                        return (
-                          attend.student_id == student.id &&
-                          student.first_name + " " + student.last_name
-                        );
-                      })}
-                    </td>
-                    <td>
-                      {
-                        classes.find(
-                          (cla: any) =>
-                            cla.id ==
-                            sessions.find(
-                              (session: any) =>
-                                session.id == attend.class_session_id
-                            )?.class_id
-                        )?.name
-                      }
-                    </td>
-                    <th scope="row">
-                      {" "}
                       {
                         subjects.find(
-                          (subject: any) => attend.subject_id == subject.id
+                          (subject: any) => subject.id == session.subject_id
                         )?.title
                       }
-                    </th>
-                    <td>{attend.date.slice(0,10)}</td>
+                    </td>
+                    <td>
+                      {
+                        classes.find((cla: any) => cla.id == session.class_id)
+                          ?.name
+                      }
+                    </td>
+                    <td>
+                      {" "}
+                      {
+                        teachers.map( (teacher: any) =>{
+                          if ( teacher.id ==
+                            teaching.find(
+                              (teach: any) =>
+                                teach.subject_id == session.subject_id
+                            )?.teacher_id)
+                            return teacher.first_name +" "+ teacher.last_name
+                            })
+                        // teachers.find((teacher:any)=>  teacher.id== ( teaching.find((teach:any)=> teach.subject_id == session.subject_id )?.teacher_id)).first_name
+                      }
+                    </td>
+                    <td>{session.start_time}</td>
+                    <td>{session.end_time}</td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
         </div>
-      </div>
-      <div className="Today-sessions col-12 p-4 bg-white rounded-4">
-        <h3 className="m-2 ">Today's Sessions</h3>
-        <table className="table table-striped table-dark">
-          <thead>
-            <tr>
-              <th scope="col">Subject</th>
-              <th scope="col">Class</th>
-              <th scope="col">Teacher</th>
-              <th scope="col">Start Time</th>
-              <th scope="col">End Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sessions.map((session: any) => {
-              return session.day=="Sunday"&& (
-                <tr key={session.id}>
-                  <td>
-                    {
-                      subjects.find(
-                        (subject: any) => subject.id == session.subject_id
-                      )?.title
-                    }
-                  </td>
-                  <td>
-                    {
-                      classes.find((cla: any) => cla.id == session.class_id)
-                        ?.name
-                    }
-                  </td>
-                  <td>
-                    {" "}
-                    {
-                      teachers.map( (teacher: any) =>{
-                        if ( teacher.id ==
-                          teaching.find(
-                            (teach: any) =>
-                              teach.subject_id == session.subject_id
-                          )?.teacher_id)
-                          return teacher.first_name +" "+ teacher.last_name
-                          })
-                      // teachers.find((teacher:any)=>  teacher.id== ( teaching.find((teach:any)=> teach.subject_id == session.subject_id )?.teacher_id)).first_name
-                    }
-                  </td>
-                  <td>{session.start_time}</td>
-                  <td>{session.end_time}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+    </div>
     </>
   );
 };

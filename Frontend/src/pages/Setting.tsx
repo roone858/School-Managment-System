@@ -12,7 +12,7 @@ export const Setting = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="setting">
+    <div className="setting container">
       
       <Routes>
         <Route path="/" element={<ControlledAccordions/>} />

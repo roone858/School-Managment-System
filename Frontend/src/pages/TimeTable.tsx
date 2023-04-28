@@ -50,68 +50,69 @@ const Timetable = () => {
 
  
   return (
-    <>
-     <Link className="btn btn-primary mb-4" to={"add"}>
-        Add New Session
-      </Link>
-      <Outlet/>
-      <div>
-        <form >
-          <div className="form-row  col-4 gap-2">
-            <label htmlFor="class-selector">CLASS NAME :</label>
-            <select
-              className="form-control"
-              name="class_id"
-              id="class-selector"
-              onChange={(e: any) => {
-                setClassID(e.target.value);
-              }}
-            >
-              <option>Select Class</option>
-              {classes.map((c: any) => (
-                <option key={c.id} value={c.id}>
-                  {c.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        
-        </form>
-
-      </div>
-      <div className="timetable">
-        <table className="table table-striped ">
-          <thead>
-            <tr>
-              <th>Time</th>
-              {days.map((day) => (
-                <th key={day}>{day}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {timeSlots.map((timeSlot) => (
-              <tr key={timeSlot.startDate}>
-                <td>{timeSlot.startDate + "-" + timeSlot.endDate}</td>
-                {days.map((day) => {
-                  const filterSessions = sessionsRow?.find(
-                    (session: any) =>
-                      session.day === day &&
-                      session.startTime == timeSlot.startDate &&
-                      session.class_id == classId
-                  );
-                  return (
-                    <td className={filterSessions?.title} key={day}>
-                      {filterSessions ? filterSessions.title : null}
-                      <p>{filterSessions?.teacher_name}</p>
-                    </td>
-                  );
-                })}
+    <><div className="timetable-section container  ">
+      
+       <Link className="btn btn-primary mb-4" to={"add"}>
+          Add New Session
+        </Link>
+        <Outlet/>
+        <div>
+          <form >
+            <div className="form-row  col-4 gap-2">
+              <label htmlFor="class-selector">CLASS NAME :</label>
+              <select
+                className="form-control"
+                name="class_id"
+                id="class-selector"
+                onChange={(e: any) => {
+                  setClassID(e.target.value);
+                }}
+              >
+                <option>Select Class</option>
+                {classes.map((c: any) => (
+                  <option key={c.id} value={c.id}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+      
+          </form>
+        </div>
+        <div className="timetable">
+          <table className="table table-striped ">
+            <thead>
+              <tr>
+                <th>Time</th>
+                {days.map((day) => (
+                  <th key={day}>{day}</th>
+                ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {timeSlots.map((timeSlot) => (
+                <tr key={timeSlot.startDate}>
+                  <td>{timeSlot.startDate + "-" + timeSlot.endDate}</td>
+                  {days.map((day) => {
+                    const filterSessions = sessionsRow?.find(
+                      (session: any) =>
+                        session.day === day &&
+                        session.startTime == timeSlot.startDate &&
+                        session.class_id == classId
+                    );
+                    return (
+                      <td className={filterSessions?.title} key={day}>
+                        {filterSessions ? filterSessions.title : null}
+                        <p>{filterSessions?.teacher_name}</p>
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+    </div>
      
     </>
   );

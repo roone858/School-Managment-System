@@ -57,7 +57,7 @@ import UpdateSubject from "./Components/UpdateComponents/UpdateSubject";
 import AddSession from "./Components/AddComponents/AddSession";
 import SignIn from "./pages/SignIn";
 import StudentDetails from "./Components/DetailsComponents/StudentDetails";
-import TeacherDetails from "./Components/DetailsComponents/teacherDetails";
+import TeacherDetails from "./Components/DetailsComponents/TeacherDetails";
 function App() {
   const dispatch = useDispatch();
 
@@ -123,7 +123,7 @@ function App() {
         <Sidebar onChange={changeHandler} />
 
         <NavBar />
-        <div className="home-section bg-eee">
+        <div className="home-section  bg-eee">
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/test" element={<Table />} />
