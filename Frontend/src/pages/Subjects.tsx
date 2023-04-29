@@ -7,9 +7,12 @@ import SubjectService from "../services/subject.service";
 import { deleteSubject } from "../redux/slice/subject-slice ";
 import SessionService from "../services/session.service";
 import { deleteSession } from "../redux/slice/session-slice ";
+import { AddSubject } from "../Components/AddComponents/AddSubject";
+import { useState } from "react";
 
 export const Subjects = () => {
   const dispatch = useDispatch();
+  const [isAddOpen, setIsAddOpen] = useState(false);
 
   const subjects = useSelector((state: any) => state.subjects);
   const teaching = useSelector((state: any) => state.teaching);
@@ -85,10 +88,15 @@ export const Subjects = () => {
   return (
     <><div className="container">
       
-        <Link className="btn btn-primary mb-1" to={"add"}>
-          Add New Subject
-        </Link>
-        <Outlet />
+      <button
+          onClick={() => {
+            setIsAddOpen(!isAddOpen);
+          }}
+          className="btn btn-primary "
+        >
+          Add new Subject
+        </button>
+        {isAddOpen && <AddSubject />}
         <IconTabs
           columns={["ID", "Title", "Level", "Teacher", "Action"]}
           rows={subjectsRows}

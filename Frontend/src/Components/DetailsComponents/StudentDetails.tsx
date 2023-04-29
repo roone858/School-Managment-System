@@ -11,7 +11,7 @@ const StudentDetails = () => {
   const student = students.find((s: any) => s.id == params.id);
 
   return (
-    <div className="details">
+    <div className="details container p-4">
       {!student ? (
         <div>loading...</div>
       ) : (
@@ -24,6 +24,7 @@ const StudentDetails = () => {
               <h5 className="font-weight-bold mb-3">
                 {student.first_name + " " + student.last_name}
               </h5>
+              <span >Student</span>
               <p className="mb-0">
                 Some quick example text to build on the panel title and make up
                 the bulk of the panel's content.

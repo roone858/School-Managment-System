@@ -118,7 +118,7 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <div className="App ">
       <BrowserRouter>
         <Sidebar onChange={changeHandler} />
 
@@ -129,22 +129,15 @@ function App() {
             <Route path="/test" element={<Table />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="students/update/:id" element={<UpdateStudent />} />
-            <Route path="/students" element={<Students />}>
-              <Route path="add" element={<AddStudent entity="student" />} />
-            </Route>
+            <Route path="/students" element={<Students />}></Route>
             <Route path="/students/:id" element={<StudentDetails />} />
             <Route path="/teachers" element={<Teachers />}>
-              <Route path="add" element={<AddTeacher />} />
               <Route path="update/:id" element={<UpdateTeacher />} />
-              <Route path=":id" element={<TeacherDetails />} />
             </Route>
-            <Route path="/subjects" element={<Subjects />}>
-              <Route path="add" element={<AddSubject />} />
-            </Route>
+            <Route path="/teachers/:id" element={<TeacherDetails />} />
+            <Route path="/subjects" element={<Subjects />}></Route>
             <Route path="subjects/update/:id" element={<UpdateSubject />} />
-            <Route path="/timetable" element={<Timetable />}>
-              <Route path="add" element={<AddSession />} />
-            </Route>
+            <Route path="/timetable" element={<Timetable />}></Route>
             <Route path="/classes" element={<ClassPage />}></Route>
             <Route path="/classes/add" element={<AddClass />}></Route>
             <Route path="/classes/update/:id" element={<UpdateClass />} />

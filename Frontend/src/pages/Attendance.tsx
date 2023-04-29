@@ -43,18 +43,17 @@ const AttendanceCm = () => {
   return (
     <div className="attendance-section container">
       <form>
-        <div className="form-row d-flex gap-2 ">
+        <div className="form-row d-flex ">
           <div className="form-group col-3">
-            <label htmlFor="formGroupExampleInput">Subject title :</label>
             <select
-              className="form-control"
+              className="form-control p-3"
               name="subject"
               onChange={(e: any) => {
                 setSubjectId(e.target.value);
                 setChosenSessionID(0);
               }}
             >
-              <option>Default select</option>
+              <option>Select Subject</option>
               {subjects.map((subject: Subject) => (
                 <option key={subject.id} value={subject.id}>
                   {subject.title}
@@ -63,16 +62,15 @@ const AttendanceCm = () => {
             </select>
           </div>
           <div className="form-group col-3">
-            <label htmlFor="formGroupExampleInput2">Select Class :</label>
             <select
-              className="form-control"
+              className="form-control p-3 mx-2"
               name="student"
               onChange={(e: any) => {
                 seClassId(e.target.value);
                 setChosenSessionID(0);
               }}
             >
-              <option>Default select</option>
+              <option>Select Class</option>
               {classes?.map((cla: any) => (
                 <option key={String(cla.id)} value={cla.id}>
                   {cla.name}

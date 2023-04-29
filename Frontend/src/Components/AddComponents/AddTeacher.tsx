@@ -43,8 +43,8 @@ const AddTeacher = () => {
   return (
     <div className="add-form container rounded-2 bg-white mt-4 px-4 py-5">
       <form  onSubmit={handleSubmit}>
-        <div className="d-flex justify-content-start flex-wrap gap-2 ">
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3  "}>
+        <div className="d-flex  flex-column  flex-lg-row justify-content-start flex-wrap gap-3  ">
+          <div className={"form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}>
             <label htmlFor="first-name">First Name</label>
             <input
               onChange={updateData}
@@ -56,7 +56,7 @@ const AddTeacher = () => {
               required
             />
           </div>
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3  "}>
+          <div className={"form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}>
             <label htmlFor="last-name">Last Name</label>
             <input
               onChange={updateData}
@@ -68,7 +68,7 @@ const AddTeacher = () => {
               required
             />
           </div>
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3  "}>
+          <div className={"form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}>
             <label htmlFor="email">Email</label>
             <input
               onChange={updateData}
@@ -80,7 +80,7 @@ const AddTeacher = () => {
               required
             />
           </div>
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3  "}>
+          <div className={"form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}>
             <label htmlFor="phone">Phone</label>
             <input
               onChange={updateData}
@@ -92,7 +92,7 @@ const AddTeacher = () => {
               required
             />
           </div>
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3  "}>
+          <div className={"form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}>
             <label htmlFor="dob">DOB</label>
             <input
               onChange={updateData}
@@ -103,7 +103,7 @@ const AddTeacher = () => {
               required
             />
           </div>
-          <div className="form-group col-sm-12  col-lg-5  col-xl-3   ">
+          <div className="form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3   ">
             <label htmlFor="inputGender4">Gender</label>
             <br />
             <select
@@ -119,7 +119,7 @@ const AddTeacher = () => {
             </select>
           </div>
          
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3  "}>
+          <div className={"form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}>
             <label htmlFor="address">Address</label>
             <input
               onChange={updateData}
@@ -131,7 +131,7 @@ const AddTeacher = () => {
               required
             />
           </div>
-          <div className="form-group col-sm-12 mt-4 col-lg-5  col-xl-3 ">
+          <div className="form-group col-sm-12 mt-4 col-lg-5  col-xl-3 mx-lg-3 ">
         
 
           <button type="submit" className="btn btn-primary form-control">

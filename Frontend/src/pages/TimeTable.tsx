@@ -7,6 +7,7 @@ import { State } from "../types/type";
 import SessionService from "../services/session.service";
 import { fetchSubjects } from "../redux/slice/subject-slice ";
 import { Link, Outlet } from "react-router-dom";
+import AddSession from "../Components/AddComponents/AddSession";
 
 const Timetable = () => {
   const [classId, setClassID] = useState(1);
@@ -15,7 +16,7 @@ const Timetable = () => {
   const sessions = useSelector((state: State) => state.sessions);
   const teachings = useSelector((state: any) => state.teaching);
   const teachers = useSelector((state: any) => state.teachers);
-
+  const [isAddOpen, setIsAddOpen] = useState(false);
   const sessionsRow = sessions.map((session: any) => {
     
     const subject = subjects.find((sub: any) => sub.id == session.subject_id);
@@ -51,17 +52,21 @@ const Timetable = () => {
  
   return (
     <><div className="timetable-section container  ">
-      
-       <Link className="btn btn-primary mb-4" to={"add"}>
-          Add New Session
-        </Link>
-        <Outlet/>
+      <button
+          onClick={() => {
+            setIsAddOpen(!isAddOpen);
+          }}
+          className="btn btn-primary "
+        >
+          Add new Subject
+        </button>
+        {isAddOpen && <AddSession />}
+  
         <div>
           <form >
-            <div className="form-row  col-4 gap-2">
-              <label htmlFor="class-selector">CLASS NAME :</label>
+            <div className="form-row  mt-4 col-4 gap-2">
               <select
-                className="form-control"
+                className="form-control p-3"
                 name="class_id"
                 id="class-selector"
                 onChange={(e: any) => {

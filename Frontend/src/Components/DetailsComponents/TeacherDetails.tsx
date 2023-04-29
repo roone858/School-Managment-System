@@ -11,13 +11,13 @@ const TeacherDetails = () => {
   const teacher = teachers.find((s: any) => s.id == params.id);
 
   return (
-    <div className="details">
+    <div className="details container p-4">
       {!teacher ? (
         <div>loading...</div>
       ) : (
         <>
           <div className="card mh-15 w-50 teacher-image">
-            <img src={ teacherAvatar } alt="" />
+            <img src={teacherAvatar} alt="" />
           </div>
           <div className="card">
             <div className="card-body">

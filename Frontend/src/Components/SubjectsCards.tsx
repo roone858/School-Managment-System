@@ -18,18 +18,20 @@ export const SubjectsCards = () => {
   const subjectsCards = subjects.map((subject: Subject, index: number) => {
 
     return (
-      <div key={subject.id} className="col-md-4 mb-4 col-sm-6">
-        <Card
-          image={images[index]?images[index] :images[Math.floor(Math.random() * images.length)]}
-          title={subject.title}
-          description={subject.description.slice(0, 100) + "..."}
-        />
+      <div key={subject.id} className="col-12 col-md-6 col-lg-4">
+        <div className="m-2">
+          <Card
+            image={images[index]?images[index] :images[Math.floor(Math.random() * images.length)]}
+            title={subject.title}
+            description={subject.description.slice(0, 100) + "..."}
+          />
+        </div>
       </div>
     );
   });
   return (
     <>
-      <div className="row gap-row-3 ">{subjectsCards}</div>
+      <div className="d-flex flex-column  flex-md-row flex-lg-row flex-wrap  ">{subjectsCards}</div>
     </>
   );
 };

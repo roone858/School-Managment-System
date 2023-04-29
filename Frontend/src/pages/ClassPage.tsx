@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Table } from "../Components/Table";
 import { Link } from "react-router-dom";
@@ -6,11 +6,14 @@ import ClassService from "../services/class.service";
 import { deleteClass } from "../redux/slice/class-slice ";
 import Swal from "sweetalert2";
 import SessionService from "../services/session.service";
+import AddClass from "../Components/AddComponents/AddClass";
 
 export const ClassPage = () => {
   const dispatch = useDispatch();
   const classes = useSelector((state: any) => state.classes);
   const students = useSelector((state: any) => state.students);
+  const [isAddOpen, setIsAddOpen] = useState(false);
+
   const handleDelete = (id: any) => {
     Swal.fire({
       title: "Are you sure?",
@@ -81,9 +84,16 @@ export const ClassPage = () => {
   return (
     <>
       <div className="class-section container">
-        <Link className="btn btn-primary " to={"add"}>
-          Add New Class
-        </Link>
+      <button
+          onClick={() => {
+            setIsAddOpen(!isAddOpen);
+          }}
+          className="btn btn-primary "
+        >
+          Add new class
+        </button>
+        {isAddOpen && <AddClass />}
+       
         <div className="class-page">
           <Table
             columns={["ID", "Name", "Grade Level", "Students", "Actions"]}

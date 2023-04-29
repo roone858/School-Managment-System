@@ -84,21 +84,34 @@ export const Teachers = () => {
         </button>
        {isAddOpen && <AddTeacher/>}
         <form className=" d-flex ">
-          <div className="form-row d-flex  col-8 gap-2">
-            <Input
-              onChange={(e: any) => {
-                // setStudentId(e.target.value);
-              }}
-              type="text"
-              placeholder="Search By ID ..."
+          <div className="form-row d-flex mt-4  col-12 ">
+
+          {/* <div className={" col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}> */}
+         
+            <input
+              className="form-control p-3  "
+              name="end_time"
+              onChange={()=>{}}
+              placeholder="Search By ID..."
+              type="search"
+              id="inputGrade_level"
+              required
             />
-            <Input
-              onChange={(e: any) => {
-                // setStudentName(e.target.value);
-              }}
-              type="text"
-              placeholder="Search By Name ..."
+          {/* </div> */}
+          
+          {/* <div className={" col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}> */}
+         
+            <input
+              className="form-control p-3 mx-3"
+              name="end_time"
+              onChange={()=>{}}
+              placeholder="Search By Name..."
+              type="search"
+              id="inputGrade_level"
+              required
             />
+          {/* </div> */}
+           
             <div className="form-group  col-5">
               <label></label>
               {/* <select

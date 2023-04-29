@@ -43,29 +43,10 @@ const AddSession = () => {
     }
   };
   return (
-    <div className="add-form">
-      <h1>Add new Session</h1>
-      <form className="form-row d-flex gap-2 " onSubmit={handleSubmit}>
-        <div className="form-row d-flex gap-2 ">
-          <div className="form-row col-6 ">
-            <label htmlFor="inputTeacher">Teacher</label>
-            <br />
-            <select
-              id="inputTeacher"
-              onChange={updateData}
-              name="teacher_id"
-              className="form-control"
-              required
-            >
-              <option>Select Teacher </option>
-              {teachers.map((teacher: any) => (
-                <option key={teacher.id} value={teacher.id}>
-                  {teacher.first_name + " " + teacher.last_name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="form-row col-6 ">
+    <div className="add-form bg-white p-4 my-4 rounded">
+      <form className="form-row gap-2 " onSubmit={handleSubmit}>
+        <div className="form-row d-flex flex-column flex-lg-row flex-wrap ">
+          <div className="form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3">
             <label htmlFor="inputClass">Class</label>
             <br />
             <select
@@ -83,9 +64,8 @@ const AddSession = () => {
               ))}
             </select>
           </div>
-        </div>
-        <div className="form-row d-flex gap-2 ">
-          <div className="form-row col-6 ">
+
+          <div className="form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3">
             <label htmlFor="inputSubject">Subject</label>
             <br />
             <select
@@ -103,7 +83,7 @@ const AddSession = () => {
               ))}
             </select>
           </div>
-          <div className="form-row col-6 ">
+          <div className="form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3 ">
             <label htmlFor="inputDay">Day</label>
             <br />
             <select
@@ -121,30 +101,35 @@ const AddSession = () => {
               ))}
             </select>
           </div>
-        </div>
-        <div className="form-row d-flex gap-2 ">
-          <Input
-            name="start_time"
-            onChange={updateData}
-            text="Start Time"
-            placeholder="Name"
-            type="time"
-            id="inputName4"
-          />
-          <Input
-            name="end_time"
-            onChange={updateData}
-            text="End Time"
-            placeholder="Grade Level"
-            type="time"
-            id="inputGrade_level"
-          />
-        </div>
+          <div className={"form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}>
+            <label htmlFor="first-name">Start Time</label>
+            <input
+              className="form-control"
+              name="start_time"
+              onChange={updateData}
+              placeholder="Name"
+              type="time"
+              id="inputName4"
+              required
+            />
+          </div>
+          <div className={"form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}>
+            <label htmlFor="first-name">End Time</label>
+            <input
+              className="form-control"
+              name="end_time"
+              onChange={updateData}
+              placeholder="Grade Level"
+              type="time"
+              id="inputGrade_level"
+              required
+            />
+          </div>
 
-        <div className="form-group"></div>
-        <button type="submit" className="btn btn-primary">
-          Create
-        </button>
+          <button type="submit" className="btn btn-primary  form-group col-sm-12  my-4 col-lg-5  col-xl-3 mx-lg-3">
+            Create
+          </button>
+        </div>
       </form>
     </div>
   );

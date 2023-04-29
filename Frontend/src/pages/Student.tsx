@@ -268,8 +268,8 @@ export const Students = () => {
         </button>
         {isAddOpen && <AddStudent />}
         <form className=" d-flex mt-4 ">
-          <div className="form-row d-flex  col-8 gap-2">
-            <div className={"form-group col-sm-12  col-lg-5  col-xl-3  "}>
+          <div className=" d-flex gap-3">
+            <div className={"form-group "}>
               <input
                 onChange={(e: any) => {
                   setStudentId(e.target.value);
@@ -282,7 +282,7 @@ export const Students = () => {
                 required
               />
             </div>
-            <div className={"form-group col-sm-12  col-lg-5  col-xl-3  "}>
+            <div className={"form-group   "}>
               <input
                 onChange={(e: any) => {
                   setStudentName(e.target.value);
@@ -295,7 +295,7 @@ export const Students = () => {
                 required
               />
             </div>
-            <div className="form-group  col-5">
+            <div className="form-group  ">
               <select
                 style={{ color: "#7c7c7c" }}
                 className="form-control p-3"
