@@ -12,6 +12,7 @@ import {
   setRedFlag,
 } from "../../redux/slice/notifications-slice";
 import { Student, Teacher } from "../../types/type";
+import Swal from "sweetalert2";
 
 const AddStudent = (props: any) => {
   const [data, setData] = useState({} as any);
@@ -23,15 +24,19 @@ const AddStudent = (props: any) => {
   };
 
   const insertStudent = () => {
-    StudentService.insertStudent(data).then((res: Student) => {
-      dispatch(addStudent(res));
-
-      NotificationService.insertNotification({
-        message: `new student has been added ${res.first_name} ${res.last_name}`,
-      }).then((result) => {
-        dispatch(addNotification(result));
-        dispatch(setRedFlag(true));
-      });
+    StudentService.insertStudent(data).then((res: Student | any) => {
+      console.log(res)
+      if (res.message)
+        Swal.fire(" Can't Add!", "Internal Server Error", "error");
+      else {
+        dispatch(addStudent(res));
+        NotificationService.insertNotification({
+          message: `new student has been added ${res.first_name} ${res.last_name}`,
+        }).then((result) => {
+          dispatch(addNotification(result));
+          dispatch(setRedFlag(true));
+        });
+      }
     });
   };
 
@@ -45,7 +50,7 @@ const AddStudent = (props: any) => {
 
   return (
     <div className="add-form container rounded-2 bg-white mt-4 px-4 py-5">
-      <form  onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div className="d-flex flex-column flex-lg-row justify-content-around flex-wrap gap-2 ">
           <div className={"form-group col-12  col-lg-5  col-xl-3  "}>
             <label htmlFor="first-name">First Name</label>
@@ -152,11 +157,9 @@ const AddStudent = (props: any) => {
             />
           </div>
           <div className="form-group col-sm-12 mt-4 col-lg-5  col-xl-3 ">
-        
-
-          <button type="submit" className="btn btn-primary form-control">
-            Create
-          </button>
+            <button type="submit" className="btn btn-primary form-control">
+              Create
+            </button>
           </div>
         </div>
       </form>
