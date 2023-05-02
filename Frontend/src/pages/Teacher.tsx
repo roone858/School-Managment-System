@@ -2,7 +2,7 @@ import { AddButton } from "../layouts/AddButton";
 import { Table } from "../Components/Table";
 import { Link, Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Teacher } from "../types/type";
+import { State, Teacher } from "../types/type";
 import Swal from "sweetalert2";
 import TeacherService from "../services/teacher.service";
 import { deleteTeacher } from "../redux/slice/teacher-slice";
@@ -14,10 +14,10 @@ import AddTeacher from "../Components/AddComponents/AddTeacher";
 
 export const Teachers = () => {
   const dispatch = useDispatch();
-  const teachers = useSelector((state: any) => state.teachers);
+  const teachers = useSelector((state: State) => state.teachers);
   const [isAddOpen, setIsAddOpen] = useState(false);
 
-  const handleDelete = (id: any) => {
+  const handleDelete = (id: number) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -36,8 +36,8 @@ export const Teachers = () => {
     });
   };
   const teachersRaws = teachers.map((teacher: Teacher) => (
-    <tr className="bg-fff" key={teacher.id}>
-      <th scope="row">{teacher.id}</th>
+    <tr className="bg-fff" key={teacher.id.toString()}>
+      <th scope="row">{teacher.id.toString()}</th>
       <td><img src={teacherAvatar}  style={{  height: "40px" ,borderRadius:"100%"}} alt="" /></td>
       <td>{teacher.first_name+" "+teacher.last_name}</td>
       <td>{teacher.dob.slice(0,10)}</td>

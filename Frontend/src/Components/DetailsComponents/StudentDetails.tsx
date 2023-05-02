@@ -3,12 +3,15 @@ import maleAvatar from "../../assets/maleAvatar.png";
 import femaleAvatar from "../../assets/femaleAvatar.png";
 import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { State, Student } from "../../types/type";
 
 const StudentDetails = () => {
   const params = useParams();
 
-  const students = useSelector((state: any) => state.students);
-  const student = students.find((s: any) => s.id == params.id);
+  const students = useSelector((state: State) => state.students);
+  const student = students.find(
+    (student: Student) => student.id == Number(params.id)
+  );
 
   return (
     <div className="details container p-4">
@@ -17,14 +20,17 @@ const StudentDetails = () => {
       ) : (
         <>
           <div className="card mh-15 w-50 student-image">
-            <img src={student.gender == "M" ? maleAvatar : femaleAvatar} alt="" />
+            <img
+              src={student.gender == "M" ? maleAvatar : femaleAvatar}
+              alt=""
+            />
           </div>
           <div className="card">
             <div className="card-body">
               <h5 className="font-weight-bold mb-3">
                 {student.first_name + " " + student.last_name}
               </h5>
-              <span >Student</span>
+              <span>Student</span>
               <p className="mb-0">
                 Some quick example text to build on the panel title and make up
                 the bulk of the panel's content.

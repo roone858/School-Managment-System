@@ -13,7 +13,7 @@ import {
 import {  Teacher } from "../../types/type";
 
 const AddTeacher = () => {
-  const [data, setData] = useState({} as any);
+  const [data, setData] = useState({} as Teacher);
   const dispatch = useDispatch();
 
   const updateData = (e: any) => {

@@ -3,12 +3,13 @@ import teacherAvatar from "../../assets/teacherAvatar.jpg";
 import femaleAvatar from "../../assets/femaleAvatar.png";
 import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { State, Teacher } from "../../types/type";
 
 const TeacherDetails = () => {
   const params = useParams();
 
-  const teachers = useSelector((state: any) => state.teachers);
-  const teacher = teachers.find((s: any) => s.id == params.id);
+  const teachers = useSelector((state: State) => state.teachers);
+  const teacher = teachers.find((teacher: Teacher) => teacher.id == Number(params.id));
 
   return (
     <div className="details container p-4">

@@ -63,7 +63,7 @@ class SubjectService {
       console.log("error", error);
     }
   }
-  static async deleteSubject(id: string) {
+  static async deleteSubject(id: Number) {
     fetch(`http://localhost:4000/api/subject/${id}`, {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { Input } from "./../Input";
 import ClassService from "../../services/class.service";
 import { useDispatch } from "react-redux";
 import { addClass } from "../../redux/slice/class-slice ";
 import { useNavigate } from "react-router-dom";
+import { ClassType } from "../../types/type";
 
 const AddClass = () => {
   const dispatch = useDispatch();
-  const [data, setData] = useState({} as any);
+  const [data, setData] = useState({} as ClassType);
   const navigate = useNavigate();
   const updateData = (e: any) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -48,9 +48,12 @@ const AddClass = () => {
               required
             />
           </div>
-            <button type="submit" className="  col-12  col-lg-5  col-xl-3 mx-lg-3  btn btn-primary mt-4">
-              Create
-            </button>
+          <button
+            type="submit"
+            className="  col-12  col-lg-5  col-xl-3 mx-lg-3  btn btn-primary mt-4"
+          >
+            Create
+          </button>
         </div>
       </form>
     </div>

@@ -1,5 +1,5 @@
 export interface Student {
-  id?: string;
+  id: number;
   first_name: string;
   last_name: string;
   dob: string;
@@ -7,19 +7,31 @@ export interface Student {
   phone?: string;
   address?: string;
   gender?: string;
-  class_id:string;
+  class_id: number;
 }
 export interface Teacher {
-  id?: string;
+  id: number;
   first_name: string;
   last_name: string;
   email?: string;
   phone?: string;
   address?: string;
   gender?: string;
-  dob:string
+  dob: string;
 }
-
+export interface Session {
+  id: number;
+  start_time: string;
+  end_time: string;
+  subject_id: number;
+  class_id: number;
+  day: string;
+}
+export interface ClassType {
+  id: number;
+  name: string;
+  grade_level: string;
+}
 interface StudentAction {
   type: string;
   payload: Student | number;
@@ -28,10 +40,18 @@ export interface Subject {
   id: number;
   title: string;
   description: string;
-  department: string;
+}
+export interface Teaching {
+  id: number;
+  teacher_id: number;
+  subject_id: number;
+  semester: string;
+  start_date: Date;
+  end_date: Date;
+  grade_level: number;
 }
 export interface Admin {
-  id: Number;
+  id: number;
   username: string;
   first_name: string;
   last_name: string;
@@ -40,13 +60,15 @@ export interface Admin {
 }
 
 export interface Attendance {
-  id?: number;
-  studentid: string;
-  subjectid: string;
-  attenddate?: number;
+  id: number;
+  student_id: number;
+  subject_id: number;
+  class_session_id?: number;
+  date: string;
+  status: string;
 }
 export interface Message {
-  id: Number;
+  id: number;
   message: Text;
   generated_at: string;
 }
@@ -65,7 +87,10 @@ export interface State {
   students: Student[];
   teachers: Teacher[];
   classes: any[];
-  sessions: any[];
+  sessions: Session[];
   login: LoginState;
   notification: Notification;
+  subjects: Subject[];
+  teaching: Teaching[];
+  attendance: Attendance[];
 }

@@ -64,7 +64,7 @@ class ClassService {
       console.log("error", error);
     }
   }
-  static async deleteClass(id: string) {
+  static async deleteClass(id: number) {
     return fetch(`http://localhost:4000/api/class/${id}`, {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },

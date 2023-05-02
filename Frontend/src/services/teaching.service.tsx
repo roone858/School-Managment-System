@@ -63,13 +63,13 @@ class TeachingService {
       console.log("error", error);
     }
   }
-  static async deleteTeaching(id: string) {
+  static async deleteTeaching(id: Number) {
     fetch(`http://localhost:4000/api/teaching/${id}`, {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },
     });
   }
-  static async deleteTeachingByTeacherID(id: string) {
+  static async deleteTeachingByTeacherID(id: Number) {
     fetch(`http://localhost:4000/api/teaching/teacher/${id}`, {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },

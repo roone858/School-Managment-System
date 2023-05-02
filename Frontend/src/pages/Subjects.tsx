@@ -9,17 +9,18 @@ import SessionService from "../services/session.service";
 import { deleteSession } from "../redux/slice/session-slice ";
 import { AddSubject } from "../Components/AddComponents/AddSubject";
 import { useState } from "react";
+import { Session, State, Subject, Teacher, Teaching } from "../types/type";
 
 export const Subjects = () => {
   const dispatch = useDispatch();
   const [isAddOpen, setIsAddOpen] = useState(false);
 
-  const subjects = useSelector((state: any) => state.subjects);
-  const teaching = useSelector((state: any) => state.teaching);
-  const sessions = useSelector((state: any) => state.sessions);
+  const subjects = useSelector((state: State) => state.subjects);
+  const teaching = useSelector((state: State) => state.teaching);
+  const sessions = useSelector((state: State) => state.sessions);
   // const [subjects,setSubjects] =useState()
-  const teachers = useSelector((state: any) => state.teachers);
-  const handleDelete = (id: any) => {
+  const teachers = useSelector((state: State) => state.teachers);
+  const handleDelete = (id: number) => {
     Swal.fire({
       title: "Are you sure  to delete this Subject?",
       text: "You won't be able to revert this!",
@@ -30,7 +31,7 @@ export const Subjects = () => {
       confirmButtonText: "Yes, delete !",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const session = await sessions.find((s: any) => s.subject_id == id);
+        const session = await sessions.find((s: Session) => s.subject_id == id);
         if (session) {
           await SessionService.deleteSessionBySubjectId(id);
           dispatch(deleteSession(session.id));
@@ -40,10 +41,10 @@ export const Subjects = () => {
       }
     });
   };
-  const subjectsRows = subjects.map((subject: any) => {
-    const teach = teaching.find((teach: any) => teach.subject_id == subject.id);
+  const subjectsRows = subjects.map((subject: Subject) => {
+    const teach = teaching.find((teach: Teaching) => teach.subject_id == subject.id);
     const teacher = teachers.find(
-      (teacher: any) => teacher.id == teach?.teacher_id
+      (teacher: Teacher) => teacher.id == teach?.teacher_id
     );
     return (
       <tr className="bg-fff" key={subject.id}>

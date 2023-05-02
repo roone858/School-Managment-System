@@ -1,7 +1,7 @@
 import { getTokenFromCookie } from "../utils/cookies";
 
 class studentService {
-  static  async deleteStudent(id: string) {
+  static  async deleteStudent(id: number) {
    const response= await fetch(`http://localhost:4000/api/student/${id}`, {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },

@@ -5,7 +5,7 @@ import StudentService from "../services/student.service";
 import { Table } from "../Components/Table";
 import { AddButton } from "../layouts/AddButton";
 import { deleteStudent } from "../redux/slice/student-slice";
-import { Student } from "../types/type";
+import { ClassType, State, Student } from "../types/type";
 import Swal from "sweetalert2";
 import image from "../assets/dash-icon-01.svg";
 import maleAvatar from "../assets/maleAvatar.png";
@@ -14,14 +14,14 @@ import { useState } from "react";
 import { Input } from "../Components/Input";
 import AddStudent from "../Components/AddComponents/AddStudent";
 export const Students = () => {
-  const students = useSelector((state: any) => state.students);
-  const classes = useSelector((state: any) => state.classes);
+  const students = useSelector((state: State ) => state.students);
+  const classes = useSelector((state: State) => state.classes);
   const [classId, setClassId] = useState();
   const [studentId, setStudentId] = useState();
   const [studentName, setStudentName] = useState();
   const dispatch = useDispatch();
   const [isAddOpen, setIsAddOpen] = useState(false);
-  const handleDelete = (id: any) => {
+  const handleDelete = (id: number) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -38,8 +38,8 @@ export const Students = () => {
       }
     });
   };
-  const GetStudentByID = () => {
-    const student = students.find((student: any) => student.id == studentId);
+  const GetStudentByID = ():any => {
+    const student = students.find((student: Student) => student.id == studentId);
     return (
       student && (
         <tr className="bg-fff" key={student.id}>
@@ -54,7 +54,7 @@ export const Students = () => {
           <td>{student.dob.slice(0, 10)}</td>
           <td>{student.address}</td>
 
-          <td>{classes.find((cl: any) => student.class_id == cl.id)?.name}</td>
+          <td>{classes.find((cl: ClassType) => student.class_id == cl.id)?.name}</td>
           <td>
             <Link
               onClick={() => {
@@ -88,8 +88,8 @@ export const Students = () => {
       )
     );
   };
-  const GetStudentByName = () => {
-    const studentFilter = students.filter((student: any) =>
+  const GetStudentByName = ():any => {
+    const studentFilter = students.filter((student: Student) =>
       (student.first_name + " " + student.last_name)
         .toLowerCase()
         .includes(String(studentName))
@@ -110,7 +110,7 @@ export const Students = () => {
             <td>{student.address}</td>
 
             <td>
-              {classes.find((cl: any) => student.class_id == cl.id)?.name}
+              {classes.find((cl: ClassType) => student.class_id == cl.id)?.name}
             </td>
             <td>
               <Link
@@ -145,9 +145,9 @@ export const Students = () => {
         )
     );
   };
-  const GetStudentByClass = () => {
+  const GetStudentByClass = ():any => {
     const studentFilter = students.filter(
-      (student: any) => student.class_id == classId
+      (student: Student) => student.class_id == classId
     );
     return studentFilter.map(
       (student: Student) =>
@@ -165,7 +165,7 @@ export const Students = () => {
             <td>{student.address}</td>
 
             <td>
-              {classes.find((cl: any) => student.class_id == cl.id)?.name}
+              {classes.find((cla: ClassType) => student.class_id == cla.id)?.name}
             </td>
             <td>
               <Link
@@ -221,7 +221,7 @@ export const Students = () => {
           <td>{student.dob.slice(0, 10)}</td>
           <td>{student.address}</td>
 
-          <td>{classes.find((cl: any) => student.class_id == cl.id)?.name}</td>
+          <td>{classes.find((cl: ClassType) => student.class_id == cl.id)?.name}</td>
           <td>
             <Link
               onClick={() => {
@@ -298,14 +298,14 @@ export const Students = () => {
             <div className="form-group  ">
               <select
                 style={{ color: "#7c7c7c" }}
-                className="form-control p-3"
+                className="form-group p-3"
                 name="class_id"
                 onChange={(e: any) => {
                   setClassId(e.target.value);
                 }}
               >
                 <option value={undefined}>Search By Class</option>
-                {classes.map((cla: any) => (
+                {classes.map((cla: ClassType) => (
                   <option key={cla.id} value={cla.id}>
                     {cla.name}
                   </option>

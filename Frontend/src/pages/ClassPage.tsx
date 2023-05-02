@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Table } from "../Components/Table";
 import { Link } from "react-router-dom";
@@ -7,14 +7,15 @@ import { deleteClass } from "../redux/slice/class-slice ";
 import Swal from "sweetalert2";
 import SessionService from "../services/session.service";
 import AddClass from "../Components/AddComponents/AddClass";
+import { ClassType, State, Student } from "../types/type";
 
 export const ClassPage = () => {
   const dispatch = useDispatch();
-  const classes = useSelector((state: any) => state.classes);
-  const students = useSelector((state: any) => state.students);
+  const classes = useSelector((state: State) => state.classes);
+  const students = useSelector((state: State) => state.students);
   const [isAddOpen, setIsAddOpen] = useState(false);
 
-  const handleDelete = (id: any) => {
+  const handleDelete = (id: number) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -38,9 +39,9 @@ export const ClassPage = () => {
       }
     });
   };
-  const classesRows = classes.map((obj: any) => {
+  const classesRows = classes.map((obj: ClassType) => {
     const studentFilter = students.filter(
-      (student: any) => student.class_id == obj.id
+      (student: Student) => student.class_id == obj.id
     );
     return (
       <tr className="bg-fff" key={obj.id}>

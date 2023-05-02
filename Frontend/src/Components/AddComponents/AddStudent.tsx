@@ -11,13 +11,13 @@ import {
   addNotification,
   setRedFlag,
 } from "../../redux/slice/notifications-slice";
-import { Student, Teacher } from "../../types/type";
+import { ClassType, State, Student, Teacher } from "../../types/type";
 import Swal from "sweetalert2";
 
 const AddStudent = (props: any) => {
-  const [data, setData] = useState({} as any);
+  const [data, setData] = useState({} as Student);
   const dispatch = useDispatch();
-  const classes = useSelector((state: any) => state.classes);
+  const classes = useSelector((state: State) => state.classes);
 
   const updateData = (e: any) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -29,6 +29,7 @@ const AddStudent = (props: any) => {
       if (res.message)
         Swal.fire(" Can't Add!", "Internal Server Error", "error");
       else {
+        
         dispatch(addStudent(res));
         NotificationService.insertNotification({
           message: `new student has been added ${res.first_name} ${res.last_name}`,
@@ -42,8 +43,21 @@ const AddStudent = (props: any) => {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-
-    insertStudent();
+  
+      Swal.fire({
+        title: "Are you sure?",
+        text: `${data.first_name} ${data.last_name} will be add in students list !`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete !",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+        
+          insertStudent();
+        }
+      });
 
     event.target.reset();
   };
@@ -137,7 +151,7 @@ const AddStudent = (props: any) => {
               required
             >
               <option>Select Class </option>
-              {classes.map((c: any) => (
+              {classes.map((c: ClassType) => (
                 <option key={c.id} value={c.id}>
                   {c.name}{" "}
                 </option>

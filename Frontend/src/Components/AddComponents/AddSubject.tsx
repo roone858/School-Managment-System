@@ -66,7 +66,7 @@ export const AddSubject = () => {
               required
             >
               <option>Select Teacher </option>
-              {teachers.map((teacher: any) => (
+              {teachers.map((teacher: Teacher) => (
                 <option key={teacher.id} value={teacher.id}>
                   {teacher.first_name + " " + teacher.last_name}
                 </option>

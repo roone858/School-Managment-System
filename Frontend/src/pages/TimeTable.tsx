@@ -58,7 +58,7 @@ const Timetable = () => {
           }}
           className="btn btn-primary "
         >
-          Add new Subject
+          Add new session
         </button>
         {isAddOpen && <AddSession />}
   
@@ -106,9 +106,12 @@ const Timetable = () => {
                         session.class_id == classId
                     );
                     return (
-                      <td className={filterSessions?.title} key={day}>
-                        {filterSessions ? filterSessions.title : null}
-                        <p>{filterSessions?.teacher_name}</p>
+                      <td className=" p-1"  key={day}>
+                        <div className={filterSessions?.title +" "+"position-relative p-3"} >
+                      { filterSessions&& <button type="button" style={{fontSize:"10px",color:"#fff"}} className="btn-close btn-close-white   position-absolute top-10 end-0 translate-middle rounded-pill " aria-label="Close"></button>}
+                          {filterSessions ? filterSessions.title : null}
+                          <p className="m-0">{filterSessions?.teacher_name}</p>
+                        </div>
                       </td>
                     );
                   })}

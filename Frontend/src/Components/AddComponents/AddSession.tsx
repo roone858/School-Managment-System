@@ -1,12 +1,10 @@
-import React, { useState } from "react";
-import { Input } from "../Input";
-import ClassService from "../../services/class.service";
+import{ useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addClass } from "../../redux/slice/class-slice ";
 import { useNavigate } from "react-router-dom";
 import { days } from "../../utils/time";
 import SessionService from "../../services/session.service";
 import { addSession } from "../../redux/slice/session-slice ";
+import {ClassType, Session, State, Subject} from "../../types/type"
 import {
   checkSessionDay,
   checkSessionTime,
@@ -15,12 +13,12 @@ import Swal from "sweetalert2";
 
 const AddSession = () => {
   const dispatch = useDispatch();
-  const [data, setData] = useState({} as any);
+  const [data, setData] = useState({} as Session);
   const navigate = useNavigate();
-  const teachers = useSelector((state: any) => state.teachers);
-  const classes = useSelector((state: any) => state.classes);
-  const subjects = useSelector((state: any) => state.subjects);
-  const sessions = useSelector((state: any) => state.sessions);
+  const teachers = useSelector((state: State) => state.teachers);
+  const classes = useSelector((state: State) => state.classes);
+  const subjects = useSelector((state: State) => state.subjects);
+  const sessions = useSelector((state: State) => state.sessions);
   const updateData = (e: any) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -57,7 +55,7 @@ const AddSession = () => {
               required
             >
               <option>Select Class </option>
-              {classes.map((cla: any) => (
+              {classes.map((cla: ClassType) => (
                 <option key={cla.id} value={cla.id}>
                   {cla.name}
                 </option>
@@ -76,7 +74,7 @@ const AddSession = () => {
               required
             >
               <option>Select Subject </option>
-              {subjects.map((subject: any) => (
+              {subjects.map((subject: Subject) => (
                 <option key={subject.id} value={subject.id}>
                   {subject.title}
                 </option>
@@ -94,7 +92,7 @@ const AddSession = () => {
               required
             >
               <option>Select Day </option>
-              {days.map((day: any) => (
+              {days.map((day: string) => (
                 <option key={day} value={day}>
                   {day}
                 </option>

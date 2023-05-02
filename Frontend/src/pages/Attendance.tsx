@@ -6,21 +6,21 @@ import {
   addAttendance,
   deleteAttendance,
 } from "../redux/slice/attendance-slice";
-import { Attendance, Subject, Student } from "../types/type";
+import { Attendance, Subject, Student, State, Session, ClassType } from "../types/type";
 import { Table } from "../Components/Table";
 import AbsentButton from "../Components/AbsentButton";
 import { currentDate } from "../utils/time";
 const AttendanceCm = () => {
-  const subjects = useSelector((state: any) => state.subjects);
-  const students = useSelector((state: any) => state.students);
-  const sessions = useSelector((state: any) => state.sessions);
-  const classes = useSelector((state: any) => state.classes);
-  const selectedStudent: any[] = [];
+  const subjects = useSelector((state: State) => state.subjects);
+  const students = useSelector((state: State) => state.students);
+  const sessions = useSelector((state: State) => state.sessions);
+  const classes = useSelector((state: State) => state.classes);
+  const attendance = useSelector((state: State) => state.attendance);
   const dispatch = useDispatch();
   const [classId, seClassId] = useState();
   const [subjectId, setSubjectId] = useState();
   const [chosenSessionID, setChosenSessionID] = useState(0 as number);
-  const attendance = useSelector((state: any) => state.attendance);
+  const selectedStudent: number[] = [];
 
   const handleApply = async () => {
  
@@ -36,7 +36,7 @@ const AttendanceCm = () => {
     });
     setChosenSessionID(0);
   };
-  const handleChose = async (id: any) => {
+  const handleChose = async (id: number) => {
     setChosenSessionID(id);
   };
 
@@ -71,7 +71,7 @@ const AttendanceCm = () => {
               }}
             >
               <option>Select Class</option>
-              {classes?.map((cla: any) => (
+              {classes?.map((cla: ClassType) => (
                 <option key={String(cla.id)} value={cla.id}>
                   {cla.name}
                 </option>
@@ -86,10 +86,10 @@ const AttendanceCm = () => {
             columns={["Session ID", "Start Time ", "End Time", "Day"]}
             rows={sessions
               .filter(
-                (session: any) =>
+                (session: Session) =>
                   session.class_id == classId && session.subject_id == subjectId
               )
-              .map((session: any) => (
+              .map((session: Session) => (
                 <tr key={session.id}>
                   <th scope="row">{session.id}</th>
                   <td>{session.start_time}</td>

@@ -62,7 +62,7 @@ class TeacherService {
       console.log("error", error);
     }
   }
-  static async deleteTeacher(id: string) {
+  static async deleteTeacher(id: number) {
    
       const response = await fetch(`http://localhost:4000/api/teacher/${id}`, {
         method: "DELETE",
