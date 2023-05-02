@@ -42,7 +42,7 @@ class SessionService {
       console.log("error", error);
     }
   }
-  static async deleteSession(id: string) {
+  static async deleteSession(id: number) {
     fetch(`http://localhost:4000/api/session/${id}`, {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },

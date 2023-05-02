@@ -1,22 +1,22 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../style/student.css";
 import StudentService from "../services/student.service";
 import { Table } from "../Components/Table";
-import { AddButton } from "../layouts/AddButton";
 import { deleteStudent } from "../redux/slice/student-slice";
 import { ClassType, State, Student } from "../types/type";
 import Swal from "sweetalert2";
-import image from "../assets/dash-icon-01.svg";
 import maleAvatar from "../assets/maleAvatar.png";
 import femaleAvatar from "../assets/femaleAvatar.png";
 import { useState } from "react";
-import { Input } from "../Components/Input";
 import AddStudent from "../Components/AddComponents/AddStudent";
+import GetStudentByID from "../Components/GetStudentByID";
+import GetStudentByName from "../Components/GetStudentByName";
+import GetStudentByClass from "../Components/GetStudentByClass";
 export const Students = () => {
-  const students = useSelector((state: State ) => state.students);
+  const students = useSelector((state: State) => state.students);
   const classes = useSelector((state: State) => state.classes);
-  const [classId, setClassId] = useState();
+  const [classId, setClassId] = useState(false);
   const [studentId, setStudentId] = useState();
   const [studentName, setStudentName] = useState();
   const dispatch = useDispatch();
@@ -38,174 +38,38 @@ export const Students = () => {
       }
     });
   };
-  const GetStudentByID = ():any => {
-    const student = students.find((student: Student) => student.id == studentId);
-    return (
-      student && (
-        <tr className="bg-fff" key={student.id}>
-          <th scope="row">{student.id}</th>
-          <td>
-            <img
-              src={student.gender == "M" ? maleAvatar : femaleAvatar}
-              style={{ height: "30px" }}
-            />
-          </td>
-          <td> {student.first_name + " " + student.last_name}</td>
-          <td>{student.dob.slice(0, 10)}</td>
-          <td>{student.address}</td>
 
-          <td>{classes.find((cl: ClassType) => student.class_id == cl.id)?.name}</td>
-          <td>
-            <Link
-              onClick={() => {
-                window.scrollTo(0, 0);
-              }}
-              to={`/students/` + student.id}
-              type="button"
-              className="btn btn-primary btn-sm "
-            >
-              Details
-            </Link>
-            <Link
-              onClick={() => {
-                window.scrollTo(0, 0);
-              }}
-              to={`/students/` + "update/" + student.id}
-              type="button"
-              className="btn btn-success btn-sm mx-2 "
-            >
-              Update
-            </Link>
-            <button
-              onClick={() => handleDelete(student.id)}
-              type="button"
-              className="btn  btn-danger btn-sm "
-            >
-              Delete
-            </button>
-          </td>
-        </tr>
-      )
-    );
-  };
-  const GetStudentByName = ():any => {
-    const studentFilter = students.filter((student: Student) =>
-      (student.first_name + " " + student.last_name)
-        .toLowerCase()
-        .includes(String(studentName))
-    );
-    return studentFilter.map(
-      (student: Student) =>
-        student && (
-          <tr className="bg-fff" key={student.id}>
-            <th scope="row">{student.id}</th>
-            <td>
-              <img
-                src={student.gender == "M" ? maleAvatar : femaleAvatar}
-                style={{ height: "30px" }}
-              />
-            </td>
-            <td> {student.first_name + " " + student.last_name}</td>
-            <td>{student.dob.slice(0, 10)}</td>
-            <td>{student.address}</td>
-
-            <td>
-              {classes.find((cl: ClassType) => student.class_id == cl.id)?.name}
-            </td>
-            <td>
-              <Link
-                onClick={() => {
-                  window.scrollTo(0, 0);
-                }}
-                to={`/students/` + student.id}
-                type="button"
-                className="btn btn-primary btn-sm "
-              >
-                Details
-              </Link>
-              <Link
-                onClick={() => {
-                  window.scrollTo(0, 0);
-                }}
-                to={`/students/` + "update/" + student.id}
-                type="button"
-                className="btn btn-success btn-sm mx-2 "
-              >
-                Update
-              </Link>
-              <button
-                onClick={() => handleDelete(student.id)}
-                type="button"
-                className="btn  btn-danger btn-sm "
-              >
-                Delete
-              </button>
-            </td>
-          </tr>
-        )
-    );
-  };
-  const GetStudentByClass = ():any => {
-    const studentFilter = students.filter(
-      (student: Student) => student.class_id == classId
-    );
-    return studentFilter.map(
-      (student: Student) =>
-        student && (
-          <tr className="bg-fff" key={student.id}>
-            <th scope="row">{student.id}</th>
-            <td>
-              <img
-                src={student.gender == "M" ? maleAvatar : femaleAvatar}
-                style={{ height: "30px" }}
-              />
-            </td>
-            <td> {student.first_name + " " + student.last_name}</td>
-            <td>{student.dob.slice(0, 10)}</td>
-            <td>{student.address}</td>
-
-            <td>
-              {classes.find((cla: ClassType) => student.class_id == cla.id)?.name}
-            </td>
-            <td>
-              <Link
-                onClick={() => {
-                  window.scrollTo(0, 0);
-                }}
-                to={`/students/` + student.id}
-                type="button"
-                className="btn btn-primary btn-sm "
-              >
-                Details
-              </Link>
-              <Link
-                onClick={() => {
-                  window.scrollTo(0, 0);
-                }}
-                to={`/students/` + "update/" + student.id}
-                type="button"
-                className="btn btn-success btn-sm mx-2 "
-              >
-                Update
-              </Link>
-              <button
-                onClick={() => handleDelete(student.id)}
-                type="button"
-                className="btn  btn-danger btn-sm "
-              >
-                Delete
-              </button>
-            </td>
-          </tr>
-        )
-    );
-  };
   const studentRaws =
     studentId || studentName || classId ? (
       <>
-        {studentId && <GetStudentByID />}
-        {studentName && <GetStudentByName />}
-        {classId && <GetStudentByClass />}
+        {studentId && (
+          <GetStudentByID
+            students={students}
+            classes={classes}
+            studentId={studentId}
+            handleDelete={handleDelete}
+            maleAvatar={maleAvatar}
+            femaleAvatar={femaleAvatar}
+          />
+        )}
+        {studentName && (
+          <GetStudentByName
+            students={students}
+            classes={classes}
+            studentName={studentName}
+            maleAvatar={maleAvatar}
+            femaleAvatar={femaleAvatar}
+          />
+        )}
+        {classId && (
+          <GetStudentByClass
+            students={students}
+            classes={classes}
+            classId={classId}
+            maleAvatar={maleAvatar}
+            femaleAvatar={femaleAvatar}
+          />
+        )}
       </>
     ) : (
       students.map((student: Student) => (
@@ -221,7 +85,9 @@ export const Students = () => {
           <td>{student.dob.slice(0, 10)}</td>
           <td>{student.address}</td>
 
-          <td>{classes.find((cl: ClassType) => student.class_id == cl.id)?.name}</td>
+          <td>
+            {classes.find((cl: ClassType) => student.class_id == cl.id)?.name}
+          </td>
           <td>
             <Link
               onClick={() => {
@@ -301,10 +167,12 @@ export const Students = () => {
                 className="form-group p-3"
                 name="class_id"
                 onChange={(e: any) => {
-                  setClassId(e.target.value);
+                  e.target.value == 0
+                    ? setClassId(false)
+                    : setClassId(e.target.value);
                 }}
               >
-                <option value={undefined}>Search By Class</option>
+                <option value={0}>Search By Class</option>
                 {classes.map((cla: ClassType) => (
                   <option key={cla.id} value={cla.id}>
                     {cla.name}
