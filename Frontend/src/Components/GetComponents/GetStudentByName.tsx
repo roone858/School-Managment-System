@@ -1,16 +1,19 @@
+import { useSelector } from "react-redux";
+import { ClassType, State, Student } from "../../types/type";
 import { Link } from "react-router-dom";
-import { ClassType, Student } from "../types/type";
 
-const GetStudentByClass = ({
+const GetStudentByName = ({
   students,
   classes,
-  classId,
+  studentName,
   handleDelete,
   maleAvatar,
   femaleAvatar,
 }: any): any => {
-  const studentFilter = students.filter(
-    (student: Student) => student.class_id == classId
+  const studentFilter = students.filter((student: Student) =>
+    (student.first_name + " " + student.last_name)
+      .toLowerCase()
+      .includes(String(studentName.toLowerCase()))
   );
   return studentFilter.map(
     (student: Student) =>
@@ -28,7 +31,7 @@ const GetStudentByClass = ({
           <td>{student.address}</td>
 
           <td>
-            {classes.find((cla: ClassType) => student.class_id == cla.id)?.name}
+            {classes.find((cl: ClassType) => student.class_id == cl.id)?.name}
           </td>
           <td>
             <Link
@@ -63,4 +66,4 @@ const GetStudentByClass = ({
       )
   );
 };
-export default GetStudentByClass;
+export default GetStudentByName ;

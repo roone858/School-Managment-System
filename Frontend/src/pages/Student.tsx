@@ -10,9 +10,11 @@ import maleAvatar from "../assets/maleAvatar.png";
 import femaleAvatar from "../assets/femaleAvatar.png";
 import { useState } from "react";
 import AddStudent from "../Components/AddComponents/AddStudent";
-import GetStudentByID from "../Components/GetStudentByID";
-import GetStudentByName from "../Components/GetStudentByName";
-import GetStudentByClass from "../Components/GetStudentByClass";
+import GetStudentByID from "../Components/GetComponents/GetStudentByID";
+import GetStudentByName from "../Components/GetComponents/GetStudentByName";
+import GetStudentByClass from "../Components/GetComponents/GetStudentByClass";
+import GetAllStudents from "../Components/GetComponents/GetAllStudents";
+
 export const Students = () => {
   const students = useSelector((state: State) => state.students);
   const classes = useSelector((state: State) => state.classes);
@@ -38,88 +40,6 @@ export const Students = () => {
       }
     });
   };
-
-  const studentRaws =
-    studentId || studentName || classId ? (
-      <>
-        {studentId && (
-          <GetStudentByID
-            students={students}
-            classes={classes}
-            studentId={studentId}
-            handleDelete={handleDelete}
-            maleAvatar={maleAvatar}
-            femaleAvatar={femaleAvatar}
-          />
-        )}
-        {studentName && (
-          <GetStudentByName
-            students={students}
-            classes={classes}
-            studentName={studentName}
-            maleAvatar={maleAvatar}
-            femaleAvatar={femaleAvatar}
-          />
-        )}
-        {classId && (
-          <GetStudentByClass
-            students={students}
-            classes={classes}
-            classId={classId}
-            maleAvatar={maleAvatar}
-            femaleAvatar={femaleAvatar}
-          />
-        )}
-      </>
-    ) : (
-      students.map((student: Student) => (
-        <tr className="bg-fff" key={student.id}>
-          <th scope="row">{student.id}</th>
-          <td>
-            <img
-              src={student.gender == "M" ? maleAvatar : femaleAvatar}
-              style={{ height: "30px" }}
-            />
-          </td>
-          <td> {student.first_name + " " + student.last_name}</td>
-          <td>{student.dob.slice(0, 10)}</td>
-          <td>{student.address}</td>
-
-          <td>
-            {classes.find((cl: ClassType) => student.class_id == cl.id)?.name}
-          </td>
-          <td>
-            <Link
-              onClick={() => {
-                window.scrollTo(0, 0);
-              }}
-              to={`/students/` + student.id}
-              type="button"
-              className="btn btn-primary btn-sm "
-            >
-              Details
-            </Link>
-            <Link
-              onClick={() => {
-                window.scrollTo(0, 0);
-              }}
-              to={`/students/` + "update/" + student.id}
-              type="button"
-              className="btn btn-success btn-sm mx-2 "
-            >
-              Update
-            </Link>
-            <button
-              onClick={() => handleDelete(student.id)}
-              type="button"
-              className="btn  btn-danger btn-sm "
-            >
-              Delete
-            </button>
-          </td>
-        </tr>
-      ))
-    );
 
   return (
     <>
@@ -193,7 +113,48 @@ export const Students = () => {
               "Class",
               "Actions",
             ]}
-            rows={studentRaws}
+            rows={
+              studentId || studentName || classId ? (
+                <>
+                  {studentId && (
+                    <GetStudentByID
+                      students={students}
+                      classes={classes}
+                      studentId={studentId}
+                      handleDelete={handleDelete}
+                      maleAvatar={maleAvatar}
+                      femaleAvatar={femaleAvatar}
+                    />
+                  )}
+                  {studentName && (
+                    <GetStudentByName
+                      students={students}
+                      classes={classes}
+                      studentName={studentName}
+                      maleAvatar={maleAvatar}
+                      femaleAvatar={femaleAvatar}
+                    />
+                  )}
+                  {classId && (
+                    <GetStudentByClass
+                      students={students}
+                      classes={classes}
+                      classId={classId}
+                      maleAvatar={maleAvatar}
+                      femaleAvatar={femaleAvatar}
+                    />
+                  )}
+                </>
+              ) : (
+                <GetAllStudents
+                  students={students}
+                  classes={classes}
+                  classId={classId}
+                  maleAvatar={maleAvatar}
+                  femaleAvatar={femaleAvatar}
+                />
+              )
+            }
           />
         </div>
       </div>

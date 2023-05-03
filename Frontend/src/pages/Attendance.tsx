@@ -10,6 +10,7 @@ import { Attendance, Subject, Student, State, Session, ClassType } from "../type
 import { Table } from "../Components/Table";
 import AbsentButton from "../Components/AbsentButton";
 import { currentDate } from "../utils/time";
+import { useNavigate } from "react-router-dom";
 const AttendanceCm = () => {
   const subjects = useSelector((state: State) => state.subjects);
   const students = useSelector((state: State) => state.students);
@@ -21,20 +22,34 @@ const AttendanceCm = () => {
   const [subjectId, setSubjectId] = useState();
   const [chosenSessionID, setChosenSessionID] = useState(0 as number);
   const selectedStudent: number[] = [];
-
+const navigate=useNavigate()
   const handleApply = async () => {
  
-    [...new Set(selectedStudent)].forEach(async (id) => {
-      const attend = await AttendanceService.insertAttendance({
-        student_id: id,
-        class_session_id: chosenSessionID,
-        subject_id: subjectId,
-        date: new Date(),
-        status: "Absent",
-      });
-      dispatch(addAttendance(attend));
+    Swal.fire({
+      title: "Are you sure Apply?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Apply !",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+      
+        [...new Set(selectedStudent)].forEach(async (id) => {
+          const attend = await AttendanceService.insertAttendance({
+            student_id: id,
+            class_session_id: chosenSessionID,
+            subject_id: subjectId,
+            date: new Date(),
+            status: "Absent",
+          });
+          dispatch(addAttendance(attend));
+        });
+        setChosenSessionID(0);
+        navigate("/attendance")
+      }
     });
-    setChosenSessionID(0);
   };
   const handleChose = async (id: number) => {
     setChosenSessionID(id);

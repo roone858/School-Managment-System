@@ -1,4 +1,4 @@
-import { ClassType, State, Student } from "../types/type";
+import { ClassType, State, Student } from "../../types/type";
 
 import { Link } from "react-router-dom";
 const GetStudentByID = ({
