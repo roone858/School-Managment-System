@@ -11,12 +11,16 @@ import { Input } from "../Components/Input";
 import teacherAvatar from "../assets/teacherAvatar.jpg";
 import { useState } from "react";
 import AddTeacher from "../Components/AddComponents/AddTeacher";
+import GetTeacherByID from "../Components/GetComponents/GetTeacherByID";
+import GetTeacherByName from "../Components/GetComponents/GetTeacherByName";
+import GetAllTeachers from "../Components/GetComponents/GetAllTeachers";
 
 export const Teachers = () => {
   const dispatch = useDispatch();
   const teachers = useSelector((state: State) => state.teachers);
   const [isAddOpen, setIsAddOpen] = useState(false);
-
+  const [teacherId, setTeacherId] = useState();
+  const [teacherName, setTeacherName] = useState();
   const handleDelete = (id: number) => {
     Swal.fire({
       title: "Are you sure?",
@@ -28,90 +32,58 @@ export const Teachers = () => {
       confirmButtonText: "Yes, delete !",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await TeachingService.deleteTeaching(id)
+        await TeachingService.deleteTeaching(id);
         const response = await TeacherService.deleteTeacher(id);
         dispatch(deleteTeacher(id));
         Swal.fire(" Deleted!", "Teacher deleted", "success");
       }
     });
   };
-  const teachersRaws = teachers.map((teacher: Teacher) => (
-    <tr className="bg-fff" key={teacher.id.toString()}>
-      <th scope="row">{teacher.id.toString()}</th>
-      <td><img src={teacherAvatar}  style={{  height: "40px" ,borderRadius:"100%"}} alt="" /></td>
-      <td>{teacher.first_name+" "+teacher.last_name}</td>
-      <td>{teacher.dob.slice(0,10)}</td>
-      <td>{teacher.address}</td>
 
-      <td>
-        <Link
-          onClick={() => {
-            window.scrollTo(0, 0);
-          }}
-          to={`/teachers/` + teacher.id}
-          type="button"
-          className="btn btn-primary btn-sm "
-        >
-          Details
-        </Link>
-        <Link
-          onClick={() => {
-            window.scrollTo(0, 0);
-          }}
-          to={`/teachers/` + "update/" + teacher.id}
-          type="button"
-          className="btn btn-success btn-sm mx-2 "
-        >
-          Update
-        </Link>
-        <button
-          onClick={() => handleDelete(teacher.id)}
-          type="button"
-          className="btn  btn-danger btn-sm "
-        >
-          Delete
-        </button>
-      </td>
-    </tr>
-  ));
   return (
-    <><div className="teachers-sections container">
-      
-       <button    onClick={() => {
+    <>
+      <div className="teachers-sections container">
+        <button
+          onClick={() => {
             setIsAddOpen(!isAddOpen);
-          }} className="btn btn-primary " >
+          }}
+          className="btn btn-primary "
+        >
           Add new Teacher
         </button>
-       {isAddOpen && <AddTeacher/>}
+        {isAddOpen && <AddTeacher />}
         <form className=" d-flex ">
           <div className="form-row d-flex mt-4  col-12 ">
+            {/* <div className={" col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}> */}
 
-          {/* <div className={" col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}> */}
-         
             <input
               className="form-control p-3  "
               name="end_time"
-              onChange={()=>{}}
+              onChange={(e: any) => {
+                setTeacherId(e.target.value);
+              }}
               placeholder="Search By ID..."
               type="search"
               id="inputGrade_level"
               required
             />
-          {/* </div> */}
-          
-          {/* <div className={" col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}> */}
-         
+            {/* </div> */}
+
+            {/* <div className={" col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}> */}
+
             <input
               className="form-control p-3 mx-3"
               name="end_time"
-              onChange={()=>{}}
+              onChange={(e: any) => {
+                setTeacherName(e.target.value);
+              }}
               placeholder="Search By Name..."
               type="search"
               id="inputGrade_level"
               required
             />
-          {/* </div> */}
-           
+            {/* </div> */}
+
             <div className="form-group  col-5">
               <label></label>
               {/* <select
@@ -133,18 +105,36 @@ export const Teachers = () => {
         </form>
         <div className="students">
           <Table
-            columns={[
-              "ID ",
-              "Photo",
-              "Name",
-              "DOP",
-              "Address",
-              "Actions",
-            ]}
-            rows={teachersRaws}
+            columns={["ID ", "Photo", "Name", "DOP", "Address", "Actions"]}
+            rows={
+              teacherId || teacherName ? (
+                <>
+                  {teacherId && (
+                    <GetTeacherByID
+                      teachers={teachers}
+                      teacherId={teacherId}
+                      handleDelete={handleDelete}
+                      teacherAvatar={teacherAvatar}
+                    />
+                  )}
+                  {teacherName && (
+                    <GetTeacherByName
+                      teachers={teachers}
+                      teacherName={teacherName}
+                      teacherAvatar={teacherAvatar}
+                    />
+                  )}
+                </>
+              ) : (
+                <GetAllTeachers
+                  teachers={teachers}
+                  teacherAvatar={teacherAvatar}
+                />
+              )
+            }
           />
         </div>
-    </div>
+      </div>
     </>
   );
 };

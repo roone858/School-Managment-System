@@ -32,12 +32,13 @@ const login = async (req, res) => {
       //    process.env.REFRESH_TOKEN_SECRET,
       //    { expiresIn: "1d" }
       //  );
-      //  res.cookie("jwt", refreshToken, {
-      //    httpOnly: true,
-      //    sameSite: "None",
-      //    secure: true,
-      //    maxAge: 24 * 60 * 60 * 1000,
-      //  });
+      res.header("jwt",token)
+       res.cookie("jwt", token, {
+         httpOnly: true,
+         sameSite: "None",
+         secure: true,
+         maxAge: 24 * 60 * 60 * 1000,
+       });
       return res.json({
         token: token,
         admin: {

@@ -18,6 +18,10 @@ export function getTokenFromCookie() {
   const token = Cookies.get("token");
   return token ? token : null;
 }
+export function getJWTFromCookie() {
+  const token = Cookies.get("jwt");
+  return token ? token : null;
+}
 export function getAdminFromCookie() {
   const admin = Cookies.get("admin");
   return admin ? JSON.parse(admin) : null;

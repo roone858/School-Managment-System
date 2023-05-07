@@ -16,12 +16,12 @@ export default function InsetDividers({ messages }: any) {
       }}
     >
       {messages.map((mess: any, index: number) => (
-        <div key={index}>
-          <ListItem>
+        <div  key={index}>
+          <ListItem  style={{borderBottom:"1px  solid #eee" }}>
             <ListItemAvatar>
               <CampaignIcon style={{fontSize:"2rem",color:"#ddd"}} ></CampaignIcon>
             </ListItemAvatar>
-            <ListItemText style={{fontSize:"0.9rem",lineHeight:"20px"}}
+            <ListItemText style={{fontSize:"0.8rem"}}
               primary={mess.message}
               secondary={
                 mess.generated_at.slice(0, 10) +
@@ -30,7 +30,6 @@ export default function InsetDividers({ messages }: any) {
               }
             />
           </ListItem>
-          <Divider variant="inset" component="li" />
         </div>
       ))}
     </List>
