@@ -17,8 +17,10 @@ app.use(cors());
 
 // app.post("/auth/login", login);
 
+app.get("/", (req, res) => {
+  res.status(200).send("OK");
+});
 app.use("/api", apiRoute);
-
 app.listen(port, () => {
   console.log("server listening");
 });
