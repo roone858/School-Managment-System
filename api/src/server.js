@@ -7,7 +7,7 @@ const { checkToken } = require("./middleware/auth");
 const app = express();
 
 const apiRoute = require("./routes/api");
-const port = process.env.SERVER_PORT || 3000;
+const port = process.env.SERVER_PORT || 3030;
 app.use(express.json());
 // Use middleware to handle HTTP request bodies
 app.use(bodyParser.json());
@@ -22,5 +22,5 @@ app.get("/", (req, res) => {
 });
 app.use("/api", apiRoute);
 app.listen(port, () => {
-  console.log("server listening");
+  console.log(`server listening on port ${port}`);
 });
