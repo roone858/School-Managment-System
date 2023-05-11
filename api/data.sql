@@ -447,7 +447,8 @@ Values
           'room 1',
           3,
           5
-     )
+     );
+
 INSERT INTO
      admin (
           first_name,

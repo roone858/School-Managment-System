@@ -15,12 +15,12 @@ app.use(bodyParser.json());
 // Use middleware to enable CORS
 app.use(cors());
 
-// app.post("/auth/login", login);
+app.post("/auth/login", login);
 
 app.get("/", (req, res) => {
   res.status(200).send("OK");
 });
-app.use("/api", apiRoute);
+app.use("/api", checkToken,apiRoute);
 app.listen(port, () => {
   console.log(`server listening on port ${port}`);
 });
