@@ -1,16 +1,12 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addStudent } from "../store/actions/studentActions";
 import Card from "./Card";
 import image from "../assets/Back-end-dev-ProCert.png";
 import image1 from "../assets/Data-analyses.png";
 import image2 from "../assets/DevOps-Cloud-Agile-Specialization-Final.png";
 import image3 from "../assets/MLS.subject-banners-01_Subject-Logo-.png";
 import image4 from "../assets/subject1.png";
-import { AddButton } from "../layouts/AddButton";
 import { Subject, Teacher } from "../types/type";
-import { Link, Outlet, useNavigate } from "react-router-dom";
-import IconTabs from "./mui/IconTabs";
 
 export const SubjectsCards = () => {
   const images = [image, image1, image2, image3, image4];

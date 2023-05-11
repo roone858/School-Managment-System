@@ -1,6 +1,6 @@
 export default async function login({ username, password }: any) {
   try {
-    const response = await fetch(`http://localhost:4000/auth/login/`, {
+    const response = await fetch(`auth/login/`, {
       method: "POST",
       mode: "cors",
       cache: "no-cache",

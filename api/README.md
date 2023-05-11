@@ -15,45 +15,45 @@ These are just some of the features that a school management API can have. The s
 
 ## Endpoints :computer:
 
-1. `/api/students`:
+1. host +`/api/students`:
      - `GET`: get a list of all students
      - `POST`: create a new student
-2. `/api/students/:id`:
+2. host +`/api/students/:id`:
      - `GET`: get a specific student by ID
      - `PUT`: update a specific student by ID
      - `DELETE`: delete a specific student by ID
-3. `/api/teachers`:
+3. host +`/api/teachers`:
      - `GET`: get a list of all teachers
      - `POST`: create a new teacher
-4. `/api/teachers/:id`:
+4. host +`/api/teachers/:id`:
      - `GET`: get a specific teacher by ID
      - `PUT`: update a specific teacher by ID
      - `DELETE`: delete a specific teacher by ID
-5. `/api/subjects`:
+5. host +`/api/subjects`:
      - `GET`: get a list of all subjects
      - `POST`: create a new subject
-6.	`/api/subjects/:id`:
+6.	host +`/api/subjects/:id`:
      - `GET`: get a specific subject by ID
      - `PUT`: update a specific subject by ID
      - `DELETE`: delete a specific subject by ID
-7.	`/api/enrollments`:
+7.	host +`/api/enrollments`:
      - `GET`: get a list of all enrollments
      - `POST`: create a new enrollment
-8.	`/api/enrollments/:id`:
+8.	host +`/api/enrollments/:id`:
      - `GET`: get a specific enrollment by ID
      - `PUT`: update a specific enrollment by ID
      - `DELETE`: delete a specific enrollment by ID
-9.	`/api/attendance`:
+9.	host +`/api/attendance`:
      - `GET`: get a list of all attendance records
      - `POST`: create a new attendance record
-10.	`/api/attendance/:id`:
+10.	host +`/api/attendance/:id`:
      - `GET`: get a specific attendance record by ID
      - `PUT`: update a specific attendance record by ID
      - `DELETE`: delete a specific attendance record by ID
-11.	`/api/grades`:
+11.	host +`/api/grades`:
      - `GET`: get a list of all grades  
      - `POST`: create a new grade
-12.	`/api/grades/:id`:
+12.	host +`/api/grades/:id`:
      - `GET`: get a specific grade by ID
      - `PUT`: update a specific grade by ID
      - `DELETE`: delete a specific grade by ID

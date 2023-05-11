@@ -66,6 +66,7 @@ export const Students = () => {
                 className="form-control p-3"
                 id="first-name"
                 placeholder="Search By ID..."
+                autoComplete="on"
                 required
               />
             </div>
@@ -80,6 +81,7 @@ export const Students = () => {
                 id="last-name"
                 placeholder="Search By Name..."
                 required
+                autoComplete="on"
               />
             </div>
             <div className="form-group  ">

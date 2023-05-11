@@ -1,8 +1,9 @@
 import { getTokenFromCookie } from "../utils/cookies";
+import { host } from "./host";
 class AdminService {
   async getAllAdmins() {
     try {
-      const response = await fetch("http://localhost:4000/api/admin", {
+      const response = await fetch(host +"/api/admin", {
         headers: { Authorization: `${getTokenFromCookie()}` },
       });
       const json = await response.json();
@@ -13,7 +14,7 @@ class AdminService {
   }
   async getAdminByUsername(username:string) {
      try {
-       const response = await fetch(`http://localhost:4000/api/admin/username/${username}`, {
+       const response = await fetch(host +`/api/admin/username/${username}`, {
          headers: { Authorization: `${getTokenFromCookie()}` },
        });
        const json = await response.json();
@@ -25,7 +26,7 @@ class AdminService {
 
   async insertAdmin(data: any) {
     try {
-      const response = await fetch(`http://localhost:4000/api/admin/`, {
+      const response = await fetch(host +`/api/admin/`, {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -46,7 +47,7 @@ class AdminService {
   }
   async changeAdminPassword(data: any) {
     try {
-      const response = await fetch(`http://localhost:4000/api/admin/changepass`, {
+      const response = await fetch(host +`/api/admin/changepass`, {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -66,14 +67,14 @@ class AdminService {
     }
   }
   async deleteAdmin(id:string) {
-    const response = await fetch(`http://localhost:4000/api/admin/${id}`, {
+    const response = await fetch(host +`/api/admin/${id}`, {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },
     });
     return response;
   }
   async updateAdmin(id:string) {
-    const response = await fetch(`http://localhost:4000/api/admin/${id}`, {
+    const response = await fetch(host +`/api/admin/${id}`, {
       method: "UPDATE",
       headers: { Authorization: `${getTokenFromCookie()}` },
     });

@@ -47,14 +47,13 @@ const AddStudent = (props: any) => {
       Swal.fire({
         title: "Are you sure?",
         text: `${data.first_name} ${data.last_name} will be add in students list !`,
-        icon: "warning",
+        icon: "question",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
+        confirmButtonColor: "green",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete !",
+        confirmButtonText: "Yes, Add !",
       }).then(async (result) => {
         if (result.isConfirmed) {
-        
           insertStudent();
         }
       });

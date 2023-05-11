@@ -1,8 +1,9 @@
 import { getTokenFromCookie } from "../utils/cookies";
+import { host } from "./host";
 class NotificationService {
  static async getNotification() {
     try {
-      const response = await fetch("http://localhost:4000/api/notification", {
+      const response = await fetch(host +"/api/notification", {
         headers: { Authorization: `${getTokenFromCookie()}` },
       });
       const json = await response.json();
@@ -14,7 +15,7 @@ class NotificationService {
  
   static async insertNotification(data: any) {
     try {
-      const response = await fetch(`http://localhost:4000/api/notification/`, {
+      const response = await fetch(host +`/api/notification/`, {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -34,7 +35,7 @@ class NotificationService {
     }
   }
   static async deleteAllNotification() {
-    const response = await fetch(`http://localhost:4000/api/notification`, {
+    const response = await fetch(host +`/api/notification`, {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },
     });

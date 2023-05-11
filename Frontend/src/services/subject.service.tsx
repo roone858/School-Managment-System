@@ -1,9 +1,10 @@
 import { getTokenFromCookie } from "../utils/cookies";
+import { host } from "./host";
 
 class SubjectService {
   static async getAllSubjects() {
     try {
-      const response = await fetch("http://localhost:4000/api/subject", {
+      const response = await fetch(host +"/api/subject", {
         headers: { Authorization: `${getTokenFromCookie()}` },
       });
       const json = await response.json();
@@ -14,7 +15,7 @@ class SubjectService {
   }
   static async getSubject(id: string | number) {
     try {
-      const response = await fetch(`http://localhost:4000/api/subject/${id}`);
+      const response = await fetch(host +`/api/subject/${id}`);
       const json = await response.json();
       return json;
     } catch (error) {
@@ -23,7 +24,7 @@ class SubjectService {
   }
   static async insertSubject(data: any) {
     try {
-      const response = await fetch(`http://localhost:4000/api/subject/`, {
+      const response = await fetch(host +`/api/subject/`, {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -44,7 +45,7 @@ class SubjectService {
   }
   static async updateSubject(id:any,data: any) {
     try {
-      const response = await fetch(`http://localhost:4000/api/subject/${id}`, {
+      const response = await fetch(host +`/api/subject/${id}`, {
         method: "PUT",
         mode: "cors",
         cache: "no-cache",
@@ -64,7 +65,7 @@ class SubjectService {
     }
   }
   static async deleteSubject(id: Number) {
-    fetch(`http://localhost:4000/api/subject/${id}`, {
+    fetch(host +`/api/subject/${id}`, {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },
     });

@@ -1,9 +1,10 @@
 import { getTokenFromCookie } from "../utils/cookies";
+import { host } from "./host";
 
 class TeachingService {
   static async getAllTeachings() {
     try {
-      const response = await fetch("http://localhost:4000/api/teaching", {
+      const response = await fetch(host +"/api/teaching", {
         headers: { Authorization: `${getTokenFromCookie()}` },
       });
       const json = await response.json();
@@ -14,7 +15,7 @@ class TeachingService {
   }
   static async getTeaching(id: string | number) {
     try {
-      const response = await fetch(`http://localhost:4000/api/teaching/${id}`);
+      const response = await fetch(host +`/api/teaching/${id}`);
       const json = await response.json();
       return json;
     } catch (error) {
@@ -23,7 +24,7 @@ class TeachingService {
   }
   static async insertTeaching(data: any) {
     try {
-      const response = await fetch(`http://localhost:4000/api/teaching/`, {
+      const response = await fetch(host +`/api/teaching/`, {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -44,7 +45,7 @@ class TeachingService {
   }
   static async updateTeaching(id:any,data: any) {
     try {
-      const response = await fetch(`http://localhost:4000/api/teaching/${id}`, {
+      const response = await fetch(host +`/api/teaching/${id}`, {
         method: "PUT",
         mode: "cors",
         cache: "no-cache",
@@ -64,13 +65,13 @@ class TeachingService {
     }
   }
   static async deleteTeaching(id: Number) {
-    fetch(`http://localhost:4000/api/teaching/${id}`, {
+    fetch(host +`/api/teaching/${id}`, {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },
     });
   }
   static async deleteTeachingByTeacherID(id: Number) {
-    fetch(`http://localhost:4000/api/teaching/teacher/${id}`, {
+    fetch(host +`/api/teaching/teacher/${id}`, {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },
     });

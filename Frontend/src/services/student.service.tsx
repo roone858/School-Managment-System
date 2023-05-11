@@ -1,8 +1,9 @@
 import { getTokenFromCookie } from "../utils/cookies";
+import { host } from "./host";
 
 class studentService {
   static  async deleteStudent(id: number) {
-   const response= await fetch(`http://localhost:4000/api/student/${id}`, {
+   const response= await fetch(host +`/api/student/${id}`, {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },
     })
@@ -13,7 +14,7 @@ class studentService {
 
   static  async getStudents() {
     try {
-      const response = await fetch("http://localhost:4000/api/student", {
+      const response = await fetch(host +"/api/student", {
         headers: { Authorization: `${getTokenFromCookie()}` },
       });
       const json = await response.json();
@@ -24,7 +25,7 @@ class studentService {
   }
   static async getStudent() {
     try {
-      const response = await fetch("http://localhost:4000/api/student");
+      const response = await fetch(host +"/api/student");
       const json = await response.json();
       return json;
     } catch (error) {
@@ -33,7 +34,7 @@ class studentService {
   }
   static async insertStudent(data: any) {
     try {
-      const response = await fetch(`http://localhost:4000/api/student/`, {
+      const response = await fetch(host +`/api/student/`, {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -54,7 +55,7 @@ class studentService {
   }
   static async updateStudent(id: any,data:any) {
     try {
-      const response = await fetch(`http://localhost:4000/api/student/${id}`, {
+      const response = await fetch(host +`/api/student/${id}`, {
         method: "PUT",
         mode: "cors",
         cache: "no-cache",

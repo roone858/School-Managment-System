@@ -1,9 +1,10 @@
 import { getTokenFromCookie } from "../utils/cookies";
+import { host } from "./host";
 
 class SessionService {
   static async getAllSession() {
     try {
-      const response = await fetch("http://localhost:4000/api/session", {
+      const response = await fetch(host +"/api/session", {
         headers: { Authorization: `${getTokenFromCookie()}` },
       });
       const json = await response.json();
@@ -14,7 +15,7 @@ class SessionService {
   }
   static async getSession(id: string | number) {
     try {
-      const response = await fetch(`http://localhost:4000/api/session/${id}`);
+      const response = await fetch(host +`/api/session/${id}`);
       const json = await response.json();
       return json;
     } catch (error) {
@@ -23,7 +24,7 @@ class SessionService {
   }
   static async insertSession(data: any) {
     try {
-      const response = await fetch(`http://localhost:4000/api/session/`, {
+      const response = await fetch(host +`/api/session/`, {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -43,19 +44,19 @@ class SessionService {
     }
   }
   static async deleteSession(id: number) {
-    fetch(`http://localhost:4000/api/session/${id}`, {
+    fetch(host +`/api/session/${id}`, {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },
     });
   }
   static async deleteSessionByClassID(id: number) {
-     return fetch(`http://localhost:4000/api/session/delete/${id}`, {
+     return fetch(host +`/api/session/delete/${id}`, {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },
     }).then( result => result);
   }
   static async deleteSessionBySubjectId(id: Number) {
-    return fetch(`http://localhost:4000/api/session/deleteBySession/${id}`, {
+    return fetch(host +`/api/session/deleteBySession/${id}`, {
      method: "DELETE",
      headers: { Authorization: `${getTokenFromCookie()}` },
    }).then( result => result);

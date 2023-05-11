@@ -1,10 +1,11 @@
 import Swal from "sweetalert2";
 import { getTokenFromCookie } from "../utils/cookies";
+import { host } from "./host";
 
 class ClassService {
   static async getAllClass() {
     try {
-      const response = await fetch("http://localhost:4000/api/class", {
+      const response = await fetch(host +"/api/class", {
         headers: { Authorization: `${getTokenFromCookie()}` },
       });
       const json = await response.json();
@@ -15,7 +16,7 @@ class ClassService {
   }
   static async getClass(id: string | number) {
     try {
-      const response = await fetch(`http://localhost:4000/api/class/${id}`);
+      const response = await fetch(host +`/api/class/${id}`);
       const json = await response.json();
       return json;
     } catch (error) {
@@ -24,7 +25,7 @@ class ClassService {
   }
   static async insertClass(data: any) {
     try {
-      const response = await fetch(`http://localhost:4000/api/class/`, {
+      const response = await fetch(host +`/api/class/`, {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -45,7 +46,7 @@ class ClassService {
   }
   static async updateClass(id: any, data: any) {
     try {
-      const response = await fetch(`http://localhost:4000/api/class/${id}`, {
+      const response = await fetch(host +`/api/class/${id}`, {
         method: "PUT",
         mode: "cors",
         cache: "no-cache",
@@ -65,7 +66,7 @@ class ClassService {
     }
   }
   static async deleteClass(id: number) {
-    return fetch(`http://localhost:4000/api/class/${id}`, {
+    return fetch(host +`/api/class/${id}`, {
       method: "DELETE",
       headers: { Authorization: `${getTokenFromCookie()}` },
     }).then((result) => result);

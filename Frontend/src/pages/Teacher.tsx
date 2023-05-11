@@ -64,7 +64,8 @@ export const Teachers = () => {
               }}
               placeholder="Search By ID..."
               type="search"
-              id="inputGrade_level"
+              id="inputID"
+              autoComplete="on"
               required
             />
             {/* </div> */}
@@ -78,14 +79,15 @@ export const Teachers = () => {
                 setTeacherName(e.target.value);
               }}
               placeholder="Search By Name..."
+              autoComplete="on"
               type="search"
-              id="inputGrade_level"
+              id="inputName"
               required
             />
             {/* </div> */}
 
             <div className="form-group  col-5">
-              <label></label>
+              
               {/* <select
                 className="form-control"
                 name="class_id"

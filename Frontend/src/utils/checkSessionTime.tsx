@@ -1,9 +1,11 @@
+import { Session } from "../types/type";
+
 export const checkSessionTime = (
-  sessions: { start_time: string; day: string ;class_id:string}[],
+  sessions: Session[],
 
   givenStartTime: string,
   givenDay: string,
-  givenClassID: string
+  givenClassID: number
 ) => {
 
  const flag = sessions.find(session =>  session.day === givenDay && session.start_time === givenStartTime+":00" && session.class_id == givenClassID )
