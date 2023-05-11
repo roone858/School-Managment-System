@@ -1,13 +1,8 @@
 import "../style/dashboard.css";
 import { useDispatch, useSelector } from "react-redux";
-import AdminService from "../services/admin.service";
 
-import {
-  addNotification,
-  setRedFlag,
-} from "../redux/slice/notifications-slice";
+
 import { currentDay, currentHours } from "../utils/time";
-import { Table } from "react-bootstrap";
 import {
   Attendance,
   ClassType,
