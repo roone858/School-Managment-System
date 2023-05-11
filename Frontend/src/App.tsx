@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 
-import AddStudent from "./Components/AddComponents/AddStudent";
-import AddTeacher from "./Components/AddComponents/AddTeacher";
+
 import Sidebar from "./layouts/Sidebar";
 import { Subjects } from "./pages/Subjects";
 import { Dashboard } from "./pages/Dashboard";
@@ -9,18 +8,13 @@ import { Setting } from "./pages/Setting";
 import { Students } from "./pages/Student";
 import { Teachers } from "./pages/Teacher";
 import { useDispatch, useSelector } from "react-redux";
-import Details from "./Components/Details";
 import { useEffect, useState } from "react";
 import { addStudent, fetchStudents } from "./redux/slice/student-slice";
-import StudentService from "./services/student.service";
-import SubjectService from "./services/subject.service";
-import TeachingService from "./services/teaching.service";
-import TeacherService from "./services/teacher.service";
-import AttendanceService from "./services/attendance.service";
+
 import NotificationService from "./services/notification.service";
 import { addNotification } from "./redux/slice/notifications-slice";
 import { addTeacher, fetchTeachers } from "./redux/slice/teacher-slice";
-import SignInSide from "./pages/SignInSide";
+
 import { getTokenFromCookie } from "./utils/cookies";
 import { addSubject, fetchSubjects } from "./redux/slice/subject-slice ";
 import NavBar from "./layouts/NavBar";
