@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 
-import "bootstrap/dist/css/bootstrap.min.css";
 import AddStudent from "./Components/AddComponents/AddStudent";
 import AddTeacher from "./Components/AddComponents/AddTeacher";
 import Sidebar from "./layouts/Sidebar";
@@ -43,11 +42,7 @@ import { AddSubject } from "./Components/AddComponents/AddSubject";
 import { addTeaching, fetchTeaching } from "./redux/slice/teaching-slice";
 import Timetable from "./pages/TimeTable";
 import { addClass, fetchClasses } from "./redux/slice/class-slice ";
-import ClassService from "./services/class.service";
-import SessionService from "./services/session.service";
 import { addSession, fetchSessions } from "./redux/slice/session-slice ";
-import TimetableService from "./services/timetable.service";
-import { addTimetable, fetchTimetables } from "./redux/slice/timetable-slice";
 import { ClassPage } from "./pages/ClassPage";
 import AddClass from "./Components/AddComponents/AddClass";
 import UpdateStudent from "./Components/UpdateComponents/UpdateStudent";
