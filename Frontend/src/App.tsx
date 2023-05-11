@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 
-import "./bootstrap/dist/css/bootstrap.min.css";
+// import "./bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import Sidebar from "./layouts/Sidebar";
 import { Subjects } from "./pages/Subjects";
@@ -9,36 +10,26 @@ import { Setting } from "./pages/Setting";
 import { Students } from "./pages/Student";
 import { Teachers } from "./pages/Teacher";
 import { useDispatch, useSelector } from "react-redux";
-import Details from "./Components/Details";
 import { useEffect, useState } from "react";
 import { addStudent, fetchStudents } from "./redux/slice/student-slice";
-import StudentService from "./services/student.service";
-import SubjectService from "./services/subject.service";
-import TeachingService from "./services/teaching.service";
-import TeacherService from "./services/teacher.service";
-import AttendanceService from "./services/attendance.service";
+
+
 import NotificationService from "./services/notification.service";
 import { addNotification } from "./redux/slice/notifications-slice";
 import { addTeacher, fetchTeachers } from "./redux/slice/teacher-slice";
-import SignInSide from "./pages/SignInSide";
 import { getTokenFromCookie } from "./utils/cookies";
 import { addSubject, fetchSubjects } from "./redux/slice/subject-slice ";
 import NavBar from "./layouts/NavBar";
 import AttendanceCm from "./pages/Attendance";
 import { addAttendance, fetchAttendance } from "./redux/slice/attendance-slice";
 import {
-  Notification,
-  Attendance,
-  Subject,
-  State,
-  Student,
-  Teacher,
+ 
   Message,
 } from "./types/type";
-import UpdateForm from "./Components/UpdateForm";
+
 import Table from "./Components/bootstrap/Table";
 import "./App.css";
-import { AddSubject } from "./Components/AddComponents/AddSubject";
+
 import { addTeaching, fetchTeaching } from "./redux/slice/teaching-slice";
 import Timetable from "./pages/TimeTable";
 import { addClass, fetchClasses } from "./redux/slice/class-slice ";
