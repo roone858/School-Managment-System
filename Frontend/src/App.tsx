@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 
 
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 
 import Sidebar from "./layouts/Sidebar";
