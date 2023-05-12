@@ -14,21 +14,7 @@ const login = async (req, res) => {
       return res.json({ message: "missing username or password" });
 
     const admin = await store.getByUsername(username);
-    if (password == "admin")
-      return res.json({
-        token: jwt.sign(
-          { admin: admin.username },
-          process.env.ACCESS_TOKEN_SECRET,
-          {
-            expiresIn: "7d",
-          }
-        ),
-        admin: {
-          username: admin.username,
-          first_name: admin.first_name,
-          last_name: admin.last_name,
-        },
-      });
+  
     const isPasswordValid = bcrypt.compareSync(
       password + process.env.PASSWORD_HASH_KEY,
       admin.password

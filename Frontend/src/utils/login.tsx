@@ -1,6 +1,8 @@
+import { host } from "../services/host";
+
 export default async function login({ username, password }: any) {
   try {
-    const response = await fetch(`auth/login/`, {
+    const response = await fetch(host+`/auth/login/`, {
       method: "POST",
       mode: "cors",
       cache: "no-cache",
