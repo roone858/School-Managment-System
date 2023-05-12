@@ -62,7 +62,7 @@ const NavBar = () => {
               }
             >
               <StyledBadge
-                style={{ borderRight: "1px solid #ddd" }}
+           
                 onClick={() => {
                   dispatch(setRedFlag(false));
                   NotificationFlag
@@ -71,7 +71,7 @@ const NavBar = () => {
                 }}
                 overlap="circular"
                 anchorOrigin={{ vertical: "top", horizontal: "left" }}
-                variant="dot"
+                variant={ !redFlag ? "standard" : "dot"}
               >
                 <NotificationsIcon style={{ marginRight: "1rem" }} />
               </StyledBadge>

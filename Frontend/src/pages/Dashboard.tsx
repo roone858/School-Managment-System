@@ -26,7 +26,7 @@ export const Dashboard = () => {
   return (
     <>
       <div className="dashboard-section  container">
-        <div className=" row w-100  analyses">
+        <div className=" row w-100 mx-auto analyses">
           <div className="col-md-4 p-1">
             <div className="analyst-card">
               <i className="bx bx-user"></i>
