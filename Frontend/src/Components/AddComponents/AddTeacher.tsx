@@ -11,6 +11,7 @@ import {
   setRedFlag,
 } from "../../redux/slice/notifications-slice";
 import {  Teacher } from "../../types/type";
+import Swal from "sweetalert2";
 
 const AddTeacher = () => {
   const [data, setData] = useState({} as Teacher);
@@ -34,8 +35,20 @@ const AddTeacher = () => {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
+    Swal.fire({
+      title: "Are you sure?",
+      text: `${data.first_name} ${data.last_name} will be add in teachers list !`,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "green",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Add !",
+    }).then(async (result:any) => {
+      if (result.isConfirmed) {
+        insertTeacher();
 
-    insertTeacher();
+      }
+    });
 
     event.target.reset();
   };
