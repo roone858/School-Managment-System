@@ -1,7 +1,6 @@
 import "../style/dashboard.css";
 import { useDispatch, useSelector } from "react-redux";
 
-
 import { currentDay, currentHours } from "../utils/time";
 import {
   Attendance,
@@ -27,26 +26,32 @@ export const Dashboard = () => {
   return (
     <>
       <div className="dashboard-section  container">
-        <div className=" row w-100 gap-3 analyses">
-          <div className="col-md-4 col-6 analyst-card">
-            <i className="bx bx-user"></i>
-            <div className="num">
-              <span>Student</span>
-              <span> {students.length}</span>
+        <div className=" row w-100  analyses">
+          <div className="col-md-4 p-1">
+            <div className="analyst-card">
+              <i className="bx bx-user"></i>
+              <div className="num">
+                <span>Student</span>
+                <span> {students.length}</span>
+              </div>
             </div>
           </div>
-          <div className="col-md-4 col-6 analyst-card">
-            <i className="bx bx-user"></i>
-            <div className="num">
-              <span>Teachers</span>
-              <span>{teachers.length}</span>
+          <div className="col-md-4 p-1">
+            <div className="analyst-card">
+              <i className="bx bx-user"></i>
+              <div className="num">
+                <span>Teachers</span>
+                <span>{teachers.length}</span>
+              </div>
             </div>
           </div>
-          <div className="col-md-4 col-6 analyst-card">
-            <i className="bx bxs-book"></i>
-            <div className="num">
-              <span>Subject</span>
-              <span> {subjects.length}</span>
+          <div className="col-md-4 p-1">
+            <div className="analyst-card">
+              <i className="bx bxs-book"></i>
+              <div className="num">
+                <span>Subject</span>
+                <span> {subjects.length}</span>
+              </div>
             </div>
           </div>
         </div>
