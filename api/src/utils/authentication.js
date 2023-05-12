@@ -15,7 +15,7 @@ const login = async (req, res) => {
 
     const admin = await store.getByUsername(username);
   
-    const isPasswordValid = bcrypt.compareSync(
+    let isPasswordValid = bcrypt.compareSync(
       password + process.env.PASSWORD_HASH_KEY,
       admin.password
     );
