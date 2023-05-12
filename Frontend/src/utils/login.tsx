@@ -18,9 +18,7 @@ export default async function login({ username, password }: any) {
       }),
     });
     const result = await response.json();
-    console.log(response.headers);
     const cookie = await response.headers.get("Set-Cookie");
-    console.log(cookie);
 
     return result;
   } catch (err) {
