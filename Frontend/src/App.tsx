@@ -1,8 +1,8 @@
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
+import "./App.css";
 
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Sidebar from "./layouts/Sidebar";
 import { Subjects } from "./pages/Subjects";
@@ -10,38 +10,32 @@ import { Dashboard } from "./pages/Dashboard";
 import { Setting } from "./pages/Setting";
 import { Students } from "./pages/Student";
 import { Teachers } from "./pages/Teacher";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { addStudent, fetchStudents } from "./redux/slice/student-slice";
-
+import { fetchStudents } from "./redux/slice/student-slice";
 
 import NotificationService from "./services/notification.service";
 import { addNotification } from "./redux/slice/notifications-slice";
-import { addTeacher, fetchTeachers } from "./redux/slice/teacher-slice";
+import { fetchTeachers } from "./redux/slice/teacher-slice";
 import { getTokenFromCookie } from "./utils/cookies";
-import { addSubject, fetchSubjects } from "./redux/slice/subject-slice ";
+import { fetchSubjects } from "./redux/slice/subject-slice ";
 import NavBar from "./layouts/NavBar";
 import AttendanceCm from "./pages/Attendance";
-import { addAttendance, fetchAttendance } from "./redux/slice/attendance-slice";
-import {
- 
-  Message,
-} from "./types/type";
+import { fetchAttendance } from "./redux/slice/attendance-slice";
+import { Message } from "./types/type";
 
 import Table from "./Components/bootstrap/Table";
-import "./App.css";
 
-import { addTeaching, fetchTeaching } from "./redux/slice/teaching-slice";
+import { fetchTeaching } from "./redux/slice/teaching-slice";
 import Timetable from "./pages/TimeTable";
-import { addClass, fetchClasses } from "./redux/slice/class-slice ";
-import { addSession, fetchSessions } from "./redux/slice/session-slice ";
+import { fetchClasses } from "./redux/slice/class-slice ";
+import { fetchSessions } from "./redux/slice/session-slice ";
 import { ClassPage } from "./pages/ClassPage";
 import AddClass from "./Components/AddComponents/AddClass";
 import UpdateStudent from "./Components/UpdateComponents/UpdateStudent";
 import UpdateClass from "./Components/UpdateComponents/UpdateClass";
 import UpdateTeacher from "./Components/UpdateComponents/UpdateTeacher";
 import UpdateSubject from "./Components/UpdateComponents/UpdateSubject";
-import AddSession from "./Components/AddComponents/AddSession";
 import SignIn from "./pages/SignIn";
 import StudentDetails from "./Components/DetailsComponents/StudentDetails";
 import TeacherDetails from "./Components/DetailsComponents/TeacherDetails";
