@@ -8,7 +8,7 @@ import { addSubject } from "../../redux/slice/subject-slice ";
 import { addTeaching } from "../../redux/slice/teaching-slice";
 
 export const AddSubject = () => {
-  const teachers = useSelector((state: State) => state.teachers);
+  const teachers = useSelector((state: State) => state.teachers.data);
   const [data, setData] = useState({} as Subject);
   const dispatch = useDispatch();
   const updateData = (e: any) => {

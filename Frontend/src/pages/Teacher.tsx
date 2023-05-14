@@ -1,23 +1,24 @@
-import { AddButton } from "../layouts/AddButton";
 import { Table } from "../Components/Table";
-import { Link, Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { State, Teacher } from "../types/type";
+import { State } from "../types/type";
 import Swal from "sweetalert2";
 import TeacherService from "../services/teacher.service";
 import { deleteTeacher } from "../redux/slice/teacher-slice";
 import TeachingService from "../services/teaching.service";
-import { Input } from "../Components/Input";
 import teacherAvatar from "../assets/teacherAvatar.jpg";
 import { useState } from "react";
 import AddTeacher from "../Components/AddComponents/AddTeacher";
 import GetTeacherByID from "../Components/GetComponents/GetTeacherByID";
 import GetTeacherByName from "../Components/GetComponents/GetTeacherByName";
 import GetAllTeachers from "../Components/GetComponents/GetAllTeachers";
+import Loading from "../layouts/Loading";
 
 export const Teachers = () => {
   const dispatch = useDispatch();
-  const teachers = useSelector((state: State) => state.teachers);
+  const teachers = useSelector((state: State) => state.teachers.data);
+  const isTeachersLoading = useSelector(
+    (state: State) => state.teachers.isLoading
+  );
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [teacherId, setTeacherId] = useState();
   const [teacherName, setTeacherName] = useState();
@@ -39,7 +40,7 @@ export const Teachers = () => {
       }
     });
   };
-
+  if (isTeachersLoading) return <Loading />;
   return (
     <>
       <div className="teachers-sections container">
@@ -87,7 +88,6 @@ export const Teachers = () => {
             {/* </div> */}
 
             <div className="form-group  col-5">
-              
               {/* <select
                 className="form-control"
                 name="class_id"

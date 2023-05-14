@@ -8,7 +8,7 @@ import { State, Student } from "../../types/type";
 const StudentDetails = () => {
   const params = useParams();
 
-  const students = useSelector((state: State) => state.students);
+  const students = useSelector((state: State) => state.students.data);
   const student = students.find(
     (student: Student) => student.id == Number(params.id)
   );

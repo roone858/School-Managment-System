@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Subject } from "../../types/type";
+import { ClassType, Subject } from "../../types/type";
 import ClassService from "../../services/class.service";
 
 export const fetchClasses: any = createAsyncThunk(
@@ -9,29 +9,45 @@ export const fetchClasses: any = createAsyncThunk(
     return response;
   }
 );
+const initialState = {
+  data: [] as ClassType[],
+  isLoading: false,
+  error: null,
+};
 const classesSlice = createSlice({
   name: "classes",
-  initialState: [] as any[],
+  initialState,
   reducers: {
     addClass: (state, action: PayloadAction<any>) => {
-      state.push(action.payload);
+      state.data.push(action.payload);
     },
-    deleteClass: (state = [], action: PayloadAction<number>) => {
-      return state.filter((c: any) => c.id !== action.payload);
+    deleteClass: (state, action: PayloadAction<number>) => {
+      return {
+        ...state,
+        data: state.data.filter((c: any) => c.id !== action.payload),
+      };
     },
-    updateClass: (state = [], action: PayloadAction<any>) => {
-      const index = state.findIndex(
+    updateClass: (state, action: PayloadAction<any>) => {
+      const index = state.data.findIndex(
         (cla: any) => cla.id == action.payload.id
       );
       if (index !== -1) {
-        state[index] = action.payload.data;
+        state.data[index] = action.payload.data;
       }
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchClasses.fulfilled, (state, action) => action.payload);
+    builder.addCase(fetchClasses.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchClasses.fulfilled, (state, action) => {
+      return { ...state, data: action.payload, isLoading: false };
+    });
+    builder.addCase(fetchClasses.rejected, (state, action) => {
+      return { ...state, error: action.payload.error };
+    });
   },
 });
 
-export const { addClass, deleteClass,updateClass } = classesSlice.actions;
+export const { addClass, deleteClass, updateClass } = classesSlice.actions;
 export default classesSlice.reducer;

@@ -15,10 +15,14 @@ import GetStudentByName from "../Components/GetComponents/GetStudentByName";
 import GetStudentByClass from "../Components/GetComponents/GetStudentByClass";
 import GetAllStudents from "../Components/GetComponents/GetAllStudents";
 import { getJWTFromCookie } from "../utils/cookies";
+import Loading from "../layouts/Loading";
 
 export const Students = () => {
-  const students = useSelector((state: State) => state.students);
-  const classes = useSelector((state: State) => state.classes);
+  const students = useSelector((state: State) => state.students.data);
+  const isStudentsLoading = useSelector(
+    (state: State) => state.students.isLoading
+  );
+  const classes = useSelector((state: State) => state.classes.data);
   const [classId, setClassId] = useState(false);
   const [studentId, setStudentId] = useState();
   const [studentName, setStudentName] = useState();
@@ -41,7 +45,8 @@ export const Students = () => {
       }
     });
   };
-
+  if (isStudentsLoading) return <Loading/>
+ 
   return (
     <>
       <div className="students-section container">

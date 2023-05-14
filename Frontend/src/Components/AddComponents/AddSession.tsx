@@ -15,10 +15,10 @@ const AddSession = () => {
   const dispatch = useDispatch();
   const [data, setData] = useState({} as Session);
   const navigate = useNavigate();
-  const teachers = useSelector((state: State) => state.teachers);
-  const classes = useSelector((state: State) => state.classes);
-  const subjects = useSelector((state: State) => state.subjects);
-  const sessions = useSelector((state: State) => state.sessions);
+  const teachers = useSelector((state: State) => state.teachers.data);
+  const classes = useSelector((state: State) => state.classes.data);
+  const subjects = useSelector((state: State) => state.subjects.data);
+  const sessions = useSelector((state: State) => state.sessions.data);
   const updateData = (e: any) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };

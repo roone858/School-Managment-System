@@ -17,7 +17,7 @@ import Swal from "sweetalert2";
 const AddStudent = (props: any) => {
   const [data, setData] = useState({} as Student);
   const dispatch = useDispatch();
-  const classes = useSelector((state: State) => state.classes);
+  const classes = useSelector((state: State) => state.classes.data);
 
   const updateData = (e: any) => {
     setData({ ...data, [e.target.name]: e.target.value });

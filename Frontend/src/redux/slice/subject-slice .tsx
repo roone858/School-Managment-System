@@ -9,27 +9,48 @@ export const fetchSubjects: any = createAsyncThunk(
     return response;
   }
 );
+const initialState = {
+  data: [] as Subject[],
+  isLoading: false,
+  error: null,
+};
 const subjectsSlice = createSlice({
   name: "subjects",
-  initialState: [] as Subject[],
+  initialState,
   reducers: {
     addSubject: (state, action: PayloadAction<Subject>) => {
-      state.push(action.payload);
+      state.data.push(action.payload);
     },
-    deleteSubject: (state = [], action: PayloadAction<number>) => {
-      return state.filter((subject: Subject) => subject.id !== action.payload);
+    deleteSubject: (state, action: PayloadAction<number>) => {
+      return {
+        ...state,
+        data: state.data.filter(
+          (subject: Subject) => subject.id !== action.payload
+        ),
+      };
     },
-    updateSubject: (state = [], action: PayloadAction<any>) => {
-      const index = state.findIndex((subject: any) => subject.id == action.payload.id);
+    updateSubject: (state, action: PayloadAction<any>) => {
+      const index = state.data.findIndex(
+        (subject: any) => subject.id == action.payload.id
+      );
       if (index !== -1) {
-        state[index] = action.payload.data;
+        state.data[index] = action.payload.data;
       }
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchSubjects.fulfilled, (state, action) => action.payload);
+    builder.addCase(fetchSubjects.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchSubjects.fulfilled, (state, action) => {
+      return { ...state, data: action.payload, isLoading: false };
+    });
+    builder.addCase(fetchSubjects.rejected, (state, action) => {
+      return { ...state, error: action.payload.error };
+    });
   },
 });
 
-export const { addSubject, deleteSubject,updateSubject } = subjectsSlice.actions;
+export const { addSubject, deleteSubject, updateSubject } =
+  subjectsSlice.actions;
 export default subjectsSlice.reducer;

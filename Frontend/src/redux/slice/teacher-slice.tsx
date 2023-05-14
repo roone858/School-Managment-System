@@ -9,38 +9,49 @@ export const fetchTeachers: any = createAsyncThunk(
     return data;
   }
 );
-
+const initialState = {
+  data: [] as Teacher[],
+  isLoading: false,
+  error: null,
+};
 const teachersSlice = createSlice({
   name: "teachers",
-  initialState: [] as Teacher[],
+  initialState,
   reducers: {
     addTeacher: (state, action: PayloadAction<Teacher>) => {
-      state.push(action.payload);
+      state.data.push(action.payload);
     },
-    deleteTeacher: (state = [], action: PayloadAction<any>) => {
-      return state.filter((teacher: Teacher) => teacher.id !== action.payload);
+    deleteTeacher: (state, action: PayloadAction<any>) => {
+      return {
+        ...state,
+        data: state.data.filter(
+          (teacher: Teacher) => teacher.id !== action.payload
+        ),
+      };
     },
-    updateTeacher: (state = [], action: PayloadAction<any>) => {
-      const index = state.findIndex(
+    updateTeacher: (state, action: PayloadAction<any>) => {
+      const index = state.data.findIndex(
         (teacher: any) => teacher.id == action.payload.id
       );
       if (index !== -1) {
-        state[index] = action.payload.data;
+        state.data[index] = action.payload.data;
       }
     },
   },
   extraReducers: (builder) => {
     // Add reducers for handling the fetchTeachers action
-    //  builder.addCase(fetchTeachers.pending, (state) => {
-    //   state.status = 'loading';
-    // });
-    builder.addCase(fetchTeachers.fulfilled, (state, action) => action.payload);
+     builder.addCase(fetchTeachers.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchTeachers.fulfilled, (state, action) => {
+      return { ...state, data: action.payload,isLoading:false };
+    });
     builder.addCase(fetchTeachers.rejected, (state, action) => {
-      // state.status = 'failed';
-      // state = action.error.message;
+      return {...state,error:action.payload.error}
     });
   },
 });
 
-export const { addTeacher, deleteTeacher,updateTeacher } = teachersSlice.actions;
+export const { addTeacher, deleteTeacher, updateTeacher } =
+  teachersSlice.actions;
 export default teachersSlice.reducer;

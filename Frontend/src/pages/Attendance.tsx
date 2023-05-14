@@ -12,10 +12,10 @@ import AbsentButton from "../Components/AbsentButton";
 import { currentDate } from "../utils/time";
 import { useNavigate } from "react-router-dom";
 const AttendanceCm = () => {
-  const subjects = useSelector((state: State) => state.subjects);
-  const students = useSelector((state: State) => state.students);
-  const sessions = useSelector((state: State) => state.sessions);
-  const classes = useSelector((state: State) => state.classes);
+  const subjects = useSelector((state: State) => state.subjects.data);
+  const students = useSelector((state: State) => state.students.data);
+  const sessions = useSelector((state: State) => state.sessions.data);
+  const classes = useSelector((state: State) => state.classes.data);
   const attendance = useSelector((state: State) => state.attendance);
   const dispatch = useDispatch();
   const [classId, seClassId] = useState();

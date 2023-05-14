@@ -14,13 +14,13 @@ import {
 
 export const Dashboard = () => {
   const dispatch = useDispatch();
-  const students = useSelector((state: State) => state.students);
-  const teachers = useSelector((state: State) => state.teachers);
-  const teaching = useSelector((state: State) => state.teaching);
-  const subjects = useSelector((state: State) => state.subjects);
-  const sessions = useSelector((state: State) => state.sessions);
-  const classes = useSelector((state: State) => state.classes);
-  const attendanceList = useSelector((state: State) => state.attendance);
+  const students = useSelector((state: State) => state.students.data);
+  const teachers = useSelector((state: State) => state.teachers.data);
+  const teaching = useSelector((state: State) => state.teaching.data);
+  const subjects = useSelector((state: State) => state.subjects.data);
+  const sessions = useSelector((state: State) => state.sessions.data);
+  const classes = useSelector((state: State) => state.classes.data);
+  const attendanceList = useSelector((state: State) => state.attendance.data);
   const attendance = attendanceList.slice(1).reverse();
 
   return (
@@ -85,11 +85,10 @@ export const Dashboard = () => {
                           }
                         </th>
                         <td>
-                          {" "}
                           {
                             classes.find(
                               (cla: ClassType) => cla.id === session.class_id
-                            ).name
+                            )?.name
                           }
                         </td>
                         <td>{session.start_time}</td>

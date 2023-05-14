@@ -15,11 +15,11 @@ export const Subjects = () => {
   const dispatch = useDispatch();
   const [isAddOpen, setIsAddOpen] = useState(false);
 
-  const subjects = useSelector((state: State) => state.subjects);
-  const teaching = useSelector((state: State) => state.teaching);
-  const sessions = useSelector((state: State) => state.sessions);
+  const subjects = useSelector((state: State) => state.subjects.data);
+  const teaching = useSelector((state: State) => state.teaching.data);
+  const sessions = useSelector((state: State) => state.sessions.data);
   // const [subjects,setSubjects] =useState()
-  const teachers = useSelector((state: State) => state.teachers);
+  const teachers = useSelector((state: State) => state.teachers.data);
   const handleDelete = (id: number) => {
     Swal.fire({
       title: "Are you sure  to delete this Subject?",

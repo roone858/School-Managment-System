@@ -11,8 +11,8 @@ import { ClassType, State, Student } from "../types/type";
 
 export const ClassPage = () => {
   const dispatch = useDispatch();
-  const classes = useSelector((state: State) => state.classes);
-  const students = useSelector((state: State) => state.students);
+  const classes = useSelector((state: State) => state.classes.data);
+  const students = useSelector((state: State) => state.students.data);
   const [isAddOpen, setIsAddOpen] = useState(false);
 
   const handleDelete = (id: number) => {

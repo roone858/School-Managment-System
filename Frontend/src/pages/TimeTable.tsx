@@ -10,11 +10,11 @@ import Swal from "sweetalert2";
 
 const Timetable = () => {
   const [classId, setClassID] = useState(1);
-  const subjects = useSelector((state: State) => state.subjects);
-  const classes = useSelector((state: State) => state.classes);
-  const sessions = useSelector((state: State) => state.sessions);
-  const teachings = useSelector((state: State) => state.teaching);
-  const teachers = useSelector((state: State) => state.teachers);
+  const subjects = useSelector((state: State) => state.subjects.data);
+  const classes = useSelector((state: State) => state.classes.data);
+  const sessions = useSelector((state: State) => state.sessions.data);
+  const teachings = useSelector((state: State) => state.teaching.data);
+  const teachers = useSelector((state: State) => state.teachers.data);
   const [isAddOpen, setIsAddOpen] = useState(false);
 
   const dispatch = useDispatch();

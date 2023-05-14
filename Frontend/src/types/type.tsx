@@ -84,13 +84,13 @@ export interface LoginState {
   error: string | null;
 }
 export interface State {
-  students: Student[];
-  teachers: Teacher[];
-  classes: any[];
-  sessions: Session[];
+  students: { data: Student[]; isLoading: boolean; error: any };
+  teachers: { data: Teacher[]; isLoading: boolean; error: any };
+  subjects: { data: Subject[]; isLoading: boolean; error: any };
+  classes: { data: ClassType[]; isLoading: boolean; error: any };
+  sessions: { data: Session[]; isLoading: boolean; error: any };
+  teaching: { data: Teaching[]; isLoading: boolean; error: any };
+  attendance: { data: Attendance[]; isLoading: boolean; error: any };
   login: LoginState;
   notification: Notification;
-  subjects: Subject[];
-  teaching: Teaching[];
-  attendance: Attendance[];
 }
