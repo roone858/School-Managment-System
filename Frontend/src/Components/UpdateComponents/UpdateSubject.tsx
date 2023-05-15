@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Student } from "../../types/type";
+import { State, Student } from "../../types/type";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import studentService from "../../services/student.service";
@@ -16,7 +16,7 @@ const UpdateStudent = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const subjects = useSelector((state: any) => state.subjects);
-  const teachers = useSelector((state: any) => state.teachers);
+  const teachers = useSelector((state: State) => state.teachers.data);
   const teaching = useSelector((state: any) => state.teaching);
   const subject = subjects?.find((cla: any) => cla.id == id);
   const teach = teaching.find((t: any) => t.subject_id == subject?.id);

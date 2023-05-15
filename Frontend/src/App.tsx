@@ -100,33 +100,33 @@ function App() {
   return (
     <div className="App ">
       {/* <BrowserRouter> */}
-          <HashRouter>
+      <HashRouter>
         <Sidebar onChange={changeHandler} />
 
         <NavBar />
         <div className="home-section">
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/test" element={<Table />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="students/update/:id" element={<UpdateStudent />} />
-              <Route path="/students" element={<Students />}></Route>
-              <Route path="/students/:id" element={<StudentDetails />} />
-              <Route path="/teachers" element={<Teachers />}>
-                <Route path="update/:id" element={<UpdateTeacher />} />
-              </Route>
-              <Route path="/teachers/:id" element={<TeacherDetails />} />
-              <Route path="/subjects" element={<Subjects />}></Route>
-              <Route path="subjects/update/:id" element={<UpdateSubject />} />
-              <Route path="/timetable" element={<Timetable />}></Route>
-              <Route path="/classes" element={<ClassPage />}></Route>
-              <Route path="/classes/add" element={<AddClass />}></Route>
-              <Route path="/classes/update/:id" element={<UpdateClass />} />
-              <Route path="/attendance" element={<AttendanceCm />}></Route>
-              <Route path="/setting//*" element={<Setting />}></Route>
-            </Routes>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/test" element={<Table />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="students/update/:id" element={<UpdateStudent />} />
+            <Route path="/students" element={<Students />}></Route>
+            <Route path="/students/:id" element={<StudentDetails />} />
+            <Route path="/teachers" element={<Teachers />} />
+
+            <Route path="teachers/update/:id" element={<UpdateTeacher />} />
+            <Route path="/teachers/:id" element={<TeacherDetails />} />
+            <Route path="/subjects" element={<Subjects />}></Route>
+            <Route path="subjects/update/:id" element={<UpdateSubject />} />
+            <Route path="/timetable" element={<Timetable />}></Route>
+            <Route path="/classes" element={<ClassPage />}></Route>
+            <Route path="/classes/add" element={<AddClass />}></Route>
+            <Route path="/classes/update/:id" element={<UpdateClass />} />
+            <Route path="/attendance" element={<AttendanceCm />}></Route>
+            <Route path="/setting//*" element={<Setting />}></Route>
+          </Routes>
         </div>
-          </HashRouter>
+      </HashRouter>
       {/* </BrowserRouter> */}
     </div>
   );

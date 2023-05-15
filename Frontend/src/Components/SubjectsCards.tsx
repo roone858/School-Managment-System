@@ -10,7 +10,7 @@ import { Subject, Teacher } from "../types/type";
 
 export const SubjectsCards = () => {
   const images = [image, image1, image2, image3, image4];
-  const subjects = useSelector((state: any) => state.subjects);
+  const subjects = useSelector((state: any) => state.subjects.data);
   const subjectsCards = subjects.map((subject: Subject, index: number) => {
 
     return (

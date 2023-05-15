@@ -1,24 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { Student } from "../../types/type";
+import { State, Student } from "../../types/type";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import studentService from "../../services/student.service";
 import { updateStudent } from "../../redux/slice/student-slice";
 import Swal from "sweetalert2";
+import Loading from "../../layouts/Loading";
 const UpdateStudent = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const students = useSelector((state: any) => state.students);
-  const classes =useSelector((state: any) => state.classes);
-  const student = students?.find((student: any) => student.id == id);
+
+  const students = useSelector((state: State) => state.students.data);
+  const classes = useSelector((state: State) => state.classes.data);
+  const student: Student | any = students?.find(
+    (student: Student) => student.id === Number(id)
+  );
   const [data, setData] = useState(student);
 
   const updateData = (e: any) => {
-    setData({ ...data, [e.target.name]: e.target.value });
+    setData({ ...student,...data, [e.target.name]: e.target.value });
   };
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-console.log(data)
+    console.log(data);
     Swal.fire({
       title: "Are you sure to update?",
       text: "You won't be able to revert this!",
@@ -40,11 +44,10 @@ console.log(data)
     });
   };
 
-  if (!data) return <h1>loading</h1>;
   return (
     <div className="update-form">
       {!student ? (
-        <h1>loading</h1>
+        <Loading />
       ) : (
         <>
           <section className="vh-100 gradient-custom">
@@ -65,8 +68,9 @@ console.log(data)
                                 id="first_name"
                                 className="form-control form-control-lg"
                                 name="first_name"
-                                value={data.first_name}
+                                defaultValue={student.first_name}
                                 onChange={updateData}
+                                autoComplete="on"
                               />
                               <label
                                 className="form-label"
@@ -81,9 +85,10 @@ console.log(data)
                               <input
                                 type="text"
                                 id="last_name"
-                                value={data.last_name}
+                                defaultValue={student.last_name}
                                 onChange={updateData}
                                 name="last_name"
+                                autoComplete="on"
                                 className="form-control form-control-lg"
                               />
                               <label className="form-label" htmlFor="last_name">
@@ -117,7 +122,7 @@ console.log(data)
                                 id="inputGender4"
                                 onChange={updateData}
                                 name="gender"
-                                value={data.gender}
+                                defaultValue={student.gender}
                                 className="form-control"
                                 required
                               >
@@ -126,7 +131,7 @@ console.log(data)
                                 <option value="F">Female</option>
                               </select>
                               <label
-                                htmlFor="birthdayDate"
+                                htmlFor="inputGender4"
                                 className="form-label"
                               >
                                 Gender
@@ -143,7 +148,8 @@ console.log(data)
                                 id="emailAddress"
                                 className="form-control form-control-lg"
                                 name="email"
-                                value={data.email}
+                                defaultValue={student.email}
+                                autoComplete="on"
                                 onChange={updateData}
                               />
                               <label
@@ -158,15 +164,16 @@ console.log(data)
                             <div className="form-outline">
                               <input
                                 type="tel"
-                                id="phon"
+                                id="phone"
                                 className="form-control form-control-lg"
                                 name="phone"
-                                value={data.phone}
+                                defaultValue={student.phone}
+                                autoComplete="on"
                                 onChange={updateData}
                               />
                               <label
                                 className="form-label"
-                                htmlFor="phoneNumber"
+                                htmlFor="phone"
                               >
                                 Phone Number
                               </label>
@@ -182,12 +189,13 @@ console.log(data)
                                 id="address"
                                 className="form-control form-control-lg"
                                 name="address"
-                                value={data.address}
+                                defaultValue={student.address}
+                                autoComplete="on"
                                 onChange={updateData}
                               />
                               <label
                                 className="form-label"
-                                htmlFor="phoneNumber"
+                                htmlFor="address"
                               >
                                 Address
                               </label>
@@ -196,22 +204,26 @@ console.log(data)
                           <div className="col-md-6 mb-4 pb-2">
                             <div className="form-outline">
                               <select
-                                id="inputGender4"
+                                id="class"
                                 onChange={updateData}
                                 name="class_id"
-                                defaultValue={data.class_id}
+                                defaultValue={student.class_id}
                                 className="form-control"
                                 required
                               >
                                 <option>Class </option>
                                 <option value="M">Select Class</option>
-                                {classes.map((c:any)=> <option value={c.id} key={c.id} >{c.name}</option>)}
+                                {classes.map((c: any) => (
+                                  <option value={c.id} key={c.id}>
+                                    {c.name}
+                                  </option>
+                                ))}
                               </select>
                               <label
-                                htmlFor="birthdayDate"
+                                htmlFor="class"
                                 className="form-label"
                               >
-                               Class
+                                Class
                               </label>
                             </div>
                           </div>

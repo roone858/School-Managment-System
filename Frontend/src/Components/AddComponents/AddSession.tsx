@@ -100,26 +100,26 @@ const AddSession = () => {
             </select>
           </div>
           <div className={"form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}>
-            <label htmlFor="first-name">Start Time</label>
+            <label htmlFor="start_time">Start Time</label>
             <input
               className="form-control"
               name="start_time"
               onChange={updateData}
               placeholder="Name"
               type="time"
-              id="inputName4"
+              id="start_time"
               required
             />
           </div>
           <div className={"form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}>
-            <label htmlFor="first-name">End Time</label>
+            <label htmlFor="end_time">End Time</label>
             <input
               className="form-control"
               name="end_time"
               onChange={updateData}
               placeholder="Grade Level"
               type="time"
-              id="inputGrade_level"
+              id="end_time"
               required
             />
           </div>

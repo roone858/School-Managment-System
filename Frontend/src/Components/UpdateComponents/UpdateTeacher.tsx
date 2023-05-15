@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Student } from "../../types/type";
+import { State, Student, Teacher } from "../../types/type";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import TeacherService from "../../services/teacher.service";
 import { updateTeacher } from "../../redux/slice/teacher-slice";
 import Swal from "sweetalert2";
+import Loading from "../../layouts/Loading";
 const UpdateTeacher = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const teachers = useSelector((state: any) => state.teachers);
-  const teacher = teachers?.find((teacher: any) => teacher.id == id);
+  const teachers = useSelector((state: State) => state.teachers.data);
+  const teacher: Teacher | any = teachers.find(
+    (teacher: any) => teacher.id == id
+  );
   const [data, setData] = useState(teacher);
 
   const updateData = (e: any) => {
-    setData({ ...data, [e.target.name]: e.target.value });
+    setData({ ...teacher,...data, [e.target.name]: e.target.value });
   };
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -38,11 +41,10 @@ const UpdateTeacher = () => {
     });
   };
 
-  if (!data) return <h1>loading</h1>;
   return (
     <div className="update-form">
       {!teacher ? (
-        <h1>loading</h1>
+        <Loading />
       ) : (
         <>
           <section className=" gradient-custom">
@@ -63,7 +65,8 @@ const UpdateTeacher = () => {
                                 id="first_name"
                                 className="form-control form-control-lg"
                                 name="first_name"
-                                value={data.first_name}
+                                defaultValue={teacher.first_name}
+                                autoComplete="on"
                                 onChange={updateData}
                               />
                               <label
@@ -79,7 +82,8 @@ const UpdateTeacher = () => {
                               <input
                                 type="text"
                                 id="last_name"
-                                value={data.last_name}
+                                defaultValue={teacher.last_name}
+                                autoComplete="on"
                                 onChange={updateData}
                                 name="last_name"
                                 className="form-control form-control-lg"
@@ -99,6 +103,7 @@ const UpdateTeacher = () => {
                                 className="form-control form-control-lg"
                                 id="birthdayDate"
                                 name="dob"
+                                autoComplete="on"
                                 onChange={updateData}
                               />
                               <label
@@ -113,9 +118,10 @@ const UpdateTeacher = () => {
                             <div className="form-outline">
                               <select
                                 id="inputGender4"
+                                autoComplete="on"
                                 onChange={updateData}
                                 name="gender"
-                                value={data.gender}
+                                defaultValue={teacher.gender}
                                 className="form-control"
                                 required
                               >
@@ -124,7 +130,7 @@ const UpdateTeacher = () => {
                                 <option value="F">Female</option>
                               </select>
                               <label
-                                htmlFor="birthdayDate"
+                                htmlFor="inputGender4"
                                 className="form-label"
                               >
                                 Gender
@@ -141,7 +147,8 @@ const UpdateTeacher = () => {
                                 id="emailAddress"
                                 className="form-control form-control-lg"
                                 name="email"
-                                value={data.email}
+                                defaultValue={teacher.email}
+                                autoComplete="on"
                                 onChange={updateData}
                               />
                               <label
@@ -156,15 +163,16 @@ const UpdateTeacher = () => {
                             <div className="form-outline">
                               <input
                                 type="tel"
-                                id="phon"
+                                id="phone"
                                 className="form-control form-control-lg"
                                 name="phone"
-                                value={data.phone}
+                                defaultValue={teacher.phone}
+                                autoComplete="on"
                                 onChange={updateData}
                               />
                               <label
                                 className="form-label"
-                                htmlFor="phoneNumber"
+                                htmlFor="phone"
                               >
                                 Phone Number
                               </label>
@@ -180,12 +188,13 @@ const UpdateTeacher = () => {
                                 id="address"
                                 className="form-control form-control-lg"
                                 name="address"
-                                value={data.address}
+                                defaultValue={teacher.address}
+                                autoComplete="on"
                                 onChange={updateData}
                               />
                               <label
                                 className="form-label"
-                                htmlFor="phoneNumber"
+                                htmlFor="address"
                               >
                                 Address
                               </label>

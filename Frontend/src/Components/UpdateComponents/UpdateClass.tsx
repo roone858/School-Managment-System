@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Student } from "../../types/type";
+import { ClassType, Student } from "../../types/type";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import studentService from "../../services/student.service";
 import { updateClass } from "../../redux/slice/class-slice ";
 import Swal from "sweetalert2";
 import ClassService from "../../services/class.service";
+import Loading from "../../layouts/Loading";
 const UpdateStudent = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const classes = useSelector((state: any) => state.classes);
-  const cla= classes?.find((cla: any) => cla.id == id);
+  const classes = useSelector((state: any) => state.classes.data);
+  const cla: ClassType | any= classes.find((cla: ClassType) => cla.id === Number(id));
   const [data, setData] = useState(cla);
 
   const updateData = (e: any) => {
-    setData({ ...data, [e.target.name]: e.target.value });
+    setData({ ...cla,...data, [e.target.name]: e.target.value });
   };
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -39,11 +40,10 @@ const UpdateStudent = () => {
     });
   };
 
-  if (!data) return <h1>loading</h1>;
   return (
     <div className="update-form">
       {!cla ? (
-        <h1>loading</h1>
+        <Loading/>
       ) : (
         <>
           <section className="vh-100 gradient-custom">
@@ -64,7 +64,7 @@ const UpdateStudent = () => {
                                 id="name"
                                 className="form-control form-control-lg"
                                 name="name"
-                                value={data.name}
+                                defaultValue={cla.name}
                                 onChange={updateData}
                               />
                               <label className="form-label" htmlFor="name">
@@ -77,7 +77,7 @@ const UpdateStudent = () => {
                               <input
                                 type="text"
                                 id="grade_level"
-                                value={data.grade_level}
+                                defaultValue={cla.grade_level}
                                 onChange={updateData}
                                 name="grade_level"
                                 className="form-control form-control-lg"
