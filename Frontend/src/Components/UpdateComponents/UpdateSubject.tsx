@@ -2,13 +2,10 @@ import React, { useEffect, useState } from "react";
 import { State, Student, Teacher, Teaching } from "../../types/type";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import studentService from "../../services/student.service";
-import { updateClass } from "../../redux/slice/class-slice ";
+
 import Swal from "sweetalert2";
-import ClassService from "../../services/class.service";
 import SubjectService from "../../services/subject.service";
 import { updateSubject } from "../../redux/slice/subject-slice ";
-import { Input } from "../Input";
 import { getOnlyDate } from "../../utils/time";
 import TeachingService from "../../services/teaching.service";
 import { addTeaching, updateTeaching } from "../../redux/slice/teaching-slice";
@@ -22,14 +19,12 @@ const UpdateStudent = () => {
   const teaching = useSelector((state: any) => state.teaching.data);
   const subject = subjects?.find((cla: any) => cla.id == id);
   const teach = teaching?.find((t: Teaching) => t?.subject_id == subject?.id);
-  const teacher = teachers?.find(
-    (teacher: Teacher) => teacher.id == teach?.teacher_id
-  );
+
 
   const [data, setData] = useState({ ...subject, ...teach });
 
   const updateData = (e: any) => {
-    setData({ ...subject, ...teach,...data, [e.target.name]: e.target.value });
+    setData({ ...subject, ...teach, ...data, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: any) => {
@@ -46,16 +41,15 @@ const UpdateStudent = () => {
       if (result.isConfirmed) {
         const subject = await SubjectService.updateSubject(id, data);
         if (!teach) {
-          TeachingService.insertTeaching({
+          const result = await TeachingService.insertTeaching({
             ...data,
             subject_id: subject.id,
-          }).then((result) => {
-            dispatch(addTeaching(result));
           });
+          dispatch(addTeaching({ id: id, data: result }));
         } else {
-          TeachingService.updateTeaching(subject.id, data).then((result) => {
-            dispatch(updateTeaching(result));
-          });
+          const result = await TeachingService.updateTeaching(subject.id, data);
+          console.log(result);
+          dispatch(updateTeaching({ id: id, data: result }));
         }
 
         dispatch(updateSubject({ id: id, data: subject }));
@@ -66,7 +60,7 @@ const UpdateStudent = () => {
 
   return (
     <div className="update-form">
-      {!subject || !teach || !teacher ? (
+      {!subject || !teach ? (
         <Loading />
       ) : (
         <>
@@ -123,18 +117,13 @@ const UpdateStudent = () => {
                                 id="inputGender4"
                                 onChange={updateData}
                                 name="teacher_id"
-                                defaultValue={
-                              teach.teacher_id
-                                }
+                                defaultValue={teach.teacher_id}
                                 className="form-control"
                                 required
                               >
                                 <option>select teacher</option>
                                 {teachers.map((teacher: any) => (
-                                  <option
-                                    key={teacher.id}
-                                    value={teacher.id}
-                                  >
+                                  <option key={teacher.id} value={teacher.id}>
                                     {teacher.first_name +
                                       " " +
                                       teacher.last_name}

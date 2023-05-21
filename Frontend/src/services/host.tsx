@@ -1,4 +1,4 @@
-const status:string = "deploy"
+const status:string = "DEV"
 
 export const host =
 status == "DEV"

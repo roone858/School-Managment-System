@@ -19,6 +19,9 @@ export const Subjects = () => {
   const isSubjectsLoading = useSelector(
     (state: State) => state.subjects.isLoading
   );
+  const isTeachingLoading = useSelector(
+    (state: State) => state.teaching.isLoading
+  );
   const subjects = useSelector((state: State) => state.subjects.data);
   const teaching = useSelector((state: State) => state.teaching.data);
   const sessions = useSelector((state: State) => state.sessions.data);
@@ -45,10 +48,12 @@ export const Subjects = () => {
       }
     });
   };
-
+  
+  if (isSubjectsLoading || isTeachingLoading) return <Loading />;
+  
   const subjectsRows = subjects.map((subject: Subject) => {
     const teach = teaching.find(
-      (teach: Teaching) => teach.subject_id == subject.id
+      (teach: Teaching) => teach?.subject_id == subject?.id
     );
     const teacher = teachers.find(
       (teacher: Teacher) => teacher.id == teach?.teacher_id
@@ -92,7 +97,6 @@ export const Subjects = () => {
       </tr>
     );
   });
-  if (isSubjectsLoading) return <Loading />;
 
   return (
     <>

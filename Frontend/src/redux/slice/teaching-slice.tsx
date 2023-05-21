@@ -34,6 +34,7 @@ const teachingSlice = createSlice({
       if (index !== -1) {
         state.data[index] = action.payload.data;
       }
+
     },
   },
   extraReducers: (builder) => {
