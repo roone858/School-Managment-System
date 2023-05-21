@@ -1,13 +1,13 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Attendance } from "../../types/type";
-import AttendanceService from "../../services/attendance.service";
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { Attendance } from '../../types/type';
+import AttendanceService from '../../services/attendance.service';
 
 export const fetchAttendance: any = createAsyncThunk(
-  "attendance/fetchAttendance",
+  'attendance/fetchAttendance',
   async () => {
     const response = await AttendanceService.getAttendance();
     return response;
-  }
+  },
 );
 const initialState = {
   data: [] as Attendance[],
@@ -15,7 +15,7 @@ const initialState = {
   error: null,
 };
 const attendanceSlice = createSlice({
-  name: "Attendances",
+  name: 'Attendances',
   initialState,
   reducers: {
     addAttendance: (state, action: PayloadAction<Attendance>) => {
@@ -25,7 +25,7 @@ const attendanceSlice = createSlice({
       return {
         ...state,
         data: state.data.filter(
-          (attendance: Attendance) => attendance.id !== action.payload
+          (attendance: Attendance) => attendance.id !== action.payload,
         ),
       };
     },

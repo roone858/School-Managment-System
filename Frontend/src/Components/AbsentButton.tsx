@@ -1,18 +1,21 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-const AbsentButton = ( props:any) => {
-     const [buttonText, setButtonText] = useState('Absent');
+const AbsentButton = () => {
+  const [buttonText, setButtonText] = useState('Absent');
   return (
     <button
-    onClick={() => {
-          setButtonText("Selected")
-   
-          }}
+      onClick={() => {
+        setButtonText('Selected');
+      }}
       type="button"
-      className={buttonText=="Absent"?"btn  btn-danger":"btn btn-secondary  disabled"}
+      className={
+        buttonText == 'Absent'
+          ? 'btn  btn-danger'
+          : 'btn btn-secondary  disabled'
+      }
       aria-label="Close"
     >
-     {buttonText}
+      {buttonText}
     </button>
   );
 };

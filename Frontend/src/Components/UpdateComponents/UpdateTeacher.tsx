@@ -1,41 +1,41 @@
-import React, { useEffect, useState } from "react";
-import { State, Student, Teacher } from "../../types/type";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import TeacherService from "../../services/teacher.service";
-import { updateTeacher } from "../../redux/slice/teacher-slice";
-import Swal from "sweetalert2";
-import Loading from "../../layouts/Loading";
+import { useState } from 'react';
+import { State, Teacher } from '../../types/type';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import TeacherService from '../../services/teacher.service';
+import { updateTeacher } from '../../redux/slice/teacher-slice';
+import Swal from 'sweetalert2';
+import Loading from '../../layouts/Loading';
 const UpdateTeacher = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const teachers = useSelector((state: State) => state.teachers.data);
   const teacher: Teacher | any = teachers.find(
-    (teacher: any) => teacher.id == id
+    (teacher: any) => teacher.id == id,
   );
   const [data, setData] = useState(teacher);
 
   const updateData = (e: any) => {
-    setData({ ...teacher,...data, [e.target.name]: e.target.value });
+    setData({ ...teacher, ...data, [e.target.name]: e.target.value });
   };
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     Swal.fire({
-      title: "Are you sure to update?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
+      title: 'Are you sure to update?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Update !",
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Update !',
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await TeacherService.updateTeacher(id, data);
         if (res.message)
-          Swal.fire("Can't Update!", "Internal Server Error", "error");
+          Swal.fire('Can\'t Update!', 'Internal Server Error', 'error');
         else {
           dispatch(updateTeacher({ id: id, data: data }));
-          Swal.fire("Updated!", "teacher Updated", "success");
+          Swal.fire('Updated!', 'teacher Updated', 'success');
         }
       }
     });
@@ -170,10 +170,7 @@ const UpdateTeacher = () => {
                                 autoComplete="on"
                                 onChange={updateData}
                               />
-                              <label
-                                className="form-label"
-                                htmlFor="phone"
-                              >
+                              <label className="form-label" htmlFor="phone">
                                 Phone Number
                               </label>
                             </div>
@@ -192,10 +189,7 @@ const UpdateTeacher = () => {
                                 autoComplete="on"
                                 onChange={updateData}
                               />
-                              <label
-                                className="form-label"
-                                htmlFor="address"
-                              >
+                              <label className="form-label" htmlFor="address">
                                 Address
                               </label>
                             </div>

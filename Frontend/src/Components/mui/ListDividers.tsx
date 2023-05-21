@@ -17,7 +17,10 @@ export default function ListDividers() {
       </ListItem>
       <Divider />
       <ListItem button divider>
-        <ListItemText primary="Drafts" onClick={()=>console.log('hello from button') }/>
+        <ListItemText
+          primary="Drafts"
+          onClick={() => console.log('hello from button')}
+        />
       </ListItem>
       <ListItem button divider>
         <ListItemText primary="Trash" />

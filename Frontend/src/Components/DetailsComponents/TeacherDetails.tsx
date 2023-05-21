@@ -1,15 +1,16 @@
-import "../../style/details.css";
-import teacherAvatar from "../../assets/teacherAvatar.jpg";
-import femaleAvatar from "../../assets/femaleAvatar.png";
-import { Link, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { State, Teacher } from "../../types/type";
+import '../../style/details.css';
+import teacherAvatar from '../../assets/teacherAvatar.jpg';
+import { Link, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { State, Teacher } from '../../types/type';
 
 const TeacherDetails = () => {
   const params = useParams();
 
   const teachers = useSelector((state: State) => state.teachers.data);
-  const teacher = teachers.find((teacher: Teacher) => teacher.id == Number(params.id));
+  const teacher = teachers.find(
+    (teacher: Teacher) => teacher.id == Number(params.id),
+  );
 
   return (
     <div className="details container p-4">
@@ -23,7 +24,7 @@ const TeacherDetails = () => {
           <div className="card">
             <div className="card-body">
               <h5 className="font-weight-bold mb-3">
-                {teacher.first_name + " " + teacher.last_name}
+                {teacher.first_name + ' ' + teacher.last_name}
               </h5>
               <p className="mb-0">
                 Some quick example text to build on the panel title and make up
@@ -53,7 +54,7 @@ const TeacherDetails = () => {
                 onClick={() => {
                   window.scrollTo(0, 0);
                 }}
-                to={`/teachers/` + "update/" + params.id}
+                to={'/teachers/' + 'update/' + params.id}
                 type="button"
                 className="btn btn-success  "
               >

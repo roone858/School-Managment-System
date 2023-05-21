@@ -1,15 +1,15 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Student } from "../../types/type";
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { Student } from '../../types/type';
 
-import studentService from "../../services/student.service";
+import studentService from '../../services/student.service';
 
 // Define the async thunk for fetching data from the student route
 export const fetchStudents: any = createAsyncThunk(
-  "students/fetchStudents",
+  'students/fetchStudents',
   async () => {
     const response = await studentService.getStudents();
     return response;
-  }
+  },
 );
 const initialState = {
   data: [] as Student[],
@@ -17,7 +17,7 @@ const initialState = {
   error: null,
 };
 const studentsSlice = createSlice({
-  name: "students",
+  name: 'students',
   initialState,
   reducers: {
     addStudent: (state, action: PayloadAction<Student>) => {
@@ -27,13 +27,13 @@ const studentsSlice = createSlice({
       return {
         ...state,
         data: state.data.filter(
-          (student: Student) => student.id !== action.payload
+          (student: Student) => student.id !== action.payload,
         ),
       };
     },
     updateStudent: (state, action: PayloadAction<any>) => {
       const index = state.data.findIndex(
-        (student: any) => student.id == action.payload.id
+        (student: any) => student.id == action.payload.id,
       );
       if (index !== -1) {
         state.data[index] = action.payload.data;

@@ -1,24 +1,21 @@
-import * as React from "react";
-import ListSubheader from "@mui/material/ListSubheader";
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Collapse from "@mui/material/Collapse";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import DraftsIcon from "@mui/icons-material/Drafts";
-import SendIcon from "@mui/icons-material/Send";
-import PersonIcon from "@mui/icons-material/Person";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import StarBorder from "@mui/icons-material/StarBorder";
-import AddModeratorIcon from "@mui/icons-material/AddModerator";
-import RemoveModeratorIcon from "@mui/icons-material/RemoveModerator";
-import LockIcon from "@mui/icons-material/Lock";
-import MoodBadIcon from "@mui/icons-material/MoodBad";
-import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
-import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
-import { useNavigate } from "react-router-dom";
+import * as React from 'react';
+import ListSubheader from '@mui/material/ListSubheader';
+import List from '@mui/material/List';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Collapse from '@mui/material/Collapse';
+import PersonIcon from '@mui/icons-material/Person';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import StarBorder from '@mui/icons-material/StarBorder';
+import AddModeratorIcon from '@mui/icons-material/AddModerator';
+import RemoveModeratorIcon from '@mui/icons-material/RemoveModerator';
+import LockIcon from '@mui/icons-material/Lock';
+import MoodBadIcon from '@mui/icons-material/MoodBad';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import { useNavigate } from 'react-router-dom';
 export default function NestedList() {
   const [open, setOpen] = React.useState(true);
   const [openItemOne, setOpenItemOne] = React.useState(false);
@@ -39,7 +36,7 @@ export default function NestedList() {
   };
   return (
     <List
-      sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+      sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
       component="nav"
       aria-labelledby="nested-list-subheader"
       subheader={
@@ -58,7 +55,7 @@ export default function NestedList() {
       <Collapse in={openItemOne} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           <ListItemButton
-            onClick={() => navigate("/setting/info")}
+            onClick={() => navigate('/setting/info')}
             sx={{ pl: 4 }}
           >
             <ListItemIcon>
@@ -67,7 +64,7 @@ export default function NestedList() {
             <ListItemText primary="Account Information" />
           </ListItemButton>
           <ListItemButton
-            onClick={() => navigate("/setting/password")}
+            onClick={() => navigate('/setting/password')}
             sx={{ pl: 4 }}
           >
             <ListItemIcon>
@@ -76,7 +73,7 @@ export default function NestedList() {
             <ListItemText primary="Change your password" />
           </ListItemButton>
           <ListItemButton
-            onClick={() => navigate("/setting/deactivate")}
+            onClick={() => navigate('/setting/deactivate')}
             sx={{ pl: 4 }}
           >
             <ListItemIcon>
@@ -94,22 +91,22 @@ export default function NestedList() {
         {openItemTow ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={openItemTow} timeout="auto" unmountOnExit>
-        <List component="div"   disablePadding>
+        <List component="div" disablePadding>
           <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon  >
-              <AddModeratorIcon fontSize={"small"}/>
+            <ListItemIcon>
+              <AddModeratorIcon fontSize={'small'} />
             </ListItemIcon>
             <ListItemText primary="Add new Admin  " />
           </ListItemButton>
           <ListItemButton sx={{ pl: 4 }}>
             <ListItemIcon>
-              <RemoveModeratorIcon fontSize={"small"} />
+              <RemoveModeratorIcon fontSize={'small'} />
             </ListItemIcon>
             <ListItemText primary="Delete Admin" />
           </ListItemButton>
           <ListItemButton sx={{ pl: 4 }}>
             <ListItemIcon>
-              <RemoveModeratorIcon fontSize={"small"} />
+              <RemoveModeratorIcon fontSize={'small'} />
             </ListItemIcon>
             <ListItemText primary="Update Admin" />
           </ListItemButton>

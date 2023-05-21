@@ -1,13 +1,13 @@
-import React, {  useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Table } from "../Components/Table";
-import { Link } from "react-router-dom";
-import ClassService from "../services/class.service";
-import { deleteClass } from "../redux/slice/class-slice ";
-import Swal from "sweetalert2";
-import SessionService from "../services/session.service";
-import AddClass from "../Components/AddComponents/AddClass";
-import { ClassType, State, Student } from "../types/type";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Table } from '../Components/Table';
+import { Link } from 'react-router-dom';
+import ClassService from '../services/class.service';
+import { deleteClass } from '../redux/slice/class-slice ';
+import Swal from 'sweetalert2';
+import SessionService from '../services/session.service';
+import AddClass from '../Components/AddComponents/AddClass';
+import { ClassType, State, Student } from '../types/type';
 
 export const ClassPage = () => {
   const dispatch = useDispatch();
@@ -17,31 +17,30 @@ export const ClassPage = () => {
 
   const handleDelete = (id: number) => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete !",
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete !',
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const sessionResponse = await SessionService.deleteSessionByClassID(id);
+        await SessionService.deleteSessionByClassID(id);
         const classResponse = await ClassService.deleteClass(id);
-      
-        if (classResponse.ok ) {
+
+        if (classResponse.ok) {
           dispatch(deleteClass(id));
-          Swal.fire(" Deleted!", "Class deleted", "success");
+          Swal.fire(' Deleted!', 'Class deleted', 'success');
+        } else {
+          Swal.fire('Can\'t Deleted!', 'There is err check api ', 'error');
         }
-       else{
-        Swal.fire("Can't Deleted!", "There is err check api ", "error");
-       }
       }
     });
   };
   const classesRows = classes.map((obj: ClassType) => {
     const studentFilter = students.filter(
-      (student: Student) => student.class_id == obj.id
+      (student: Student) => student.class_id == obj.id,
     );
     return (
       <tr className="bg-fff" key={obj.id}>
@@ -54,7 +53,7 @@ export const ClassPage = () => {
             onClick={() => {
               window.scrollTo(0, 0);
             }}
-            to={`/classes/` + obj.id}
+            to={'/classes/' + obj.id}
             type="button"
             className="btn btn-primary btn-sm "
           >
@@ -64,7 +63,7 @@ export const ClassPage = () => {
             onClick={() => {
               window.scrollTo(0, 0);
             }}
-            to={`/classes/` + "update/" + obj.id}
+            to={'/classes/' + 'update/' + obj.id}
             type="button"
             className="btn btn-success btn-sm mx-2 "
           >
@@ -85,7 +84,7 @@ export const ClassPage = () => {
   return (
     <>
       <div className="class-section container">
-      <button
+        <button
           onClick={() => {
             setIsAddOpen(!isAddOpen);
           }}
@@ -94,10 +93,10 @@ export const ClassPage = () => {
           Add new class
         </button>
         {isAddOpen && <AddClass />}
-       
+
         <div className="class-page">
           <Table
-            columns={["ID", "Name", "Grade Level", "Students", "Actions"]}
+            columns={['ID', 'Name', 'Grade Level', 'Students', 'Actions']}
             rows={classesRows}
           />
         </div>

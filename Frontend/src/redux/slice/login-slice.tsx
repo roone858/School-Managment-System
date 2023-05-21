@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { LoginState } from "../../types/type";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { LoginState } from '../../types/type';
 
 const initialState: LoginState = {
   username: null,
@@ -9,7 +9,7 @@ const initialState: LoginState = {
 };
 
 const loginSlice = createSlice({
-  name: "login",
+  name: 'login',
   initialState,
   reducers: {
     loginRequest: (state) => {

@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Student } from "../types/type";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import studentService from "../services/student.service";
-import { updateStudent } from "../redux/slice/student-slice";
-import Swal from "sweetalert2";
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import studentService from '../services/student.service';
+import { updateStudent } from '../redux/slice/student-slice';
+import Swal from 'sweetalert2';
 const UpdateForm = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -14,19 +13,18 @@ const UpdateForm = () => {
 
   const updateData = (e: any) => {
     setData({ ...data, [e.target.name]: e.target.value });
-    
   };
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     Swal.fire({
-      title: "Are you sure to update?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
+      title: 'Are you sure to update?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Update !",
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Update !',
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await studentService.updateStudent(id, {
@@ -35,10 +33,10 @@ const UpdateForm = () => {
           last_name: data.last_name,
         });
         if (res.message)
-          Swal.fire("Can't Update!", "Internal Server Error", "error");
+          Swal.fire('Can\'t Update!', 'Internal Server Error', 'error');
         else {
           dispatch(updateStudent({ id: id, data: data }));
-          Swal.fire("Updated!", "student Updated", "success");
+          Swal.fire('Updated!', 'student Updated', 'success');
         }
       }
     });
@@ -70,7 +68,10 @@ const UpdateForm = () => {
                                 value={data.first_name}
                                 onChange={updateData}
                               />
-                              <label className="form-label" htmlFor="first_name">
+                              <label
+                                className="form-label"
+                                htmlFor="first_name"
+                              >
                                 First Name
                               </label>
                             </div>
@@ -111,7 +112,6 @@ const UpdateForm = () => {
                             </div>
                           </div>
                           <div className="col-md-6 mb-4 pb-2">
-
                             <div className="form-outline">
                               <select
                                 id="inputGender4"
@@ -122,14 +122,14 @@ const UpdateForm = () => {
                                 required
                               >
                                 <option>Select Gender </option>
-                                <option >Male</option>
+                                <option>Male</option>
                                 <option>Female</option>
                               </select>
                               <label
                                 htmlFor="birthdayDate"
                                 className="form-label"
                               >
-                                Gender 
+                                Gender
                               </label>
                             </div>
                           </div>

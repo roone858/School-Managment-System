@@ -1,4 +1,4 @@
-import Card from "./Card";
+import Card from './Card';
 
 export default function ListGroup() {
   return (
@@ -8,10 +8,18 @@ export default function ListGroup() {
         <li className="list-group-item">
           <Card />
         </li>
-        <li className="list-group-item"><Card /></li>
-        <li className="list-group-item"><Card /></li>
-        <li className="list-group-item"><Card /></li>
-        <li className="list-group-item"><Card /></li>
+        <li className="list-group-item">
+          <Card />
+        </li>
+        <li className="list-group-item">
+          <Card />
+        </li>
+        <li className="list-group-item">
+          <Card />
+        </li>
+        <li className="list-group-item">
+          <Card />
+        </li>
       </ul>
     </>
   );

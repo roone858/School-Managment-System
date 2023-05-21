@@ -1,6 +1,5 @@
-import { useSelector } from "react-redux";
-import { ClassType, State, Student } from "../../types/type";
-import { Link } from "react-router-dom";
+import { ClassType, Student } from '../../types/type';
+import { Link } from 'react-router-dom';
 
 const GetStudentByName = ({
   students,
@@ -11,9 +10,9 @@ const GetStudentByName = ({
   femaleAvatar,
 }: any): any => {
   const studentFilter = students.filter((student: Student) =>
-    (student.first_name + " " + student.last_name)
+    (student.first_name + ' ' + student.last_name)
       .toLowerCase()
-      .includes(String(studentName.toLowerCase()))
+      .includes(String(studentName.toLowerCase())),
   );
   return studentFilter.map(
     (student: Student) =>
@@ -22,11 +21,11 @@ const GetStudentByName = ({
           <th scope="row">{student.id}</th>
           <td>
             <img
-              src={student.gender == "M" ? maleAvatar : femaleAvatar}
-              style={{ height: "30px" }}
+              src={student.gender == 'M' ? maleAvatar : femaleAvatar}
+              style={{ height: '30px' }}
             />
           </td>
-          <td> {student.first_name + " " + student.last_name}</td>
+          <td> {student.first_name + ' ' + student.last_name}</td>
           <td>{student.dob.slice(0, 10)}</td>
           <td>{student.address}</td>
 
@@ -38,7 +37,7 @@ const GetStudentByName = ({
               onClick={() => {
                 window.scrollTo(0, 0);
               }}
-              to={`/students/` + student.id}
+              to={'/students/' + student.id}
               type="button"
               className="btn btn-primary btn-sm "
             >
@@ -48,7 +47,7 @@ const GetStudentByName = ({
               onClick={() => {
                 window.scrollTo(0, 0);
               }}
-              to={`/students/` + "update/" + student.id}
+              to={'/students/' + 'update/' + student.id}
               type="button"
               className="btn btn-success btn-sm mx-2 "
             >
@@ -63,7 +62,7 @@ const GetStudentByName = ({
             </button>
           </td>
         </tr>
-      )
+      ),
   );
 };
-export default GetStudentByName ;
+export default GetStudentByName;

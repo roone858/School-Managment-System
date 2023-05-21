@@ -1,6 +1,5 @@
-import React from "react";
-import { ClassType, Teacher } from "../../types/type";
-import { Link } from "react-router-dom";
+import { Teacher } from '../../types/type';
+import { Link } from 'react-router-dom';
 
 const GetAllTeachers = ({
   teachers,
@@ -14,10 +13,10 @@ const GetAllTeachers = ({
       <td>
         <img
           src={teacherAvatar}
-          style={{ height: "40px", borderRadius: "100%" }}
+          style={{ height: '40px', borderRadius: '100%' }}
         />
       </td>
-      <td> {teacher.first_name + " " + teacher.last_name}</td>
+      <td> {teacher.first_name + ' ' + teacher.last_name}</td>
       <td>{teacher.dob.slice(0, 10)}</td>
       <td>{teacher.address}</td>
 
@@ -26,7 +25,7 @@ const GetAllTeachers = ({
           onClick={() => {
             window.scrollTo(0, 0);
           }}
-          to={`/teachers/` + teacher.id}
+          to={'/teachers/' + teacher.id}
           type="button"
           className="btn btn-primary btn-sm "
         >
@@ -36,7 +35,7 @@ const GetAllTeachers = ({
           onClick={() => {
             window.scrollTo(0, 0);
           }}
-          to={`/teachers/` + "update/" + teacher.id}
+          to={'/teachers/' + 'update/' + teacher.id}
           type="button"
           className="btn btn-success btn-sm mx-2 "
         >

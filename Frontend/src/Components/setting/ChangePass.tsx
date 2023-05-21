@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import "../../style/changepass.css";
-import { getAdminFromCookie } from "../../utils/cookies";
-import AdminService from "../../services/admin.service";
-import Swal from "sweetalert2";
+import React, { useState } from 'react';
+import '../../style/changepass.css';
+import { getAdminFromCookie } from '../../utils/cookies';
+import AdminService from '../../services/admin.service';
+import Swal from 'sweetalert2';
 const ChangePass = () => {
   const [data, setData] = useState({} as any);
   const [hideCurrent, setHideCurrent] = useState(true);
@@ -23,17 +23,17 @@ const ChangePass = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (data.newPassword !== data.confirmPassword)
-      return console.log("not confirm");
+      return console.log('not confirm');
     const { username } = getAdminFromCookie();
 
     Swal.fire({
-      title: "Are you sure Change Your Password ?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
+      title: 'Are you sure Change Your Password ?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Update !",
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Update !',
     }).then(async (result) => {
       if (result.isConfirmed) {
         new AdminService()
@@ -41,11 +41,11 @@ const ChangePass = () => {
           .then((result: any) => {
             if (result.message)
               return Swal.fire(
-                "Sorry!",
-                "Current Password is not valid ",
-                "error"
+                'Sorry!',
+                'Current Password is not valid ',
+                'error',
               );
-            Swal.fire("Changed!", "Password is changed ", "success");
+            Swal.fire('Changed!', 'Password is changed ', 'success');
           });
       }
     });
@@ -59,7 +59,7 @@ const ChangePass = () => {
             <label>Current Password</label>
             <div className="form-group pass_show">
               <input
-                type={hideCurrent ? "password" : "text"}
+                type={hideCurrent ? 'password' : 'text'}
                 className="form-control"
                 placeholder="Current Password"
                 name="oldPassword"
@@ -73,7 +73,7 @@ const ChangePass = () => {
             <label>New Password</label>
             <div className="form-group pass_show">
               <input
-                type={hideNew ? "password" : "text"}
+                type={hideNew ? 'password' : 'text'}
                 className="form-control"
                 placeholder="New Password"
                 name="newPassword"
@@ -87,7 +87,7 @@ const ChangePass = () => {
             <label>Confirm Password</label>
             <div className="form-group pass_show">
               <input
-                type={hideConfirm ? "password" : "text"}
+                type={hideConfirm ? 'password' : 'text'}
                 className="form-control"
                 placeholder="Confirm Password"
                 name="confirmPassword"

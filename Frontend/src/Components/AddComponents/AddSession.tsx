@@ -1,21 +1,15 @@
-import{ useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { days } from "../../utils/time";
-import SessionService from "../../services/session.service";
-import { addSession } from "../../redux/slice/session-slice ";
-import {ClassType, Session, State, Subject} from "../../types/type"
-import {
-  checkSessionDay,
-  checkSessionTime,
-} from "../../utils/checkSessionTime";
-import Swal from "sweetalert2";
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { days } from '../../utils/time';
+import SessionService from '../../services/session.service';
+import { addSession } from '../../redux/slice/session-slice ';
+import { ClassType, Session, State, Subject } from '../../types/type';
+import { checkSessionTime } from '../../utils/checkSessionTime';
+import Swal from 'sweetalert2';
 
 const AddSession = () => {
   const dispatch = useDispatch();
   const [data, setData] = useState({} as Session);
-  const navigate = useNavigate();
-  const teachers = useSelector((state: State) => state.teachers.data);
   const classes = useSelector((state: State) => state.classes.data);
   const subjects = useSelector((state: State) => state.subjects.data);
   const sessions = useSelector((state: State) => state.sessions.data);
@@ -29,15 +23,15 @@ const AddSession = () => {
       sessions,
       data.start_time,
       data.day,
-      data.class_id
+      data.class_id,
     );
     if (!isFound) {
-      Swal.fire(" Cant  Add!", "The time period already exists", "error");
+      Swal.fire(' Cant  Add!', 'The time period already exists', 'error');
     } else {
       SessionService.insertSession(data).then((result) => {
         dispatch(addSession(result));
       });
-      Swal.fire(" Added!", "The Session has been added", "success");
+      Swal.fire(' Added!', 'The Session has been added', 'success');
     }
   };
   return (
@@ -99,7 +93,7 @@ const AddSession = () => {
               ))}
             </select>
           </div>
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}>
+          <div className={'form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  '}>
             <label htmlFor="start_time">Start Time</label>
             <input
               className="form-control"
@@ -111,7 +105,7 @@ const AddSession = () => {
               required
             />
           </div>
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}>
+          <div className={'form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  '}>
             <label htmlFor="end_time">End Time</label>
             <input
               className="form-control"
@@ -124,7 +118,10 @@ const AddSession = () => {
             />
           </div>
 
-          <button type="submit" className="btn btn-primary  form-group col-sm-12  my-4 col-lg-5  col-xl-3 mx-lg-3">
+          <button
+            type="submit"
+            className="btn btn-primary  form-group col-sm-12  my-4 col-lg-5  col-xl-3 mx-lg-3"
+          >
             Create
           </button>
         </div>

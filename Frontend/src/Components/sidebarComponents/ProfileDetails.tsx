@@ -1,9 +1,9 @@
-import profileImage from "../../assets/avatar.png";
+import profileImage from '../../assets/avatar.png';
 import {
   getAdminFromCookie,
   removeTokenCookie,
   removeAdminCookie,
-} from "../../utils/cookies";
+} from '../../utils/cookies';
 
 export default function ProfileDetails() {
   const admin = getAdminFromCookie();
@@ -14,7 +14,7 @@ export default function ProfileDetails() {
           <img src={profileImage} alt="profileImg" />
           <div className="name_job">
             <div className="name">
-              {admin.first_name + " " + admin.last_name}{" "}
+              {admin.first_name + ' ' + admin.last_name}{' '}
             </div>
             <div className="job">Administrator</div>
           </div>
@@ -23,7 +23,7 @@ export default function ProfileDetails() {
           onClick={() => {
             removeTokenCookie();
             removeAdminCookie();
-            window.location.href = "/";
+            window.location.href = '/';
           }}
           className="bx bx-log-out"
           id="log_out"

@@ -1,21 +1,20 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Attendance } from "../../types/type";
-import NotificationService from "../../services/notification.service";
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import NotificationService from '../../services/notification.service';
 export const fetchStudents: any = createAsyncThunk(
-  "students/fetchStudents",
+  'students/fetchStudents',
   async () => {
     const response = await NotificationService.getNotification();
     return response;
-  }
+  },
 );
 const initialState = {
   messages: [] as any[],
   isVisible: false,
-  isLoading:false,
-  error:null,
+  isLoading: false,
+  error: null,
 };
 const notificationSlice = createSlice({
-  name: "Attendances",
+  name: 'Attendances',
   initialState,
   reducers: {
     addNotification: (state, action: PayloadAction<any>) => {

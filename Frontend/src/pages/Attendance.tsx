@@ -1,53 +1,46 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import AttendanceService from "../services/attendance.service";
-import Swal from "sweetalert2";
-import {
-  addAttendance,
-  deleteAttendance,
-} from "../redux/slice/attendance-slice";
-import { Attendance, Subject, Student, State, Session, ClassType } from "../types/type";
-import { Table } from "../Components/Table";
-import AbsentButton from "../Components/AbsentButton";
-import { currentDate } from "../utils/time";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import AttendanceService from '../services/attendance.service';
+import Swal from 'sweetalert2';
+import { addAttendance } from '../redux/slice/attendance-slice';
+import { Subject, Student, State, Session, ClassType } from '../types/type';
+import { Table } from '../Components/Table';
+import AbsentButton from '../Components/AbsentButton';
+import { useNavigate } from 'react-router-dom';
 const AttendanceCm = () => {
   const subjects = useSelector((state: State) => state.subjects.data);
   const students = useSelector((state: State) => state.students.data);
   const sessions = useSelector((state: State) => state.sessions.data);
   const classes = useSelector((state: State) => state.classes.data);
-  const attendance = useSelector((state: State) => state.attendance);
   const dispatch = useDispatch();
   const [classId, seClassId] = useState();
   const [subjectId, setSubjectId] = useState();
   const [chosenSessionID, setChosenSessionID] = useState(0 as number);
   const selectedStudent: number[] = [];
-const navigate=useNavigate()
+  const navigate = useNavigate();
   const handleApply = async () => {
- 
     Swal.fire({
-      title: "Are you sure Apply?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
+      title: 'Are you sure Apply?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Apply !",
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Apply !',
     }).then(async (result) => {
       if (result.isConfirmed) {
-      
         [...new Set(selectedStudent)].forEach(async (id) => {
           const attend = await AttendanceService.insertAttendance({
             student_id: id,
             class_session_id: chosenSessionID,
             subject_id: subjectId,
             date: new Date(),
-            status: "Absent",
+            status: 'Absent',
           });
           dispatch(addAttendance(attend));
         });
         setChosenSessionID(0);
-        navigate("/attendance")
+        navigate('/attendance');
       }
     });
   };
@@ -98,11 +91,12 @@ const navigate=useNavigate()
       <div className="attendance-table">
         {!chosenSessionID ? (
           <Table
-            columns={["Session ID", "Start Time ", "End Time", "Day"]}
+            columns={['Session ID', 'Start Time ', 'End Time', 'Day']}
             rows={sessions
               .filter(
                 (session: Session) =>
-                  session.class_id == classId && session.subject_id == subjectId
+                  session.class_id == classId &&
+                  session.subject_id == subjectId,
               )
               .map((session: Session) => (
                 <tr key={session.id}>
@@ -116,7 +110,7 @@ const navigate=useNavigate()
                       type="button"
                       className="btn  btn-primary"
                     >
-                      {" "}
+                      {' '}
                       Chose
                     </button>
                   </td>
@@ -126,13 +120,13 @@ const navigate=useNavigate()
         ) : (
           <>
             <Table
-              columns={["Student ID", "Student Name ", "Absent"]}
+              columns={['Student ID', 'Student Name ', 'Absent']}
               rows={students.map(
                 (student: Student) =>
                   student.class_id == classId && (
                     <tr key={student.id}>
                       <th scope="row">{student.id}</th>
-                      <td>{student.first_name + " " + student.last_name}</td>
+                      <td>{student.first_name + ' ' + student.last_name}</td>
                       <td>
                         <div
                           onClick={() => {
@@ -143,7 +137,7 @@ const navigate=useNavigate()
                         </div>
                       </td>
                     </tr>
-                  )
+                  ),
               )}
             />
             <button onClick={handleApply} className="btn btn-success">

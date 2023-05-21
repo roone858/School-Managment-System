@@ -1,11 +1,10 @@
-import React, { useState } from "react";
-import { Input } from "../Input";
-import { Subject, State, Teacher } from "../../types/type";
-import { useDispatch, useSelector } from "react-redux";
-import TeachingService from "../../services/teaching.service";
-import SubjectService from "../../services/subject.service";
-import { addSubject } from "../../redux/slice/subject-slice ";
-import { addTeaching } from "../../redux/slice/teaching-slice";
+import { useState } from 'react';
+import { Subject, State, Teacher } from '../../types/type';
+import { useDispatch, useSelector } from 'react-redux';
+import TeachingService from '../../services/teaching.service';
+import SubjectService from '../../services/subject.service';
+import { addSubject } from '../../redux/slice/subject-slice ';
+import { addTeaching } from '../../redux/slice/teaching-slice';
 
 export const AddSubject = () => {
   const teachers = useSelector((state: State) => state.teachers.data);
@@ -30,7 +29,7 @@ export const AddSubject = () => {
     <div className="add-form container rounded-2 bg-white my-4 px-4 py-5">
       <form onSubmit={handleSubmit}>
         <div className="d-flex  flex-column  flex-lg-row justify-content-start flex-wrap gap-3  ">
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}>
+          <div className={'form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  '}>
             <label htmlFor="first-name">Title</label>
             <input
               name="title"
@@ -42,7 +41,7 @@ export const AddSubject = () => {
               required
             />
           </div>
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}>
+          <div className={'form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  '}>
             <label htmlFor="first-name">Description</label>
             <input
               name="description"
@@ -55,7 +54,7 @@ export const AddSubject = () => {
             />
           </div>
 
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}>
+          <div className={'form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  '}>
             <label htmlFor="inputTeacher">Teacher Name :</label>
             <br />
             <select
@@ -68,13 +67,13 @@ export const AddSubject = () => {
               <option>Select Teacher </option>
               {teachers.map((teacher: Teacher) => (
                 <option key={teacher.id} value={teacher.id}>
-                  {teacher.first_name + " " + teacher.last_name}
+                  {teacher.first_name + ' ' + teacher.last_name}
                 </option>
               ))}
             </select>
           </div>
 
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}>
+          <div className={'form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  '}>
             <label htmlFor="first-name">Semester</label>
             <input
               className="form-control"
@@ -86,13 +85,12 @@ export const AddSubject = () => {
               required
             />
           </div>
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}>
+          <div className={'form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  '}>
             <label htmlFor="first-name">Grade Level</label>
             <input
               className="form-control"
               name="grade_level"
               onChange={updateData}
-            
               type="text"
               id="GradeLevel"
               placeholder="Grade Level"
@@ -100,7 +98,7 @@ export const AddSubject = () => {
             />
           </div>
 
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}>
+          <div className={'form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  '}>
             <label htmlFor="first-name">Start Date</label>
             <input
               className="form-control"
@@ -112,7 +110,7 @@ export const AddSubject = () => {
               required
             />
           </div>
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}>
+          <div className={'form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  '}>
             <label htmlFor="first-name">End Date</label>
             <input
               className="form-control"
@@ -125,10 +123,10 @@ export const AddSubject = () => {
             />
           </div>
 
-        
-
-      
-          <button type="submit" className="btn btn-primary form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3 mt-4 ">
+          <button
+            type="submit"
+            className="btn btn-primary form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3 mt-4 "
+          >
             Create
           </button>
         </div>

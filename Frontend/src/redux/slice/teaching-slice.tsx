@@ -1,13 +1,13 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import TeachingService from "../../services/teaching.service";
-import { Teaching } from "../../types/type";
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import TeachingService from '../../services/teaching.service';
+import { Teaching } from '../../types/type';
 
 export const fetchTeaching: any = createAsyncThunk(
-  "teaching/fetchTeaching",
+  'teaching/fetchTeaching',
   async () => {
     const data = await TeachingService.getAllTeachings();
     return data;
-  }
+  },
 );
 const initialState = {
   data: [] as Teaching[],
@@ -15,7 +15,7 @@ const initialState = {
   error: null,
 };
 const teachingSlice = createSlice({
-  name: "Teaching",
+  name: 'Teaching',
   initialState,
   reducers: {
     addTeaching: (state, action: PayloadAction<any>) => {
@@ -29,12 +29,11 @@ const teachingSlice = createSlice({
     },
     updateTeaching: (state, action: PayloadAction<any>) => {
       const index = state.data.findIndex(
-        (tech: any) => tech.id == action.payload.id
+        (tech: any) => tech.id == action.payload.id,
       );
       if (index !== -1) {
         state.data[index] = action.payload.data;
       }
-
     },
   },
   extraReducers: (builder) => {

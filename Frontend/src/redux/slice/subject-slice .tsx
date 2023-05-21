@@ -1,13 +1,13 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Subject } from "../../types/type";
-import SubjectService from "../../services/subject.service";
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { Subject } from '../../types/type';
+import SubjectService from '../../services/subject.service';
 
 export const fetchSubjects: any = createAsyncThunk(
-  "subjects/fetchSubjects",
+  'subjects/fetchSubjects',
   async () => {
     const response = await SubjectService.getAllSubjects();
     return response;
-  }
+  },
 );
 const initialState = {
   data: [] as Subject[],
@@ -15,7 +15,7 @@ const initialState = {
   error: null,
 };
 const subjectsSlice = createSlice({
-  name: "subjects",
+  name: 'subjects',
   initialState,
   reducers: {
     addSubject: (state, action: PayloadAction<Subject>) => {
@@ -25,13 +25,13 @@ const subjectsSlice = createSlice({
       return {
         ...state,
         data: state.data.filter(
-          (subject: Subject) => subject.id !== action.payload
+          (subject: Subject) => subject.id !== action.payload,
         ),
       };
     },
     updateSubject: (state, action: PayloadAction<any>) => {
       const index = state.data.findIndex(
-        (subject: any) => subject.id == action.payload.id
+        (subject: any) => subject.id == action.payload.id,
       );
       if (index !== -1) {
         state.data[index] = action.payload.data;

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { State, Student } from "../../types/type";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import studentService from "../../services/student.service";
-import { updateStudent } from "../../redux/slice/student-slice";
-import Swal from "sweetalert2";
-import Loading from "../../layouts/Loading";
+import { useState } from 'react';
+import { State, Student } from '../../types/type';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import studentService from '../../services/student.service';
+import { updateStudent } from '../../redux/slice/student-slice';
+import Swal from 'sweetalert2';
+import Loading from '../../layouts/Loading';
 const UpdateStudent = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -13,32 +13,32 @@ const UpdateStudent = () => {
   const students = useSelector((state: State) => state.students.data);
   const classes = useSelector((state: State) => state.classes.data);
   const student: Student | any = students?.find(
-    (student: Student) => student.id === Number(id)
+    (student: Student) => student.id === Number(id),
   );
   const [data, setData] = useState(student);
 
   const updateData = (e: any) => {
-    setData({ ...student,...data, [e.target.name]: e.target.value });
+    setData({ ...student, ...data, [e.target.name]: e.target.value });
   };
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     console.log(data);
     Swal.fire({
-      title: "Are you sure to update?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
+      title: 'Are you sure to update?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Update !",
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Update !',
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await studentService.updateStudent(id, data);
         if (res.message)
-          Swal.fire("Can't Update!", "Internal Server Error", "error");
+          Swal.fire('Can\'t Update!', 'Internal Server Error', 'error');
         else {
           dispatch(updateStudent({ id: id, data: data }));
-          Swal.fire("Updated!", "student Updated", "success");
+          Swal.fire('Updated!', 'student Updated', 'success');
         }
       }
     });
@@ -171,10 +171,7 @@ const UpdateStudent = () => {
                                 autoComplete="on"
                                 onChange={updateData}
                               />
-                              <label
-                                className="form-label"
-                                htmlFor="phone"
-                              >
+                              <label className="form-label" htmlFor="phone">
                                 Phone Number
                               </label>
                             </div>
@@ -193,10 +190,7 @@ const UpdateStudent = () => {
                                 autoComplete="on"
                                 onChange={updateData}
                               />
-                              <label
-                                className="form-label"
-                                htmlFor="address"
-                              >
+                              <label className="form-label" htmlFor="address">
                                 Address
                               </label>
                             </div>
@@ -219,10 +213,7 @@ const UpdateStudent = () => {
                                   </option>
                                 ))}
                               </select>
-                              <label
-                                htmlFor="class"
-                                className="form-label"
-                              >
+                              <label htmlFor="class" className="form-label">
                                 Class
                               </label>
                             </div>

@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { State, Student, Teacher, Teaching } from "../../types/type";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from 'react';
+import { State, Teaching } from '../../types/type';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-import Swal from "sweetalert2";
-import SubjectService from "../../services/subject.service";
-import { updateSubject } from "../../redux/slice/subject-slice ";
-import { getOnlyDate } from "../../utils/time";
-import TeachingService from "../../services/teaching.service";
-import { addTeaching, updateTeaching } from "../../redux/slice/teaching-slice";
-import Loading from "../../layouts/Loading";
+import Swal from 'sweetalert2';
+import SubjectService from '../../services/subject.service';
+import { updateSubject } from '../../redux/slice/subject-slice ';
+import { getOnlyDate } from '../../utils/time';
+import TeachingService from '../../services/teaching.service';
+import { addTeaching, updateTeaching } from '../../redux/slice/teaching-slice';
+import Loading from '../../layouts/Loading';
 const UpdateStudent = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -20,7 +20,6 @@ const UpdateStudent = () => {
   const subject = subjects?.find((cla: any) => cla.id == id);
   const teach = teaching?.find((t: Teaching) => t?.subject_id == subject?.id);
 
-
   const [data, setData] = useState({ ...subject, ...teach });
 
   const updateData = (e: any) => {
@@ -30,13 +29,13 @@ const UpdateStudent = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     Swal.fire({
-      title: "Are you sure to update?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
+      title: 'Are you sure to update?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Update !",
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Update !',
     }).then(async (result: any) => {
       if (result.isConfirmed) {
         const subject = await SubjectService.updateSubject(id, data);
@@ -53,7 +52,7 @@ const UpdateStudent = () => {
         }
 
         dispatch(updateSubject({ id: id, data: subject }));
-        Swal.fire("Updated!", "Subject Updated", "success");
+        Swal.fire('Updated!', 'Subject Updated', 'success');
       }
     });
   };
@@ -125,7 +124,7 @@ const UpdateStudent = () => {
                                 {teachers.map((teacher: any) => (
                                   <option key={teacher.id} value={teacher.id}>
                                     {teacher.first_name +
-                                      " " +
+                                      ' ' +
                                       teacher.last_name}
                                   </option>
                                 ))}
@@ -140,7 +139,7 @@ const UpdateStudent = () => {
                               <input
                                 type="text"
                                 id="semester"
-                                defaultValue={teach ? teach.semester : ""}
+                                defaultValue={teach ? teach.semester : ''}
                                 onChange={updateData}
                                 name="semester"
                                 className="form-control form-control-lg"
@@ -170,7 +169,7 @@ const UpdateStudent = () => {
                               </label>
                             </div>
                           </div>
-                        </div>{" "}
+                        </div>{' '}
                         <div className="row">
                           <div className="col-md-6 mb-2">
                             <div className="form-outline">
@@ -178,7 +177,7 @@ const UpdateStudent = () => {
                                 type="date"
                                 id="start_date"
                                 defaultValue={
-                                  teach ? getOnlyDate(teach.start_date) : ""
+                                  teach ? getOnlyDate(teach.start_date) : ''
                                 }
                                 onChange={updateData}
                                 name="start_date"
@@ -198,7 +197,7 @@ const UpdateStudent = () => {
                                 type="date"
                                 id="end_date"
                                 defaultValue={
-                                  teach ? getOnlyDate(teach.end_date) : ""
+                                  teach ? getOnlyDate(teach.end_date) : ''
                                 }
                                 onChange={updateData}
                                 name="end_date"
@@ -209,7 +208,7 @@ const UpdateStudent = () => {
                               </label>
                             </div>
                           </div>
-                        </div>{" "}
+                        </div>{' '}
                         <button type="submit" className="btn btn-primary">
                           Update
                         </button>

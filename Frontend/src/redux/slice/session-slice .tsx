@@ -1,13 +1,13 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Session } from "../../types/type";
-import SessionService from "../../services/session.service";
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { Session } from '../../types/type';
+import SessionService from '../../services/session.service';
 
 export const fetchSessions: any = createAsyncThunk(
-  "sessions/fetchSessions",
+  'sessions/fetchSessions',
   async () => {
     const response = await SessionService.getAllSession();
     return response;
-  }
+  },
 );
 const initialState = {
   data: [] as Session[],
@@ -15,7 +15,7 @@ const initialState = {
   error: null,
 };
 const sessionsSlice = createSlice({
-  name: "sessions",
+  name: 'sessions',
   initialState,
   reducers: {
     addSession: (state, action: PayloadAction<any>) => {

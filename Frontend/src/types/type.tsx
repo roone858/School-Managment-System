@@ -32,7 +32,7 @@ export interface ClassType {
   name: string;
   grade_level: string;
 }
-interface StudentAction {
+export interface StudentAction {
   type: string;
   payload: Student | number;
 }
@@ -74,7 +74,7 @@ export interface Message {
 }
 export interface Notification {
   messages: Message[];
-  isVisible: Boolean;
+  isVisible: boolean;
 }
 
 export interface LoginState {

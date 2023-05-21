@@ -1,13 +1,13 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Teacher } from "../../types/type";
-import TeacherService from "../../services/teacher.service";
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { Teacher } from '../../types/type';
+import TeacherService from '../../services/teacher.service';
 
 export const fetchTeachers: any = createAsyncThunk(
-  "teachers/fetchTeachers",
+  'teachers/fetchTeachers',
   async () => {
     const data = await TeacherService.getTeachers();
     return data;
-  }
+  },
 );
 const initialState = {
   data: [] as Teacher[],
@@ -15,7 +15,7 @@ const initialState = {
   error: null,
 };
 const teachersSlice = createSlice({
-  name: "teachers",
+  name: 'teachers',
   initialState,
   reducers: {
     addTeacher: (state, action: PayloadAction<Teacher>) => {
@@ -25,13 +25,13 @@ const teachersSlice = createSlice({
       return {
         ...state,
         data: state.data.filter(
-          (teacher: Teacher) => teacher.id !== action.payload
+          (teacher: Teacher) => teacher.id !== action.payload,
         ),
       };
     },
     updateTeacher: (state, action: PayloadAction<any>) => {
       const index = state.data.findIndex(
-        (teacher: any) => teacher.id == action.payload.id
+        (teacher: any) => teacher.id == action.payload.id,
       );
       if (index !== -1) {
         state.data[index] = action.payload.data;
@@ -40,14 +40,14 @@ const teachersSlice = createSlice({
   },
   extraReducers: (builder) => {
     // Add reducers for handling the fetchTeachers action
-     builder.addCase(fetchTeachers.pending, (state) => {
+    builder.addCase(fetchTeachers.pending, (state) => {
       state.isLoading = true;
     });
     builder.addCase(fetchTeachers.fulfilled, (state, action) => {
-      return { ...state, data: action.payload,isLoading:false };
+      return { ...state, data: action.payload, isLoading: false };
     });
     builder.addCase(fetchTeachers.rejected, (state, action) => {
-      return {...state,error:action.payload.error}
+      return { ...state, error: action.payload.error };
     });
   },
 });

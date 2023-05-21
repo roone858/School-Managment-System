@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import ClassService from "../../services/class.service";
-import { useDispatch } from "react-redux";
-import { addClass } from "../../redux/slice/class-slice ";
-import { useNavigate } from "react-router-dom";
-import { ClassType } from "../../types/type";
+import React, { useState } from 'react';
+import ClassService from '../../services/class.service';
+import { useDispatch } from 'react-redux';
+import { addClass } from '../../redux/slice/class-slice ';
+import { useNavigate } from 'react-router-dom';
+import { ClassType } from '../../types/type';
 
 const AddClass = () => {
   const dispatch = useDispatch();
@@ -17,14 +17,14 @@ const AddClass = () => {
 
     ClassService.insertClass(data).then((result) => {
       dispatch(addClass(result));
-      navigate("/classes");
+      navigate('/classes');
     });
   };
   return (
     <div className="add-form  rounded-2 bg-white mt-4  py-3">
       <form onSubmit={handleSubmit}>
         <div className="form-row  d-flex flex-column  flex-lg-row flex-wrap  p-4  bg-white   rounded-3">
-          <div className={"form-group col-12  col-lg-5  col-xl-3 mx-lg-3  "}>
+          <div className={'form-group col-12  col-lg-5  col-xl-3 mx-lg-3  '}>
             <label htmlFor="last-name">Name :</label>
             <input
               onChange={updateData}
@@ -36,7 +36,7 @@ const AddClass = () => {
               required
             />
           </div>
-          <div className={"form-group col-12  col-lg-5  col-xl-3 mx-lg-3  "}>
+          <div className={'form-group col-12  col-lg-5  col-xl-3 mx-lg-3  '}>
             <label htmlFor="email">Grade Level :</label>
             <input
               onChange={updateData}

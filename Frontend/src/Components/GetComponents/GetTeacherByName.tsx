@@ -1,6 +1,5 @@
-import { useSelector } from "react-redux";
-import { ClassType, State, Teacher } from "../../types/type";
-import { Link } from "react-router-dom";
+import { Teacher } from '../../types/type';
+import { Link } from 'react-router-dom';
 
 const GetTeacherByName = ({
   teachers,
@@ -9,9 +8,9 @@ const GetTeacherByName = ({
   teacherAvatar,
 }: any): any => {
   const teacherFilter = teachers.filter((teacher: Teacher) =>
-    (teacher.first_name + " " + teacher.last_name)
+    (teacher.first_name + ' ' + teacher.last_name)
       .toLowerCase()
-      .includes(String(teacherName.toLowerCase()))
+      .includes(String(teacherName.toLowerCase())),
   );
   return teacherFilter.map(
     (teacher: Teacher) =>
@@ -21,10 +20,10 @@ const GetTeacherByName = ({
           <td>
             <img
               src={teacherAvatar}
-              style={{ height: "40px", borderRadius: "100%" }}
+              style={{ height: '40px', borderRadius: '100%' }}
             />
           </td>
-          <td> {teacher.first_name + " " + teacher.last_name}</td>
+          <td> {teacher.first_name + ' ' + teacher.last_name}</td>
           <td>{teacher.dob.slice(0, 10)}</td>
           <td>{teacher.address}</td>
 
@@ -33,7 +32,7 @@ const GetTeacherByName = ({
               onClick={() => {
                 window.scrollTo(0, 0);
               }}
-              to={`/teachers/` + teacher.id}
+              to={'/teachers/' + teacher.id}
               type="button"
               className="btn btn-primary btn-sm "
             >
@@ -43,7 +42,7 @@ const GetTeacherByName = ({
               onClick={() => {
                 window.scrollTo(0, 0);
               }}
-              to={`/teachers/` + "update/" + teacher.id}
+              to={'/teachers/' + 'update/' + teacher.id}
               type="button"
               className="btn btn-success btn-sm mx-2 "
             >
@@ -58,7 +57,7 @@ const GetTeacherByName = ({
             </button>
           </td>
         </tr>
-      )
+      ),
   );
 };
 export default GetTeacherByName;

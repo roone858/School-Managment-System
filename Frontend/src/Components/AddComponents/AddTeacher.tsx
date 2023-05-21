@@ -1,17 +1,16 @@
-import { useState } from "react";
-import { Input } from "../Input";
-import TeacherService from "../../services/teacher.service";
-import NotificationService from "../../services/notification.service";
-import { useDispatch } from "react-redux";
+import { useState } from 'react';
+import TeacherService from '../../services/teacher.service';
+import NotificationService from '../../services/notification.service';
+import { useDispatch } from 'react-redux';
 
-import { addTeacher } from "../../redux/slice/teacher-slice";
-import "../../style/addForm.css";
+import { addTeacher } from '../../redux/slice/teacher-slice';
+import '../../style/addForm.css';
 import {
   addNotification,
   setRedFlag,
-} from "../../redux/slice/notifications-slice";
-import {  Teacher } from "../../types/type";
-import Swal from "sweetalert2";
+} from '../../redux/slice/notifications-slice';
+import { Teacher } from '../../types/type';
+import Swal from 'sweetalert2';
 
 const AddTeacher = () => {
   const [data, setData] = useState({} as Teacher);
@@ -36,17 +35,16 @@ const AddTeacher = () => {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     Swal.fire({
-      title: "Are you sure?",
+      title: 'Are you sure?',
       text: `${data.first_name} ${data.last_name} will be add in teachers list !`,
-      icon: "question",
+      icon: 'question',
       showCancelButton: true,
-      confirmButtonColor: "green",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Add !",
-    }).then(async (result:any) => {
+      confirmButtonColor: 'green',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Add !',
+    }).then(async (result: any) => {
       if (result.isConfirmed) {
         insertTeacher();
-
       }
     });
 
@@ -55,9 +53,9 @@ const AddTeacher = () => {
 
   return (
     <div className="add-form container rounded-2 bg-white mt-4 px-4 py-5">
-      <form  onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div className="d-flex  flex-column  flex-lg-row justify-content-start flex-wrap gap-3  ">
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}>
+          <div className={'form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  '}>
             <label htmlFor="first-name">First Name</label>
             <input
               onChange={updateData}
@@ -69,7 +67,7 @@ const AddTeacher = () => {
               required
             />
           </div>
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}>
+          <div className={'form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  '}>
             <label htmlFor="last-name">Last Name</label>
             <input
               onChange={updateData}
@@ -81,7 +79,7 @@ const AddTeacher = () => {
               required
             />
           </div>
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}>
+          <div className={'form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  '}>
             <label htmlFor="email">Email</label>
             <input
               onChange={updateData}
@@ -93,7 +91,7 @@ const AddTeacher = () => {
               required
             />
           </div>
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}>
+          <div className={'form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  '}>
             <label htmlFor="phone">Phone</label>
             <input
               onChange={updateData}
@@ -105,7 +103,7 @@ const AddTeacher = () => {
               required
             />
           </div>
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}>
+          <div className={'form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  '}>
             <label htmlFor="dob">DOB</label>
             <input
               onChange={updateData}
@@ -131,8 +129,8 @@ const AddTeacher = () => {
               <option value="F">Female</option>
             </select>
           </div>
-         
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  "}>
+
+          <div className={'form-group col-sm-12  col-lg-5  col-xl-3 mx-lg-3  '}>
             <label htmlFor="address">Address</label>
             <input
               onChange={updateData}
@@ -145,11 +143,9 @@ const AddTeacher = () => {
             />
           </div>
           <div className="form-group col-sm-12 mt-4 col-lg-5  col-xl-3 mx-lg-3 ">
-        
-
-          <button type="submit" className="btn btn-primary form-control">
-            Create
-          </button>
+            <button type="submit" className="btn btn-primary form-control">
+              Create
+            </button>
           </div>
         </div>
       </form>

@@ -1,13 +1,13 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { ClassType, Subject } from "../../types/type";
-import ClassService from "../../services/class.service";
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { ClassType } from '../../types/type';
+import ClassService from '../../services/class.service';
 
 export const fetchClasses: any = createAsyncThunk(
-  "classes/fetchClasses",
+  'classes/fetchClasses',
   async () => {
     const response = await ClassService.getAllClass();
     return response;
-  }
+  },
 );
 const initialState = {
   data: [] as ClassType[],
@@ -15,7 +15,7 @@ const initialState = {
   error: null,
 };
 const classesSlice = createSlice({
-  name: "classes",
+  name: 'classes',
   initialState,
   reducers: {
     addClass: (state, action: PayloadAction<any>) => {
@@ -29,7 +29,7 @@ const classesSlice = createSlice({
     },
     updateClass: (state, action: PayloadAction<any>) => {
       const index = state.data.findIndex(
-        (cla: any) => cla.id == action.payload.id
+        (cla: any) => cla.id == action.payload.id,
       );
       if (index !== -1) {
         state.data[index] = action.payload.data;

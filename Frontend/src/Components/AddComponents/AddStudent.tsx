@@ -1,20 +1,17 @@
-import { useState } from "react";
-import { Input } from "../Input";
-import StudentService from "../../services/student.service";
-import TeacherService from "../../services/teacher.service";
-import NotificationService from "../../services/notification.service";
-import { useDispatch, useSelector } from "react-redux";
-import { addStudent } from "../../redux/slice/student-slice";
-import { addTeacher } from "../../redux/slice/teacher-slice";
-import "../../style/addForm.css";
+import { useState } from 'react';
+import StudentService from '../../services/student.service';
+import NotificationService from '../../services/notification.service';
+import { useDispatch, useSelector } from 'react-redux';
+import { addStudent } from '../../redux/slice/student-slice';
+import '../../style/addForm.css';
 import {
   addNotification,
   setRedFlag,
-} from "../../redux/slice/notifications-slice";
-import { ClassType, State, Student, Teacher } from "../../types/type";
-import Swal from "sweetalert2";
+} from '../../redux/slice/notifications-slice';
+import { ClassType, State, Student } from '../../types/type';
+import Swal from 'sweetalert2';
 
-const AddStudent = (props: any) => {
+const AddStudent = () => {
   const [data, setData] = useState({} as Student);
   const dispatch = useDispatch();
   const classes = useSelector((state: State) => state.classes.data);
@@ -25,11 +22,10 @@ const AddStudent = (props: any) => {
 
   const insertStudent = () => {
     StudentService.insertStudent(data).then((res: Student | any) => {
-      console.log(res)
+      console.log(res);
       if (res.message)
-        Swal.fire(" Can't Add!", "Internal Server Error", "error");
+        Swal.fire(' Can\'t Add!', 'Internal Server Error', 'error');
       else {
-        
         dispatch(addStudent(res));
         NotificationService.insertNotification({
           message: `new student has been added ${res.first_name} ${res.last_name}`,
@@ -43,20 +39,20 @@ const AddStudent = (props: any) => {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-  
-      Swal.fire({
-        title: "Are you sure?",
-        text: `${data.first_name} ${data.last_name} will be add in students list !`,
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonColor: "green",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, Add !",
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          insertStudent();
-        }
-      });
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: `${data.first_name} ${data.last_name} will be add in students list !`,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: 'green',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Add !',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        insertStudent();
+      }
+    });
 
     event.target.reset();
   };
@@ -65,7 +61,7 @@ const AddStudent = (props: any) => {
     <div className="add-form container rounded-2 bg-white mt-4 px-4 py-5">
       <form onSubmit={handleSubmit}>
         <div className="d-flex flex-column flex-lg-row justify-content-around flex-wrap gap-2 ">
-          <div className={"form-group col-12  col-lg-5  col-xl-3  "}>
+          <div className={'form-group col-12  col-lg-5  col-xl-3  '}>
             <label htmlFor="first-name">First Name</label>
             <input
               onChange={updateData}
@@ -77,7 +73,7 @@ const AddStudent = (props: any) => {
               required
             />
           </div>
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3  "}>
+          <div className={'form-group col-sm-12  col-lg-5  col-xl-3  '}>
             <label htmlFor="last-name">Last Name</label>
             <input
               onChange={updateData}
@@ -89,7 +85,7 @@ const AddStudent = (props: any) => {
               required
             />
           </div>
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3  "}>
+          <div className={'form-group col-sm-12  col-lg-5  col-xl-3  '}>
             <label htmlFor="email">Email</label>
             <input
               onChange={updateData}
@@ -101,7 +97,7 @@ const AddStudent = (props: any) => {
               required
             />
           </div>
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3  "}>
+          <div className={'form-group col-sm-12  col-lg-5  col-xl-3  '}>
             <label htmlFor="phone">Phone</label>
             <input
               onChange={updateData}
@@ -113,7 +109,7 @@ const AddStudent = (props: any) => {
               required
             />
           </div>
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3  "}>
+          <div className={'form-group col-sm-12  col-lg-5  col-xl-3  '}>
             <label htmlFor="dob">DOB</label>
             <input
               onChange={updateData}
@@ -152,12 +148,12 @@ const AddStudent = (props: any) => {
               <option>Select Class </option>
               {classes.map((c: ClassType) => (
                 <option key={c.id} value={c.id}>
-                  {c.name}{" "}
+                  {c.name}{' '}
                 </option>
               ))}
             </select>
           </div>
-          <div className={"form-group col-sm-12  col-lg-5  col-xl-3  "}>
+          <div className={'form-group col-sm-12  col-lg-5  col-xl-3  '}>
             <label htmlFor="address">Address</label>
             <input
               onChange={updateData}

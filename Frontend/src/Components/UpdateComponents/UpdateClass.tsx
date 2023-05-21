@@ -1,40 +1,41 @@
-import React, { useEffect, useState } from "react";
-import { ClassType, Student } from "../../types/type";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import studentService from "../../services/student.service";
-import { updateClass } from "../../redux/slice/class-slice ";
-import Swal from "sweetalert2";
-import ClassService from "../../services/class.service";
-import Loading from "../../layouts/Loading";
+import { useState } from 'react';
+import { ClassType } from '../../types/type';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateClass } from '../../redux/slice/class-slice ';
+import Swal from 'sweetalert2';
+import ClassService from '../../services/class.service';
+import Loading from '../../layouts/Loading';
 const UpdateStudent = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const classes = useSelector((state: any) => state.classes.data);
-  const cla: ClassType | any= classes.find((cla: ClassType) => cla.id === Number(id));
+  const cla: ClassType | any = classes.find(
+    (cla: ClassType) => cla.id === Number(id),
+  );
   const [data, setData] = useState(cla);
 
   const updateData = (e: any) => {
-    setData({ ...cla,...data, [e.target.name]: e.target.value });
+    setData({ ...cla, ...data, [e.target.name]: e.target.value });
   };
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     Swal.fire({
-      title: "Are you sure to update?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
+      title: 'Are you sure to update?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Update !",
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Update !',
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await ClassService.updateClass(id, data);
         if (res.message)
-          Swal.fire("Can't Update!", "Internal Server Error", "error");
+          Swal.fire('Can\'t Update!', 'Internal Server Error', 'error');
         else {
           dispatch(updateClass({ id: id, data: data }));
-          Swal.fire("Updated!", "student Updated", "success");
+          Swal.fire('Updated!', 'student Updated', 'success');
         }
       }
     });
@@ -43,7 +44,7 @@ const UpdateStudent = () => {
   return (
     <div className="update-form">
       {!cla ? (
-        <Loading/>
+        <Loading />
       ) : (
         <>
           <section className="vh-100 gradient-custom">

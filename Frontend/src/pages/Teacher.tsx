@@ -1,42 +1,42 @@
-import { Table } from "../Components/Table";
-import { useDispatch, useSelector } from "react-redux";
-import { State } from "../types/type";
-import Swal from "sweetalert2";
-import TeacherService from "../services/teacher.service";
-import { deleteTeacher } from "../redux/slice/teacher-slice";
-import TeachingService from "../services/teaching.service";
-import teacherAvatar from "../assets/teacherAvatar.jpg";
-import { useState } from "react";
-import AddTeacher from "../Components/AddComponents/AddTeacher";
-import GetTeacherByID from "../Components/GetComponents/GetTeacherByID";
-import GetTeacherByName from "../Components/GetComponents/GetTeacherByName";
-import GetAllTeachers from "../Components/GetComponents/GetAllTeachers";
-import Loading from "../layouts/Loading";
+import { Table } from '../Components/Table';
+import { useDispatch, useSelector } from 'react-redux';
+import { State } from '../types/type';
+import Swal from 'sweetalert2';
+import TeacherService from '../services/teacher.service';
+import { deleteTeacher } from '../redux/slice/teacher-slice';
+import TeachingService from '../services/teaching.service';
+import teacherAvatar from '../assets/teacherAvatar.jpg';
+import { useState } from 'react';
+import AddTeacher from '../Components/AddComponents/AddTeacher';
+import GetTeacherByID from '../Components/GetComponents/GetTeacherByID';
+import GetTeacherByName from '../Components/GetComponents/GetTeacherByName';
+import GetAllTeachers from '../Components/GetComponents/GetAllTeachers';
+import Loading from '../layouts/Loading';
 
 export const Teachers = () => {
   const dispatch = useDispatch();
   const teachers = useSelector((state: State) => state.teachers.data);
   const isTeachersLoading = useSelector(
-    (state: State) => state.teachers.isLoading
+    (state: State) => state.teachers.isLoading,
   );
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [teacherId, setTeacherId] = useState();
   const [teacherName, setTeacherName] = useState();
   const handleDelete = (id: number) => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete !",
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete !',
     }).then(async (result) => {
       if (result.isConfirmed) {
         await TeachingService.deleteTeachingByTeacherID(id);
-        const response = await TeacherService.deleteTeacher(id);
+        await TeacherService.deleteTeacher(id);
         dispatch(deleteTeacher(id));
-        Swal.fire(" Deleted!", "Teacher deleted", "success");
+        Swal.fire(' Deleted!', 'Teacher deleted', 'success');
       }
     });
   };
@@ -107,7 +107,7 @@ export const Teachers = () => {
         </form>
         <div className="students">
           <Table
-            columns={["ID ", "Photo", "Name", "DOP", "Address", "Actions"]}
+            columns={['ID ', 'Photo', 'Name', 'DOP', 'Address', 'Actions']}
             rows={
               teacherId || teacherName ? (
                 <>
@@ -131,7 +131,6 @@ export const Teachers = () => {
                 <GetAllTeachers
                   teachers={teachers}
                   handleDelete={handleDelete}
-
                   teacherAvatar={teacherAvatar}
                 />
               )

@@ -1,26 +1,24 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import "../style/student.css";
-import StudentService from "../services/student.service";
-import { Table } from "../Components/Table";
-import { deleteStudent } from "../redux/slice/student-slice";
-import { ClassType, State, Student } from "../types/type";
-import Swal from "sweetalert2";
-import maleAvatar from "../assets/maleAvatar.png";
-import femaleAvatar from "../assets/femaleAvatar.png";
-import { useState } from "react";
-import AddStudent from "../Components/AddComponents/AddStudent";
-import GetStudentByID from "../Components/GetComponents/GetStudentByID";
-import GetStudentByName from "../Components/GetComponents/GetStudentByName";
-import GetStudentByClass from "../Components/GetComponents/GetStudentByClass";
-import GetAllStudents from "../Components/GetComponents/GetAllStudents";
-import { getJWTFromCookie } from "../utils/cookies";
-import Loading from "../layouts/Loading";
+import { useDispatch, useSelector } from 'react-redux';
+import '../style/student.css';
+import StudentService from '../services/student.service';
+import { Table } from '../Components/Table';
+import { deleteStudent } from '../redux/slice/student-slice';
+import { ClassType, State } from '../types/type';
+import Swal from 'sweetalert2';
+import maleAvatar from '../assets/maleAvatar.png';
+import femaleAvatar from '../assets/femaleAvatar.png';
+import { useState } from 'react';
+import AddStudent from '../Components/AddComponents/AddStudent';
+import GetStudentByID from '../Components/GetComponents/GetStudentByID';
+import GetStudentByName from '../Components/GetComponents/GetStudentByName';
+import GetStudentByClass from '../Components/GetComponents/GetStudentByClass';
+import GetAllStudents from '../Components/GetComponents/GetAllStudents';
+import Loading from '../layouts/Loading';
 
 export const Students = () => {
   const students = useSelector((state: State) => state.students.data);
   const isStudentsLoading = useSelector(
-    (state: State) => state.students.isLoading
+    (state: State) => state.students.isLoading,
   );
   const classes = useSelector((state: State) => state.classes.data);
   const [classId, setClassId] = useState(false);
@@ -30,18 +28,18 @@ export const Students = () => {
   const [isAddOpen, setIsAddOpen] = useState(false);
   const handleDelete = (id: number) => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete !",
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete !',
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const response = await StudentService.deleteStudent(id);
+        await StudentService.deleteStudent(id);
         dispatch(deleteStudent(id));
-        Swal.fire(" Deleted!", "student deleted", "success");
+        Swal.fire(' Deleted!', 'student deleted', 'success');
       }
     });
   };
@@ -61,7 +59,7 @@ export const Students = () => {
         {isAddOpen && <AddStudent />}
         <form className=" d-flex mt-4 ">
           <div className=" d-flex gap-3">
-            <div className={"form-group "}>
+            <div className={'form-group '}>
               <input
                 onChange={(e: any) => {
                   setStudentId(e.target.value);
@@ -75,7 +73,7 @@ export const Students = () => {
                 required
               />
             </div>
-            <div className={"form-group   "}>
+            <div className={'form-group   '}>
               <input
                 onChange={(e: any) => {
                   setStudentName(e.target.value);
@@ -91,7 +89,7 @@ export const Students = () => {
             </div>
             <div className="form-group  ">
               <select
-                style={{ color: "#7c7c7c" }}
+                style={{ color: '#7c7c7c' }}
                 className="form-group p-3"
                 name="class_id"
                 onChange={(e: any) => {
@@ -113,13 +111,13 @@ export const Students = () => {
         <div className="students">
           <Table
             columns={[
-              "ID ",
-              "Photo",
-              "Name",
-              "DOP",
-              "Address",
-              "Class",
-              "Actions",
+              'ID ',
+              'Photo',
+              'Name',
+              'DOP',
+              'Address',
+              'Class',
+              'Actions',
             ]}
             rows={
               studentId || studentName || classId ? (

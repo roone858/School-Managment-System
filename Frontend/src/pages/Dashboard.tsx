@@ -1,7 +1,7 @@
-import "../style/dashboard.css";
-import { useDispatch, useSelector } from "react-redux";
+import '../style/dashboard.css';
+import { useSelector } from 'react-redux';
 
-import { currentDay, currentHours } from "../utils/time";
+import { currentDay, currentHours } from '../utils/time';
 import {
   Attendance,
   ClassType,
@@ -10,10 +10,9 @@ import {
   Subject,
   Teacher,
   Teaching,
-} from "../types/type";
+} from '../types/type';
 
 export const Dashboard = () => {
-  const dispatch = useDispatch();
   const students = useSelector((state: State) => state.students.data);
   const teachers = useSelector((state: State) => state.teachers.data);
   const teaching = useSelector((state: State) => state.teaching.data);
@@ -74,20 +73,20 @@ export const Dashboard = () => {
                     Number(session.start_time.slice(0, 2)) == currentHours()
                   ) {
                     return (
-                      <tr key={"session" + session.id}>
+                      <tr key={'session' + session.id}>
                         <th scope="row">
-                          {" "}
+                          {' '}
                           {
                             subjects.find(
                               (subject: Subject) =>
-                                session.subject_id == subject.id
+                                session.subject_id == subject.id,
                             )?.title
                           }
                         </th>
                         <td>
                           {
                             classes.find(
-                              (cla: ClassType) => cla.id === session.class_id
+                              (cla: ClassType) => cla.id === session.class_id,
                             )?.name
                           }
                         </td>
@@ -114,12 +113,12 @@ export const Dashboard = () => {
               <tbody>
                 {attendance.slice(0, 5).map((attend: Attendance) => {
                   return (
-                    <tr key={"attend" + attend.id}>
+                    <tr key={'attend' + attend.id}>
                       <td>
                         {students.map((student: any) => {
                           return (
                             attend.student_id == student.id &&
-                            student.first_name + " " + student.last_name
+                            student.first_name + ' ' + student.last_name
                           );
                         })}
                       </td>
@@ -130,17 +129,17 @@ export const Dashboard = () => {
                               cla.id ==
                               sessions.find(
                                 (session: any) =>
-                                  session.id == attend.class_session_id
-                              )?.class_id
+                                  session.id == attend.class_session_id,
+                              )?.class_id,
                           )?.name
                         }
                       </td>
                       <th scope="row">
-                        {" "}
+                        {' '}
                         {
                           subjects.find(
                             (subject: Subject) =>
-                              attend.subject_id == subject.id
+                              attend.subject_id == subject.id,
                           )?.title
                         }
                       </th>
@@ -167,36 +166,36 @@ export const Dashboard = () => {
             <tbody>
               {sessions.map((session: Session) => {
                 return (
-                  session.day == "Sunday" && ( //currentDay()
+                  session.day == 'Sunday' && ( //currentDay()
                     <tr key={session.id}>
                       <td>
                         {
                           subjects.find(
                             (subject: Subject) =>
-                              subject.id == session.subject_id
+                              subject.id == session.subject_id,
                           )?.title
                         }
                       </td>
                       <td>
                         {
                           classes.find(
-                            (cla: ClassType) => cla.id == session.class_id
+                            (cla: ClassType) => cla.id == session.class_id,
                           )?.name
                         }
                       </td>
                       <td>
-                        {" "}
+                        {' '}
                         {
                           teachers.map((teacher: Teacher) => {
                             if (
                               teacher.id ==
                               teaching.find(
                                 (teach: Teaching) =>
-                                  teach.subject_id == session.subject_id
+                                  teach.subject_id == session.subject_id,
                               )?.teacher_id
                             )
                               return (
-                                teacher.first_name + " " + teacher.last_name
+                                teacher.first_name + ' ' + teacher.last_name
                               );
                           })
                           // teachers.find((teacher:any)=>  teacher.id== ( teaching.find((teach:any)=> teach.subject_id == session.subject_id )?.teacher_id)).first_name

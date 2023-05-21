@@ -1,4 +1,4 @@
-const Card = ({ title, description, image ,teacher }: any) => {
+const Card = ({ title, description, image }: any) => {
   return (
     <>
       <div className="card border h-100 ">
@@ -6,8 +6,10 @@ const Card = ({ title, description, image ,teacher }: any) => {
         <div className="card-body">
           <h5 className="card-title">{title}</h5>
           <p className="card-text">{description}</p>
-          
-          <a  href="#" className="btn btn-primary disabled">Enroll Me</a>
+
+          <a href="#" className="btn btn-primary disabled">
+            Enroll Me
+          </a>
         </div>
       </div>
     </>
