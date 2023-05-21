@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { State, Student } from "../../types/type";
+import { State, Student, Teacher, Teaching } from "../../types/type";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import studentService from "../../services/student.service";
@@ -12,19 +12,24 @@ import { Input } from "../Input";
 import { getOnlyDate } from "../../utils/time";
 import TeachingService from "../../services/teaching.service";
 import { addTeaching, updateTeaching } from "../../redux/slice/teaching-slice";
+import Loading from "../../layouts/Loading";
 const UpdateStudent = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const subjects = useSelector((state: any) => state.subjects);
+
+  const subjects = useSelector((state: any) => state.subjects.data);
   const teachers = useSelector((state: State) => state.teachers.data);
-  const teaching = useSelector((state: any) => state.teaching);
+  const teaching = useSelector((state: any) => state.teaching.data);
   const subject = subjects?.find((cla: any) => cla.id == id);
-  const teach = teaching.find((t: any) => t.subject_id == subject?.id);
+  const teach = teaching?.find((t: Teaching) => t?.subject_id == subject?.id);
+  const teacher = teachers?.find(
+    (teacher: Teacher) => teacher.id == teach?.teacher_id
+  );
 
   const [data, setData] = useState({ ...subject, ...teach });
 
   const updateData = (e: any) => {
-    setData({ ...data, [e.target.name]: e.target.value });
+    setData({ ...subject, ...teach,...data, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: any) => {
@@ -59,11 +64,10 @@ const UpdateStudent = () => {
     });
   };
 
-  if (!data) return <h1>loading</h1>;
   return (
     <div className="update-form">
-      {!subject ? (
-        <h1>loading</h1>
+      {!subject || !teach || !teacher ? (
+        <Loading />
       ) : (
         <>
           <section className="gradient-custom">
@@ -84,7 +88,7 @@ const UpdateStudent = () => {
                                 id="title"
                                 className="form-control form-control-lg"
                                 name="title"
-                                value={data.title}
+                                defaultValue={subject.title}
                                 onChange={updateData}
                               />
                               <label className="form-label" htmlFor="title">
@@ -97,7 +101,7 @@ const UpdateStudent = () => {
                               <input
                                 type="text"
                                 id="description"
-                                value={data.description}
+                                defaultValue={subject.description}
                                 onChange={updateData}
                                 name="description"
                                 className="form-control form-control-lg"
@@ -119,13 +123,18 @@ const UpdateStudent = () => {
                                 id="inputGender4"
                                 onChange={updateData}
                                 name="teacher_id"
-                                value={data?.teacher_id}
+                                defaultValue={
+                              teach.teacher_id
+                                }
                                 className="form-control"
                                 required
                               >
                                 <option>select teacher</option>
                                 {teachers.map((teacher: any) => (
-                                  <option key={teacher.id} value={teacher.id}>
+                                  <option
+                                    key={teacher.id}
+                                    value={teacher.id}
+                                  >
                                     {teacher.first_name +
                                       " " +
                                       teacher.last_name}
@@ -142,7 +151,7 @@ const UpdateStudent = () => {
                               <input
                                 type="text"
                                 id="semester"
-                                value={teach ? data.semester: ""}
+                                defaultValue={teach ? teach.semester : ""}
                                 onChange={updateData}
                                 name="semester"
                                 className="form-control form-control-lg"
@@ -161,7 +170,7 @@ const UpdateStudent = () => {
                                 id="grade_level"
                                 className="form-control form-control-lg"
                                 name="grade_level"
-                                value={data.grade_level}
+                                defaultValue={teach.grade_level}
                                 onChange={updateData}
                               />
                               <label
@@ -179,7 +188,9 @@ const UpdateStudent = () => {
                               <input
                                 type="date"
                                 id="start_date"
-                               value={teach ? getOnlyDate(data.start_date):''}
+                                defaultValue={
+                                  teach ? getOnlyDate(teach.start_date) : ""
+                                }
                                 onChange={updateData}
                                 name="start_date"
                                 className="form-control form-control-lg"
@@ -197,7 +208,9 @@ const UpdateStudent = () => {
                               <input
                                 type="date"
                                 id="end_date"
-                                 value={teach ? getOnlyDate(data.end_date): ""}
+                                defaultValue={
+                                  teach ? getOnlyDate(teach.end_date) : ""
+                                }
                                 onChange={updateData}
                                 name="end_date"
                                 className="form-control form-control-lg"

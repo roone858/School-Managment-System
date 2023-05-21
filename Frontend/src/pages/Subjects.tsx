@@ -10,16 +10,20 @@ import { deleteSession } from "../redux/slice/session-slice ";
 import { AddSubject } from "../Components/AddComponents/AddSubject";
 import { useState } from "react";
 import { Session, State, Subject, Teacher, Teaching } from "../types/type";
+import Loading from "../layouts/Loading";
 
 export const Subjects = () => {
   const dispatch = useDispatch();
   const [isAddOpen, setIsAddOpen] = useState(false);
 
+  const isSubjectsLoading = useSelector(
+    (state: State) => state.subjects.isLoading
+  );
   const subjects = useSelector((state: State) => state.subjects.data);
   const teaching = useSelector((state: State) => state.teaching.data);
   const sessions = useSelector((state: State) => state.sessions.data);
-  // const [subjects,setSubjects] =useState()
   const teachers = useSelector((state: State) => state.teachers.data);
+
   const handleDelete = (id: number) => {
     Swal.fire({
       title: "Are you sure  to delete this Subject?",
@@ -41,8 +45,11 @@ export const Subjects = () => {
       }
     });
   };
+
   const subjectsRows = subjects.map((subject: Subject) => {
-    const teach = teaching.find((teach: Teaching) => teach.subject_id == subject.id);
+    const teach = teaching.find(
+      (teach: Teaching) => teach.subject_id == subject.id
+    );
     const teacher = teachers.find(
       (teacher: Teacher) => teacher.id == teach?.teacher_id
     );
@@ -85,11 +92,12 @@ export const Subjects = () => {
       </tr>
     );
   });
+  if (isSubjectsLoading) return <Loading />;
 
   return (
-    <><div className="container">
-      
-      <button
+    <>
+      <div className="container">
+        <button
           onClick={() => {
             setIsAddOpen(!isAddOpen);
           }}
@@ -102,7 +110,7 @@ export const Subjects = () => {
           columns={["ID", "Title", "Level", "Teacher", "Action"]}
           rows={subjectsRows}
         />
-    </div>
+      </div>
     </>
   );
 };

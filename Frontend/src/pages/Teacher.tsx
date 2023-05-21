@@ -33,7 +33,7 @@ export const Teachers = () => {
       confirmButtonText: "Yes, delete !",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await TeachingService.deleteTeaching(id);
+        await TeachingService.deleteTeachingByTeacherID(id);
         const response = await TeacherService.deleteTeacher(id);
         dispatch(deleteTeacher(id));
         Swal.fire(" Deleted!", "Teacher deleted", "success");
@@ -130,6 +130,8 @@ export const Teachers = () => {
               ) : (
                 <GetAllTeachers
                   teachers={teachers}
+                  handleDelete={handleDelete}
+
                   teacherAvatar={teacherAvatar}
                 />
               )

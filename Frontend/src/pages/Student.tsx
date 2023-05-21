@@ -45,8 +45,8 @@ export const Students = () => {
       }
     });
   };
-  if (isStudentsLoading) return <Loading/>
- 
+  if (isStudentsLoading) return <Loading />;
+
   return (
     <>
       <div className="students-section container">
@@ -158,6 +158,7 @@ export const Students = () => {
                   students={students}
                   classes={classes}
                   classId={classId}
+                  handleDelete={handleDelete}
                   maleAvatar={maleAvatar}
                   femaleAvatar={femaleAvatar}
                 />
