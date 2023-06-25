@@ -15,7 +15,6 @@ export const AddSubject = () => {
   };
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    console.log(data);
     const subject: Subject = await SubjectService.insertSubject(data);
     await TeachingService.insertTeaching({
       ...data,
